@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ComparatorBundle/ComparatorBundle.iml" filepath="$PROJECT_DIR$/ComparatorBundle/ComparatorBundle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OsgiDS.iml" filepath="$PROJECT_DIR$/OsgiDS.iml" />
+    </modules>
+  </component>
+</project>
+

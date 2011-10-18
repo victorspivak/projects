@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Osmorc" name="OSGi">
+      <configuration osmorcControlsManifest="true" manifestLocation="" jarfileLocation="OsgiDS.jar" outputPathType="OsgiOutputPath" useBndFile="false" bndFileLocation="" useBundlorFile="false" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="OsgiDS Client Bundle" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false">
+        <additionalProperties>
+          <property key="Private-Package" value="svl" />
+          <property key="Service-Component" value="OSGI-INF/minimal.xml" />
+          <property key="Include-Resource" value="OSGI-INF/minimal.xml" />
+        </additionalProperties>
+        <additionalJARContents>
+          <entry source="$MODULE_DIR$/OSGI-INF" dest="OSGI-INF" />
+        </additionalJARContents>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Equinox" level="application" />
+  </component>
+</module>
+
