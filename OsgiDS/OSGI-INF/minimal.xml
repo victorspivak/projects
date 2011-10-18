@@ -2,4 +2,6 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="svl.ClientBundle">
     <implementation class="svl.ClientBundle"/>
     <reference interface="java.util.Comparator" bind="setComparator"/>
+    <property name="mode" type="Boolean" value="false"/>
+
 </scr:component>
