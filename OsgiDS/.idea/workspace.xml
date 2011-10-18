@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="27ebb1eb-87cf-4b34-bec4-a744948d79d5" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme txt" afterPath="$PROJECT_DIR$/readme txt" />
-    </list>
+    <list default="true" id="27ebb1eb-87cf-4b34-bec4-a744948d79d5" name="Default" comment="" />
     <ignored path="OsgiDS.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -73,19 +68,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="minimal.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="minimal.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/OSGI-INF/minimal.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0">
+            <state line="7" column="20" selection-start="321" selection-end="321" vertical-scroll-proportion="0.15373352">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme txt" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="readme txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="104" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.43923867">
+            <state line="20" column="8" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -94,7 +89,7 @@
       <file leaf-file-name="ClientBundle.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="69" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.0">
+            <state line="44" column="17" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -124,10 +119,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/ComparatorBundle/OSGI-INF/sample.xml" />
-        <option value="$PROJECT_DIR$/OSGI-INF/minimal.xml" />
         <option value="$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java" />
-        <option value="$PROJECT_DIR$/src/svl/ClientBundle.java" />
         <option value="$PROJECT_DIR$/readme txt" />
+        <option value="$PROJECT_DIR$/src/svl/ClientBundle.java" />
+        <option value="$PROJECT_DIR$/OSGI-INF/minimal.xml" />
       </list>
     </option>
   </component>
@@ -454,7 +449,7 @@
     <frame x="0" y="27" width="1920" height="1147" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297456" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297456" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -507,7 +502,7 @@
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added properties." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -520,6 +515,7 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Added properties." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -534,28 +530,28 @@
         <state line="11" column="64" selection-start="328" selection-end="328" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="69" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ComparatorBundle/OSGI-INF/sample.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="49" selection-start="282" selection-end="282" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OSGI-INF/minimal.xml">
+    <entry file="file://$PROJECT_DIR$/readme txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="263" selection-end="263" vertical-scroll-proportion="0.0">
+        <state line="20" column="8" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readme txt">
+    <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="104" selection-start="1007" selection-end="1007" vertical-scroll-proportion="0.43923867">
+        <state line="44" column="17" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OSGI-INF/minimal.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="20" selection-start="321" selection-end="321" vertical-scroll-proportion="0.15373352">
           <folding />
         </state>
       </provider>
