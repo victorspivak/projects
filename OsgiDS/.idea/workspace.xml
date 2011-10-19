@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27ebb1eb-87cf-4b34-bec4-a744948d79d5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConsoleLogger/ConsoleLogger.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConsoleLogger/OSGI-INF/consoleLogger.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConsoleLogger/src/svl/log/console/ConsoleLog.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LogAPI/LogAPI.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LogAPI/src/svl/log/api/Log.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NiceConsoleLogger/NiceConsoleLogger.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NiceConsoleLogger/OSGI-INF/niceconsoleLogger.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/NiceConsoleLogger/src/svl/log/niceconsole/NiceConsoleLog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java" afterPath="$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OSGI-INF/minimal.xml" afterPath="$PROJECT_DIR$/OSGI-INF/minimal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/OsgiDS.iml" afterPath="$PROJECT_DIR$/OsgiDS.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme txt" afterPath="$PROJECT_DIR$/readme txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/ClientBundle.java" afterPath="$PROJECT_DIR$/src/svl/ClientBundle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../interview/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../interview/.idea/workspace.xml" />
     </list>
     <ignored path="OsgiDS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,10 +67,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ClientBundle.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ClientBundle.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="82" selection-start="1594" selection-end="1594" vertical-scroll-proportion="0.94298244">
+            <state line="79" column="37" selection-start="2540" selection-end="2540" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NiceConsoleLog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NiceConsoleLogger/src/svl/log/niceconsole/NiceConsoleLog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="93" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="niceconsoleLogger.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/NiceConsoleLogger/OSGI-INF/niceconsoleLogger.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="28" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -85,10 +99,8 @@
       <file leaf-file-name="ConsoleLog.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ConsoleLogger/src/svl/log/console/ConsoleLog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="23" selection-start="247" selection-end="257" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="33" column="12" selection-start="650" selection-end="650" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,10 +141,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="readme txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/readme txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="44" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0">
+            <state line="23" column="30" selection-start="1097" selection-end="1097" vertical-scroll-proportion="0.42963886">
               <folding />
             </state>
           </provider>
@@ -163,12 +175,14 @@
       <list>
         <option value="$PROJECT_DIR$/ComparatorBundle/OSGI-INF/sample.xml" />
         <option value="$PROJECT_DIR$/ConsoleLogger/src/svl/log/console/ConsoleLog.java" />
-        <option value="$PROJECT_DIR$/readme txt" />
         <option value="$PROJECT_DIR$/ConsoleLogger/OSGI-INF/consoleLogger.xml" />
         <option value="$PROJECT_DIR$/OSGI-INF/minimal.xml" />
         <option value="$PROJECT_DIR$/LogAPI/src/svl/log/api/Log.java" />
         <option value="$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java" />
         <option value="$PROJECT_DIR$/src/svl/ClientBundle.java" />
+        <option value="$PROJECT_DIR$/NiceConsoleLogger/OSGI-INF/niceconsoleLogger.xml" />
+        <option value="$PROJECT_DIR$/NiceConsoleLogger/src/svl/log/niceconsole/NiceConsoleLog.java" />
+        <option value="$PROJECT_DIR$/readme txt" />
       </list>
     </option>
   </component>
@@ -202,7 +216,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -263,7 +276,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LogAPI" />
+              <option name="myItemId" value="NiceConsoleLogger" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -277,7 +290,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LogAPI" />
+              <option name="myItemId" value="NiceConsoleLogger" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -285,7 +298,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="api" />
+              <option name="myItemId" value="niceconsole" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OsgiDS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OsgiDS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NiceConsoleLogger" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OSGI-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -400,6 +431,7 @@
         </subPane>
       </pane>
       <pane id="Favorites" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -417,23 +449,15 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/NiceConsoleLogger/OSGI-INF" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="PhingTarget" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
       <module name="" />
       <setting name="path" value="" />
@@ -445,6 +469,19 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="PhingTarget" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="PhingTarget" enabled="false" />
       </method>
@@ -586,7 +623,7 @@
     <frame x="0" y="27" width="1920" height="1147" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32876712" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21232876" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -601,7 +638,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="ScratchPad" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24879615" sideWeight="0.6712329" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24826111" sideWeight="0.7876712" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -669,23 +706,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ComparatorBundle/OSGI-INF/sample.xml">
+    <entry file="file://$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readme txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="44" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/OSGI-INF/minimal.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="55" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
+        <state line="15" column="43" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -697,25 +720,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ComparatorBundle/src/sample/SampleComparator.java">
+    <entry file="file://$PROJECT_DIR$/OSGI-INF/minimal.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="43" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0">
+        <state line="4" column="55" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ComparatorBundle/OSGI-INF/sample.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="201" selection-end="201" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="37" selection-start="2540" selection-end="2540" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NiceConsoleLogger/OSGI-INF/niceconsoleLogger.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="28" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ConsoleLogger/src/svl/log/console/ConsoleLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="247" selection-end="257" vertical-scroll-proportion="0.0">
+        <state line="33" column="12" selection-start="650" selection-end="650" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/NiceConsoleLogger/src/svl/log/niceconsole/NiceConsoleLog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="93" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/svl/ClientBundle.java">
+    <entry file="file://$PROJECT_DIR$/readme txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="82" selection-start="1594" selection-end="1594" vertical-scroll-proportion="0.94298244">
+        <state line="23" column="30" selection-start="1097" selection-end="1097" vertical-scroll-proportion="0.42963886">
           <folding />
         </state>
       </provider>
@@ -773,7 +824,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>OSGi|ConsoleLogger</last-edited>
+          <last-edited>OSGi|NiceConsoleLogger</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

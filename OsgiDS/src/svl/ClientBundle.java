@@ -63,6 +63,7 @@ public class ClientBundle {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start");
         executorService = Executors.newSingleThreadExecutor();
         executorService.submit(new Runnable() {
+            @SuppressWarnings({"NullableProblems"})
             public void run() {
                 while (!Thread.interrupted()) {
                     logger.log(Log.LEVEL.DEBUG, "Hello World!! " + comparator.compare(o1, o2), null);

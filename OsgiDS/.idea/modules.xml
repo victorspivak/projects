@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/ComparatorBundle/ComparatorBundle.iml" filepath="$PROJECT_DIR$/ComparatorBundle/ComparatorBundle.iml" />
       <module fileurl="file://$PROJECT_DIR$/ConsoleLogger/ConsoleLogger.iml" filepath="$PROJECT_DIR$/ConsoleLogger/ConsoleLogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/LogAPI/LogAPI.iml" filepath="$PROJECT_DIR$/LogAPI/LogAPI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NiceConsoleLogger/NiceConsoleLogger.iml" filepath="$PROJECT_DIR$/NiceConsoleLogger/NiceConsoleLogger.iml" />
       <module fileurl="file://$PROJECT_DIR$/OsgiDS.iml" filepath="$PROJECT_DIR$/OsgiDS.iml" />
     </modules>
   </component>

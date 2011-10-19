@@ -19,4 +19,5 @@ install file:OsgiDS.jar
 install file:ComparatorBundle.jar
 install file:LogAPI.jar
 install file:ConsoleLogger.jar
+install file:NiceConsoleLogger.jar
 
