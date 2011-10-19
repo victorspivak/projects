@@ -22,6 +22,7 @@ public class NiceConsoleLog implements Log {
 
     public NiceConsoleLog() {
         System.out.println("NiceConsoleLog created...");
+        dateFormat = new SimpleDateFormat();
     }
 
     public void log(LEVEL level, String message, Throwable t) {
