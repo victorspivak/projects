@@ -2,11 +2,9 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Osmorc" name="OSGi">
-      <configuration osmorcControlsManifest="true" manifestLocation="" jarfileLocation="OsgiDS.jar" outputPathType="OsgiOutputPath" useBndFile="false" bndFileLocation="" useBundlorFile="false" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="OsgiDS Client Bundle" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false">
+      <configuration osmorcControlsManifest="true" manifestLocation="" jarfileLocation="ConsoleLogger.jar" outputPathType="OsgiOutputPath" useBndFile="false" bndFileLocation="" useBundlorFile="false" bundlorFileLocation="" bundleActivator="" bundleSymbolicName="ConsoleLogger" bundleVersion="1.0.0" ignoreFilePattern="" useProjectDefaultManifestFileLocation="true" alwaysRebuildBundleJAR="false">
         <additionalProperties>
-          <property key="Private-Package" value="svl" />
-          <property key="Service-Component" value="OSGI-INF/minimal.xml" />
-          <property key="Include-Resource" value="OSGI-INF/minimal.xml" />
+          <property key="Service-Component" value="consoleLogger.xml, OSGI-INF/consoleLogger.xml" />
         </additionalProperties>
         <additionalJARContents>
           <entry source="$MODULE_DIR$/OSGI-INF" dest="OSGI-INF" />
@@ -21,7 +19,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Equinox" level="application" />
     <orderEntry type="module" module-name="LogAPI" />
   </component>
 </module>

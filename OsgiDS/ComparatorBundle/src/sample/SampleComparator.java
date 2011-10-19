@@ -1,5 +1,5 @@
 /*
- * Copyright © 1994-2009. Victor Spivak.  All Rights Reserved.
+ * Copyright  1994-2009. Victor Spivak.  All Rights Reserved.
  */
 
 package sample;

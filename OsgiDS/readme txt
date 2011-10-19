@@ -17,4 +17,6 @@ install file:/home/vspivak/tools/lib/equinox/plugins/org.eclipse.osgi.services_3
 
 install file:OsgiDS.jar
 install file:ComparatorBundle.jar
+install file:LogAPI.jar
+install file:ConsoleLogger.jar
 
