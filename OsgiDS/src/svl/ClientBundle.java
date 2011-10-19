@@ -11,14 +11,16 @@ import java.util.Comparator;
 import java.util.Dictionary;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ClientBundle {
     private ExecutorService executorService;
     private Comparator comparator;
-    private Log logger;
+    private AtomicReference<Log> loggerRef;
 
     public ClientBundle() {
-        System.out.println("CLIENT Constructor");
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> CLIENT Constructor");
+        loggerRef = new AtomicReference<Log>();
     }
 
     @SuppressWarnings({"unused"})
@@ -27,16 +29,13 @@ public class ClientBundle {
         System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> activate");
 
         Dictionary properties = context.getProperties();
-        boolean compareMode = true;
-
-        if (properties != null) {
-            compareMode = (Boolean) properties.get("mode");
-        }
+        boolean compareMode = Boolean.parseBoolean((String) properties.get("mode"));
+        long timeout = Long.parseLong((String) properties.get("timeout"));
 
         if (compareMode)
-            start("1", "1");
+            start("1", "1", timeout);
         else
-            start("1", "2");
+            start("1", "2", timeout);
     }
 
     @SuppressWarnings({"unused"})
@@ -50,25 +49,34 @@ public class ClientBundle {
     @SuppressWarnings({"unused"})
     public void setComparator (Comparator comparator) {
         this.comparator = comparator;
-        System.out.println("@@@@@@@@@@@@@@@@@ Comparator @@@@@@@@@@@@@@@@@@@@@@@@");
     }
 
     @SuppressWarnings({"unused"})
     public void setLog(Log logger) {
-        this.logger = logger;
+        loggerRef.set(logger);
+        System.out.println("set logger = " + logger);
+    }
+
+    @SuppressWarnings({"unused"})
+    public void unsetLog(Log logger) {
+        System.out.println("unset logger = " + logger);
+        loggerRef.compareAndSet(logger, null);
     }
 
     @SuppressWarnings({"unchecked"})
-    public void start(final Object o1, final Object o2) {
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> start");
+    public void start(final Object o1, final Object o2, final long timeout) {
         executorService = Executors.newSingleThreadExecutor();
         executorService.submit(new Runnable() {
             @SuppressWarnings({"NullableProblems"})
             public void run() {
                 while (!Thread.interrupted()) {
-                    logger.log(Log.LEVEL.DEBUG, "Hello World!! " + comparator.compare(o1, o2), null);
+                    Log logger = loggerRef.get();
+                    if (logger != null)
+                        logger.log(Log.LEVEL.DEBUG, "Hello World!! " + comparator.compare(o1, o2), null);
+                    else
+                        System.out.println("*** No Logger ***");
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(timeout);
                     } catch (InterruptedException e) {
                         System.out.println("************************************************************************");
                         Thread.currentThread().interrupt();
