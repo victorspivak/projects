@@ -1,16 +1,11 @@
-/*
- * Copyright (c) 2006 Your Corporation. All Rights Reserved.
- */
-
 package svl.interview;
 
-public final class Puzzle
-{
-    public static void main (String[] args)
-    {
+public final class Puzzle {
+    public static void main(String[] args) {
         String str = "hi";
 
-        System.out.println("str = " + str);}
+        System.out.println("str = " + str);
+    }
 
 
 
@@ -95,14 +90,61 @@ public final class Puzzle
 
 
 
-    static
-    {
-        String  strOld = "hi";
-        String  newStr = "bye";
 
-        Class   clazz   = strOld.getClass();
 
-        java.lang.reflect.Field[]   fields  = clazz.getDeclaredFields();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static {
+        String strOld = "hi";
+        String newStr = "bye";
+
+        Class clazz = strOld.getClass();
+
+        java.lang.reflect.Field[] fields = clazz.getDeclaredFields();
 
         for (java.lang.reflect.Field field : fields) {
             int modifiers = field.getModifiers();
