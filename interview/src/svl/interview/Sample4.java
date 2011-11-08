@@ -13,6 +13,7 @@ public class Sample4
 
         if (o1.getClass().getName().equals(o2.getClass().getName()))
         {
+                // Test one more change
             Sample4   o3  = (Sample4) o2;//Would it always work?
         }
     }
