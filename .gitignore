@@ -2,3 +2,6 @@ out/
 target/
 */.idea/workspace.xml
 *.iws
+
+*/*/.idea/workspace.xml
+*/*.iws
