@@ -1,8 +1,6 @@
 package svl.learn.kotlin
 
-/**
- * HelloKotlin
- *
- * @author vspivak
- * @since 174
- */
+fun main(args : Array<String>) {
+  println("Hello, world!")
+}
+
