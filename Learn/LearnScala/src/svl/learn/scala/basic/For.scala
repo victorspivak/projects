@@ -1,10 +1,18 @@
-/*
- * User: Victor    Date: 1/21/12   Time: 1:29 AM
- */
+import util.control.Breaks._
 
 val list = List(1,2,3,4,5,6,7,8,9)
 for (i <- list)
     Console print (" " + i)
+Console println ()
+
+//break loop
+breakable {
+    for (i <- list) {
+        Console print (" " + i)
+        if (i > 5)
+            break;
+    }
+}
 Console println ()
 
 for (i <- 1 to 10)
