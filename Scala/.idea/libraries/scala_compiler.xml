@@ -3,6 +3,8 @@
     <CLASSES>
       <root url="jar://D:/Tools/Scala/scala-2.9.0.1/lib/scala-compiler.jar!/" />
       <root url="jar://D:/Tools/Scala/scala-2.9.0.1/lib/scala-library.jar!/" />
+      <root url="jar://$USER_HOME$/tools/sdk/scala/lib/scala-compiler.jar!/" />
+      <root url="jar://$USER_HOME$/tools/sdk/scala/lib/scala-library.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
