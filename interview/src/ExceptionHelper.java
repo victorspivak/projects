@@ -1,8 +1,6 @@
 /*
- * Copyright © 1994-2009. Victor Spivak.  All Rights Reserved.
+ * Copyright ï¿½ 1994-2009. Victor Spivak.  All Rights Reserved.
  */
-
-package svl;
 
 public class ExceptionHelper {
     public static void doThrow(Exception e) {

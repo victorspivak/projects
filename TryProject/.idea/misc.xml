@@ -8,7 +8,7 @@
     <option name="effort" value="default" />
     <option name="priority" value="Medium" />
   </component>
-  <component name="IdProvider" IDEtalkID="D5DF5C90AE802F3AB91A46099467BFF3" />
+  <component name="IdProvider" IDEtalkID="7B546F3F8CAC59CB153B434288D534DB" />
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" />
     <option name="OPTION_SCOPE" value="protected" />
@@ -26,8 +26,9 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
-  <component name="ProjectResources">
-    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
+  <component name="ModuleEditorState">
+    <option name="LAST_EDITED_MODULE_NAME" />
+    <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />

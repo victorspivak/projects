@@ -1,10 +1,7 @@
 /*
- * Copyright © 1994-2009. Victor Spivak.  All Rights Reserved.
+ * Copyright ï¿½ 1994-2009. Victor Spivak.  All Rights Reserved.
  */
 
-
-
-import svl.ExceptionHelper;
 
 import java.sql.SQLException;
 
