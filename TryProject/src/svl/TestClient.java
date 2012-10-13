@@ -67,6 +67,8 @@ public class TestClient {
     }
 
     public void processSelectionKey(SelectionKey selKey) throws IOException {
+        System.out.println("processSelectionKey");
+
         if (selKey.isValid() && selKey.isConnectable()) {
             SocketChannel sChannel = (SocketChannel) selKey.channel();
 
@@ -86,6 +88,7 @@ public class TestClient {
             SocketChannel sChannel = (SocketChannel) selKey.channel();
 
             write(sChannel, "2000\n");
+            selKey.channel().register(selKey.selector(), SelectionKey.OP_READ);
         }
     }
 

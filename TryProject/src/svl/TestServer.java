@@ -41,6 +41,8 @@ public class TestServer {
 
                         int counter = 0;
 
+                        System.out.println("pause = " + pause);
+
                         while(true) {
                             try {
                                 printer.println(counter++);
