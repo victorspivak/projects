@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+
+    <servlet>
+        <display-name>HelloServlet</display-name>
+        <servlet-name>HelloServlet</servlet-name>
+        <servlet-class>svl.servlet.HelloServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloServlet</servlet-name>
+        <url-pattern>hello</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>HelloServlet</display-name>
+        <servlet-name>HelloServletAsync</servlet-name>
+        <servlet-class>svl.servlet.HelloServletAsync</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HelloServletAsync</servlet-name>
+        <url-pattern>helloasync</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>ReverseHttpServlet</display-name>
+        <servlet-name>ReverseHttpServlet</servlet-name>
+        <servlet-class>svl.servlet.reversehttp.ReverseHttpServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReverseHttpServlet</servlet-name>
+        <url-pattern>reversehttp</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>ReverseHttpRequestServlet</display-name>
+        <servlet-name>ReverseHttpRequestServlet</servlet-name>
+        <servlet-class>svl.servlet.reversehttp.ReverseHttpRequestServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReverseHttpRequestServlet</servlet-name>
+        <url-pattern>reversehttprequest</url-pattern>
+    </servlet-mapping>
+
+    <!--
+        <servlet>
+            <display-name>HelloServlet</display-name>
+            <servlet-name>HelloServletAsyncDispatch</servlet-name>
+            <servlet-class>svl.servlet.HelloServletAsyncDispatch</servlet-class>
+            <async-supported>true</async-supported>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>HelloServletAsyncDispatch</servlet-name>
+            <url-pattern>hellodisp</url-pattern>
+        </servlet-mapping>
+    -->
+
+    <filter>
+        <filter-name>GzipFilter</filter-name>
+        <filter-class>org.eclipse.jetty.servlets.GzipFilter</filter-class>
+        <init-param>
+            <param-name>mimeTypes</param-name>
+            <param-value>text/html,text/plain,text/xml,application/xhtml+xml,text/css,application/javascript,image/svg+xml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>minGzipSize</param-name>
+            <param-value>5</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>GzipFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
