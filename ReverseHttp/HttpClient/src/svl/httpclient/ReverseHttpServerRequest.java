@@ -4,9 +4,15 @@
 
 package svl.httpclient;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -14,11 +20,12 @@ import java.util.concurrent.TimeUnit;
 public class ReverseHttpServerRequest implements Runnable {
     private final String url;
     private final String requestId;
+    private HttpClient httpclient;
 
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        startRequests(executorService, 5);
+        startRequests(executorService, 1);
 
         executorService.shutdown();
         executorService.awaitTermination(60*24, TimeUnit.MINUTES);
@@ -35,56 +42,58 @@ public class ReverseHttpServerRequest implements Runnable {
     public ReverseHttpServerRequest(String url, String requestId) {
         this.url = url;
         this.requestId = requestId;
+        httpclient = new DefaultHttpClient();
     }
 
     public void run() {
         try {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                connection = createConnection();
-                connection.setDoOutput(true);
-                PrintWriter printer = null;
-                try {
-                    printer = new PrintWriter(new OutputStreamWriter(connection.getOutputStream()));
-                    for (int i = 0; i < 10; i++) {
-                        printer.println("Request line " + i);
-                    }
-                    printer.println();
-                    printer.flush();
-                } catch (IOException e) {
-                    printer.close();
-                }
-
-                try {
-                    reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        System.out.println(line);
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        } catch (Exception e) {
+            HttpPost httppost = prepareRequest();
+            HttpResponse response = httpclient.execute(httppost);
+            processResponse(response);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private HttpURLConnection createConnection() throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.addRequestProperty(WaitingContextsConstants.REVERSE_HTTP_REQUEST_ID, requestId);
-        return connection;
+    private HttpPost prepareRequest() throws UnsupportedEncodingException {
+        StringWriter stringWriter = new StringWriter(1024);
+        PrintWriter printer = new PrintWriter(stringWriter);
+
+        for (int i = 0; i < 10; i++) {
+            printer.println("Request line " + i);
+        }
+        printer.println();
+        printer.flush();
+
+        HttpPost httppost = new HttpPost(url);
+        httppost.addHeader(new BasicHeader(WaitingContextsConstants.REVERSE_HTTP_REQUEST_ID, requestId));
+        httppost.setEntity(new StringEntity(stringWriter.getBuffer().toString()));
+        return httppost;
+    }
+
+    private void processResponse(HttpResponse response) {
+        BufferedReader reader = null;
+
+        try {
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                reader = new BufferedReader(new InputStreamReader(entity.getContent()));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

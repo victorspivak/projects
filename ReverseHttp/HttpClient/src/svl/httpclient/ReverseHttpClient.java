@@ -4,9 +4,16 @@
 
 package svl.httpclient;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -14,14 +21,15 @@ import java.util.concurrent.TimeUnit;
 public class ReverseHttpClient implements Runnable {
     private final String url;
     private final String requestId;
+    private HttpClient httpclient;
 
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        startRequests(executorService, 5);
+        startRequests(executorService, 1);
 
         executorService.shutdown();
-        executorService.awaitTermination(60*24, TimeUnit.MINUTES);
+        executorService.awaitTermination(60 * 24, TimeUnit.MINUTES);
         executorService.shutdownNow();
         System.exit(0);
     }
@@ -35,20 +43,30 @@ public class ReverseHttpClient implements Runnable {
     public ReverseHttpClient(String url, String requestId) {
         this.url = url;
         this.requestId = requestId;
+        httpclient = new DefaultHttpClient();
     }
 
     public void run() {
-        HttpURLConnection connection = null;
+        long start = System.currentTimeMillis();
+
+        HttpGet httpget = new HttpGet(url);
+        httpget.addHeader(new BasicHeader(WaitingContextsConstants.REVERSE_HTTP_REQUEST_ID, requestId));
         BufferedReader reader = null;
 
         try {
-            connection = createConnection();
+            HttpResponse response = httpclient.execute(httpget);
 
             while (true) {
-                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                HttpEntity entity = response.getEntity();
+                if (entity != null) {
+                    reader = new BufferedReader(new InputStreamReader(entity.getContent()));
 
-                String line = readHeartbeats(reader);
-                connection = processRequest(connection, line, reader);
+                    String line = readHeartbeats(reader);
+                    System.out.println("timing: " + (System.currentTimeMillis() - start) / 1000);
+                    response = processRequest(response, line, reader);
+                } else {
+                    break;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -61,31 +79,41 @@ public class ReverseHttpClient implements Runnable {
                 }
             }
         }
+
+        System.out.println("timing: " + (System.currentTimeMillis() - start) / 1000);
     }
 
-    private HttpURLConnection processRequest(HttpURLConnection connection, String line, BufferedReader reader) throws IOException {
+    private HttpResponse processRequest(HttpResponse response, String line, BufferedReader reader) throws IOException {
+        processRequest(line, reader);
+        HttpPost httppost = prepareResponse();
+        response = httpclient.execute(httppost);
+
+        return response;
+    }
+
+    private HttpPost prepareResponse() throws UnsupportedEncodingException {
+        StringWriter stringWriter = new StringWriter(1024);
+        PrintWriter printer = new PrintWriter(stringWriter);
+
+        for (int i = 0; i < 10; i++) {
+            printer.println("Response line " + i);
+        }
+        printer.println();
+        printer.flush();
+
+        HttpPost httppost = new HttpPost(url);
+        httppost.addHeader(new BasicHeader(WaitingContextsConstants.REVERSE_HTTP_REQUEST_ID, requestId));
+        httppost.setEntity(new StringEntity(stringWriter.getBuffer().toString()));
+        return httppost;
+    }
+
+    private void processRequest(String line, BufferedReader reader) throws IOException {
+        System.out.println(line);
         while ((line = reader.readLine()) != null) {
             System.out.println(line);
         }
 
         reader.close();
-        connection.disconnect();
-        connection = createConnection();
-        connection.setDoOutput(true);
-
-        PrintWriter printer = null;
-        try {
-            printer = new PrintWriter(new OutputStreamWriter(connection.getOutputStream()));
-            for (int i = 0; i < 10; i++) {
-                printer.println("Response line " + i);
-            }
-            printer.println();
-            printer.flush();
-        } catch (IOException e) {
-            printer.close();
-        }
-
-        return connection;
     }
 
     private String readHeartbeats(BufferedReader reader) throws IOException {
@@ -96,11 +124,5 @@ public class ReverseHttpClient implements Runnable {
             System.out.println(line);
         }
         return line;
-    }
-
-    private HttpURLConnection createConnection() throws IOException {
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        connection.addRequestProperty(WaitingContextsConstants.REVERSE_HTTP_REQUEST_ID, requestId);
-        return connection;
     }
 }

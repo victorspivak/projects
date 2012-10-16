@@ -31,13 +31,14 @@ public class TestClient {
         SocketChannel sChannel2 = createSocketChannel("localhost", 8888);
 
         sChannel1.register(selector, sChannel1.validOps());
-        sChannel2.register(selector, sChannel1.validOps());
+        sChannel2.register(selector, sChannel2.validOps());
 
         while (true) {
             try {
-                selector.select();
+                if (selector.select(5000) == 0) {
+                    continue;
+                }
             } catch (IOException e) {
-                // Handle error with selector
                 System.out.println("e = " + e);
                 break;
             }
@@ -67,8 +68,6 @@ public class TestClient {
     }
 
     public void processSelectionKey(SelectionKey selKey) throws IOException {
-        System.out.println("processSelectionKey");
-
         if (selKey.isValid() && selKey.isConnectable()) {
             SocketChannel sChannel = (SocketChannel) selKey.channel();
 
@@ -87,18 +86,19 @@ public class TestClient {
         if (selKey.isValid() && selKey.isWritable()) {
             SocketChannel sChannel = (SocketChannel) selKey.channel();
 
-            write(sChannel, "2000\n");
-            selKey.channel().register(selKey.selector(), SelectionKey.OP_READ);
+            write(sChannel, "5000\n");
+            selKey.channel().register(selKey.selector(), SelectionKey.OP_READ | SelectionKey.OP_CONNECT);
         }
     }
 
     private void write(SocketChannel sChannel, String line) throws IOException {
+        System.out.println("Write");
         ByteBuffer buf = BufferHelper.str_to_bb(line);
-        buf.flip();
         sChannel.write(buf);
     }
 
     private void read(SocketChannel sChannel) throws IOException {
+        System.out.println("Read");
         ByteBuffer buf = ByteBuffer.allocateDirect(1024);
 
         buf.clear();

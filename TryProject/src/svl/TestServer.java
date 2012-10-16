@@ -32,12 +32,13 @@ public class TestServer {
             new Thread(new Runnable() {
                 public void run() {
                     try {
+                        String line = null;
                         BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
                         PrintWriter printer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
 
-                        String line = reader.readLine();
+                        line = reader.readLine();
                         line = line == null ? "" : line.trim();
-                        long pause = line.isEmpty() ? 10000 : Long.parseLong(line);
+                        long pause = line.isEmpty() ? 1000 : Long.parseLong(line);
 
                         int counter = 0;
 
