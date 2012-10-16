@@ -1,5 +1,5 @@
 /*
- * Copyright © 1994-2009. Victor Spivak.  All Rights Reserved.
+ * Copyright ï¿½ 1994-2009. Victor Spivak.  All Rights Reserved.
  */
 
 package svl.httpclient;
@@ -35,7 +35,8 @@ public class ReverseHttpServerRequest implements Runnable {
 
     private static void startRequests(ExecutorService executorService, int count) {
         for (int i = 0; i < count; i++) {
-            executorService.submit(new ReverseHttpServerRequest("http://localhost:8080/reversehttprequest", "Req-" + i));
+            executorService.submit(new ReverseHttpServerRequest("http://localhost:"  + WaitingContextsConstants.PROXY_PORT +
+                    "/reversehttprequest", "Req-" + i));
         }
     }
 
