@@ -24,14 +24,14 @@ object SfdcDsl {
     }
 
     case class login (user:String) extends DslCommand {
-        private var _passoword: Option[String] = None
+        private var _password: Option[String] = None
         private var _address: Option[String] = None
 
-        def password(value: String) = {_passoword = value; this}
+        def password(value: String) = {_password = value; this}
         def to(value: String) = {_address = value; this}
 
         def address = option2String(_address)
-        def password = option2String(_passoword)
+        def password = option2String(_password)
 
         def execute() {println("Login as %s with %s password to %s org".format(user, password, address))}
     }
