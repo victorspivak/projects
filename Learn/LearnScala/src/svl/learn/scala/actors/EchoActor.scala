@@ -1,7 +1,8 @@
+import actors.Actor
 import java.util.Date
 import scala.actors.Actor._
 
-val echoActor = actor {
+val echoActor: Actor = actor {
     while (true) {
         receive {
             case msg =>

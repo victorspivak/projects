@@ -34,10 +34,19 @@
         }
     }
 
+    class Child1 extends Base
+    {
+    }
+
     $baseObj = new Base();
     $baseObj = null;
 
     $childObj = new Child();
     print("name: " . $childObj->name()."\n");
     $childObj = null;
+
+    $childObj1 = new Child1();
+    print("name: $childObj1->name()\n");
+    $childObj1 = null;
+
 ?>
