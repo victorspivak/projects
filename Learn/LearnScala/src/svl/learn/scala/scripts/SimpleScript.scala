@@ -1,7 +1,8 @@
-/*
- * User: Victor    Date: 1/20/12   Time: 9:48 PM
- */
+object SimpleScript {
+    def main(args:Array[String]) {
+        Console println "Hello World 1"
+        println ("Hello World 2")
+    }
+}
 
-Console println "Hello World 1"
-println ("Hello World 2")
 

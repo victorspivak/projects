@@ -1,6 +1,10 @@
 import scala.actors.Actor._
 
-self ! "hello"
-self.receive { case x => println(x) }
+object SelfActor {
+    def main(args:Array[String]) {
+        self ! "hello"
+        self.receive { case x => println(x) }
+    }
+}
 
 

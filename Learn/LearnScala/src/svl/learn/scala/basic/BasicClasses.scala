@@ -1,8 +1,9 @@
-/*
- * User: Victor    Date: 1/26/12   Time: 1:13 AM
- */
+object BasicClasses {
+    def main(args:Array[String]) {
+        val hello : Any = "Hello"
+        Console println  hello.hashCode
+        Console println  hello.##
+        Console println  (hello ##)
+    }
+}
 
-val hello : Any = "Hello"
-Console println  hello.hashCode
-Console println  hello.##
-Console println  (hello ##)
