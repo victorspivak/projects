@@ -58,6 +58,5 @@ foreach($ar as $v)
 
 foreach($array1 as $v)
     print "(" . $v . ")\n";
-
 ?>
 
