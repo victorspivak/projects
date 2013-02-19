@@ -1,8 +1,8 @@
 package svl.interview;
 
-public final class Puzzle {
+public class Puzzle {
     public static void main(String[] args) {
-        String str = "hi";
+      String str = "hi";
 
         System.out.println("str = " + str);
     }
