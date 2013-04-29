@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="SBT: ua.t3hnar.bcrypt:scala-bcrypt:1.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/ua.t3hnar.bcrypt/scala-bcrypt/jars/scala-bcrypt-1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

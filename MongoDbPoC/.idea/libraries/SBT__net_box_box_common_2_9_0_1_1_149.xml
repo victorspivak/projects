@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: net.box:box-common_2.9.0-1:1.149">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.box/box-common_2.9.0-1/jars/box-common_2.9.0-1-1.149.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.box/box-common_2.9.0-1/docs/box-common_2.9.0-1-1.149-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.box/box-common_2.9.0-1/srcs/box-common_2.9.0-1-1.149-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

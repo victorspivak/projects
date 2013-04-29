@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.scalatra:scalatra-auth_2.9.0-1:2.0.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.scalatra/scalatra-auth_2.9.0-1/jars/scalatra-auth_2.9.0-1-2.0.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.scalatra/scalatra-auth_2.9.0-1/docs/scalatra-auth_2.9.0-1-2.0.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.scalatra/scalatra-auth_2.9.0-1/srcs/scalatra-auth_2.9.0-1-2.0.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
