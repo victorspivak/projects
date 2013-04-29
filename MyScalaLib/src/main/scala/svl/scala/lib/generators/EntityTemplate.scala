@@ -43,6 +43,8 @@ object EntityTemplate {
   }
 
   implicit def String2ConstString(value:String) = ConstString(value)
+  implicit def AttributeGenerator2String(gen:AbstractAttributeGenerator):String = gen.next
+  implicit def AttributeGenerator2Int(gen:AbstractAttributeGenerator):Int = gen.next.toInt
 
   class Based64String(val generator:AbstractAttributeGenerator) extends AbstractAttributeGenerator {
     def next:String = toBase64(generator.next)
@@ -78,19 +80,17 @@ object EntityTemplate {
     def apply(template: String, mask: String) = new AutoStringTimerBased(template, mask)
   }
 
-  class RandomString(val template: String, val mask: String, val random: Random = RandomString.defaultRandom) extends AbstractAttributeGenerator {
-    val maskLength = mask.length
-
+  class RandomString(val template: String, val maxLength:Int, val random: Random = RandomString.defaultRandom) extends AbstractAttributeGenerator {
     private def nextChar: Char = {
       val c = random.nextPrintableChar()
       if (!RandomString.isAllowed(c)) nextChar else c
     }
 
-    def nextLength = random.nextInt(maskLength)
+    def nextLength = random.nextInt(maxLength)
 
     def next: String = {
       val length = nextLength
-      val str = mask + (1 to length).map(s => nextChar).mkString takeRight maskLength
+      val str = (1 to length).map(s => nextChar).mkString takeRight maxLength
       template.format(str)
     }
   }
@@ -100,20 +100,19 @@ object EntityTemplate {
 
     val defaultRandom = new Random
 
-    def apply(template: String, mask: String, random: Random = defaultRandom) = new RandomString(template, mask, random)
+    def apply(template: String, maxLength:Int, random: Random = defaultRandom) = new RandomString(template, maxLength, random)
 
     def isAllowed(c: Char) = charFilter.contains(c)
   }
 
-  class RandomFixedString(template: String, mask: String, random: Random = RandomString.defaultRandom) extends
-  RandomString(template, mask, random) {
+  class RandomFixedString(template: String, maxLength:Int, random: Random = RandomString.defaultRandom) extends
+  RandomString(template, maxLength, random) {
 
-    override def nextLength = maskLength
+    override def nextLength = maxLength
   }
 
   object RandomFixedString {
-    def apply(template: String, mask: String, random: Random = RandomString.defaultRandom) = new RandomFixedString(template, mask, random)
+    def apply(template: String, maxLength:Int, random: Random = RandomString.defaultRandom) = new RandomFixedString(template, maxLength, random)
   }
-
 }
 

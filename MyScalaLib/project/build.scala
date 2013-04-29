@@ -23,7 +23,8 @@ object MyScalaLibBuild extends Build {
       oneJarSettings ++
       buildInfoSettings ++
       Seq(
-        version := "1.54-SNAPSHOT",
+        organization := "svl",
+        version := "0.5.0",
         scalaVersion := "2.9.2",
         libraryDependencies ++= deps,
         sourceGenerators in Compile <+= buildInfo,
@@ -39,6 +40,6 @@ object MyScalaLibBuild extends Build {
                              |import svl.scala.lib._
                              |""".stripMargin
       ) ++
-      addArtifact(Artifact("ScalaZ", "one-jar"), oneJar)
+      addArtifact(Artifact("MyScalaLib", "one-jar"), oneJar)
   )
 }
