@@ -22,4 +22,7 @@ if (!$v1[1])
 if (!isset($v1[1]))
     echo "Is not set\n";
 
+$n = null;
+if($n)
+	echo "Check n\n"
 ?>
