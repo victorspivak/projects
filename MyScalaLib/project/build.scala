@@ -8,7 +8,7 @@ object MyScalaLibBuild extends Build {
   lazy val deps = Seq(
     // NOTE: We use "latest.integration", which is the most recent SNAPSHOT version, to try to catch box-common bugs earlier!
     // NOTE: There is another dep: sudo cp ~/libjpam.so /usr/java/jdk1.6.0_26/jre/lib/amd64
-    "org.slf4j" % "slf4j-simple" % "1.6.4",
+    "org.slf4j" % "slf4j-simple" % "1.7.5",
     "commons-logging" % "commons-logging" % "1.1.1",
     "org.specs2"               % "specs2_2.9.2"         % "1.12.3" % "test",
     "org.mockito"              % "mockito-all"          % "1.9.0"  % "test",
