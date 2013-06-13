@@ -14,10 +14,10 @@ object App {
 case class CheckpointRecord(id:String)
 
 /** Component obligation for Checkpoint storage and retrieval */
-trait CheckpointPersistence { // ⬅ The Component Obligation ⬇
-  def checkpointRepository: CheckpointRepository // ⬅ The Provider
+trait CheckpointPersistence { // The Component Obligation ⬇
+  def checkpointRepository: CheckpointRepository // The Provider
 
-  trait CheckpointRepository { // ⬅ The Characteristic ⬇
+  trait CheckpointRepository { // The Characteristic ⬇
     def recordCheckpoint(cpr: CheckpointRecord, hostName: String)
     def restoreCheckpoint(cprPath: String): CheckpointRecord
     def deleteCheckpoint(cprPath: String)
@@ -25,13 +25,13 @@ trait CheckpointPersistence { // ⬅ The Component Obligation ⬇
 }
 
 /** Zookeeper-based Checkpoint persistence component realization */
-trait   ZKCheckpointPersistence // ⬅ A Component Realization ⬇
+trait   ZKCheckpointPersistence // A Component Realization ⬇
 extends CheckpointPersistence {
-	serializator: CheckpointSerialization => // ⬅ Component Dependency
+	serializator: CheckpointSerialization => // Component Dependency
 
 	val checkpointRepository = new ZKCheckpointRepository // ⬅ Component Provider
 
-	class   ZKCheckpointRepository // ⬅ The Characteristic Implementation ⬇
+	class   ZKCheckpointRepository // The Characteristic Implementation ⬇
 	extends CheckpointRepository {
 		def recordCheckpoint(cpr: CheckpointRecord, hostName: String) {
 			printf ("recordCheckpoint %s %s\n", cpr.toString, hostName)
