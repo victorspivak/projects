@@ -1,4 +1,4 @@
-package svl.metadata.poc.md.database
+package svl.metadata.poc.md.database.hbase
 
 import org.apache.hadoop.hbase.{TableNotFoundException, HColumnDescriptor, HTableDescriptor, HBaseConfiguration}
 import org.apache.hadoop.hbase.client._
@@ -7,26 +7,7 @@ import org.apache.hadoop.conf.Configuration
 import java.util.{UUID, Date}
 import svl.metadata.poc.md.mdd.MdAttrDataTypes
 import MdAttrDataTypes._
-import org.slf4j.{LoggerFactory, Logger}
-
-//-Dlog4j.configuration=/home/victor/projects/src/main/resources/log4j.properties
-
-object MyTest extends App{
-  val db = new HBaseDatabase with DefaultHBaseDatabaseEnv
-
-  val l = LoggerFactory.getLogger("aLogger")
-  l.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111")
-
-  val s = db.connect
-  for (i <- 1 to 2) {
-//    println(db.env.idFactory.makeRandomId)
-    println(db.env.idFactory.makeSeqId("TestIdGr1", "gr1_%d"))
-  }
-
-  s.delete("12345")
-
-  s.disconnect()
-}
+import svl.metadata.poc.md.database.{DbObject, DbSession, Database}
 
 trait HBaseDatabaseEnv{
   def conf:Configuration
@@ -81,14 +62,6 @@ trait DefaultHBaseDatabaseEnv{
           case None => throw new Exception("Unexpected case. Should analyze.")
         }
       }
-
-      def rememberId(idGroup:String, id:Long) = {
-        val idTable = helper.getTable(FactoryIdTableName)
-        val put = helper.makePut(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, LongType, id)
-        idTable.put(put)
-        helper.closeTable(idTable)
-        id
-      }
     }
   }
 }
@@ -117,8 +90,13 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
                 "The argument type %s is not supported in the toBytes conversion.".format(attrType.toString))
   }
 
-  def makePut[T](id:String, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T) =
-    new Put(id).add(fieldFamily, fieldName, toBytes(attrType, value))
+  def makePut[T](id:String):Put = new Put(id)
+
+  def makePut[T](id:String, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T):Put =
+    addToPut(makePut(id), fieldFamily, fieldName, attrType, value)
+
+  def addToPut[T](put:Put, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T) =
+    put.add(fieldFamily, fieldName, toBytes(attrType, value))
 
   def makeIncrement(id:String, fieldFamily:String, fieldName:String, value:Long) =
     new Increment(id).addColumn(fieldFamily, fieldName, value)
@@ -159,8 +137,6 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
 }
 
 class HBaseSession(val env:HBaseDatabaseEnv) extends DbSession{
-
-
   def create(dbObj: DbObject) = {println("CREATE");null}
 
   def update(dbObj: DbObject) = {println("UPDATE");null}

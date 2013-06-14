@@ -3,8 +3,7 @@ package svl.metadata.poc.md.mdd
 import org.specs2._
 import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 
-class MdAttributeSpec extends Specification {
-  def is =
+class MdAttributeSpec extends Specification { def is =
   "This is a specification to check Metadata Attributes"                            ^
                                                                                     p^
     "The StringAttribute with default values should"                                ^
