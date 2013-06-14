@@ -1,32 +1,13 @@
-package svl.metadata.poc.md.database
+package svl.metadata.poc.md.database.hbase
 
-import org.apache.hadoop.hbase.{TableNotFoundException, HColumnDescriptor, HTableDescriptor, HBaseConfiguration}
-import org.apache.hadoop.hbase.client._
-import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.conf.Configuration
-import java.util.{UUID, Date}
-import svl.metadata.poc.md.mdd.MdAttrDataTypes
-import MdAttrDataTypes._
-import org.slf4j.{LoggerFactory, Logger}
-
-//-Dlog4j.configuration=/home/victor/projects/src/main/resources/log4j.properties
-
-object MyTest extends App{
-  val db = new HBaseDatabase with DefaultHBaseDatabaseEnv
-
-  val l = LoggerFactory.getLogger("aLogger")
-  l.error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111")
-
-  val s = db.connect
-  for (i <- 1 to 2) {
-//    println(db.env.idFactory.makeRandomId)
-    println(db.env.idFactory.makeSeqId("TestIdGr1", "gr1_%d"))
-  }
-
-  s.delete("12345")
-
-  s.disconnect()
-}
+import org.apache.hadoop.hbase.client._
+import svl.metadata.poc.md.database.DbSession
+import org.apache.hadoop.hbase.{HColumnDescriptor, HTableDescriptor, HBaseConfiguration}
+import java.util.{Date, UUID}
+import svl.metadata.poc.md.mdd.MdAttrDataTypes._
+import org.apache.hadoop.hbase.util.Bytes
+import svl.metadata.poc.md.mdd.MddBaseException
 
 trait HBaseDatabaseEnv{
   def conf:Configuration
@@ -64,30 +45,21 @@ trait DefaultHBaseDatabaseEnv{
     }
 
     def idFactory = new IdFactory{
-      val FactoryIdTableName = "FactoryID"
-      val FactoryIdFieldFamily = "fi_ff"
+      val FactoryIdTableName = "IdFactory"
+      val FactoryIdFieldFamily = "id_ff"
       val FactoryIdFieldName = "lastId"
-
-      helper.createTableIfMissing(FactoryIdTableName, FactoryIdFieldFamily)
 
       def makeRandomId:String = UUID.randomUUID().toString
 
       def makeSeqId(idGroup:String, template:String):String = {
         def makeId(id:Long, template:String) = template.format(id)
-        val idTable = helper.getTable(FactoryIdTableName)
+        val idTable = helper.getTable(FactoryIdTableName, Option(FactoryIdFieldFamily))
         val result = idTable.increment(helper.makeIncrement(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, 1))
         helper.getValue(LongType, result, FactoryIdFieldFamily, FactoryIdFieldName) match {
           case Some(id) => makeId(id, template)
           case None => throw new Exception("Unexpected case. Should analyze.")
         }
-      }
 
-      def rememberId(idGroup:String, id:Long) = {
-        val idTable = helper.getTable(FactoryIdTableName)
-        val put = helper.makePut(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, LongType, id)
-        idTable.put(put)
-        helper.closeTable(idTable)
-        id
       }
     }
   }
@@ -96,13 +68,24 @@ trait DefaultHBaseDatabaseEnv{
 class HBaseHelper(val env:HBaseDatabaseEnv){
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
 
-  def getTable(name:String):HTableInterface = {
+  def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     try{
       env.pool.getTable(name)
-    } catch{
-      case e:TableNotFoundException => null
-      case e:Exception => throw e
+    } catch {
+      case exception:Exception => translateException(exception) match {
+        case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
+          createTable(name, fldFamily)
+          getTable(name, None)
+        }).getOrElse(null)
+        case e:Exception => throw e
+      }
     }
+  }
+
+  def translateException(exception:Throwable):Throwable = exception match {
+    case e:MddBaseException => e
+    case e:org.apache.hadoop.hbase.TableNotFoundException => e
+    case e:Exception =>   if (e.getCause != null) translateException(e.getCause) else e
   }
 
   def closeTable(table:HTableInterface) {table.close()}
@@ -110,15 +93,20 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
   def toBytes[T](attrType:MdAttrDataType[T], value:T) = attrType match {
     case StringType => Bytes.toBytes(value.asInstanceOf[String])
     case IntegerType => Bytes.toBytes(value.asInstanceOf[Int])
-    case DoubleType => Bytes.toBytes(value.asInstanceOf[Int])
-    case LongType => Bytes.toBytes(value.asInstanceOf[Int])
+    case DoubleType => Bytes.toBytes(value.asInstanceOf[Double])
+    case LongType => Bytes.toBytes(value.asInstanceOf[Long])
     case DateType => Bytes.toBytes(value.asInstanceOf[Date].getTime)
     case _ => throw new IllegalArgumentException(
-                "The argument type %s is not supported in the toBytes conversion.".format(attrType.toString))
+      "The argument type %s is not supported in the toBytes conversion.".format(attrType.toString))
   }
 
-  def makePut[T](id:String, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T) =
-    new Put(id).add(fieldFamily, fieldName, toBytes(attrType, value))
+  def makePut[T](id:String):Put = new Put(id)
+
+  def makePut[T](id:String, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T):Put =
+    addToPut(makePut(id), fieldFamily, fieldName, attrType, value)
+
+  def addToPut[T](put:Put, fieldFamily:String, fieldName:String, attrType:MdAttrDataType[T], value:T) =
+    put.add(fieldFamily, fieldName, toBytes(attrType, value))
 
   def makeIncrement(id:String, fieldFamily:String, fieldName:String, value:Long) =
     new Increment(id).addColumn(fieldFamily, fieldName, value)
@@ -147,7 +135,7 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
     }
   }
 
-  def fromBytes[T](attrType:MdAttrDataType[T], bytes:Array[Byte]):T = {
+  private def fromBytes[T](attrType:MdAttrDataType[T], bytes:Array[Byte]):T = {
     attrType match {
       case StringType =>  Bytes.toString(bytes).asInstanceOf[T]
       case IntegerType => Bytes.toString(bytes).asInstanceOf[T]
@@ -156,25 +144,5 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
       case LongType => Bytes.toLong(bytes).asInstanceOf[T]
     }
   }
-}
-
-class HBaseSession(val env:HBaseDatabaseEnv) extends DbSession{
-
-
-  def create(dbObj: DbObject) = {println("CREATE");null}
-
-  def update(dbObj: DbObject) = {println("UPDATE");null}
-
-  def delete(id: String) {println("DELETE " + id)}
-
-  def fetch(id: String) = {println("FETCH");null}
-
-  def disconnect() {}
-}
-
-trait HBaseDatabase extends Database {
-  def env:HBaseDatabaseEnv
-
-  def connect = env.sessionFactory.newSession
 }
 
