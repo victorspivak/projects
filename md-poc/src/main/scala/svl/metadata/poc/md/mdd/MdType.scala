@@ -3,21 +3,22 @@ package svl.metadata.poc.md.mdd
 case class MdTypePolicy(optimisticLocking:Boolean, searchable:Boolean)
 
 object MdIdGenerationPolicies{
-  sealed case class MdIdGenerationPolicy()
+  sealed case class MdIdGenerationPolicy(ordenal:Int)
 
-  val RandomIdPolicy = MdIdGenerationPolicy()
-  val SeqIdPolicy = MdIdGenerationPolicy()
-  val SuppliedIdPolicy = MdIdGenerationPolicy()
+  val RandomIdPolicy = MdIdGenerationPolicy(1)
+  val SeqIdPolicy = MdIdGenerationPolicy(2)
+  val SuppliedIdPolicy = MdIdGenerationPolicy(3)
 }
 import MdIdGenerationPolicies._
 
-sealed case class IdGeneration(idColumn:MdAttribute, policy:MdIdGenerationPolicy, idTemplate:String)
+sealed case class IdGeneration(idColumn:MdAttribute[_], policy:MdIdGenerationPolicy, idTemplate:String)
 
-class MdType(val id:String, val name:String, val attributes:List[MdAttribute], val idGeneration:IdGeneration){
-  val attributesByName:Map[String, MdAttribute] =
-    attributes.foldLeft(Map[String, MdAttribute]()) ((m:Map[String, MdAttribute], a:MdAttribute) => m + (a.name -> a))
+case class MdType(id:String, name:String, attributes:List[MdAttribute[_]], idGeneration:IdGeneration){
+  val attributesByName:Map[String, MdAttribute[_]] =
+    attributes.foldLeft(Map[String, MdAttribute[_]]()) ((m:Map[String, MdAttribute[_]], a:MdAttribute[_]) => m + (a.name -> a))
 
   def getAttributeByName(attrName:String) = attributesByName.get(attrName)
+  def containsAttribute(attrName:String) = attributesByName.contains(attrName)
   def idGenerationPolicy = idGeneration
   def optimisticLockingAttribute = getAttributeByName(MdType.OptimisticLockingColumnName)
 }
@@ -27,14 +28,14 @@ object MdType {
 }
 
 class MdTypeBuilder (val name:String) {
-  var attributes = scala.collection.mutable.ArrayBuffer[MdAttribute]()
-  var attributesIndex = scala.collection.mutable.HashMap[String, MdAttribute]()
+  var attributes = scala.collection.mutable.ArrayBuffer[MdAttribute[_]]()
+  var attributesIndex = scala.collection.mutable.HashMap[String, MdAttribute[_]]()
   var optimisticLocking = false
-  var idColumn:MdAttribute = null
+  var idColumn:MdAttribute[_] = null
   var idTemplate = MdTypeBuilder.DefaultIdTemplate
   var idGenerationPolicy:MdIdGenerationPolicy = MdTypeBuilder.DefaultIdPolicy
 
-  def add (attribute:MdAttribute):MdTypeBuilder = {
+  def add (attribute:MdAttribute[_]):MdTypeBuilder = {
     if (attributesIndex.contains(attribute.name))
       throw MddExceptions.duplicateAttribute(name, attribute.name)
     if (attribute.name == MdType.OptimisticLockingColumnName)
@@ -44,7 +45,7 @@ class MdTypeBuilder (val name:String) {
     this
   }
 
-  def id (attribute:MdAttribute):MdTypeBuilder = {
+  def id (attribute:MdAttribute[_]):MdTypeBuilder = {
     if (idColumn != null)
       throw MddExceptions.duplicateIdAttribute(name, attribute.name, idColumn.name)
     this add attribute
@@ -64,7 +65,7 @@ class MdTypeBuilder (val name:String) {
   }
 
   def build = {
-    def addOptimisticAttrIfNeeded(): List[MdAttribute] = {
+    def addOptimisticAttrIfNeeded(): List[MdAttribute[_]] = {
       if (optimisticLocking)
         LongAttributeBuilder(MdType.OptimisticLockingColumnName).build :: attributes.toList
       else
@@ -81,6 +82,6 @@ class MdTypeBuilder (val name:String) {
 object MdTypeBuilder {
   val DefaultIdPolicy = SeqIdPolicy
   val DefaultIdTemplate = "id_%09d"
-  implicit def mdAttributeBuilder2MdAttribute(builder:MdAttributeBuilder) = builder.build
+  implicit def mdAttributeBuilder2MdAttribute(builder:MdAttributeBuilder[_]) = builder.build
   def apply (name:String) = new MdTypeBuilder(name)
 }

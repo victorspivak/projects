@@ -22,11 +22,11 @@ import MdAttrDataTypes._
 case class MdAttrIndexPolicy(filterable:Boolean, searchable:Boolean)
 case class MdAttrStorePolicy(compressing:Boolean, encrypting:Boolean)
 
-case class MdAttribute(id:String, name:String, attrType:MdAttrDataType[_], size:Int,
+case class MdAttribute[T](id:String, name:String, attrType:MdAttrDataType[T], size:Int,
                        indexPolicy:MdAttrIndexPolicy, storePolicy:MdAttrStorePolicy) {
 }
 
-class MdAttributeBuilder (name:String, attrType:MdAttrDataType[_], size:Int = -1) {
+class MdAttributeBuilder[T] (name:String, attrType:MdAttrDataType[T], size:Int = -1) {
   var filterable = false
   var searchable = false
   var compressing = false
@@ -58,31 +58,31 @@ class MdAttributeBuilder (name:String, attrType:MdAttrDataType[_], size:Int = -1
 }
 object StringAttributeBuilder {
   def apply(name:String, size:Int = -1) = {
-    new MdAttributeBuilder(name, StringType, size)
+    new MdAttributeBuilder[String](name, StringType, size)
   }
 }
 
 object IntAttributeBuilder {
   def apply(name:String) = {
-    new MdAttributeBuilder(name, IntegerType)
+    new MdAttributeBuilder[Int](name, IntegerType)
   }
 }
 
 object DoubleAttributeBuilder {
   def apply(name:String) = {
-    new MdAttributeBuilder(name, DoubleType)
+    new MdAttributeBuilder[Double](name, DoubleType)
   }
 }
 
 object DateAttributeBuilder {
   def apply(name:String) = {
-    new MdAttributeBuilder(name, DateType)
+    new MdAttributeBuilder[Date](name, DateType)
   }
 }
 
 object LongAttributeBuilder {
   def apply(name:String) = {
-    new MdAttributeBuilder(name, LongType)
+    new MdAttributeBuilder[Long](name, LongType)
   }
 }
 

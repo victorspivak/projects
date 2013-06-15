@@ -16,6 +16,8 @@ class MdTypeSpec extends Specification { def is =
     "and attribute '" + attr2Name + "' is ID Column"                                ! typeIdAttrFact(makeSimpleType, attr2Name, attr2)  ^
     "and default id generation policy is sequential"                                ! idGenerationPolicyFact(makeSimpleType, SeqIdPolicy)  ^
     "does not have attribute with bogus name"                                       ! typeAttrFact(makeSimpleType, "bogus", null)  ^
+    "and containAttribute returns true for existing one"                            ! makeSimpleType.containsAttribute(attr1Name)  ^
+    "and containAttribute returns false for bogus one"                              ! !makeSimpleType.containsAttribute("Bogus")  ^
                                                                                     p^
     "The type builder should "                                                      ^
     "create"                                                                        ^
@@ -48,17 +50,17 @@ class MdTypeSpec extends Specification { def is =
 
   def typeIdFact(t:MdType, expected:String) = t.id mustEqual expected
   def typeNameFact(t:MdType, expected:String) = t.name mustEqual expected
-  def typeAttrFact(t:MdType, attrName:String, expected:MdAttribute) = t.getAttributeByName(attrName) === Option(expected)
+  def typeAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.getAttributeByName(attrName) === Option(expected)
   def typeOptimisticLockingFact(t:MdType, expected:Boolean) = t.optimisticLockingAttribute.isDefined === expected
   def idGenerationPolicyFact(t:MdType, expected:MdIdGenerationPolicy) = t.idGenerationPolicy.policy === expected
   def idTemplateFact(t:MdType, expected:String) = t.idGenerationPolicy.idTemplate === expected
 
-  def typeIdAttrFact(t:MdType, attrName:String, expected:MdAttribute) = t.idGenerationPolicy.idColumn === expected
-  def dupAttrFact(tb:MdTypeBuilder, attr1:MdAttribute) = tb.add(attr1) must throwAn[MddInvalidTypeBuildingException]
+  def typeIdAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.idGenerationPolicy.idColumn == expected
+  def dupAttrFact(tb:MdTypeBuilder, attr1:MdAttribute[_]) = tb.add(attr1) must throwAn[MddInvalidTypeBuildingException]
   def typeWitoutIdFact = MdTypeBuilder(typeName).add(attr1).build must throwAn[MddInvalidTypeBuildingException]
   def addingAttrBuilderFact(tb:MdTypeBuilder) = {
     val mdType = tb.add(StringAttributeBuilder(attr4Name)).build
-    val expectedAttribute: MdAttribute = StringAttributeBuilder(attr4Name).build
+    val expectedAttribute: MdAttribute[_] = StringAttributeBuilder(attr4Name).build
     mdType.getAttributeByName(attr4Name) === Option(expectedAttribute)
   }
 }

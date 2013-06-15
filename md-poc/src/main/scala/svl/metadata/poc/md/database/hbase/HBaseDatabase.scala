@@ -5,7 +5,7 @@ import org.apache.hadoop.hbase.client._
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.conf.Configuration
 import java.util.{UUID, Date}
-import svl.metadata.poc.md.mdd.MdAttrDataTypes
+import svl.metadata.poc.md.mdd.{FeatureIsNotImplementedException, MdType, MddBaseException, MdAttrDataTypes}
 import MdAttrDataTypes._
 import svl.metadata.poc.md.database.{DbObject, DbSession, Database}
 
@@ -45,22 +45,21 @@ trait DefaultHBaseDatabaseEnv{
     }
 
     def idFactory = new IdFactory{
-      val FactoryIdTableName = "FactoryID"
-      val FactoryIdFieldFamily = "fi_ff"
+      val FactoryIdTableName = "IdFactory"
+      val FactoryIdFieldFamily = "id_ff"
       val FactoryIdFieldName = "lastId"
-
-      helper.createTableIfMissing(FactoryIdTableName, FactoryIdFieldFamily)
 
       def makeRandomId:String = UUID.randomUUID().toString
 
       def makeSeqId(idGroup:String, template:String):String = {
         def makeId(id:Long, template:String) = template.format(id)
-        val idTable = helper.getTable(FactoryIdTableName)
+        val idTable = helper.getTable(FactoryIdTableName, Option(FactoryIdFieldFamily))
         val result = idTable.increment(helper.makeIncrement(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, 1))
         helper.getValue(LongType, result, FactoryIdFieldFamily, FactoryIdFieldName) match {
           case Some(id) => makeId(id, template)
           case None => throw new Exception("Unexpected case. Should analyze.")
         }
+
       }
     }
   }
@@ -69,22 +68,32 @@ trait DefaultHBaseDatabaseEnv{
 class HBaseHelper(val env:HBaseDatabaseEnv){
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
 
-  def getTable(name:String):HTableInterface = {
+  def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     try{
       env.pool.getTable(name)
-    } catch{
-      case e:TableNotFoundException => null
-      case e:Exception => throw e
+    } catch {
+      case exception:Exception => translateException(exception) match {
+          case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
+              createTable(name, fldFamily)
+              getTable(name, None)
+            }).getOrElse(null)
+          case e:Exception => throw e
+      }
     }
   }
 
+  def translateException(exception:Throwable):Throwable = exception match {
+    case e:MddBaseException => e
+    case e:org.apache.hadoop.hbase.TableNotFoundException => e
+    case e:Exception =>   if (e.getCause != null) translateException(e.getCause) else e
+  }
   def closeTable(table:HTableInterface) {table.close()}
 
   def toBytes[T](attrType:MdAttrDataType[T], value:T) = attrType match {
     case StringType => Bytes.toBytes(value.asInstanceOf[String])
     case IntegerType => Bytes.toBytes(value.asInstanceOf[Int])
-    case DoubleType => Bytes.toBytes(value.asInstanceOf[Int])
-    case LongType => Bytes.toBytes(value.asInstanceOf[Int])
+    case DoubleType => Bytes.toBytes(value.asInstanceOf[Double])
+    case LongType => Bytes.toBytes(value.asInstanceOf[Long])
     case DateType => Bytes.toBytes(value.asInstanceOf[Date].getTime)
     case _ => throw new IllegalArgumentException(
                 "The argument type %s is not supported in the toBytes conversion.".format(attrType.toString))
@@ -137,13 +146,29 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
 }
 
 class HBaseSession(val env:HBaseDatabaseEnv) extends DbSession{
-  def create(dbObj: DbObject) = {println("CREATE");null}
+  val mdHBaseMapping = MdHBaseMapping(env)
+  val helper = env.helper
+
+  def create(dbObj: DbObject) = {
+    val tableName: String = mdHBaseMapping.typeToTableName(dbObj.mdType)
+    val hTable = helper.getTable(tableName, Some(mdHBaseMapping.attributeToFieldFamily(dbObj.mdType)))
+
+    val id = mdHBaseMapping.makeId(dbObj)
+    val objWithId = dbObj.setId(id)
+    val put = mdHBaseMapping.objectToPutForCreate(dbObj, id)
+
+    hTable.put(put)
+
+    objWithId
+  }
 
   def update(dbObj: DbObject) = {println("UPDATE");null}
 
   def delete(id: String) {println("DELETE " + id)}
 
-  def fetch(id: String) = {println("FETCH");null}
+  def fetch(id: String, mdType:MdType) = {
+    throw new FeatureIsNotImplementedException("fetch")
+  }
 
   def disconnect() {}
 }
