@@ -10,12 +10,10 @@ import org.apache.hadoop.hbase.util.Bytes
 import svl.metadata.poc.md.mdd.MddBaseException
 import svl.metadata.poc.md.database.solr.{DefaultSolrEnv, SolrEnv}
 
-trait HBaseDatabaseEnv{
-  def conf:Configuration
-  def pool:HTablePool
+trait HBaseDatabaseContext{
   def sessionFactory:HBaseSessionFactory
-  def administration:Administration
   def idFactory:IdFactory
+  def hbaseEnv:HBaseEnv
   def solrEnv:SolrEnv
 
   def hbaseHelper = new HBaseHelper(this)
@@ -24,26 +22,39 @@ trait HBaseDatabaseEnv{
     def newSession:DbSession
   }
 
-  trait Administration{
-    def adminSession:HBaseAdmin
-  }
-
   trait IdFactory{
     def makeRandomId:String
     def makeSeqId(prefix:String, template:String):String
   }
 }
 
-trait DefaultHBaseDatabaseEnv{
-  val hbaseEnv:HBaseDatabaseEnv = new HBaseDatabaseEnv with DefaultSolrEnv {
+trait HBaseEnv{
+  def conf:Configuration
+  def pool:HTablePool
+  def administration:Administration
+
+  trait Administration{
+    def adminSession:HBaseAdmin
+  }
+}
+
+trait DefaultHBaseEnv{
+  def hbaseEnv = new HBaseEnv{
     val conf = HBaseConfiguration.create()
     val pool = new HTablePool()
-    def sessionFactory = new HBaseSessionFactory {
-      def newSession = new HBaseSession(hbaseEnv)
-    }
 
     def administration = new Administration{
       def adminSession = new HBaseAdmin(conf)
+    }
+  }
+}
+
+trait DefaultHBaseDatabaseContext{
+  val context:HBaseDatabaseContext = new HBaseDatabaseContext
+                                      with DefaultSolrEnv
+                                      with DefaultHBaseEnv{
+    def sessionFactory = new HBaseSessionFactory {
+      def newSession = new HBaseSession(context)
     }
 
     def idFactory = new IdFactory{
@@ -67,12 +78,12 @@ trait DefaultHBaseDatabaseEnv{
   }
 }
 
-class HBaseHelper(val hbaseEnv:HBaseDatabaseEnv){
+class HBaseHelper(val context:HBaseDatabaseContext){
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
 
   def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     try{
-      hbaseEnv.pool.getTable(name)
+      context.hbaseEnv.pool.getTable(name)
     } catch {
       case exception:Exception => translateException(exception) match {
         case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
@@ -118,10 +129,10 @@ class HBaseHelper(val hbaseEnv:HBaseDatabaseEnv){
   def createTable(name:String, fieldFamily:String){
     val tableDesc = new HTableDescriptor(name)
     tableDesc.addFamily(new HColumnDescriptor(fieldFamily))
-    hbaseEnv.administration.adminSession.createTable(tableDesc)
+    context.hbaseEnv.administration.adminSession.createTable(tableDesc)
   }
 
-  def isTableExist(name:String) = hbaseEnv.administration.adminSession.tableExists(name)
+  def isTableExist(name:String) = context.hbaseEnv.administration.adminSession.tableExists(name)
   def createTableIfMissing(name:String, fieldFamily:String) {
     if (!isTableExist(name))
       createTable(name, fieldFamily)

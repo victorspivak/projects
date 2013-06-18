@@ -40,7 +40,7 @@
 //  }
 //}
 //
-//case class MongoPocConfig(implicit hbaseEnv: Environment) {
+//case class MongoPocConfig(implicit context: Environment) {
 // val config = Config(GlobalConfigGroup("mongopoc"))
 // val name = config("mongopoc")("name").toString
 // val dbName = config("mongopoc")("db-name").toString

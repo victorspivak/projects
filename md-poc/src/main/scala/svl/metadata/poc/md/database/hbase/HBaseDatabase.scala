@@ -4,10 +4,11 @@ import svl.metadata.poc.md.mdd.{FeatureIsNotImplementedException, MdType}
 import svl.metadata.poc.md.database.{MdQuery, DbObject, DbSession, Database}
 import HBaseRichObjects._
 import svl.metadata.poc.md.database.solr.SolrEnv
+import org.apache.solr.common.params.ModifiableSolrParams
 
-class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
-  implicit val hbaseEnv_ = hbaseEnv
-  val hbaseHelper = hbaseEnv.hbaseHelper
+class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
+  implicit val context_ = context
+  val hbaseHelper = context.hbaseHelper
 
   def create(dbObj: DbObject) = {
     val table =  dbObj.mdType.table
@@ -17,6 +18,8 @@ class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
 
     table.put(put)
     table.close()
+
+    context.solrEnv.helper.indexDocument(objWithId)
 
     objWithId
   }
@@ -40,19 +43,14 @@ class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
     if (values.isEmpty) None else Option(DbObject(id, mdType, values.toMap))
   }
 
-  def query(query:MdQuery):List[DbObject] = {
-    val queryStr = hbaseEnv.solrEnv.helper.mdQueryToSolrQuery(query)
-    println("Query: " + queryStr)
-
-    throw new FeatureIsNotImplementedException("query")
-  }
+  def query(query:MdQuery):List[DbObject] = context.solrEnv.helper.query(query)
 
   def disconnect() {}
 }
 
 trait HBaseDatabase extends Database {
-  def hbaseEnv:HBaseDatabaseEnv
+  def context:HBaseDatabaseContext
   def solrEnv:SolrEnv
 
-  def connect = hbaseEnv.sessionFactory.newSession
+  def connect = context.sessionFactory.newSession
 }
