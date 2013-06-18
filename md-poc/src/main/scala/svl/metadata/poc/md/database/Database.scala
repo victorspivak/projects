@@ -9,6 +9,7 @@ trait DbSession {
   def update(dbObj:DbObject):String
   def delete(id:String)
   def fetch(id:String, mdType:MdType):Option[DbObject]
+  def query(query:MdQuery):List[DbObject]
 }
 
 trait Database {

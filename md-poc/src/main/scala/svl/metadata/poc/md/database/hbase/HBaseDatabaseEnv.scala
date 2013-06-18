@@ -33,11 +33,11 @@ trait HBaseDatabaseEnv{
 }
 
 trait DefaultHBaseDatabaseEnv{
-  def env:HBaseDatabaseEnv = new HBaseDatabaseEnv{
+  val hbaseEnv:HBaseDatabaseEnv = new HBaseDatabaseEnv{
     val conf = HBaseConfiguration.create()
     val pool = new HTablePool()
     def sessionFactory = new HBaseSessionFactory {
-      def newSession = new HBaseSession(env)
+      def newSession = new HBaseSession(hbaseEnv)
     }
 
     def administration = new Administration{
@@ -65,12 +65,12 @@ trait DefaultHBaseDatabaseEnv{
   }
 }
 
-class HBaseHelper(val env:HBaseDatabaseEnv){
+class HBaseHelper(val hbaseEnv:HBaseDatabaseEnv){
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
 
   def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     try{
-      env.pool.getTable(name)
+      hbaseEnv.pool.getTable(name)
     } catch {
       case exception:Exception => translateException(exception) match {
         case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
@@ -116,10 +116,10 @@ class HBaseHelper(val env:HBaseDatabaseEnv){
   def createTable(name:String, fieldFamily:String){
     val tableDesc = new HTableDescriptor(name)
     tableDesc.addFamily(new HColumnDescriptor(fieldFamily))
-    env.administration.adminSession.createTable(tableDesc)
+    hbaseEnv.administration.adminSession.createTable(tableDesc)
   }
 
-  def isTableExist(name:String) = env.administration.adminSession.tableExists(name)
+  def isTableExist(name:String) = hbaseEnv.administration.adminSession.tableExists(name)
   def createTableIfMissing(name:String, fieldFamily:String) {
     if (!isTableExist(name))
       createTable(name, fieldFamily)

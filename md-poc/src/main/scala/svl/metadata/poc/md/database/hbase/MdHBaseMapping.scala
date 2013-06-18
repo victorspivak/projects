@@ -7,15 +7,15 @@ import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 import org.apache.hadoop.hbase.client.{Result, Put}
 
 object HBaseRichObjects{
-  implicit def mdType2HBaseRichType(mdType:MdType)(implicit env:HBaseDatabaseEnv) = new HBaseRichType(mdType)(env)
-  implicit def mdObject2HBaseRichDbObject(dbObject:DbObject)(implicit env:HBaseDatabaseEnv) = new HBaseRichDbObject(dbObject)(env)
-  implicit def mdAttribute2HBaseRichAttribute[T](mdAttribute:MdAttribute[T])(implicit env:HBaseDatabaseEnv) = new HBaseRichAttribute[T](mdAttribute)(env)
+  implicit def mdType2HBaseRichType(mdType:MdType)(implicit hbaseEnv:HBaseDatabaseEnv) = new HBaseRichType(mdType)(hbaseEnv)
+  implicit def mdObject2HBaseRichDbObject(dbObject:DbObject)(implicit hbaseEnv:HBaseDatabaseEnv) = new HBaseRichDbObject(dbObject)(hbaseEnv)
+  implicit def mdAttribute2HBaseRichAttribute[T](mdAttribute:MdAttribute[T])(implicit hbaseEnv:HBaseDatabaseEnv) = new HBaseRichAttribute[T](mdAttribute)(hbaseEnv)
 }
 
 import HBaseRichObjects._
 
-class HBaseRichType(val mdType:MdType)(val env:HBaseDatabaseEnv){
-  val helper = env.helper
+class HBaseRichType(val mdType:MdType)(val hbaseEnv:HBaseDatabaseEnv){
+  val helper = hbaseEnv.helper
 
   def tableName = mdType.name
   def fieldFamily = "ff_" + mdType.name
@@ -24,23 +24,23 @@ class HBaseRichType(val mdType:MdType)(val env:HBaseDatabaseEnv){
   def makeGet(id:String) = helper.makeGet(id)
 }
 
-class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val env:HBaseDatabaseEnv){
-  implicit val env_ = env
-  val helper = env.helper
+class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val hbaseEnv:HBaseDatabaseEnv){
+  implicit val hbaseEnv_ = hbaseEnv
+  val helper = hbaseEnv.helper
 
   def fieldName = attribute.name
   def getValue[T](result:Result, mdType:MdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
 }
 
-class HBaseRichDbObject(val dbObject:DbObject)(val env:HBaseDatabaseEnv){
-  implicit val env_ = env
-  val helper = env.helper
+class HBaseRichDbObject(val dbObject:DbObject)(val hbaseEnv:HBaseDatabaseEnv){
+  implicit val hbaseEnv_ = hbaseEnv
+  val helper = hbaseEnv.helper
 
   def makeId = {
     val mdType = dbObject.mdType
     mdType.idGenerationPolicy.policy match {
-      case RandomIdPolicy => env.idFactory.makeRandomId
-      case SeqIdPolicy => env.idFactory.makeSeqId(mdType.name, mdType.idGenerationPolicy.idTemplate)
+      case RandomIdPolicy => hbaseEnv.idFactory.makeRandomId
+      case SeqIdPolicy => hbaseEnv.idFactory.makeSeqId(mdType.name, mdType.idGenerationPolicy.idTemplate)
       case SuppliedIdPolicy => throw new FeatureIsNotImplementedException("SuppliedIdPolicy")
     }
   }

@@ -1,12 +1,12 @@
 package svl.metadata.poc.md.database.hbase
 
-import svl.metadata.poc.md.mdd.MdType
-import svl.metadata.poc.md.database.{DbObject, DbSession, Database}
+import svl.metadata.poc.md.mdd.{FeatureIsNotImplementedException, MdType}
+import svl.metadata.poc.md.database.{MdQuery, DbObject, DbSession, Database}
 import HBaseRichObjects._
 
-class HBaseSession(val env:HBaseDatabaseEnv) extends DbSession{
-  implicit val env_ = env
-  val helper = env.helper
+class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
+  implicit val hbaseEnv_ = hbaseEnv
+  val helper = hbaseEnv.helper
 
   def create(dbObj: DbObject) = {
     val table =  dbObj.mdType.table
@@ -39,12 +39,16 @@ class HBaseSession(val env:HBaseDatabaseEnv) extends DbSession{
     if (values.isEmpty) None else Option(DbObject(id, mdType, values.toMap))
   }
 
+  def query(query:MdQuery):List[DbObject] = {
+    throw new FeatureIsNotImplementedException("query")
+  }
+
   def disconnect() {}
 }
 
 trait HBaseDatabase extends Database {
-  def env:HBaseDatabaseEnv
+  def hbaseEnv:HBaseDatabaseEnv
 
-  def connect = env.sessionFactory.newSession
+  def connect = hbaseEnv.sessionFactory.newSession
 }
 
