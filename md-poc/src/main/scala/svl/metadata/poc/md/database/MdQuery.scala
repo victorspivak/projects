@@ -39,7 +39,7 @@ object MdSortingPolicy{
 import MdSortingPolicy._
 
 case class MdSorting(attribute:MdAttribute[_], direction:MdSoringOrder)
-case class MdQueryOptions(starting:Int = 0)
+case class MdQueryOptions(starting:Int, maxCount:Int)
 
 
 case class MdQuery (ftQuery:String, mdType:MdType, constrains:List[MdQueryConstrain[_]], sorting:Option[MdSorting], options:MdQueryOptions){
@@ -49,6 +49,7 @@ class MdQueryBuilder(ftQuery:String, mdType:MdType) {
   var constrains = scala.collection.mutable.ArrayBuffer[MdQueryConstrain[_]]()
   var sorting:Option[MdSorting] = None
   var starting = 0
+  var count = 10
 
   def filter(constrain:MdQueryConstrain[_]) = {
     constrains += constrain
@@ -65,7 +66,12 @@ class MdQueryBuilder(ftQuery:String, mdType:MdType) {
     this
   }
 
-  def build = new MdQuery(ftQuery, mdType, constrains.toList, sorting, MdQueryOptions(starting))
+  def maxCount(max:Int) = {
+    this.count = max
+    this
+  }
+
+  def build = new MdQuery(ftQuery, mdType, constrains.toList, sorting, MdQueryOptions(starting, count))
 }
 
 object MdQueryBuilder{

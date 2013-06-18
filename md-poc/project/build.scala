@@ -51,6 +51,7 @@ object MdPocBuild extends Build {
       Seq(
         version := "1.54-SNAPSHOT",
         scalaVersion := "2.9.0-1",
+        scalacOptions := Seq( "-deprecation", "-unchecked" ),
         libraryDependencies ++= deps,
         sourceGenerators in Compile <+= buildInfo,
         buildInfoPackage := "svl.metadata.poc",
