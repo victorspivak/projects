@@ -29,7 +29,7 @@ class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val hbaseEnv:HBaseData
   val helper = hbaseEnv.hbaseHelper
 
   def fieldName = attribute.name
-  def getValue[T](result:Result, mdType:MdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
+  def getValue(result:Result, mdType:MdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
 }
 
 class HBaseRichDbObject(val dbObject:DbObject)(val hbaseEnv:HBaseDatabaseEnv){
@@ -66,5 +66,3 @@ class HBaseRichDbObject(val dbObject:DbObject)(val hbaseEnv:HBaseDatabaseEnv){
     }).getOrElse(put)
   }
 }
-
-

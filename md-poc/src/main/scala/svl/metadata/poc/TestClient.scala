@@ -23,7 +23,6 @@ object TestClient extends App{
                     doOptimisticLocking().use(MdIdGenerationPolicies.SeqIdPolicy, "ClaimID-%08d").build
   val dbObj = DbObjectBuilder(mdType).addAttribute(insurance -> "Farmers").addAttribute(amount -> 123.12).addAttribute(item -> "Car").build
 
-
 //  for (i <- 1 to 10) {
 //    val createdObj = s.create(dbObj)
 //    val fetchedObject = s.fetch(createdObj.id, mdType)

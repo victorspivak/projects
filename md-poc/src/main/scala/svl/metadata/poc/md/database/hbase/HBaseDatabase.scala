@@ -56,4 +56,3 @@ trait HBaseDatabase extends Database {
 
   def connect = hbaseEnv.sessionFactory.newSession
 }
-
