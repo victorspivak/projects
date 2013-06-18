@@ -10,7 +10,7 @@ import MdQueryOperators._
 
 trait SolrEnv {
   def solr: SolrServer
-
+  def helper = new SolrHelper(this)
 }
 
 trait DefaultSolrEnv{
@@ -72,6 +72,8 @@ class SolrHelper(val solrEnv:SolrEnv){
     val constrainStr = constrains.foldLeft(buffer){(buffer, constrain) =>
       buffer.append(constrainExpression(constrain))
     }
+
+    buffer.toString()
   }
 }
 

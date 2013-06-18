@@ -8,6 +8,7 @@ import java.util.{Date, UUID}
 import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 import org.apache.hadoop.hbase.util.Bytes
 import svl.metadata.poc.md.mdd.MddBaseException
+import svl.metadata.poc.md.database.solr.{DefaultSolrEnv, SolrEnv}
 
 trait HBaseDatabaseEnv{
   def conf:Configuration
@@ -15,8 +16,9 @@ trait HBaseDatabaseEnv{
   def sessionFactory:HBaseSessionFactory
   def administration:Administration
   def idFactory:IdFactory
+  def solrEnv:SolrEnv
 
-  def helper = new HBaseHelper(this)
+  def hbaseHelper = new HBaseHelper(this)
 
   trait HBaseSessionFactory{
     def newSession:DbSession
@@ -33,7 +35,7 @@ trait HBaseDatabaseEnv{
 }
 
 trait DefaultHBaseDatabaseEnv{
-  val hbaseEnv:HBaseDatabaseEnv = new HBaseDatabaseEnv{
+  val hbaseEnv:HBaseDatabaseEnv = new HBaseDatabaseEnv with DefaultSolrEnv {
     val conf = HBaseConfiguration.create()
     val pool = new HTablePool()
     def sessionFactory = new HBaseSessionFactory {
@@ -53,9 +55,9 @@ trait DefaultHBaseDatabaseEnv{
 
       def makeSeqId(idGroup:String, template:String):String = {
         def makeId(id:Long, template:String) = template.format(id)
-        val idTable = helper.getTable(FactoryIdTableName, Option(FactoryIdFieldFamily))
-        val result = idTable.increment(helper.makeIncrement(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, 1))
-        helper.getValue(LongType, result, FactoryIdFieldFamily, FactoryIdFieldName) match {
+        val idTable = hbaseHelper.getTable(FactoryIdTableName, Option(FactoryIdFieldFamily))
+        val result = idTable.increment(hbaseHelper.makeIncrement(idGroup, FactoryIdFieldFamily, FactoryIdFieldName, 1))
+        hbaseHelper.getValue(LongType, result, FactoryIdFieldFamily, FactoryIdFieldName) match {
           case Some(id) => makeId(id, template)
           case None => throw new Exception("Unexpected case. Should analyze.")
         }

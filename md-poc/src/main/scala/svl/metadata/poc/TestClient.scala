@@ -8,7 +8,9 @@ import MdQueryBooleanOperators._
 import svl.metadata.poc.md.database.solr.DefaultSolrEnv
 
 object TestClient extends App{
-  val db = new HBaseDatabase with DefaultHBaseDatabaseEnv with DefaultSolrEnv
+  val db = new HBaseDatabase
+                              with DefaultHBaseDatabaseEnv
+                              with DefaultSolrEnv
 
   val s = db.connect
 
@@ -20,6 +22,7 @@ object TestClient extends App{
   val mdType = MdTypeBuilder(typeName).id(claimId).add(insurance).add(amount).add(item).
                     doOptimisticLocking().use(MdIdGenerationPolicies.SeqIdPolicy, "ClaimID-%08d").build
   val dbObj = DbObjectBuilder(mdType).addAttribute(insurance -> "Farmers").addAttribute(amount -> 123.12).addAttribute(item -> "Car").build
+
 
 //  for (i <- 1 to 10) {
 //    val createdObj = s.create(dbObj)
@@ -43,6 +46,7 @@ object TestClient extends App{
     .filter(MdQueryConstrain(And, item, Equal, "Car"))
     .build
 
+  s.query(query)
 
   s.disconnect()
 }

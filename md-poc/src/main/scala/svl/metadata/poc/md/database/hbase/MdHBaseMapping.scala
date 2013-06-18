@@ -15,7 +15,7 @@ object HBaseRichObjects{
 import HBaseRichObjects._
 
 class HBaseRichType(val mdType:MdType)(val hbaseEnv:HBaseDatabaseEnv){
-  val helper = hbaseEnv.helper
+  val helper = hbaseEnv.hbaseHelper
 
   def tableName = mdType.name
   def fieldFamily = "ff_" + mdType.name
@@ -26,7 +26,7 @@ class HBaseRichType(val mdType:MdType)(val hbaseEnv:HBaseDatabaseEnv){
 
 class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val hbaseEnv:HBaseDatabaseEnv){
   implicit val hbaseEnv_ = hbaseEnv
-  val helper = hbaseEnv.helper
+  val helper = hbaseEnv.hbaseHelper
 
   def fieldName = attribute.name
   def getValue[T](result:Result, mdType:MdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
@@ -34,7 +34,7 @@ class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val hbaseEnv:HBaseData
 
 class HBaseRichDbObject(val dbObject:DbObject)(val hbaseEnv:HBaseDatabaseEnv){
   implicit val hbaseEnv_ = hbaseEnv
-  val helper = hbaseEnv.helper
+  val helper = hbaseEnv.hbaseHelper
 
   def makeId = {
     val mdType = dbObject.mdType

@@ -3,10 +3,11 @@ package svl.metadata.poc.md.database.hbase
 import svl.metadata.poc.md.mdd.{FeatureIsNotImplementedException, MdType}
 import svl.metadata.poc.md.database.{MdQuery, DbObject, DbSession, Database}
 import HBaseRichObjects._
+import svl.metadata.poc.md.database.solr.SolrEnv
 
 class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
   implicit val hbaseEnv_ = hbaseEnv
-  val helper = hbaseEnv.helper
+  val hbaseHelper = hbaseEnv.hbaseHelper
 
   def create(dbObj: DbObject) = {
     val table =  dbObj.mdType.table
@@ -40,6 +41,9 @@ class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
   }
 
   def query(query:MdQuery):List[DbObject] = {
+    val queryStr = hbaseEnv.solrEnv.helper.mdQueryToSolrQuery(query)
+    println("Query: " + queryStr)
+
     throw new FeatureIsNotImplementedException("query")
   }
 
@@ -48,6 +52,7 @@ class HBaseSession(val hbaseEnv:HBaseDatabaseEnv) extends DbSession{
 
 trait HBaseDatabase extends Database {
   def hbaseEnv:HBaseDatabaseEnv
+  def solrEnv:SolrEnv
 
   def connect = hbaseEnv.sessionFactory.newSession
 }
