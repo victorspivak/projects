@@ -3,8 +3,7 @@ package svl.metadata.poc.md.mdd
 import org.specs2._
 import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 
-class MdAttributeSpec extends Specification {
-  def is =
+class MdAttributeSpec extends Specification { def is =
   "This is a specification to check Metadata Attributes"                            ^
                                                                                     p^
     "The StringAttribute with default values should"                                ^
@@ -45,12 +44,12 @@ class MdAttributeSpec extends Specification {
   def attrWithDefValues = StringAttributeBuilder(attrName).build
   def strAttr = StringAttributeBuilder(attrName, size32).doFiltering().doSearching().doCompressing().doEncrypting().build
 
-  def attrIdFact(a:MdAttribute, expected:String) = a.id mustEqual expected
-  def attrNameFact(a:MdAttribute, expected:String) = a.name mustEqual expected
-  def attrTypeFact(a:MdAttribute, expected:MdAttrDataType[_]) = a.attrType.equals(expected)
-  def attrSizeFact(a:MdAttribute, expected:Int) = a.size mustEqual expected
-  def attrFilterableFact(a:MdAttribute, expected:Boolean) =  a.indexPolicy.filterable mustEqual expected
-  def attrSearchableFact(a:MdAttribute, expected:Boolean) =  a.indexPolicy.searchable mustEqual expected
-  def attrCompressingFact(a:MdAttribute, expected:Boolean) =  a.storePolicy.compressing mustEqual expected
-  def attrEncryptingFact(a:MdAttribute, expected:Boolean) =  a.storePolicy.encrypting mustEqual expected
+  def attrIdFact(a:MdAttribute[_], expected:String) = a.id mustEqual expected
+  def attrNameFact(a:MdAttribute[_], expected:String) = a.name mustEqual expected
+  def attrTypeFact(a:MdAttribute[_], expected:MdAttrDataType[_]) = a.attrType.equals(expected)
+  def attrSizeFact(a:MdAttribute[_], expected:Int) = a.size mustEqual expected
+  def attrFilterableFact(a:MdAttribute[_], expected:Boolean) =  a.indexPolicy.filterable mustEqual expected
+  def attrSearchableFact(a:MdAttribute[_], expected:Boolean) =  a.indexPolicy.searchable mustEqual expected
+  def attrCompressingFact(a:MdAttribute[_], expected:Boolean) =  a.storePolicy.compressing mustEqual expected
+  def attrEncryptingFact(a:MdAttribute[_], expected:Boolean) =  a.storePolicy.encrypting mustEqual expected
 }

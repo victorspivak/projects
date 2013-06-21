@@ -3,12 +3,12 @@ package svl.metadata.poc.md.mdd
 import java.util.Date
 
 object MdAttrDataTypes{
-  trait MdAttrDataType[T]{}
-  case class StringTypeImp() extends MdAttrDataType[String]
-  case class IntTypeImp() extends MdAttrDataType[Int]
-  case class DoubleTypeImp() extends MdAttrDataType[Double]
-  case class DateTypeImp() extends MdAttrDataType[Date]
-  case class LongTypeImp() extends MdAttrDataType[Long]
+  sealed trait MdAttrDataType[T]{}
+  sealed case class StringTypeImp() extends MdAttrDataType[String]
+  sealed case class IntTypeImp() extends MdAttrDataType[Int]
+  sealed case class DoubleTypeImp() extends MdAttrDataType[Double]
+  sealed case class DateTypeImp() extends MdAttrDataType[Date]
+  sealed case class LongTypeImp() extends MdAttrDataType[Long]
 
   val StringType = StringTypeImp()
   val IntegerType = IntTypeImp()
@@ -22,11 +22,11 @@ import MdAttrDataTypes._
 case class MdAttrIndexPolicy(filterable:Boolean, searchable:Boolean)
 case class MdAttrStorePolicy(compressing:Boolean, encrypting:Boolean)
 
-case class MdAttribute(id:String, name:String, attrType:MdAttrDataType[_], size:Int,
+case class MdAttribute[T](id:String, name:String, attrType:MdAttrDataType[T], size:Int,
                        indexPolicy:MdAttrIndexPolicy, storePolicy:MdAttrStorePolicy) {
 }
 
-class AttributeBuilder (name:String, attrType:MdAttrDataType[_], size:Int = -1) {
+class MdAttributeBuilder[T] (name:String, attrType:MdAttrDataType[T], size:Int = -1) {
   var filterable = false
   var searchable = false
   var compressing = false
@@ -58,31 +58,31 @@ class AttributeBuilder (name:String, attrType:MdAttrDataType[_], size:Int = -1) 
 }
 object StringAttributeBuilder {
   def apply(name:String, size:Int = -1) = {
-    new AttributeBuilder(name, StringType, size)
+    new MdAttributeBuilder[String](name, StringType, size)
   }
 }
 
 object IntAttributeBuilder {
   def apply(name:String) = {
-    new AttributeBuilder(name, IntegerType)
+    new MdAttributeBuilder[Int](name, IntegerType)
   }
 }
 
 object DoubleAttributeBuilder {
   def apply(name:String) = {
-    new AttributeBuilder(name, DoubleType)
+    new MdAttributeBuilder[Double](name, DoubleType)
   }
 }
 
 object DateAttributeBuilder {
   def apply(name:String) = {
-    new AttributeBuilder(name, DateType)
+    new MdAttributeBuilder[Date](name, DateType)
   }
 }
 
 object LongAttributeBuilder {
   def apply(name:String) = {
-    new AttributeBuilder(name, LongType)
+    new MdAttributeBuilder[Long](name, LongType)
   }
 }
 
