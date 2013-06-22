@@ -8,6 +8,10 @@ object Maps {
 
         val romanNumeral = Map(1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V")
         Console println romanNumeral
+
+        val transformed = treasureMap.foldLeft(List[String]()){(l, e) => e._2 :: l}
+        println (transformed)
+
     }
 }
 

@@ -19,6 +19,8 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
     table.put(put)
     context.solrEnv.helper.indexDocument(objWithId)
 
+    context.solrEnv.helper.indexDocument(objWithId)
+
     objWithId
   }
 
