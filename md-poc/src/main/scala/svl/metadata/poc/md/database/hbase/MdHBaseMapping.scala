@@ -49,7 +49,7 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
 
     val put = dbObject.values.foldLeft(helper.makePut(dbObject.id)){(put, entry) =>
       mdType.getAttributeByName(entry._1) match {
-        case Some(MdAttribute(_, name, attrType, _, _, _)) => helper.addToPut(put, mdType.fieldFamily, name, attrType, entry._2)
+        case Some(attr) => helper.addToPut(put, mdType.fieldFamily, attr.name, attr.attrType.asInstanceOf[MdAttrDataType[Any]], entry._2)
         case None => throw new UnexpectedStateException("Did not find attribute for specified value")
       }
     }
@@ -70,6 +70,8 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
           helper.addToPut(put, mdType.fieldFamily, MdType.OptimisticLockingColumnName, attrType, entry._2.asInstanceOf[Long] + 1)
         case Some(MdAttribute(_, name, attrType, _, _, _)) =>
           helper.addToPut(put, mdType.fieldFamily, name, attrType, entry._2)
+        case Some(attr) =>
+          throw new UnexpectedStateException("Did not find attribute for specified value: %s".format(attr.name))
         case None => throw new UnexpectedStateException("Did not find attribute for specified value")
       }
     }
@@ -81,6 +83,7 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
       case RandomIdPolicy => context.idFactory.makeRandomId
       case SeqIdPolicy => context.idFactory.makeSeqId(mdType.name, mdType.idGenerationPolicy.idTemplate)
       case SuppliedIdPolicy => throw new FeatureIsNotImplementedException("SuppliedIdPolicy")
+      case _ => throw new UnexpectedStateException("Unknown ID factory policy: %s".format(mdType.idGenerationPolicy.policy.toString))
     }
   }
 

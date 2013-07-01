@@ -46,7 +46,7 @@ object TestClient extends App{
 //  createdObjects.foreach(dumpDbObj(_))
 
   def makeDbObj(index:Int) = {
-    DbObjectBuilder(mdType).addAttribute(insurance -> "Farmers").addAttribute(amount -> 100. * (index + 1)).addAttribute(item -> "Car").build
+    DbObjectBuilder(mdType).addAttribute(insurance -> "Farmers").addAttribute(amount -> 100.0 * (index + 1)).addAttribute(item -> "Car").build
   }
 
   def dump(dbObject:Option[DbObject]) = dbObject.map(dumpDbObj(_)).orElse{println("There is no object");null}
@@ -91,7 +91,7 @@ object TestClient extends App{
 
   def changeObject(dbObj:Option[DbObject]) = {
     dbObj.map {obj =>
-        val updated = DbObjectBuilder(obj).addAttribute(amount, (obj.getValue(amount).getOrElse(0.) + 1000.)).build
+        val updated = DbObjectBuilder(obj).addAttribute(amount, obj.getValue(amount).getOrElse(0.0) + 1000.0).build
         s.update(updated)
         updated
     }
