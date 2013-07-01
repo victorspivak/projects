@@ -80,6 +80,7 @@ trait DefaultHBaseDatabaseContext{
 }
 
 class HBaseHelper(val context:HBaseDatabaseContext){
+  import scala.language.implicitConversions
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
   def tableCache = new mutable.HashMap[String, HTableInterface]
 

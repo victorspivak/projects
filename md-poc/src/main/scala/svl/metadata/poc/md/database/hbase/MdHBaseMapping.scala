@@ -10,6 +10,7 @@ import scala.Some
 import svl.metadata.poc.md.database.DbObject
 
 object HBaseRichObjects{
+  import scala.language.implicitConversions
   implicit def mdType2HBaseRichType(mdType:MdType)(implicit context:HBaseDatabaseContext) =
                                                                         new HBaseRichType(mdType)(context)
   implicit def mdObject2HBaseRichDbObject(dbObject:DbObject)(implicit context:HBaseDatabaseContext) =

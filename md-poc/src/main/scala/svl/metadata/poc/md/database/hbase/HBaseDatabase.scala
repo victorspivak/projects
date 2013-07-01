@@ -25,6 +25,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
   }
 
   def update(dbObj: DbObject) {
+    import scala.language.implicitConversions
     implicit def string2Bytes(value:String) = Bytes.toBytes(value)
     import MdAttrDataTypes._
 

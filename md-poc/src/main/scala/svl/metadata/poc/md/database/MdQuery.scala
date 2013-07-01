@@ -1,6 +1,7 @@
 package svl.metadata.poc.md.database
 
 import svl.metadata.poc.md.mdd.{MdAttribute, MdType}
+import scala.language.existentials
 
 object MdQueryOperators{
   case class MdQueryOperator(ordinal:Int){}

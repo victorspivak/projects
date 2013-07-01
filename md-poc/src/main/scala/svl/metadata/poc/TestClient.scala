@@ -65,7 +65,7 @@ object TestClient extends App{
     .filter(MdQueryConstrain(And, item, Equal, "Car"))
     .sortBy(amount, Descending)
     .startWith(0)
-    .maxCount(200)
+    .maxCount(5)
     .build
 
   val (result, queryTiming) = PerformanceUtil.timerWithResult(s.query(query))

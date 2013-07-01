@@ -24,6 +24,7 @@ class EntityTemplate(val name:String, val attrTemplates: List[(String, AbstractA
 }
 
 object EntityTemplate {
+  import scala.language.implicitConversions
   def apply(name: String, attrs: (String, AbstractAttributeGenerator)*) = {
     new EntityTemplate(name, attrs.toList)
   }

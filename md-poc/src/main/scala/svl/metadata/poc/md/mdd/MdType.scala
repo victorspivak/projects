@@ -1,5 +1,7 @@
 package svl.metadata.poc.md.mdd
 
+import scala.language.existentials
+
 case class MdTypePolicy(optimisticLocking:Boolean, searchable:Boolean)
 
 object MdIdGenerationPolicies{
@@ -80,6 +82,7 @@ class MdTypeBuilder (val name:String) {
 }
 
 object MdTypeBuilder {
+  import scala.language.implicitConversions
   val DefaultIdPolicy = SeqIdPolicy
   val DefaultIdTemplate = "id_%09d"
   implicit def mdAttributeBuilder2MdAttribute(builder:MdAttributeBuilder[_]) = builder.build

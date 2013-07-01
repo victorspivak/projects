@@ -1,7 +1,6 @@
 import sbt._
 import Keys._
 import org.scalatra.sbt._
-import org.scalatra.sbt.PluginKeys._
 import com.mojolly.scalate.ScalatePlugin._
 import ScalateKeys._
 
@@ -15,7 +14,6 @@ object MdPocBuild extends Build {
     val MyArtifact = "MdPocProject"
 
     val ScalaVersion = "2.10.2"
-    val ScalaVersionDep = "2.10"
     val ScalatraVersion = "2.2.1"
     val Slf4jVersion = "1.7.5"
     val JUnitVersion = "4.7"
@@ -28,23 +26,42 @@ object MdPocBuild extends Build {
     resolvers += "amateras-repo" at "http://amateras.sourceforge.com/mvn/"
 
     lazy val deps = Seq(
+      "org.slf4j" % "slf4j-api" % Slf4jVersion,
+      "org.slf4j" % "slf4j-log4j12" % Slf4jVersion,
+      "log4j" % "log4j" % "1.2.17",
       "org.scalatra" %% "scalatra" % ScalatraVersion,
       "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
       "org.scalatra" %% "scalatra-json" % ScalatraVersion,
+      "org.json4s"   %% "json4s-jackson" % "3.2.4",
+
       "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
-      "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
       "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile,container",
       "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile,container;provided;test" artifacts Artifact("javax.servlet", "jar", "jar"),
 
-      "org.slf4j" % "slf4j-api" % Slf4jVersion,
-      "org.slf4j" % "slf4j-log4j12" % Slf4jVersion,
-
-      "org.apache.hadoop"        %  "hadoop-core"          % "1.1.2",
-      ("org.apache.hbase"         %  "hbase"                % "0.94.7").exclude("org.slf4j", "slf4j-log4j12"),
-      ("org.apache.solr" % "solr-solrj" % "4.3.0").exclude("org.slf4j", "slf4j-simple"),
-      ("svl"                      % ("myscalalib_" + ScalaVersionDep)   %  "1.0.0").exclude("org.slf4j", "slf4j-simple"),
-      "org.specs2" % ("specs2_" + ScalaVersionDep) % Specs2Version % "test",
-      "org.hamcrest"             % "hamcrest-all"         % "1.1"    % "test",
+      ("org.apache.hadoop"        %  "hadoop-core"          % "1.1.2")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
+      ("org.apache.hbase"         %  "hbase"                % "0.94.7")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
+      ("org.apache.solr" % "solr-solrj" % "4.3.0")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
+      ("svl"                      %% "myscalalib"   %  "1.0.0")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
+      ("org.specs2" %% "specs2" % Specs2Version % "test")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
+      ("org.hamcrest"             % "hamcrest-all"         % "1.1"    % "test")
+        .exclude("org.slf4j", "slf4j-log4j12")
+        .exclude("org.slf4j", "slf4j-simple")
+        .exclude("org.slf4j", "slf4j-api"),
       "org.mockito"              % "mockito-all"          % MochitoVersion  % "test",
       "junit"                    % "junit"                % JUnitVersion    % "test"
     )
