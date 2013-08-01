@@ -68,7 +68,6 @@ object Rational {
         }
         finally {
             println ("I am in finally")
-            0
         }
 
         Console println testFinally(1)
