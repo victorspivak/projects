@@ -56,11 +56,10 @@ class SolrHelper(val solrEnv:SolrEnv){
     dbObj.values.foldLeft(document) {
       (document, valueEntry) =>
         mdType.getAttributeByName(valueEntry._1) match {
-          case Some(attr:MdAttribute[_]) => if (attr.indexPolicy.filterable)
+          case attr:MdAttribute[_] => if (attr.indexPolicy.filterable)
               document.addField(solrFieldName(attr), valueEntry._2)
             document
-          case Some(_) => document
-          case None => throw new UnexpectedStateException("Did not find attribute for specified value")
+          case _ => document
         }
     }
     document

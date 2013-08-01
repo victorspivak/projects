@@ -2,16 +2,16 @@ package svl.metadata.poc.md.database
 
 import svl.metadata.poc.md.mdd._
 import svl.metadata.poc.md.mdd.MdAttribute
+import scala.language.existentials
 
 case class DbObject(id: String, mdType: MdType, values: Map[String, Any]) {
   def getValue[T](attr: MdAttribute[T]): Option[T] = values.get(attr.name).map(_.asInstanceOf[T])
-
   def getValue[T](attr: Option[MdAttribute[T]]) = attr.flatMap((a: MdAttribute[T]) => values.get(a.name).map(_.asInstanceOf[T]))
-
   def getValue[T](name: String)(clazz: Class[T]) = values.get(name).map(_.asInstanceOf[T])
 
+  def getAllValues:List[(MdAttribute[_], Any)] = values.foldLeft(List[(MdAttribute[_], Any)]()){(list, entry) =>
+                                          mdType.getAttributeByName(entry._1) -> entry._2 :: list}
   def setId(id: String) = DbObject(id, mdType, values)
-
   def optimisticLocking: Option[Long] = getValue(mdType.optimisticLockingAttribute)
 }
 
@@ -29,6 +29,9 @@ class DbObjectBuilder(id: String, mdType: MdType, overwriteValues: Boolean = fal
   }
 
   def addAttribute[T](entry: (MdAttribute[T], T)): DbObjectBuilder = add(entry._1.name -> entry._2)
+  def addAttribute[T](entry: (String, T))(clazz:Class[T]): DbObjectBuilder = {val (name, value) = entry
+    addAttribute(mdType.getAttributeByNameType(name)(clazz) -> value)
+  }
 
   def build = new DbObject(id, mdType, values.toMap)
 }

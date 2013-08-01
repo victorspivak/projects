@@ -3,18 +3,16 @@ package svl.metadata.poc.md.mdd
 import java.util.Date
 
 object MdAttrDataTypes{
-  sealed trait MdAttrDataType[T]{}
-  sealed case class StringTypeImp() extends MdAttrDataType[String]
-  sealed case class IntTypeImp() extends MdAttrDataType[Int]
-  sealed case class DoubleTypeImp() extends MdAttrDataType[Double]
-  sealed case class DateTypeImp() extends MdAttrDataType[Date]
-  sealed case class LongTypeImp() extends MdAttrDataType[Long]
+  sealed case class MdAttrDataType[T](dataType:Class[T]){
+    val dataTypeName = dataType.getSimpleName
+    def asInstanceOf(value:Any) = value.asInstanceOf[T]
+  }
 
-  val StringType = StringTypeImp()
-  val IntegerType = IntTypeImp()
-  val DoubleType = DoubleTypeImp()
-  val DateType = DateTypeImp()
-  val LongType = LongTypeImp()
+  val StringType = MdAttrDataType(classOf[String])
+  val IntegerType = MdAttrDataType(classOf[Int])
+  val DoubleType = MdAttrDataType(classOf[Double])
+  val DateType = MdAttrDataType(classOf[Date])
+  val LongType = MdAttrDataType(classOf[Long])
 }
 
 import MdAttrDataTypes._
@@ -24,6 +22,7 @@ case class MdAttrStorePolicy(compressing:Boolean, encrypting:Boolean)
 
 case class MdAttribute[T](id:String, name:String, attrType:MdAttrDataType[T], size:Int,
                        indexPolicy:MdAttrIndexPolicy, storePolicy:MdAttrStorePolicy) {
+  def attrValueToString(value:Any) = value.asInstanceOf[T].toString
 }
 
 class MdAttributeBuilder[T] (name:String, attrType:MdAttrDataType[T], size:Int = -1) {

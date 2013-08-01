@@ -1,7 +1,6 @@
 package svl.metadata.poc.md.database.hbase
 
 import svl.metadata.poc.md.mdd._
-import svl.metadata.poc.md.database.DbObject
 import svl.metadata.poc.md.mdd.MdIdGenerationPolicies._
 import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 import org.apache.hadoop.hbase.client.{Result, Put}
@@ -49,10 +48,8 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
     val mdType = dbObject.mdType
 
     val put = dbObject.values.foldLeft(helper.makePut(dbObject.id)){(put, entry) =>
-      mdType.getAttributeByName(entry._1) match {
-        case Some(attr) => helper.addToPut(put, mdType.fieldFamily, attr.name, attr.attrType.asInstanceOf[MdAttrDataType[Any]], entry._2)
-        case None => throw new UnexpectedStateException("Did not find attribute for specified value")
-      }
+      val attr = mdType.getAttributeByName(entry._1)
+      helper.addToPut(put, mdType.fieldFamily, attr.name, attr.attrType.asInstanceOf[MdAttrDataType[Any]], entry._2)
     }
 
     addOptimisticLockingIfNeeded(put, dbObject)
@@ -65,15 +62,14 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
       MddExceptions.missingOptimisticLockingAttribute(dbObject)
     }
 
-    dbObject.values.foldLeft(helper.makePut(dbObject.id)){(put, entry) =>
-      mdType.getAttributeByName(entry._1) match {
-        case Some(MdAttribute(_, MdType.OptimisticLockingColumnName, attrType, _, _, _)) =>
-          helper.addToPut(put, mdType.fieldFamily, MdType.OptimisticLockingColumnName, attrType, entry._2.asInstanceOf[Long] + 1)
-        case Some(MdAttribute(_, name, attrType, _, _, _)) =>
-          helper.addToPut(put, mdType.fieldFamily, name, attrType, entry._2)
-        case Some(attr) =>
+    dbObject.values.foldLeft(helper.makePut(dbObject.id)){(put, entry) => val (attrName, value) = entry
+      mdType.getAttributeByName(attrName) match {
+        case MdAttribute(_, MdType.OptimisticLockingColumnName, LongType, _, _, _) =>
+          helper.addToPut(put, mdType.fieldFamily, MdType.OptimisticLockingColumnName, LongType, value.asInstanceOf[Long] + 1)
+        case MdAttribute(_, name, attrType, _, _, _) =>
+          helper.addToPut(put, mdType.fieldFamily, name, attrType, attrType.asInstanceOf(value))
+        case attr =>
           throw new UnexpectedStateException("Did not find attribute for specified value: %s".format(attr.name))
-        case None => throw new UnexpectedStateException("Did not find attribute for specified value")
       }
     }
   }
