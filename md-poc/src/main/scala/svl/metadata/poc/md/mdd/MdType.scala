@@ -1,5 +1,7 @@
 package svl.metadata.poc.md.mdd
 
+import scala.language.existentials
+
 case class MdTypePolicy(optimisticLocking:Boolean, searchable:Boolean)
 
 object MdIdGenerationPolicies{
@@ -17,10 +19,17 @@ case class MdType(id:String, name:String, attributes:List[MdAttribute[_]], idGen
   val attributesByName:Map[String, MdAttribute[_]] =
     attributes.foldLeft(Map[String, MdAttribute[_]]()) ((m:Map[String, MdAttribute[_]], a:MdAttribute[_]) => m + (a.name -> a))
 
-  def getAttributeByName(attrName:String) = attributesByName.get(attrName)
+  def getAttributeByNameOpt(attrName:String) = attributesByName.get(attrName)
+  def getAttributeByName(attrName:String):MdAttribute[_] = getAttributeByNameOpt(attrName) match {
+    case Some(attr) => attr
+    case _ => throw MddExceptions.unknownAttribute(name, attrName)
+  }
+  def getAttributeByNameType[T](attrName:String)(clazz:Class[T]):MdAttribute[T] = getAttributeByName(attrName).asInstanceOf[MdAttribute[T]]
+
   def containsAttribute(attrName:String) = attributesByName.contains(attrName)
+  def idColumn = idGeneration.idColumn
   def idGenerationPolicy = idGeneration
-  def optimisticLockingAttribute:Option[MdAttribute[Long]] = getAttributeByName(MdType.OptimisticLockingColumnName).asInstanceOf[Option[MdAttribute[Long]]]
+  def optimisticLockingAttribute:Option[MdAttribute[Long]] = getAttributeByNameOpt(MdType.OptimisticLockingColumnName).asInstanceOf[Option[MdAttribute[Long]]]
 }
 
 object MdType {
@@ -80,6 +89,7 @@ class MdTypeBuilder (val name:String) {
 }
 
 object MdTypeBuilder {
+  import scala.language.implicitConversions
   val DefaultIdPolicy = SeqIdPolicy
   val DefaultIdTemplate = "id_%09d"
   implicit def mdAttributeBuilder2MdAttribute(builder:MdAttributeBuilder[_]) = builder.build

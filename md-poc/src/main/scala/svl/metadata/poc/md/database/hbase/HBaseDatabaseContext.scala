@@ -7,8 +7,9 @@ import org.apache.hadoop.hbase.{HColumnDescriptor, HTableDescriptor, HBaseConfig
 import java.util.{Date, UUID}
 import svl.metadata.poc.md.mdd.MdAttrDataTypes._
 import org.apache.hadoop.hbase.util.Bytes
-import svl.metadata.poc.md.mdd.MddBaseException
+import svl.metadata.poc.md.mdd.{MddExceptions, MddBaseException}
 import svl.metadata.poc.md.database.solr.{DefaultSolrEnv, SolrEnv}
+import scala.collection.mutable
 
 trait HBaseDatabaseContext{
   def sessionFactory:HBaseSessionFactory
@@ -79,21 +80,37 @@ trait DefaultHBaseDatabaseContext{
 }
 
 class HBaseHelper(val context:HBaseDatabaseContext){
+  import scala.language.implicitConversions
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
+  def tableCache = new mutable.HashMap[String, HTableInterface]
 
   def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
-    try{
-      context.hbaseEnv.pool.getTable(name)
-    } catch {
-      case exception:Exception => translateException(exception) match {
-        case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
-          createTable(name, fldFamily)
-          getTable(name, None)
-        }).getOrElse(null)
-        case e:Exception => throw e
+    def getTableWithCreate(name:String, fieldFamily:Option[String]):HTableInterface = {
+      try{
+        val table = tableCache.get(name)
+
+        context.hbaseEnv.pool.getTable(name)
+      } catch {
+        case exception:Exception => translateException(exception) match {
+          case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
+            createTable(name, fldFamily)
+            getTable(name, None)
+          }).getOrElse(null)
+          case e:Exception => throw e
+        }
       }
     }
+
+    val tableOpt = tableCache.get(name)
+    if (tableOpt.isEmpty) {
+      val table = getTableWithCreate(name, fieldFamily)
+      tableCache.put(name, table)
+      table
+    }
+    else
+      tableOpt.get
   }
+
 
   def translateException(exception:Throwable):Throwable = exception match {
     case e:MddBaseException => e
@@ -155,6 +172,7 @@ class HBaseHelper(val context:HBaseDatabaseContext){
       case DoubleType => Bytes.toDouble(bytes).asInstanceOf[T]
       case DateType => new Date(Bytes.toLong(bytes)).asInstanceOf[T]
       case LongType => Bytes.toLong(bytes).asInstanceOf[T]
+      case _ => throw MddExceptions.unknownAttributeType(attrType)
     }
   }
 }

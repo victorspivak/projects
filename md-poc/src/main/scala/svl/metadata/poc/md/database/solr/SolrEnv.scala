@@ -10,9 +10,7 @@ import MdQueryOperators._
 import org.apache.solr.common.{SolrDocument, SolrInputDocument}
 import org.apache.solr.common.params.ModifiableSolrParams
 import scala.collection.JavaConversions._
-import scala.Some
-import svl.metadata.poc.md.database.MdQuery
-import svl.metadata.poc.md.database.DbObject
+import MdSortingPolicy._
 import svl.metadata.poc.md.mdd.MdAttribute
 import scala.Some
 import svl.metadata.poc.md.database.MdQuery
@@ -41,20 +39,30 @@ import SolrHelper._
 class SolrHelper(val solrEnv:SolrEnv){
   def indexDocument(dbObj:DbObject) {
     val mdType = dbObj.mdType
+    val document = makeSolrDocument(dbObj, mdType)
+
+    solrEnv.solr.add(document, 100)
+  }
+
+  def indexDocument(dbObjs:List[DbObject], mdType:MdType) {
+    solrEnv.solr.add(dbObjs.map(makeSolrDocument(_, mdType)), 100)
+  }
+
+  private def makeSolrDocument(dbObj: DbObject, mdType: MdType): SolrInputDocument = {
     val document = new SolrInputDocument
     document.addField("id", dbObj.id)
     document.addField(TypeField, dbObj.mdType.name)
 
-    dbObj.values.foldLeft(document){(document, valueEntry) =>
-      mdType.getAttributeByName(valueEntry._1) match { //svl filter out non-indexed fields
-        case Some(attr:MdAttribute[_]) => document.addField(solrFieldName(attr), valueEntry._2)
-          document
-        case None => throw new UnexpectedStateException("Did not find attribute for specified value")
-      }
+    dbObj.values.foldLeft(document) {
+      (document, valueEntry) =>
+        mdType.getAttributeByName(valueEntry._1) match {
+          case attr:MdAttribute[_] => if (attr.indexPolicy.filterable)
+              document.addField(solrFieldName(attr), valueEntry._2)
+            document
+          case _ => document
+        }
     }
-
-    solrEnv.solr.add(document)
-//    solrEnv.solr.commit       //svl do we need commit here?
+    document
   }
 
   def solrFieldName(attribute:MdAttribute[_]) = attribute match {
@@ -63,6 +71,7 @@ class SolrHelper(val solrEnv:SolrEnv){
     case MdAttribute(_, name, DoubleType, _, _, _) => name + "_d"
     case MdAttribute(_, name, DateType, _, _, _) => name + "_dt"
     case MdAttribute(_, name, LongType, _, _, _) => name + "_l"
+    case _ => throw MddExceptions.unknownAttributeType(attribute)
   }
 
   def startConstrainExpression(constrain:MdQueryConstrain[_]) = constrain match {
@@ -122,6 +131,15 @@ class SolrHelper(val solrEnv:SolrEnv){
     val params = new ModifiableSolrParams
     params.set("q", queryStr)
     params.set("start", query.options.starting)
+    params.set("rows", query.options.maxCount)
+    params.set("fl", "id")
+
+    query.sorting.map{(sorting) => sorting match {
+      case MdSorting(attribute, Ascending) => params.set("sort", solrFieldName(sorting.attribute) + " asc ")
+      case MdSorting(attribute, Descending) => params.set("sort", solrFieldName(sorting.attribute) + " desc ")
+    }}
+
+    println("QueryParams: " + params)
     val solrResults = solrEnv.solr.query(params)
     val resultList = solrResults.getResults
 

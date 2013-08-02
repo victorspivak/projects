@@ -50,7 +50,7 @@ class MdTypeSpec extends Specification { def is =
 
   def typeIdFact(t:MdType, expected:String) = t.id mustEqual expected
   def typeNameFact(t:MdType, expected:String) = t.name mustEqual expected
-  def typeAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.getAttributeByName(attrName) === Option(expected)
+  def typeAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.getAttributeByNameOpt(attrName) === Option(expected)
   def typeOptimisticLockingFact(t:MdType, expected:Boolean) = t.optimisticLockingAttribute.isDefined === expected
   def idGenerationPolicyFact(t:MdType, expected:MdIdGenerationPolicy) = t.idGenerationPolicy.policy === expected
   def idTemplateFact(t:MdType, expected:String) = t.idGenerationPolicy.idTemplate === expected
@@ -61,6 +61,6 @@ class MdTypeSpec extends Specification { def is =
   def addingAttrBuilderFact(tb:MdTypeBuilder) = {
     val mdType = tb.add(StringAttributeBuilder(attr4Name)).build
     val expectedAttribute: MdAttribute[_] = StringAttributeBuilder(attr4Name).build
-    mdType.getAttributeByName(attr4Name) === Option(expectedAttribute)
+    mdType.getAttributeByName(attr4Name) === expectedAttribute
   }
 }
