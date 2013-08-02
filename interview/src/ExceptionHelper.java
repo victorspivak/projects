@@ -1,7 +1,3 @@
-/*
- * Copyright � 1994-2009. Victor Spivak.  All Rights Reserved.
- */
-
 public class ExceptionHelper {
     public static void doThrow(Exception e) {
         ExceptionHelper.<RuntimeException> doThrow0(e);

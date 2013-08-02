@@ -1,7 +1,3 @@
-/*
- * Copyright (c) 2006 Your Corporation. All Rights Reserved.
- */
-
 package svl.interview;
 
 public final class Sample2
