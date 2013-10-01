@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/TypeScript/src/Test1.js" />
+        <item url="file://$PROJECT_DIR$/TypeScript/src/http.js" />
+        <item url="file://$PROJECT_DIR$/TypeScript/src/TsWebServer.js" />
+        <item url="file://$PROJECT_DIR$/TypeScript/src/TsWebServer.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/TypeScript/src/http.js" />
+      <root url="file://$PROJECT_DIR$/TypeScript/src/Test1.js" />
+      <root url="file://$PROJECT_DIR$/TypeScript/src/http.js" />
+      <root url="file://$PROJECT_DIR$/TypeScript/src/TsWebServer.js" />
+      <root url="file://$PROJECT_DIR$/TypeScript/src/TsWebServer.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
