@@ -56,7 +56,7 @@ object Main {
             ) yield e
 
         println("RESULT: " + r.value)
-        println
+        println()
         println("LOG")
         println("---")
         r.log foreach println

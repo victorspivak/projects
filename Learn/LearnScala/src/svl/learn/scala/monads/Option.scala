@@ -1,3 +1,5 @@
+package svl.learn.scala.monads
+
 object Option {
     def main(args:Array[String]) {
         val capitals = Map("France" -> "Paris", "Japan" -> "Tokyo")
@@ -16,7 +18,7 @@ object Option {
             for {   user <- u
                     password <- p
                     domain <- d}
-            yield (domain + "/" + user + "/" + password)
+            yield domain + "/" + user + "/" + password
 
         def fd2(u:Option[String], p:Option[String], d:Option[String]) = u.flatMap(user => p.flatMap(pass => d.map(domain => domain + "/" + user + "/" + pass)))
 
