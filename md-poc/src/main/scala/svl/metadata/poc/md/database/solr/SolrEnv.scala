@@ -23,7 +23,7 @@ trait SolrEnv {
 
 trait DefaultSolrEnv{
   def solrEnv:SolrEnv = new SolrEnv{
-    val solr: SolrServer = new HttpSolrServer("http://localhost:8080/solr")
+    val solr: SolrServer = new HttpSolrServer("http://localhost:8983/solr")
   }
 }
 

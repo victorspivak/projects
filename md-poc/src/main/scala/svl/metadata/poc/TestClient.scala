@@ -67,7 +67,7 @@ object TestClient extends App{
   println ("Query                 Timing: " + queryTiming + "  Size: " + result.size)
 
 
-  val id = "ClaimID-00000274"
+  val id = "ClaimID-00000174"
 
   val obj1 = s.fetch(id, claimType)
   dump(obj1)
