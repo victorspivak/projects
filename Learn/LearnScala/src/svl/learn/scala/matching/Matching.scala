@@ -8,8 +8,20 @@ object Matching {
             }
         }
 
+		def matchClass(obj:Any) {
+			obj match {
+				case s:String => println("It is a string")
+				case s:Int => println("It is an int")
+				case _ => println("It is unknown")
+			}
+		}
+
         testMatch1(List(0, 1, 1))
         testMatch1(List(0, 1, 1, 1, 0))
+
+		matchClass(1)
+		matchClass("1")
+		matchClass(1.0)
     }
 }
 
