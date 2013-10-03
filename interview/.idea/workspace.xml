@@ -2,503 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d063684-1e71-4904-8f02-a2b0b510e79d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/.name" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/.name" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/.name" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/.name" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/.name" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/.name" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/.name" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/.name" afterPath="$PROJECT_DIR$/../Scala/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/Agents.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/Agents.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/Basic.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/Basic.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Basic.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Basic.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Collections.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Collections.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/ConsumeFunctions.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/ConsumeFunctions.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/ExtFunctions.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/ExtFunctions.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/FunctionsRecur.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/functions/FunctionsRecur.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/HelloKotlin.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/HelloKotlin.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/JavaIntegration.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/JavaIntegration.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/List.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/List.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/Loops.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/Loops.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Maps.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Maps.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/metadata/Metadata.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/metadata/Metadata.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/Misc.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/Misc.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Nullable.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Nullable.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/Pong.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/Pong.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/Prog1.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/Prog1.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Properties.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Properties.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Sequence.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Sequence.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/SpecialForms.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/SpecialForms.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Strings.kt" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/src/svl/learn/kotlin/basic/Strings.kt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Vector.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/Vector.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/atoms.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/atoms.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/src/svl/basic/basic.go" afterPath="$PROJECT_DIR$/../Learn/LearnGo/src/svl/basic/basic.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/buddhabrot.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/buddhabrot.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/src/svl/classes/classes.go" afterPath="$PROJECT_DIR$/../Learn/LearnGo/src/svl/classes/classes.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/lib/clojure.jar" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/lib/clojure.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/lib/httpmime-4.2.2.jar" afterPath="$PROJECT_DIR$/../Scala/lib/httpmime-4.2.2.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/src/main.go" afterPath="$PROJECT_DIR$/../Learn/LearnGo/src/main.go" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/refs.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/stateful/refs.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/lib/scala-dispatch-jar-with-dependencies.jar" afterPath="$PROJECT_DIR$/../Scala/lib/scala-dispatch-jar-with-dependencies.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/shapes.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/examples/shapes.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/string.clj" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/src/data_structures/string.clj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/AbstractTypes.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/AbstractTypes.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/Annotations.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/Annotations.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/AnotherScotchBuilder.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/AnotherScotchBuilder.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/containers/Arrays.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/containers/Arrays.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Arrays.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Arrays.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/BasicClasses.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/BasicClasses.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/BoxCommands.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/BoxCommands.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/BoxJsonDeserialization.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/BoxJsonDeserialization.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/BoxRestClientUsingDispatch.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/BoxRestClientUsingDispatch.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/BuildScotchDrink.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/BuildScotchDrink.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/ByNameParameters.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/ByNameParameters.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/CL.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/CL.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/Calculator.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/Calculator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/CallUserFunc.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/CallUserFunc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/CaseClasses.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/CaseClasses.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/CheckNullSet.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/CheckNullSet.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/ClCommand.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/ClCommand.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/ClExceptions.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/ClExceptions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/ClassAndObject.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/ClassAndObject.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/Classes.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/Classes.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/Client.java" afterPath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/Client.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/src/svl/ClientBundle.java" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/src/svl/ClientBundle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/src/svl/ClientBundle.java" afterPath="$PROJECT_DIR$/../OsgiDS/src/svl/ClientBundle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/Combinations.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/Combinations.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/ComparatorBundle.iml" afterPath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/ComparatorBundle.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/Compose.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/Compose.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/ConsoleUtil.scala" afterPath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/ConsoleUtil.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Constants.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Constants.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/ConstructorDestructor.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/ConstructorDestructor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/CuriedFunctions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/CuriedFunctions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/DataModel.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/DataModel.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/Db.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/Db.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/Db.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/Db.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/dsl/DslProcessor.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/dsl/DslProcessor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/DynamicMethod.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/DynamicMethod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/EchoActor.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/EchoActor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/generators/EntityTemplate.scala" afterPath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/generators/EntityTemplate.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/src/test/scala/svl/scala/lib/generators/EntityTemplateTest.scala" afterPath="$PROJECT_DIR$/../MyScalaLib/src/test/scala/svl/scala/lib/generators/EntityTemplateTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Enum.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Enum.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/EnumExtended.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/EnumExtended.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/EulerSolutions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/EulerSolutions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/EulerTask001.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/EulerTask001.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ExceptionHelper.java" afterPath="$PROJECT_DIR$/src/ExceptionHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Exceptions.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Exceptions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Exceptions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Exceptions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/FindUniqueNumber.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/samples/FindUniqueNumber.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/FirstClassFunctions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/FirstClassFunctions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/For.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/For.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/FunctionArgs.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/FunctionArgs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Functions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Functions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/FunctionsAsControlStruct.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/FunctionsAsControlStruct.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/GetFields.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/GetFields.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/GetMethods.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/dynamic/GetMethods.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/Sbt/sample1/src/main/scala/svl/Hello.scala" afterPath="$PROJECT_DIR$/../Learn/Sbt/sample1/src/main/scala/svl/Hello.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/Hello.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/Hello.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServlet.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServletAsync.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServletAsync.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServletAsyncDispatch.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/HelloServletAsyncDispatch.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/basic/HelloWorld.groovy" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/basic/HelloWorld.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/HttpClient/HttpClient.iml" afterPath="$PROJECT_DIR$/../ReverseHttp/HttpClient/HttpClient.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/IdeaProject.iml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/IdeaProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/IdeaProject.iml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/IdeaProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/IdeaProject.iml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/IdeaProject.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/ImplicitParameters.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/ImplicitParameters.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Interview.iml" afterPath="$PROJECT_DIR$/Interview.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/Invoice.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/Invoice.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/Invoice.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/Invoice.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/InvoiceServiceRunner.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/InvoiceServiceRunner.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/InvoiceServiceRunner.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/InvoiceServiceRunner.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticMethod.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticMethod.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticmethods1.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticmethods1.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticmethods2.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/classes/InvokeStaticmethods2.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/JasonDeserealization.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/JasonDeserealization.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/box/JsonParser.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/box/JsonParser.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Lazy.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Lazy.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/LearnGo.iml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/LearnGo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/LearnGroovy.iml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/LearnGroovy.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/implicits/Implicitly.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/implicits/Implicitly.scala" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/LearnPhp.iml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/LearnPhp.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/LearnScala.iml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/LearnScala.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/containers/Lists.groovy" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/containers/Lists.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Lists.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Lists.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/my_tools/MakeUrls.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/my_tools/MakeUrls.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/containers/Maps.groovy" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/src/svl/learn/groovy/containers/Maps.groovy" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Maps.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Maps.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/Matching.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/Matching.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/MongoInvoiceService.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/mongo/MongoInvoiceService.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/MongoInvoiceService.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/poc/MongoInvoiceService.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/monads/MonoidExample.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/monads/MonoidExample.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/NestedFunctions.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/NestedFunctions.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Operators.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Operators.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/Option.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/Option.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/ParalelCollections.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/ParalelCollections.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/Parameters.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/functions/Parameters.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/scala/tools/Performance.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/scala/tools/Performance.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/PerformanceBenchmark.iml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/PerformanceBenchmark.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/PerformanceBenchmark.java" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/PerformanceBenchmark.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/PerformanceUtil.scala" afterPath="$PROJECT_DIR$/../MyScalaLib/src/main/scala/svl/scala/lib/PerformanceUtil.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/scala/tools/PerformanceUtils.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/scala/tools/PerformanceUtils.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/PhpInfo.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/PhpInfo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../ReverseHttp/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../TryProject/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/interview/Puzzle.java" afterPath="$PROJECT_DIR$/src/svl/interview/Puzzle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/samples/Rational.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/classes/samples/Rational.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/React.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/React.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/files/ReadFile.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/files/ReadFile.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/RegExMatching.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/matching/RegExMatching.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/RestClientUsingDispatch.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/RestClientUsingDispatch.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/RestClientUsingStandard.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/RestClientUsingStandard.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/ReturnFromFunc.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/ReturnFromFunc.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/ReverseHttpClient.java" afterPath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/ReverseHttpClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpRequestServlet.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpRequestServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/ReverseHttpServerRequest.java" afterPath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/ReverseHttpServerRequest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpServlet.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpUtil.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/ReverseHttpUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ch_qos_logback_logback_classic_0_9_29.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ch_qos_logback_logback_classic_0_9_29.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ch_qos_logback_logback_core_0_9_29.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ch_qos_logback_logback_core_0_9_29.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_github_nscala_time_nscala_time_2_9_2_0_2_0.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_github_nscala_time_nscala_time_2_9_2_0_2_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_googlecode_xmemcached_xmemcached_1_3_8.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_googlecode_xmemcached_xmemcached_1_3_8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_thoughtworks_paranamer_paranamer_2_3.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_thoughtworks_paranamer_paranamer_2_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_scala_zookeeper_client_2_9_0_1_3_0_2_box_3840e4f.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_scala_zookeeper_client_2_9_0_1_3_0_2_box_3840e4f.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_util_core_2_0_0.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_util_core_2_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_util_logging_2_0_0.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_twitter_util_logging_2_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_weiglewilczek_slf4s_slf4s_2_9_0_1_1_0_7.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_weiglewilczek_slf4s_slf4s_2_9_0_1_1_0_7.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_core_2_1_3.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_core_2_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_scala_2_9_1_2_1_3.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_scala_2_9_1_2_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_servlet_2_1_3.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__com_yammer_metrics_metrics_servlet_2_1_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_codec_commons_codec_1_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_codec_commons_codec_1_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_io_commons_io_2_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_io_commons_io_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_activation_activation_1_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_activation_activation_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_mail_mail_1_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_mail_mail_1_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_servlet_servlet_api_2_5.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__javax_servlet_servlet_api_2_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__jline_jline_0_9_94.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__jline_jline_0_9_94.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__joda_time_joda_time_1_6.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__joda_time_joda_time_1_6.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__joda_time_joda_time_2_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__joda_time_joda_time_2_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__junit_junit_3_8_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__junit_junit_3_8_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__junit_junit_4_7_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__junit_junit_4_7_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__junit_junit_4_7_test.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__junit_junit_4_7_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__junit_junit_4_7_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__junit_junit_4_7_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__log4j_log4j_1_2_15.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__log4j_log4j_1_2_15.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_box_common_2_9_0_1_1_149.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_box_common_2_9_0_1_1_149.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_box_common_2_9_0_1_1_149_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_box_common_2_9_0_1_1_149_SNAPSHOT.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_metrics_opentsdb_2_9_0_1_1_5.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_box_metrics_opentsdb_2_9_0_1_1_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_iharder_base64_2_3_8.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_iharder_base64_2_3_8.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_liftweb_lift_json_2_9_0_1_2_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_liftweb_lift_json_2_9_0_1_2_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_sf_jpam_jpam_1_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__net_sf_jpam_jpam_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_httpcomponents_httpclient_4_1_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_httpcomponents_httpclient_4_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_httpcomponents_httpcore_4_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_httpcomponents_httpcore_4_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_zookeeper_zookeeper_3_3_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_apache_zookeeper_zookeeper_3_3_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_codehaus_jackson_jackson_core_asl_1_8_5.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_codehaus_jackson_jackson_core_asl_1_8_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_codehaus_jackson_jackson_mapper_asl_1_8_5.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_codehaus_jackson_jackson_mapper_asl_1_8_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_continuation_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_continuation_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_http_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_http_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_io_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_io_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_security_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_security_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_server_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_server_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_servlet_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_servlet_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_util_7_4_5_v20110725.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_eclipse_jetty_jetty_util_7_4_5_v20110725.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_hamcrest_hamcrest_all_1_1_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_hamcrest_hamcrest_all_1_1_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_jboss_netty_netty_3_2_7_Final.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_jboss_netty_netty_3_2_7_Final.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_joda_joda_convert_1_2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_joda_joda_convert_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mindrot_jbcrypt_0_3m.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mindrot_jbcrypt_0_3m.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_mockito_mockito_all_1_9_0_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_0_1_3_0_0_M1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_0_1_3_0_0_M1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_0_1_3_0_0_M2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_0_1_3_0_0_M2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_2_2_5_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_commons_2_9_2_2_5_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_0_1_3_0_0_M1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_0_1_3_0_0_M1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_0_1_3_0_0_M2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_0_1_3_0_0_M2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_2_2_5_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_core_2_9_2_2_5_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_0_1_3_0_0_M1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_0_1_3_0_0_M1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_0_1_3_0_0_M2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_0_1_3_0_0_M2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_2_2_5_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_gridfs_2_9_2_2_5_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_0_1_3_0_0_M1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_0_1_3_0_0_M1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_0_1_3_0_0_M2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_0_1_3_0_0_M2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_2_2_5_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_query_2_9_2_2_5_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_util_2_9_0_1_3_0_0_M1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_util_2_9_0_1_3_0_0_M1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_util_2_9_0_1_3_0_0_M2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_casbah_util_2_9_0_1_3_0_0_M2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_mongo_java_driver_2_10_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_mongo_java_driver_2_10_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_mongo_java_driver_2_7_3.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_mongodb_mongo_java_driver_2_7_3.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scala_compiler_2_9_0_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scala_compiler_2_9_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_0_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_1.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_2.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_2.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scala_lang_scala_library_2_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scalap_2_9_0_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_lang_scalap_2_9_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_tools_time_time_2_8_0_0_2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scala_tools_time_time_2_8_0_0_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalaj_scalaj_collection_2_9_0_1_1_2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalaj_scalaj_collection_2_9_0_1_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_2_9_0_1_2_0_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_2_9_0_1_2_0_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_auth_2_9_0_1_2_0_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_auth_2_9_0_1_2_0_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_lift_json_2_9_0_1_2_0_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalatra_scalatra_lift_json_2_9_0_1_2_0_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_0_1_6_0_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_0_1_6_0_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_1_6_0_4.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_1_6_0_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_2_7_0_0.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_scalaz_scalaz_core_2_9_2_7_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_log4j_over_slf4j_1_6_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_log4j_over_slf4j_1_6_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_slf4j_slf4j_api_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_slf4j_slf4j_simple_1_6_4_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_2_9_0_1_7_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_2_9_0_1_7_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_2_9_1_1_8_2_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_2_9_1_1_8_2_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_2_9_2_1_12_3_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_0_6_0_RC2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_0_6_0_RC2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_1_6_0_1_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_1_6_0_1_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__org_specs2_specs2_scalaz_core_2_9_2_6_0_1_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__scala_2_9_0_1.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__scala_2_9_0_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__scala_2_9_1.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__scala_2_9_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__scala_2_9_2.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__scala_2_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__scala_2_9_2.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/libraries/SBT__scala_2_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__scala_2_9_2.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/libraries/SBT__scala_2_9_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__svl_myscalalib_2_9_2_0_5_0.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__svl_myscalalib_2_9_2_0_5_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__svl_myscalalib_2_9_2_0_5_0_test.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__svl_myscalalib_2_9_2_0_5_0_test.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ua_t3hnar_bcrypt_scala_bcrypt_1_4.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/libraries/SBT__ua_t3hnar_bcrypt_scala_bcrypt_1_4.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/interview/Sample1.java" afterPath="$PROJECT_DIR$/src/svl/interview/Sample1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/interview/Sample2.java" afterPath="$PROJECT_DIR$/src/svl/interview/Sample2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/interview/Sample3.java" afterPath="$PROJECT_DIR$/src/svl/interview/Sample3.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/svl/interview/Sample4.java" afterPath="$PROJECT_DIR$/src/svl/interview/Sample4.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/ComparatorBundle/src/sample/SampleComparator.java" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/ComparatorBundle/src/sample/SampleComparator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/src/sample/SampleComparator.java" afterPath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/src/sample/SampleComparator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/Scala.iml" afterPath="$PROJECT_DIR$/../Scala/Scala.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/test/src/Script1.scala" afterPath="$PROJECT_DIR$/../Scala/test/src/Script1.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/SelfActor.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/SelfActor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Sets.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Sets.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/sfdc/client/dsl/SfdcDsl.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/sfdc/client/dsl/SfdcDsl.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/networking/Simple.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/networking/Simple.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/Closures/SimpleClosure.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/Closures/SimpleClosure.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/SimpleCombinator.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/SimpleCombinator.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/scripts/SimpleScript.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/scripts/SimpleScript.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/SimpleTypeSafeBuilder.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/typesafebuilder/SimpleTypeSafeBuilder.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/xml/SimpleXml.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/xml/SimpleXml.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/cake/SolidCake.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/patterns/cake/SolidCake.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/StaticFunctions.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/StaticFunctions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Streams.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Streams.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Strings.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Strings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Strings.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/Strings.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/SyncActor.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/SyncActor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Test.java" afterPath="$PROJECT_DIR$/src/Test.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/Test.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/Test.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/Test.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/Test.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/test/src/Test1.scala" afterPath="$PROJECT_DIR$/../Scala/test/src/Test1.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/json/TestBean.java" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/json/TestBean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/src/svl/TestClient.java" afterPath="$PROJECT_DIR$/../TryProject/src/svl/TestClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/TestClojure.iml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/TestClojure.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/TestCompactMemoryCache.java" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/TestCompactMemoryCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/json/TestGson.java" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/src/svl/test/performance/json/TestGson.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/Sbt/sample1/src/test/scala/svl/TestHello.scala" afterPath="$PROJECT_DIR$/../Learn/Sbt/sample1/src/test/scala/svl/TestHello.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/TestKeyboard.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/prototype/Rest/TestKeyboard.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/src/svl/TestServer.java" afterPath="$PROJECT_DIR$/../TryProject/src/svl/TestServer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Tuples.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/containers/Tuples.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/UnApply.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/basic/UnApply.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/src/main/scala/svl/validation/ValidationTest.scala" afterPath="$PROJECT_DIR$/../Scalaz/src/main/scala/svl/validation/ValidationTest.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Variables.php" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/src/basic/Variables.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/dictionaries/Victor.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/dictionaries/Victor.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/WaitingContexts.java" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/src/svl/servlet/reversehttp/WaitingContexts.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/WaitingContextsConstants.java" afterPath="$PROJECT_DIR$/../ReverseHttp/HttpClient/src/svl/httpclient/WaitingContextsConstants.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/WebHelper.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/WebHelper.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/WebHelper.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/WebHelper.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/defs/_Defs_.scala" afterPath="$PROJECT_DIR$/../Scala/src/svl/scalaimp/defs/_Defs_.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/ant.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/ant.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/ant.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/ant.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/ant.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/ant.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/ant.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/ant.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/basicActor.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/actors/basicActor.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/project/build.properties" afterPath="$PROJECT_DIR$/../MongoDbPoC/project/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/project/build.properties" afterPath="$PROJECT_DIR$/../MyScalaLib/project/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/project/build.properties" afterPath="$PROJECT_DIR$/../Scalaz/project/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/project/build.properties" afterPath="$PROJECT_DIR$/../md-poc/project/build.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/Sbt/sample1/build.sbt" afterPath="$PROJECT_DIR$/../Learn/Sbt/sample1/build.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/project/build.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/project/build.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/project/build.scala" afterPath="$PROJECT_DIR$/../MyScalaLib/project/build.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/project/build.scala" afterPath="$PROJECT_DIR$/../Scalaz/project/build.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/project/build.scala" afterPath="$PROJECT_DIR$/../md-poc/project/build.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/libraries/clojure_1_2.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/libraries/clojure_1_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/codeStyleSettings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/compiler.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/description.html" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/description.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/encodings.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/highlighting.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/highlighting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/highlighting.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/highlighting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/highlighting.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/highlighting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/highlighting.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/highlighting.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/web/index.jsp" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/web/index.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/json.scala" afterPath="$PROJECT_DIR$/../Learn/LearnScala/src/svl/learn/scala/combinator/json.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea_modules/learnscalaz-build.iml" afterPath="$PROJECT_DIR$/../Scalaz/.idea_modules/learnscalaz-build.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea_modules/learnscalaz.iml" afterPath="$PROJECT_DIR$/../Scalaz/.idea_modules/learnscalaz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/logback.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/OSGI-INF/minimal.xml" afterPath="$PROJECT_DIR$/../OsgiDS/OSGI-INF/minimal.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/.idea/codeStyleSettings.xml" afterPath="$PROJECT_DIR$/../md-poc/.idea/codeStyleSettings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/.idea_modules/mdpoc-build.iml" afterPath="$PROJECT_DIR$/../md-poc/.idea_modules/mdpoc-build.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/.idea_modules/mdpoc.iml" afterPath="$PROJECT_DIR$/../md-poc/.idea_modules/mdpoc.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/misc.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/misc.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/misc.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/misc.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/misc.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/.idea/misc.xml" afterPath="$PROJECT_DIR$/../ReverseHttp/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/.idea/misc.xml" afterPath="$PROJECT_DIR$/../TryProject/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/modules.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/modules.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/modules.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/modules.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea_modules/mongopoc-build.iml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea_modules/mongopoc-build.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/mongopoc.conf" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/mongopoc.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea_modules/mongopoc.iml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea_modules/mongopoc.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/mongopoc.properties" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/mongopoc.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/mongopoc.scala" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/mongopoc.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/mongopoc.scala" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/mongopoc.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea_modules/myscalalib-build.iml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea_modules/myscalalib-build.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea_modules/myscalalib.iml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea_modules/myscalalib.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/project/plugins.sbt" afterPath="$PROJECT_DIR$/../MongoDbPoC/project/plugins.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/project/plugins.sbt" afterPath="$PROJECT_DIR$/../MyScalaLib/project/plugins.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/project/plugins.sbt" afterPath="$PROJECT_DIR$/../Scalaz/project/plugins.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/project/plugins.sbt" afterPath="$PROJECT_DIR$/../md-poc/project/plugins.sbt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../ReverseHttp/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/copyright/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/.idea/inspectionProfiles/profiles_settings.xml" afterPath="$PROJECT_DIR$/../TryProject/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/projectCodeStyle.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/projectCodeStyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/projectCodeStyle.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/projectCodeStyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/projectCodeStyle.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/projectCodeStyle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/OSGI-INF/sample.xml" afterPath="$PROJECT_DIR$/../OsgiDS/ComparatorBundle/OSGI-INF/sample.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scala_compiler.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scala_compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/scala_compiler.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/scala_compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/scala_compiler.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/scala_compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/scala_compiler.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/scala_compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/scala_compiler.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/scala_compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scala_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scala_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/scopes/scope_settings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/test.sc" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/scala/svl/web/test.sc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/test.sc" afterPath="$PROJECT_DIR$/../md-poc/src/main/scala/svl/metadata/web/test.sc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnKotlin/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../OsgiDS-Annotations/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../OsgiDS/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../OsgiDS/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../ReverseHttp/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../TryProject/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../TryProject/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Learn/LearnClojure/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGo/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGo/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Learn/LearnGroovy/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Learn/LearnPhp/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Learn/LearnScala/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Learn/LearnScala/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../MongoDbPoC/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MyScalaLib/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../MyScalaLib/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../PerformanceBenchmark/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scala/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Scala/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Scalaz/.idea/vcs.xml" afterPath="$PROJECT_DIR$/../Scalaz/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/version.properties" afterPath="$PROJECT_DIR$/../MongoDbPoC/src/main/resources/version.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../ReverseHttp/TestJetty/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/../ReverseHttp/TestJetty/web/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../md-poc/.idea/misc.xml" afterPath="$PROJECT_DIR$/../md-poc/.idea/misc.xml" />
     </list>
     <ignored path="interview.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="9d063684-1e71-4904-8f02-a2b0b510e79d" time="1373658151188" ignored="false" />
+    <file path="/Dummy.txt" changelist="9d063684-1e71-4904-8f02-a2b0b510e79d" time="1377905049447" ignored="false" />
+    <file path="/Puzzle.java" changelist="9d063684-1e71-4904-8f02-a2b0b510e79d" time="1377905875052" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -550,6 +68,23 @@
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints>
+      <breakpoint url="file://$PROJECT_DIR$/src/svl/interview/Sample2.java" line="10" class="svl.interview.Sample2" package="svl.interview">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -559,10 +94,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Puzzle.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Puzzle.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/svl/interview/Puzzle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="5" column="12" selection-start="116" selection-end="116" vertical-scroll-proportion="0.08900524">
               <folding />
             </state>
           </provider>
@@ -577,10 +112,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Test.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Test.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="44" selection-start="321" selection-end="321" vertical-scroll-proportion="0.25636193">
+            <state line="18" column="44" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -590,9 +125,7 @@
         <entry file="file://$PROJECT_DIR$/src/ExceptionHelper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="9" column="1" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#144#174#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -618,7 +151,7 @@
       <file leaf-file-name="Sample2.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/svl/interview/Sample2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="10" column="0" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -645,12 +178,12 @@
         <option value="$PROJECT_DIR$/src/svl/problems/MeaningOfLife.java" />
         <option value="$PROJECT_DIR$/src/svl/interview/Test1.java" />
         <option value="$PROJECT_DIR$/src/Test.java" />
-        <option value="$PROJECT_DIR$/src/svl/interview/Puzzle.java" />
         <option value="$PROJECT_DIR$/src/svl/interview/Sample3.java" />
         <option value="$PROJECT_DIR$/src/svl/interview/Sample4.java" />
         <option value="$PROJECT_DIR$/src/svl/interview/Sample1.java" />
         <option value="$PROJECT_DIR$/src/svl/interview/Sample2.java" />
         <option value="$PROJECT_DIR$/src/ExceptionHelper.java" />
+        <option value="$PROJECT_DIR$/src/svl/interview/Puzzle.java" />
       </list>
     </option>
   </component>
@@ -661,9 +194,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-2" />
+    <option name="y" value="-8" />
     <option name="width" value="2576" />
-    <option name="height" value="1216" />
+    <option name="height" value="1534" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -765,9 +298,9 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Application.Puzzle">
     <configuration default="false" name="Puzzle" type="Application" factoryName="Application" temporary="true">
@@ -807,6 +340,34 @@
       <module name="Interview" />
       <envs />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Sample2" type="Application" factoryName="Application" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="svl.interview.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="svl.interview.Sample2" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="Interview" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -884,11 +445,18 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="3">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="Application.MeaningOfLife" />
       <item index="1" class="java.lang.String" itemvalue="Application.Puzzle" />
       <item index="2" class="java.lang.String" itemvalue="Application.Test1" />
+      <item index="3" class="java.lang.String" itemvalue="Application.Sample2" />
     </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="Application.Puzzle" />
+        <item index="1" class="java.lang.String" itemvalue="Application.Sample2" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -921,7 +489,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-2" width="2576" height="1216" extended-state="1" />
+    <frame x="-8" y="-8" width="2576" height="1534" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297456" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
@@ -930,22 +498,24 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30859107" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3072464" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297456" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920963" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gerrit" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="SBT Execute" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="SBT Execute" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24224344" sideWeight="0.60109663" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32783505" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24224344" sideWeight="0.6927536" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32753623" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -954,11 +524,10 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32920963" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Code Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="EJB" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Code Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="ScratchPad" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1069,9 +638,7 @@
     <entry file="file://$PROJECT_DIR$/src/ExceptionHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="0" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#144#174#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1096,9 +663,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/svl/interview/Puzzle.java">
+    <entry file="file://$PROJECT_DIR$/src/ExceptionHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="9" column="1" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="44" selection-start="321" selection-end="321" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1110,9 +684,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/svl/interview/Sample2.java">
+    <entry file="file://$PROJECT_DIR$/src/svl/interview/Sample4.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="2" column="13" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1124,25 +698,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/svl/interview/Sample4.java">
+    <entry file="file://$PROJECT_DIR$/src/svl/interview/Sample2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0">
+        <state line="10" column="0" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ExceptionHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/svl/interview/Puzzle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="1" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#144#174#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="44" selection-start="321" selection-end="321" vertical-scroll-proportion="0.25636193">
+        <state line="5" column="12" selection-start="116" selection-end="116" vertical-scroll-proportion="0.08900524">
           <folding />
         </state>
       </provider>
