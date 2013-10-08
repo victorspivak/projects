@@ -1,0 +1,17 @@
+@(user:model.BoxUser, rootFolder:model.BoxFolder, rootFolderItems:model.BoxFolderItems)
+
+<h1>Welcome @user.name!</h1>
+<br/>
+<h2>RootFolder: @rootFolder.name (@rootFolder.count):</h2>
+<ul>
+@for(item <- rootFolderItems.items) {
+    @if(item.itemType == model.BoxItem.BoxItemType.Folder){
+
+        <li>Folder @item.id   @item.name</li>
+    } else {
+        <li>File @item.id   @item.name</li>
+    }
+}
+</ul>
+
+

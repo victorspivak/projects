@@ -9,6 +9,9 @@ import java.io.{FileOutputStream, File}
 object BoxCommands {
 	val server = "vspivak.inside-box.net"
 	val apiVer = "api/2.0"
+  val apiKey = "i8ei0dxlkwu8d3n9036trtt436u9kbsc"
+  val clientSecret = "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU"
+
 	val authHeader = Map("Authorization" -> "BoxAuth api_key=3i8u7632f52ye9kh879gsnva7yb7ylw1&auth_token=x9d927uvd0vfv5ei5zo85d3wx8jw8e9n")
 
 	def getFolder(id:String) = {
