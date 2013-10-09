@@ -37,6 +37,7 @@ object Application extends Controller {
       root <- rootFuture
       rootItems <- rootItemsFuture
       user <- userFuture
-    } yield  Ok(views.html.rootFolder(user, root, rootItems))
+    } yield  Ok(views.html.folder(root, rootItems))
+//    } yield  Ok(views.html.box("kuku"))
   }
 }
