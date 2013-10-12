@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="SBT: net.databinder:dispatch-futures_2.9.1:0.8.7">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.databinder/dispatch-futures_2.9.1/jars/dispatch-futures_2.9.1-0.8.7.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/net.databinder/dispatch-futures_2.9.1/srcs/dispatch-futures_2.9.1-0.8.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
