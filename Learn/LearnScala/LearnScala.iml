@@ -8,6 +8,13 @@
       <configuration>
         <option name="compilerLibraryLevel" value="Global" />
         <option name="compilerLibraryName" value="scala-compiler 2.10.2" />
+        <option name="continuations" value="true" />
+        <option name="explainTypeErrors" value="true" />
+        <option name="pluginPaths">
+          <array>
+            <option value="C:\Tools\Scala\scala-2.10.2\misc\scala-devel\plugins\continuations.jar" />
+          </array>
+        </option>
       </configuration>
     </facet>
   </component>

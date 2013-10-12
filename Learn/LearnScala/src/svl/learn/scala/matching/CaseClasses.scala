@@ -53,14 +53,14 @@ object CaseClasses {
 
         println (generalSize("Hello"))
 
-        def generalSizeX(x: Any) = x match {
-            case c: {def size : Int} => c.size
-            case s: {def length : Int} => s.length
-            case _ => 1
-        }
-
-        println (generalSize("Hello"))
-        println (generalSize(List(1,2,3)))
+//        def generalSizeX(x: Any) = x match {
+//            case c: {def size : Int} => c.size
+//            case s: {def length : Int} => s.length
+//            case _ => 1
+//        }
+//
+//        println (generalSize("Hello"))
+//        println (generalSize(List(1,2,3)))
 
         List(1,2,3).length
     }
