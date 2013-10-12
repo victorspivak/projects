@@ -1,6 +1,6 @@
-@(message: String)
+@(inputForm: Form[String])(message: String)
 
-@main("Welcome to Play") {
+@main("Welcome to Play", inputForm) {
 
     <h1>@message</h1>
 

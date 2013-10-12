@@ -1,0 +1,11 @@
+@(inputForm: Form[String])
+
+@import helper._
+
+@form(routes.Application.processCommand) {
+    <input type="text" name="command" placeholder="Enter Command" id="command">
+
+    <button type="submit" id="commandButton" class="submit">Enter</button>
+}
+
+

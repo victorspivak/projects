@@ -6,38 +6,58 @@ import scala.concurrent.Await
 import lib._
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
+import controllers.commands.{BoxContext}
+import play.api.data.Forms._
+import play.api.data.Form
 
 object Application extends Controller {
+  val inputCommandForm = Form[String]("command" -> text)
 
-  def index = Action.async {
-//    val boxConfig = new BoxAppConfig("https://api.feature01.inside-box.net/api", "https://api.feature01.inside-box.net/api/2.0",
-//      "a3nhdenqgvp4q7b2ujj12nu8te0sbsma", "4tgqXEPrtohvakK3jv2LD2rJWtFaiGZx")
-//    val resF = bc.authenticate("mwiller+dev2@box.com", "test1234")
+  def start = Action {request =>
+    try {
+      val bc = BoxContext(request.session)
 
-    val boxConfig = new BoxAppConfig("https://vspivak.inside-box.net/api",
-      "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU")
-    val bc = BoxClient(boxConfig)
-    implicit val tokenFuture = bc.authenticate("vic+admin@box.com", "test1234")
+      val folderId = "0"
+      val rootItemsFuture = bc.getFolderItems(folderId)
+      val rootFuture = bc.getFolder(folderId)
+      val userFuture = bc.getUser("me")
 
-//    val rootFuture = bc.getFolder("0")
-//    rootFuture.map{root =>
-//      Ok(views.html.box(s"Root folder: $root"))
-//    }
+      val session = request.session
 
-//    val rootFuture = bc.getFolderItems("0")
-//    rootFuture.map{root =>
-//      Ok(views.html.box(s"Root folder items: $root"))
-//    }
+      AsyncResult{
+        for {
+          root <- rootFuture
+          rootItems <- rootItemsFuture
+          user <- userFuture
+          tokens <- bc.token
+        } yield  Ok(views.html.folder(inputCommandForm)(user, root, rootItems)).withSession(
+          "accessToken" -> tokens.accessToken, "refreshToken" -> tokens.refreshToken)
+      }
+    } catch {
+      case e:Exception => println(e)
+        Ok(views.html.box(inputCommandForm)(e.getMessage))
+    }
+  }
 
-    val rootItemsFuture = bc.getFolderItems("0")
-    val rootFuture = bc.getFolder("0")
+  def processCommand() = Action {implicit request =>
+    val command = inputCommandForm.bindFromRequest().data("command")
+
+    val accessToken = session.get("accessToken")
+    val refreshToken = session.get("refreshToken")
+
+    val bc = BoxContext(request.session)
+
+    val folderId = command
+    val rootItemsFuture = bc.getFolderItems(folderId)
+    val rootFuture = bc.getFolder(folderId)
     val userFuture = bc.getUser("me")
 
-    for {
-      root <- rootFuture
-      rootItems <- rootItemsFuture
-      user <- userFuture
-    } yield  Ok(views.html.folder(root, rootItems))
-//    } yield  Ok(views.html.box("kuku"))
+   AsyncResult{
+     for {
+       root <- rootFuture
+       rootItems <- rootItemsFuture
+       user <- userFuture
+     } yield  Ok(views.html.folder(inputCommandForm)(user, root, rootItems))
+   }
   }
 }

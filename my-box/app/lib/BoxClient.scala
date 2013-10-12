@@ -9,42 +9,28 @@ import play.api.libs.json.JsValue
 case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
 case class BoxToken(accessToken:String, refreshToken:String)
 
-class BoxClient(config:BoxAppConfig) {
+class BoxClient(config:BoxAppConfig, tokenOpt:Option[BoxToken]) {
   implicit val context = scala.concurrent.ExecutionContext.Implicits.global
-
-  def authenticate(login:String, password:String): Future[BoxToken] = {
-    println(s"Authenticating $login started...")
-    val authResultFuture = WS.url(tokenUrl).post(postAuthData(login, password))
-    authResultFuture onFailure {
-      case e => {
-        println("***ERROR*** " + e.getMessage)
-        throw e
-      }
-    }
-
-    authResultFuture map {
-      case response => {
-        println(s"Authenticating $login is successful.")
-        BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
-      }
-    }
+  val token = tokenOpt match {
+    case Some(t) => Future(t)
+    case None =>   BoxAuthenticator(config).authenticate("vic+admin@box.com", "test1234")
   }
 
-  def getUser(id:String)(implicit tokenFuture:Future[BoxToken]) = {
-    get(BoxUserResource(id), tokenFuture) map (new Json2BoxUser).toEntity
+  def getUser(id:String) = {
+    get(BoxUserResource(id)) map (new Json2BoxUser).toEntity
   }
 
-  def getFolder(id:String)(implicit tokenFuture:Future[BoxToken]) = {
-    get(BoxFolderResource(id), tokenFuture) map (new Json2BoxFolder).toEntity
+  def getFolder(id:String)= {
+    get(BoxFolderResource(id)) map (new Json2BoxFolder).toEntity
   }
 
-  def getFolderItems(id:String)(implicit tokenFuture:Future[BoxToken]) = {
-    get(BoxFolderItemsResource(id), tokenFuture) map new Json2BoxFolderItems(id).toEntity
+  def getFolderItems(id:String) = {
+    get(BoxFolderItemsResource(id)) map new Json2BoxFolderItems(id).toEntity
   }
 
-  private def get[T <: BoxEntity](resource: BoxResource[T], tokenFuture:Future[BoxToken]): Future[JsValue] = {
+  private def get[T <: BoxEntity](resource: BoxResource[T]): Future[JsValue] = {
     val fullUrl = apiUrl + resource.path
-    tokenFuture flatMap {token =>
+    token flatMap {token =>
       System.out.println(s"Sending request to $fullUrl")
       val getFuture = WS.url(fullUrl).withHeaders(getAuthHeader(token)).withQueryString(resource.getParams: _*).get()
       getFuture map {
@@ -60,19 +46,10 @@ class BoxClient(config:BoxAppConfig) {
     }
   }
 
-  private def tokenUrl: String = config.url + "/oauth2/token"
   private def apiUrl:   String = config.url + "/2.0"
   private def getAuthHeader(token:BoxToken) = "Authorization" -> s"Bearer ${token.accessToken}"
-
-  private def postAuthData(login:String, password:String) = Map(
-    "grant_type" -> Seq("password"),
-    "username" -> Seq(login),
-    "password" -> Seq(password),
-    "client_id" -> Seq(config.clientId),
-    "client_secret" -> Seq(config.clientSecret)
-  )
 }
 
 object BoxClient {
-  def apply(config:BoxAppConfig) = new BoxClient(config)
+  def apply(config:BoxAppConfig, tokenOpt:Option[BoxToken]) = new BoxClient(config, tokenOpt)
 }

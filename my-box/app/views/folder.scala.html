@@ -1,9 +1,17 @@
-@(folder:model.BoxFolder, folderItems:model.BoxFolderItems)
+@(inputForm: Form[String])(currentUser:model.BoxUser, folder:model.BoxFolder, folderItems:model.BoxFolderItems)
+    @println("**1>>>>>>>>>>>>>>> " + inputForm)
 
-@main("Welcome") {
 
-    <h1 align="center">@folder.name</h1>
+@main("Box Folders", inputForm) {
+    <h1 class="userName">Welcome @currentUser.name!</h1>
+    <br/>
+    <h1 class="folderName">@folder.name</h1>
+    <br/>
+
+    @folderMembers(folderItems)
+
 }
+
 
 
 @****************************************
