@@ -1,0 +1,5 @@
+- Add to session stack of directories to support cd ..
+- Add table layout to folder view
+- Implement cd command
+- Add find folder by name command
+

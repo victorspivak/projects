@@ -29,7 +29,7 @@ object Application extends Controller {
     AsyncResult{
       val boxClient = BoxClient(request.session)
 
-      BoxContext(boxClient, folderId).toSessionData.flatMap{sessionData =>
+      boxClient.boxContext.setCurrentFolder(folderId).toSessionData.flatMap{sessionData =>
         FolderService.fetchFolderData(folderId, boxClient) map{folderDataTry =>
           folderDataTry match {
             case Success(folderData) => Ok(views.html.folder(inputCommandForm)(folderData)).withSession(sessionData: _*)
