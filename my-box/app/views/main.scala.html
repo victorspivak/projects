@@ -1,4 +1,4 @@
-@(title: String, inputForm: Form[String])(content: Html)
+@(title: String)(content: Html)
 
 <!DOCTYPE html>
 
@@ -12,7 +12,7 @@
     </head>
     <body>
         <div>
-            @inputCommand(inputForm)
+            @inputCommand()
         </div>
         @content
     </body>

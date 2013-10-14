@@ -1,4 +1,4 @@
-package controllers.commands
+package controllers
 
 import lib.{BoxAuthenticator, BoxToken, BoxClient, BoxAppConfig}
 import scala.concurrent.Future

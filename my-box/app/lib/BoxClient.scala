@@ -7,7 +7,7 @@ import model.BoxFolderResource
 import play.api.libs.json.JsValue
 import scala.util.Try
 import play.api.mvc.Session
-import controllers.commands.BoxContext
+import controllers.BoxContext
 import model.BoxItem.BoxItemType
 
 case class BoxAppConfig(url:String, clientId:String, clientSecret:String)

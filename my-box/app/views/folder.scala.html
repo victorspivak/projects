@@ -1,6 +1,6 @@
-@(inputForm: Form[String])(folderData:model.FolderData)
+@(folderData:model.FolderData)
 
-@main("Box Folders", inputForm) {
+@main("Box Folders") {
     <h1 class="userName">Welcome @folderData.currentUser.name!</h1>
     <br/>
     <h1 class="folderName">@folderData.folder.name</h1>

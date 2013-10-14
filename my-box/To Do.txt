@@ -2,4 +2,6 @@
 - Add table layout to folder view
 - Implement cd command
 - Add find folder by name command
+- Add status line
+
 
