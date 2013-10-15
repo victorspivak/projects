@@ -1,13 +1,12 @@
 @(folderData:model.FolderData)
 
 @main("Box Folders") {
-    <h1 class="userName">Welcome @folderData.currentUser.name!</h1>
     <br/>
-    <h1 class="folderName">@folderData.folder.name</h1>
+    <div class="statusview">Logged User: @folderData.currentUser.name</div>
+
+    <h1 class="folderName">@folderData.folder.name  ---  @folderData.folder.count items</h1>
     <br/>
-
-    @folderMembers(folderData.folderItems)
-
+    <div class="itemsview">@folderMembers(folderData.folderItems)</div>
 }
 
 

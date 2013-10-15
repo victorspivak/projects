@@ -34,19 +34,19 @@ class Json2BoxFolder extends json2Entity[BoxFolder] {
   }
 }
 
-case class BoxFile(fileId: String, name: String) extends BoxItem {
+case class BoxFile(fileId: String, name: String, size:Long) extends BoxItem {
   def id = fileId
   def itemType = BoxItemType.File
 }
 
 case class BoxFileResource(id: String) extends BoxResource[BoxFile] {
   val path = s"/files/$id"
-  def getParams = List("fields" -> "id,name")
+  def getParams = List("fields" -> "id,name,size")
 }
 
 class Json2BoxFile extends json2Entity[BoxFile] {
   def toEntity(json: JsValue): BoxFile = {
-    BoxFile((json \ "id").as[String], (json \ "name").as[String])
+    BoxFile((json \ "id").as[String], (json \ "name").as[String], (json \ "size").as[Long])
   }
 }
 

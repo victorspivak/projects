@@ -1,12 +1,30 @@
 @(rootFolderItems:model.BoxFolderItems)
 
-@for(item <- rootFolderItems.items) {
-    @if(item.itemType == model.BoxItem.BoxItemType.Folder){
-        <li>Folder @item.id   @item.name</li>
+<table border="1">
+    <th>Item Type</th>
+    <th>Item Name</th>
+    <th>ID</th>
+    <th>Size</th>
+
+@for((item, index) <- rootFolderItems.items.zipWithIndex) {
+    @if((index%2)==0){
+        <tr class="alt">
     } else {
-        <li>File @item.id   @item.name</li>
+        <tr class="alt1">
     }
+    @if(item.itemType == model.BoxItem.BoxItemType.Folder){
+        <td>Folder</td>
+        <td>@item.name</td>
+        <td align="right">@item.id</td>
+    } else {
+        <td>File</td>
+        <td>@item.name</td>
+        <td align="right">@item.id</td>
+        <td align="right">@item.asInstanceOf[model.BoxFile].size</td>
+    }
+    </tr>
 }
-</ul>
+
+</table>
 
 
