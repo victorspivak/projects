@@ -7,16 +7,14 @@ import model.BoxFolderResource
 import play.api.libs.json.JsValue
 import scala.util.Try
 import play.api.mvc.Session
+import controllers.BoxContext
+import model.BoxItem.BoxItemType
 
 case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
 case class BoxToken(accessToken:String, refreshToken:String)
 
-class BoxClient(config:BoxAppConfig, tokenOpt:Option[BoxToken]) {
+class BoxClient(val config:BoxAppConfig, val boxContext:BoxContext) {
   implicit val context = scala.concurrent.ExecutionContext.Implicits.global
-  val token = tokenOpt match {
-    case Some(t) => Future(t)
-    case None =>   BoxAuthenticator(config).authenticate("vic+admin@box.com", "test1234")
-  }
 
   def getUser(id:String) = {
     get(BoxUserResource(id)).map(_.map( (new Json2BoxUser).toEntity))
@@ -30,9 +28,17 @@ class BoxClient(config:BoxAppConfig, tokenOpt:Option[BoxToken]) {
     get(BoxFolderItemsResource(id)).map(_.map(new Json2BoxFolderItems(id).toEntity))
   }
 
+  def folderIdByName(name:String) = {
+    getFolderItems(boxContext.currentFolderId).map{_.map{folderItems=>
+      folderItems.items.find{item=>
+        item.name == name && item.itemType == BoxItemType.Folder
+      }.get
+    }}
+  }
+
   private def get[T <: BoxEntity](resource: BoxResource[T]): Future[Try[JsValue]] = {
     val fullUrl = apiUrl + resource.path
-    token flatMap {token =>
+    boxContext.tokenFuture flatMap {token =>
       System.out.println(s"Sending request to $fullUrl")
       val getFuture = WS.url(fullUrl).withHeaders(getAuthHeader(token)).withQueryString(resource.getParams: _*).get()
       getFuture map {
@@ -53,7 +59,7 @@ class BoxClient(config:BoxAppConfig, tokenOpt:Option[BoxToken]) {
 }
 
 object BoxClient {
-  def apply(config:BoxAppConfig, tokenOpt:Option[BoxToken]) = new BoxClient(config, tokenOpt) : BoxClient
+  def apply(config:BoxAppConfig, boxContext:BoxContext) = new BoxClient(config, boxContext) : BoxClient
   def apply(implicit session:Session) : BoxClient = {
   //    val boxConfig = new BoxAppConfig("https://api.feature01.inside-box.net/api", "https://api.feature01.inside-box.net/api/2.0",
   //      "a3nhdenqgvp4q7b2ujj12nu8te0sbsma", "4tgqXEPrtohvakK3jv2LD2rJWtFaiGZx")
@@ -62,11 +68,6 @@ object BoxClient {
       val boxConfig = new BoxAppConfig("https://vspivak.inside-box.net/api",
         "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU")
 
-      val token = for {
-        accessToken <- session.get("accessToken")
-        refreshToken <- session.get("refreshToken")
-      } yield BoxToken(accessToken, refreshToken)
-
-      BoxClient(boxConfig, token)
+      BoxClient(boxConfig, BoxContext.fromSession(session, boxConfig))
     }
 }

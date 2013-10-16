@@ -1,0 +1,734 @@
+[33mcommit dcc94d57f8dc52dbaa55554d73e034af218d2ed3[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Oct 13 16:00:08 2013 -0700
+
+    First phase for BoxCommands.
+
+[33mcommit 4fea37a0c58071c25b37009fdaed543223d94444[m
+Merge: 74495a3 e8080ac
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Oct 13 02:44:13 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 74495a3a861405f8687791b81281c73b577c8480[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Oct 13 02:42:34 2013 -0700
+
+    Added FolderData, BoxContext.
+
+[33mcommit e8080accad52a3a0e262f9001b80b3b71f92d474[m
+Merge: d784d59 9c7f817
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Oct 12 16:18:57 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit d784d59941db93d8b1622edea5665648abc68fb2[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Oct 12 16:16:55 2013 -0700
+
+    Added continuation and Try samples.
+
+[33mcommit 9c7f817a78f97fbd61c205483bfb33615b157ba1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Oct 12 15:40:21 2013 -0700
+
+    Added session support.
+
+[33mcommit f56ab183fd371a9a39b7df6048e4806bdfce7f67[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 8 19:48:17 2013 -0700
+
+    Start implementing input.
+
+[33mcommit a366b0d162ea2072e8fa10ada5a082eeb481c296[m
+Merge: a4afc1d 69fa92b
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Oct 7 20:02:58 2013 -0700
+
+    Merge branch 'master' of http://github.com/victorspivak/projects
+    
+    Conflicts:
+    	Learn/TypeScript/TypeScript/src/TsWebServer.js
+    	Learn/TypeScript/TypeScript/src/TsWebServer.ts
+
+[33mcommit a4afc1d56c81fd86dbc6f85b54373dfe641fd0ef[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Oct 7 19:59:48 2013 -0700
+
+    Added my-box project
+
+[33mcommit 69fa92b5d4638e92c96c30216f9b83080032cc48[m
+Merge: ef0f8e2 0e579c3
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Oct 3 00:25:02 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit ef0f8e2e011ae9a1e153bfdf5a52fe12f036ecad[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Oct 3 00:24:40 2013 -0700
+
+    Updated TypeScript Learn project
+
+[33mcommit 887d970811033fb380a711c626326a068a1981d7[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 2 15:56:08 2013 -0700
+
+    Added ScalaBox project.
+
+[33mcommit 0e579c390c4ccee18394b6d44f22dec3dc5fd6c8[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 1 10:58:15 2013 -0700
+
+    Merged.
+
+[33mcommit e53b233bd1af2e4437c7c927705627423f7741dc[m
+Merge: 1a24d49 47a4d23
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 1 10:57:41 2013 -0700
+
+    Merge branch 'master' of http://github.com/victorspivak/projects
+
+[33mcommit 1a24d4943c0b44f6ee189948d45310e6c8f9b9a0[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 1 10:57:11 2013 -0700
+
+    Touched some files.
+
+[33mcommit 47a4d23601432703e0675f827a89aef7dce447df[m
+Merge: ffe6ad5 8f6ee98
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 1 01:51:16 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit ffe6ad5f71002e77e892e1ac13c24b3f6e37b108[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 1 01:50:10 2013 -0700
+
+    Added couple scala examples and created new project for TypeScript.
+
+[33mcommit 8f6ee9858ed91f4dd77b1b94c2207774449aad87[m
+Author: Victor Spivak <victor@vspivak-h-u64.(none)>
+Date:   Tue Oct 1 00:38:07 2013 -0700
+
+    Updated project after rebuilt VM.
+
+[33mcommit 93733e310a8f5b25af233981c90ba14bece0472d[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Aug 1 18:10:17 2013 -0700
+
+    Updated.
+
+[33mcommit 76ab5bc7282af730a649558295952332dc9f5d6f[m
+Merge: 0b80db1 93c5051
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Aug 1 18:09:24 2013 -0700
+
+    Merge branch 'master' of http://github.com/victorspivak/projects
+
+[33mcommit 0b80db1e81663daa838fa826b5688c00982cf818[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Aug 1 18:08:32 2013 -0700
+
+    Updated.
+
+[33mcommit 93c50515d57a76dea446fc17fcff7dce7bc1e8c9[m
+Merge: 1dd1037 a6670ca
+Author: victorspivak <vadimspivak83>
+Date:   Thu Aug 1 14:30:59 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+    
+    Conflicts:
+    	MyScalaLib/.idea_modules/myscalalib-build.iml
+    	MyScalaLib/.idea_modules/myscalalib.iml
+
+[33mcommit 1dd103712783663cb31ced50389f1fba8cbbea14[m
+Author: victorspivak <vadimspivak83>
+Date:   Thu Aug 1 14:24:45 2013 -0700
+
+    First phase for rest services.
+
+[33mcommit a6670ca1ea932ada40dc2ca48c9d7b59a6a8e051[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Jul 23 01:35:36 2013 -0700
+
+    Added to LearnScala a couple examples related to implicits.
+
+[33mcommit c0fbf83274c21971ccb73843c7b9cb6a577729b3[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Jul 23 00:50:18 2013 -0700
+
+    Added to LearnPhp PHP traits.
+
+[33mcommit 678a18e191f9ba2fefca830da07b045a561bd8ca[m
+Author: victorspivak <vadimspivak83>
+Date:   Sun Jun 30 23:39:38 2013 -0700
+
+    Cleaned up for Scala 2.10 and added scalatra support.
+    
+    Removed all warnings related to scala 2.10:
+    Added
+        import scala.language.implicitConversions
+        import scala.language.existentials
+    
+    Added scalatra simple servlet and Jetty support.
+
+[33mcommit a3709bbaed6b469dd3c60adb9f0fda2131dfdb7e[m
+Author: victorspivak <vadimspivak83>
+Date:   Sun Jun 30 22:45:57 2013 -0700
+
+    Upgraded MyScalaLib and MdPoC to scala 2.10.2, latest scalatra and spec2.
+
+[33mcommit f6418f0ff686d21293753aaebe02bb17391d427d[m
+Merge: 1fb9c42 f5d7bb6
+Author: victorspivak <vadimspivak83>
+Date:   Sat Jun 22 04:38:24 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+    
+    Conflicts:
+    	md-poc/src/main/scala/svl/metadata/poc/TestClient.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/HBaseDatabase.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/HBaseDatabaseContext.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/MdHBaseMapping.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/solr/SolrEnv.scala
+
+[33mcommit 1fb9c427b1c7e57a081177eec685e6f505a36450[m
+Author: victorspivak <vadimspivak83>
+Date:   Tue Jun 18 03:08:58 2013 -0700
+
+    Finally finish the first phase of mdpoc.
+    
+    Object created in the hbase, indexed in solr and retrieved using query.
+    Implemented batch fetch.
+    Changed the query implementation. Now it fetches only id from solr and then the object should be fetched from hbase.
+    Implemented batch create.
+    Implemented update with optimistic locking.
+
+[33mcommit f5d7bb600aa70fcae274fb51826d32fc1d69a389[m
+Merge: 9b5e0f0 2e165bf
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Fri Jun 21 09:28:09 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 9b5e0f0a824c6eab720b784797c7857296acce27[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Fri Jun 21 09:27:13 2013 -0700
+
+    Added examples of the type safe builder and use of compose.
+
+[33mcommit 2e165bff83b08e280c29da0a5f945b8030057716[m
+Author: victorspivak <vadimspivak83>
+Date:   Tue Jun 18 03:08:58 2013 -0700
+
+    Finally finish the first phase of mdpoc.
+    
+    Object created in the hbase, indexed in solr and retrieved using query.
+
+[33mcommit d5468988b615a2d4b9e0823cd50bd0bd1f861034[m
+Merge: 03a5c98 070ece3
+Author: victorspivak <vadimspivak83>
+Date:   Tue Jun 18 00:23:05 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+    
+    Conflicts:
+    	md-poc/src/main/scala/svl/metadata/poc/TestClient.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/Database.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/DbObject.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/HBaseDatabase.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/HBaseDatabase.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/HBaseDatabaseEnv.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/database/hbase/MdHBaseMapping.scala
+    	md-poc/src/main/scala/svl/metadata/poc/md/mdd/MdType.scala
+
+[33mcommit 03a5c9898e464f69036ec17af66c3864f69d0ac3[m
+Author: victorspivak <vadimspivak83>
+Date:   Tue Jun 18 00:04:22 2013 -0700
+
+    Second phase of solr implementation.
+
+[33mcommit 9e49b85291c31400ca32dbf233b245a7e1f00c49[m
+Author: victorspivak <vadimspivak83>
+Date:   Mon Jun 17 22:36:03 2013 -0700
+
+    First phase SOLR implementation.
+    
+    Renamed env to hbaseEnv.
+
+[33mcommit 3adeca59fc7af340e8f334c41199dfa9b1256e98[m
+Author: victorspivak <vadimspivak83>
+Date:   Thu Jun 13 23:42:21 2013 -0700
+
+    Implemented create method.
+    
+    Added rich hbase specific extensions.
+    Implemented fetch.
+
+[33mcommit 070ece3710588a2151e7ed7c71df73fb008f9167[m
+Author: victorspivak <vadimspivak83>
+Date:   Fri Jun 14 22:40:17 2013 -0700
+
+    Implemented create method.
+
+[33mcommit 3ad01cbd4bb07514d3b4705fde6879da80d02b0f[m
+Author: victorspivak <vadimspivak83>
+Date:   Thu Jun 13 23:42:21 2013 -0700
+
+    Intermediate commit. Before changing DbObject.
+
+[33mcommit ec9cf7de6477ae3e1a81322f52f2e87f1d4324b2[m
+Author: Victor Spivak <victor@vspivak-u64.(none)>
+Date:   Thu Jun 13 01:44:33 2013 -0700
+
+    Added md-poc.
+
+[33mcommit 4f7974484ed9bb352e1a6491002a2be15b9e73d3[m
+Merge: e9ad277 c72f3ea
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Jun 13 01:11:53 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit e9ad2776e82f3a7c1947f0763c670c78420254ff[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Jun 13 01:11:27 2013 -0700
+
+    Added some examples for Scala Enum.
+
+[33mcommit c72f3ea9fbfb58d232994e3773c65025d2fac251[m
+Merge: 26477e2 b34fc83
+Author: Victor Spivak <victor@vspivak-u64.(none)>
+Date:   Thu Jun 13 01:09:40 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 26477e216d497caf7712fe23796692b5d61bf708[m
+Author: Victor Spivak <victor@vspivak-u64.(none)>
+Date:   Thu Jun 13 01:08:55 2013 -0700
+
+    Upgraded slf4j to 1.7.5.
+
+[33mcommit b34fc8316868b116e6ddf8ac8ce97cf119127d82[m
+Merge: 0ff400f 5bfd81c
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 17:38:15 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 0ff400f9fddf6293b021531808dc1d0b2e820539[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 17:38:05 2013 -0700
+
+    Added a few examples for AnyRef and Any
+
+[33mcommit 5bfd81cc64c21e865efb285c7d20dc08769a2fff[m
+Merge: f07d333 cc26c66
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 17:35:59 2013 -0700
+
+    Merge branch 'master' of http://github.com/victorspivak/projects
+
+[33mcommit f07d33373d8ed2d153c573359d92c721a322ee4e[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 17:35:49 2013 -0700
+
+    Added cake example
+
+[33mcommit cc26c66694cb1165a367be14580749565dd3245e[m
+Merge: 5b20e83 2fe8654
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 03:00:29 2013 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 5b20e830bb6e4ce7ceace18fed15764a9db6f7dd[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jun 9 02:59:48 2013 -0700
+
+    Added Learn Go.
+
+[33mcommit 2fe865454703878deb78a465f828714d692f8896[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Fri May 31 15:56:15 2013 -0700
+
+    Added a few things to LearnPhp and Scalaz project.
+
+[33mcommit 4caecc21bbbe4d46ec694c4c994d6197fc68ba19[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Apr 30 10:49:30 2013 -0700
+
+    Added Combinations sample to LearnScala.
+
+[33mcommit 909a0dae0b5e35b1b9fa0a69e081ba6f706c8f44[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Apr 29 15:02:44 2013 -0700
+
+    Added MongoDbPoC.
+
+[33mcommit ce93333f3ce7c951955f17678af3d978e85defd7[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Apr 29 15:00:44 2013 -0700
+
+    Added PerformanceUtil. Modified ConsoleUtil and Generators entities.
+
+[33mcommit aeceaead5ccd1b0a01c92e3bb40a220f85687a2c[m
+Merge: 7afe929 da4ff0d
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Apr 24 00:22:56 2013 -0700
+
+    Merge branch 'master' of http://github.com/victorspivak/projects
+
+[33mcommit 7afe929bf27ebae99041230cb2f4b92570320287[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Apr 24 00:20:36 2013 -0700
+
+    Added new project -- MyScalaLib.
+
+[33mcommit b5358724305aeee6dc288b94256ccc2a44f37263[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Apr 23 23:27:09 2013 -0700
+
+    Some clean up. Added Exceptions.php and Annotations.php
+
+[33mcommit da4ff0db70eabb4cdbff2a29db36a03cb35bf68e[m
+Merge: 61e42b6 5741429
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Feb 19 01:31:43 2013 -0800
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 61e42b6e6e6ed224a565d4de1cc810acb1823542[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Feb 19 01:31:09 2013 -0800
+
+    Scala Learn Unapply and TestKeyboard.
+
+[33mcommit 5741429bcce8a22b7c7ff5d4915a40e9ff80e612[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Feb 19 01:08:14 2013 -0800
+
+    Add dynamic stuff to PHP learn and improved BOX CL
+
+[33mcommit 667b4bc9e67664c3e41d698f693f5320024f0519[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Thu Jan 24 02:17:57 2013 -0800
+
+    Added json example based on Box.
+
+[33mcommit 45d564ad514c86fc3866ee78943489a73b7aa7f4[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Jan 23 23:06:10 2013 -0800
+
+    Intermidiate checkin for json deserialization experements.
+
+[33mcommit 2cd9924909f8ee986a81bdf2c7955fc90385dc83[m
+Merge: aad7491 8911cd6
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Jan 21 18:08:15 2013 -0800
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit aad7491af8dfea73015f89fe5065501b3988acd1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Jan 21 18:07:02 2013 -0800
+
+    Updated scala scripts to use object/Main
+
+[33mcommit 8911cd609c1e2aa4e63db760ce06509a8308a8a8[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Jan 21 03:08:32 2013 -0800
+
+    Touch up a few things after use on the laptop
+
+[33mcommit d525488c0a5c5c6764aa000b6d86f526170ecebb[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Jan 21 02:32:36 2013 -0800
+
+    Changed Scala to 2.9.2 and added some new stuff to Scala and PHP
+
+[33mcommit 43aeb59c0a1794a1b4ead3ec7a84b5dbbbe8aee8[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Jan 13 23:43:25 2013 -0800
+
+    Added LearnPhp and some new stuff for Scala and SBT
+
+[33mcommit 6943f5ecaae0e3d6ddeb290798b43c6f71313772[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Fri Nov 2 14:07:13 2012 -0700
+
+    Added Rest Client prototype.
+
+[33mcommit 89f3580ef4d5fd321708139e78e2c679b3c70d15[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Sat Oct 27 14:36:57 2012 -0700
+
+    Clean up
+
+[33mcommit b134fa94b05bfd8d7a521611b51ca157311397e4[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Tue Oct 16 14:17:21 2012 -0700
+
+    Updated Reverse HTTP project. Changed the port to 8888
+
+[33mcommit 69504d9c3a0efc9448fa2087e9137894c4c51fd0[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 16 08:09:10 2012 -0700
+
+    Modified Reverse HTTP. Replaced HttpURLConnection with Apache HttpClient
+
+[33mcommit 86fe17a9880059e0e7a04be8b49f0aca5dfa9a05[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Mon Oct 15 12:00:02 2012 -0700
+
+    Added Reverse HTTP project
+
+[33mcommit 493b0c9f3865340ebbba1af02a9ac50ed4f1613e[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Fri Oct 12 20:44:56 2012 -0700
+
+    simple update
+
+[33mcommit cb4f0aeb2fc2256f465d1cc731d67b98fe5b6fab[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Fri Oct 12 15:00:24 2012 -0700
+
+    Added Try project
+
+[33mcommit 0ad0e1a6e9bbd8cb76c4110f6174af4cca2e52a1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Sep 24 18:04:57 2012 -0700
+
+    Added Exception Handler
+
+[33mcommit ebbd2b772e149fe7e29523df97c70c9477402f35[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Sep 16 10:53:41 2012 -0700
+
+    Modified Enum.scala
+
+[33mcommit 493ff1ab4876efc433464338036e8757952478d5[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Tue Sep 11 18:00:05 2012 -0700
+
+    Updated project settings for linux.
+
+[33mcommit bb2fbe0bb9d44d70031ffbdcd16c797460d5bc2d[m
+Merge: 864d827 9e05911
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Mon Sep 10 12:55:41 2012 -0700
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit 864d8277e1a809e2e1de1f1abb8bac69914219e7[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Mon Sep 10 12:55:29 2012 -0700
+
+    Updated project settings.
+
+[33mcommit 9e05911279f9641fb9079bf436372dadd460bd69[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Sep 9 12:40:18 2012 -0700
+
+    added Scala project stuff
+
+[33mcommit bdb0cf817be7927d48139a2bc311178d3f9b3bb1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Sep 9 12:38:30 2012 -0700
+
+    Added Scala project with DSL framework and place holders for SFDC client DSL
+
+[33mcommit 7e06345258b2f90c202aafa99bfa4ae147f6ed39[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sun Sep 9 12:37:14 2012 -0700
+
+    Added enums, implicit params
+
+[33mcommit 568751851bc3d270282dcee8d5834937d37f80c7[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Sep 5 01:50:32 2012 -0700
+
+    Added exceptions and functions
+
+[33mcommit df9df69cfed54ab3fb37d9e0b1bc6b58b8ae966c[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Aug 28 01:06:16 2012 -0700
+
+    added couple more examples
+
+[33mcommit 5286add37c161ca166358e77d11a93ba609fba16[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Sun Aug 26 03:24:33 2012 -0700
+
+    Added Learn Kotlin. Cleanup.
+
+[33mcommit bba6d43caec59da1b70d562d76fa620c0d95c346[m
+Author: Victor Spivak <vspivak@salesforce.com>
+Date:   Tue Apr 17 17:17:40 2012 -0700
+
+    added LearnKotlin project
+
+[33mcommit 331c3d97b1a3c595c400a82b773126ae2fadb229[m
+Author: U-vspivak-h\Victor <Victor@vspivak-h.(none)>
+Date:   Tue Mar 27 23:34:20 2012 -0700
+
+    Added couple files to learn Groovy
+
+[33mcommit 27be7c0ddba599d74ba62664b977c34514366601[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Mar 24 03:30:18 2012 -0700
+
+    added Learn Groovy
+
+[33mcommit 3218cbee94d56e34677e40c144292f7ad7146a74[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Mar 24 03:19:05 2012 -0700
+
+    added Learn Clojure
+
+[33mcommit 78be04629d80533317648fef36202abbfb0d9389[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Mar 24 02:33:03 2012 -0700
+
+    reorg Learn
+    
+    reorg Learn 1
+
+[33mcommit 609a11410dd9f9ff38a370dc7fd8dc0c6e355f35[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Mar 24 01:55:00 2012 -0700
+
+    added LearnScala and some changes
+
+[33mcommit 150759ef9005b213c59d88bb77c314cda94dc0d3[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Sat Nov 12 00:50:27 2011 -0800
+
+    added performance benchmark
+
+[33mcommit 98e724c7f6482d2ce4520e4733297abc2acd9d27[m
+Merge: a5aca8e f66bee6
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 20:46:03 2011 -0800
+
+    Merge branch 'master' of github.com:victorspivak/projects
+
+[33mcommit a5aca8ec4399d595297636972b2503d95b6fa9d1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 20:45:53 2011 -0800
+
+    local changes 2
+
+[33mcommit f6df4ed3faf37c89ea78177c6c1cd2166a0738bf[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 20:45:01 2011 -0800
+
+    local changes 1
+
+[33mcommit f66bee610aacd2be01cdf5649c2640c186474bed[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 20:40:55 2011 -0800
+
+    Test 2
+
+[33mcommit de04dd165235c47db2e0aeffef8c01bcd61aded1[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 18:56:14 2011 -0800
+
+    Test 1
+
+[33mcommit 48720135b23057c242423288320b2ed9c248c5bf[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Mon Nov 7 18:47:32 2011 -0800
+
+    updated gitignore
+
+[33mcommit 490fbf8594f6b8ccc60a19c7be68152f2f6ea698[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 18:15:31 2011 -0700
+
+    added annotation based OSGi DS project
+
+[33mcommit 50e02c86233c15520c746fa475719ca1aec7bd96[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 14:05:28 2011 -0700
+
+    Reformat.
+
+[33mcommit fad5d10f43cb25ebcd32d3c6a139b7be727975a8[m
+Merge: 726cb07 f1d14ed
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 09:57:18 2011 -0700
+
+    remove workspace.xml
+
+[33mcommit 726cb07023f160e96ca32f934ac73ac2c1a0095d[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 09:49:40 2011 -0700
+
+    remove workspace.xml
+
+[33mcommit f1d14ed315c4a5765845bb533bec88de441b5c18[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 02:31:16 2011 -0700
+
+    commit
+
+[33mcommit a2da02f5f35350f1a45af304561cb3b4dd6b650a[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 00:55:39 2011 -0700
+
+    Fixed null pointer.
+
+[33mcommit a51af3f41d143d6c06c2a22517877995f018428b[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 00:24:56 2011 -0700
+
+    commit
+
+[33mcommit 06f9619d8135afd92753cc7f0214ad71c1f58c64[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Wed Oct 19 00:13:30 2011 -0700
+
+    commit
+
+[33mcommit 61ac136977f9eab706efeaaa3ad16a1719727408[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 18:17:03 2011 -0700
+
+    Added nice console logger.
+
+[33mcommit b4403a48b42dfc653220f31e28ee07fd1322b59f[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 17:52:32 2011 -0700
+
+    Added Logging service.
+
+[33mcommit 9fa0c9378cc1eae701cf061bbe3305affb540f9a[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 12:50:51 2011 -0700
+
+    commit
+
+[33mcommit d36bac21f513a9c9269955e98b82331c955ee40b[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 11:46:08 2011 -0700
+
+    Added properties.
+
+[33mcommit 4d1b85d9543023a1e7c4f84e874591e596709b6c[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 11:33:39 2011 -0700
+
+    commit
+
+[33mcommit c4787a39e32f0f7cfcf1d149d58b234ba22cd5cf[m
+Author: Victor Spivak <victor.spivak@gmail.com>
+Date:   Tue Oct 18 11:08:16 2011 -0700
+
+    first commit
