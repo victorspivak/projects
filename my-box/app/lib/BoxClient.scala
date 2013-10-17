@@ -5,7 +5,6 @@ import scala.concurrent.Future
 import model._
 import model.BoxFolderResource
 import play.api.libs.json.JsValue
-import scala.util.Try
 import play.api.mvc.Session
 import controllers.BoxContext
 import model.BoxItem.BoxItemType
@@ -17,37 +16,37 @@ class BoxClient(val config:BoxAppConfig, val boxContext:BoxContext) {
   implicit val context = scala.concurrent.ExecutionContext.Implicits.global
 
   def getUser(id:String) = {
-    get(BoxUserResource(id)).map(_.map( (new Json2BoxUser).toEntity))
+    get(BoxUserResource(id)).map((new Json2BoxUser).toEntity)
   }
 
   def getFolder(id:String)= {
-    get(BoxFolderResource(id)).map(_.map((new Json2BoxFolder).toEntity))
+    get(BoxFolderResource(id)).map((new Json2BoxFolder).toEntity)
   }
 
   def getFolderItems(id:String) = {
-    get(BoxFolderItemsResource(id)).map(_.map(new Json2BoxFolderItems(id).toEntity))
+    get(BoxFolderItemsResource(id)).map(new Json2BoxFolderItems(id).toEntity)
   }
 
   def folderIdByName(name:String) = {
-    getFolderItems(boxContext.currentFolderId).map{_.map{folderItems=>
+    getFolderItems(boxContext.currentFolderId).map{folderItems=>
       folderItems.items.find{item=>
         item.name == name && item.itemType == BoxItemType.Folder
       }.get
-    }}
+    }
   }
 
-  private def get[T <: BoxEntity](resource: BoxResource[T]): Future[Try[JsValue]] = {
+  private def get[T <: BoxEntity](resource: BoxResource[T]): Future[JsValue] = {
     val fullUrl = apiUrl + resource.path
     boxContext.tokenFuture flatMap {token =>
       System.out.println(s"Sending request to $fullUrl")
       val getFuture = WS.url(fullUrl).withHeaders(getAuthHeader(token)).withQueryString(resource.getParams: _*).get()
-      getFuture map {
+      getFuture flatMap {
         response => {
           response.status match {
             case 200 =>
               System.out.println(s"Request $fullUrl is completed")
-              Try(response.json)
-            case _ => Try(throw new Exception(s"${response.status} ${response.statusText} for ${response.getAHCResponse.getUri.toString}"))
+              Future.successful(response.json)
+            case _ => Future.failed(new Exception(s"${response.status} ${response.statusText} for ${response.getAHCResponse.getUri.toString}"))
           }
         }
       }

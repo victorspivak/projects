@@ -11,10 +11,11 @@ class ShowFolder(val folderId:String)(implicit request:Request[AnyContent])  ext
     val boxClient = BoxClient(request.session)
 
     boxClient.boxContext.setCurrentFolder(folderId).toSessionData.flatMap{sessionData =>
-      FolderService.fetchFolderData(folderId, boxClient) map {
-        case Success(folderData) => Ok(views.html.folder(folderData)).withSession(sessionData: _*)
-        case Failure(e) => Ok(views.html.box(e.getMessage)).withNewSession
+      FolderService.fetchFolderData(folderId, boxClient) map {folderData =>
+        Ok(views.html.folder(folderData)).withSession(sessionData: _*)
       }
+    }.recover{
+      case e => Ok(views.html.box(e.getMessage)).withNewSession
     }
   }
 }
