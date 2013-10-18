@@ -5,6 +5,11 @@
 # Home page
 GET     /                           controllers.Application.start
 POST    /command                    controllers.Application.processCommand
+GET     /authtoken                  controllers.Application.authtoken
+POST    /authtoken                  controllers.Application.authtoken
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+
+GET     /test                       controllers.Application.test
