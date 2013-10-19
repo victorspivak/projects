@@ -46,7 +46,7 @@ case class BoxFileResource(id: String) extends BoxResource[BoxFile] {
 
 class Json2BoxFile extends json2Entity[BoxFile] {
   def toEntity(json: JsValue): BoxFile = {
-    BoxFile((json \ "id").as[String], (json \ "name").as[String], (json \ "size").as[Long])
+    BoxFile((json \ "id").as[String], (json \ "name").as[String], (json \ "size").asOpt[Long].getOrElse(0))
   }
 }
 

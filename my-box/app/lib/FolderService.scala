@@ -10,13 +10,9 @@ object FolderService {
     val userFuture = boxClient.getUser("me")
 
     for {
-      root_ <- rootFuture
-      rootItems_ <- rootItemsFuture
-      user_ <- userFuture
-    } yield for {
-        root <- root_
-        rootItems <- rootItems_
-        user <- user_
-      } yield FolderData(user, root, rootItems)
+      root <- rootFuture
+      rootItems <- rootItemsFuture
+      user <- userFuture
+    } yield FolderData(user, root, rootItems)
   }
 }

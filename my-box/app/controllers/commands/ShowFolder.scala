@@ -1,26 +1,31 @@
 package controllers.commands
 
-import play.api.mvc.{AsyncResult, AnyContent, Request}
+import play.api.mvc.{AnyContent, Request}
 import lib.{FolderService, BoxClient}
-import scala.util.{Failure, Success}
 import scala.concurrent.ExecutionContext.Implicits.global
-import play.api.mvc.Action
+import java.net.ConnectException
+import controllers.BoxContext
 
-class ShowFolder(val folderId:String)(implicit request:Request[AnyContent])  extends BoxCommand {
-  def execute = {
-    val boxClient = BoxClient(request.session)
-
-    boxClient.boxContext.setCurrentFolder(folderId).toSessionData.flatMap{sessionData =>
-      FolderService.fetchFolderData(folderId, boxClient) map {
-        case Success(folderData) => Ok(views.html.folder(folderData)).withSession(sessionData: _*)
-        case Failure(e) => Ok(views.html.box(e.getMessage)).withNewSession
+class ShowFolder(val folderId:String) extends BoxCommand {
+  def execute(context:BoxContext) = {
+    val boxClient = BoxClient(context)
+    context.setCurrentFolder(folderId).toSessionData.flatMap{sessionData =>
+      FolderService.fetchFolderData(folderId, boxClient) map {folderData =>
+        Ok(views.html.folder(folderData)).withSession(sessionData: _*)
       }
+    }.recover{
+      case e:ConnectException =>
+        Ok(views.html.message("Could not connect to the server", e.getMessage)).withNewSession
+      case e =>
+        println(">>>>>>>>>>>>>>>>>> I got " + e)
+        e.printStackTrace()
+        Ok(views.html.message(e.getMessage)).withNewSession
     }
   }
 }
 
 object ShowFolder {
-  def apply(folderId:String)(implicit request:Request[AnyContent]) = new ShowFolder(folderId)
+  def apply(folderId:String) = new ShowFolder(folderId)
 }
 
 

@@ -1,7 +1,17 @@
 - Add to session stack of directories to support cd ..
-- Add table layout to folder view
 - Implement cd command
 - Add find folder by name command
 - Add status line
+- Add Exceptions
+- Center folder item view
+- Implement login
+- Implement Oauth2 token with refresh
+- Parse authentiction error json to identify the reason
 
+
+
+
+To use https:
+    set JAVA_OPTS=-Dhttps.port=9443
+    play run
 
