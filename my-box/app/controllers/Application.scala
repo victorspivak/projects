@@ -14,8 +14,9 @@ import java.net.ConnectException
 object Application extends Controller {
   val inputCommandForm = Form[String]("command" -> text)
 
-  def test = Action {
-    BoxAuthenticator(BoxClient.config).getOauth2Code
+  def test = Action {implicit request =>
+    Ok(views.html.message("Message:", "" + routes.Application.authtoken.absoluteURL(true)))
+//    BoxAuthenticator(BoxClient.config).getOauth2Code
   }
 
   def authtoken = Action {implicit request =>
@@ -45,7 +46,7 @@ object Application extends Controller {
       BoxContext.fromRequest(request) match {
         case Some(context) =>
           exceptionHandler(context, func)
-        case None => Future(BoxAuthenticator(BoxClient.config).getOauth2Code)
+        case None => Future(BoxAuthenticator(BoxClient.config).getOauth2Code(request))
       }
     }
   }

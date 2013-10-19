@@ -1,13 +1,7 @@
 - Add to session stack of directories to support cd ..
 - Implement cd command
 - Add find folder by name command
-- Add status line
-- Add Exceptions
-- Center folder item view
-- Implement login
-- Implement Oauth2 token with refresh
 - Parse authentiction error json to identify the reason
-- fix hardcoded callback url for oauth2
 
 
 
