@@ -14,11 +14,23 @@ class BoxAuthenticator(config:BoxAppConfig) {
       case response if response.status == 200 =>
         println(s"Authenticating $code is successful.")
         val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
-        println(token)
         Future.successful(token)
       case response =>
         println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
         Future.failed(BoxHttpErrorException(response))
+    }
+  }
+
+  def refresh(token:BoxToken): Future[BoxToken] = {
+    println(s"Refresh token started...")
+    WS.url(tokenUrl).post(postAuthDataForRefresh(token.refreshToken)) flatMap {
+      case response if response.status == 200 =>
+        println(s"Refresh token is successful.")
+        val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
+        Future.successful(token)
+      case response =>
+        println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
+        Future.failed(BoxRefreshTokenException(response))
     }
   }
 
