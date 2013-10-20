@@ -13,28 +13,30 @@ case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
 
 case class BoxToken(accessToken:String, refreshToken:String)
 
-class BoxClient(val boxContext:BoxContext) {
-  def getUser(id:String) = {
-    get(BoxUserResource(id)).map((new Json2BoxUser).toEntity)
+class BoxClient(config:BoxAppConfig){
+  val boxAuthenticator = new BoxAuthenticator(config)
+
+  def getUser(boxContext:BoxContext, id:String) = {
+    get(boxContext, BoxUserResource(id)).map((new Json2BoxUser).toEntity)
   }
 
-  def getFolder(id:String)= {
-    get(BoxFolderResource(id)).map((new Json2BoxFolder).toEntity)
+  def getFolder(boxContext:BoxContext, id:String)= {
+    get(boxContext, BoxFolderResource(id)).map((new Json2BoxFolder).toEntity)
   }
 
-  def getFolderItems(id:String) = {
-    get(BoxFolderItemsResource(id)).map(new Json2BoxFolderItems(id).toEntity)
+  def getFolderItems(boxContext:BoxContext, id:String) = {
+    get(boxContext, BoxFolderItemsResource(id)).map(new Json2BoxFolderItems(id).toEntity)
   }
 
-  def folderIdByName(name:String) = {
-    getFolderItems(boxContext.currentFolderId).map{folderItems=>
+  def folderIdByName(boxContext:BoxContext, name:String) = {
+    getFolderItems(boxContext, boxContext.currentFolderId).map{folderItems=>
       folderItems.items.find{item=>
         item.name == name && item.itemType == BoxItemType.Folder
       }.get
     }
   }
 
-  private def get[T <: BoxEntity](resource: BoxResource[T]): Future[JsValue] = {
+  private def get[T <: BoxEntity](boxContext:BoxContext, resource: BoxResource[T]): Future[JsValue] = {
     val fullUrl = apiUrl + resource.path
     boxContext.tokenFuture flatMap {token =>
       System.out.println(s"Sending request to $fullUrl")
@@ -52,13 +54,10 @@ class BoxClient(val boxContext:BoxContext) {
     }
   }
 
-  private def apiUrl:   String = BoxClient.config.url + "/2.0"
+  private def apiUrl:   String = config.url + "/2.0"
   private def getAuthHeader(token:BoxToken) = "Authorization" -> s"Bearer ${token.accessToken}"
 }
 
 object BoxClient {
-  val config = new BoxAppConfig("https://vspivak.inside-box.net/api",
-        "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU")
-
-  def apply(boxContext:BoxContext) = new BoxClient(boxContext) : BoxClient
+  def apply(config:BoxAppConfig) = new BoxClient(config) : BoxClient
 }

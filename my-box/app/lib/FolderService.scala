@@ -2,12 +2,13 @@ package lib
 
 import model.FolderData
 import scala.concurrent.ExecutionContext.Implicits.global
+import controllers.BoxContext
 
 object FolderService {
-  def fetchFolderData(folderId:String, boxClient:BoxClient) = {
-    val rootItemsFuture = boxClient.getFolderItems(folderId)
-    val rootFuture = boxClient.getFolder(folderId)
-    val userFuture = boxClient.getUser("me")
+  def fetchFolderData(boxContext:BoxContext, folderId:String) = {
+    val rootItemsFuture = boxContext.boxClient.getFolderItems(boxContext, folderId)
+    val rootFuture = boxContext.boxClient.getFolder(boxContext, folderId)
+    val userFuture = boxContext.boxClient.getUser(boxContext, "me")
 
     for {
       root <- rootFuture

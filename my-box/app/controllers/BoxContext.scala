@@ -7,8 +7,8 @@ import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import play.api.mvc.Session
 
-case class BoxContext(tokenFuture:Future[BoxToken], currentFolderId:String) {
-  def setCurrentFolder(currentFolderId:String) = BoxContext(tokenFuture, currentFolderId)
+case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], currentFolderId:String) {
+  def setCurrentFolder(currentFolderId:String) = BoxContext(boxClient, tokenFuture, currentFolderId)
 
   def toSessionData = tokenFuture.map (buildSessionData)
   def toSessionDataOpt = tokenFuture.value.flatMap {
@@ -29,7 +29,7 @@ object BoxContext {
   val REFRESH_TOKEN:  String = "refreshToken"
   val CURRENT_FOLDER: String = "currentFolder"
 
-  def fromRequest(request:Request[AnyContent]) = {
+  def fromRequest(boxClient:BoxClient, request:Request[AnyContent]) = {
     val session = request.session
 
     val tokenOpt = for {
@@ -37,23 +37,22 @@ object BoxContext {
       refreshToken <- session.get(REFRESH_TOKEN)
     } yield BoxToken(accessToken, refreshToken)
 
-    //svl find a better home for BoxConfig
     val tokenAsFuture = tokenOpt match {
       case Some(t) => Option(Future(t))
-      case None =>  retrieveTokenUsingCode(request)
+      case None =>  retrieveTokenUsingCode(boxClient, request)
     }
 
     tokenAsFuture.map{token =>
-      BoxContext(token, session.get(CURRENT_FOLDER).getOrElse("0"))
+      BoxContext(boxClient, token, session.get(CURRENT_FOLDER).getOrElse("0"))
     }
   }
 
   def refreshToken(context:BoxContext) = {
-    val newToken = BoxAuthenticator(BoxClient.config).refresh(context.tokenFuture.value.get.get)
-    BoxContext(newToken, context.currentFolderId)
+    val newToken = context.boxClient.boxAuthenticator.refresh(context.tokenFuture.value.get.get)
+    BoxContext(context.boxClient, newToken, context.currentFolderId)
   }
 
-  private def retrieveTokenUsingCode(request:Request[AnyContent]) = request.queryString.get("code").map {code =>
-    BoxAuthenticator(BoxClient.config).authenticate(code.toList.head)
+  private def retrieveTokenUsingCode(boxClient:BoxClient, request:Request[AnyContent]) =
+    request.queryString.get("code").map {code => boxClient.boxAuthenticator.authenticate(code.toList.head)
   }
 }

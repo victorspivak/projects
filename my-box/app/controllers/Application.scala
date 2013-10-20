@@ -13,17 +13,17 @@ import java.net.ConnectException
 
 object Application extends Controller {
   val inputCommandForm = Form[String]("command" -> text)
+  val boxClient = BoxClient(BoxAppConfig("https://vspivak.inside-box.net/api", "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU"))
 
   def test = Action {implicit request =>
     Ok(views.html.message("Message:", "" + routes.Application.authtoken.absoluteURL(true)))
-//    BoxAuthenticator(BoxClient.config).getOauth2Code
   }
 
   def authtoken = Action {implicit request =>
     AsyncResult{
-      BoxContext.fromRequest(request) match {
+      BoxContext.fromRequest(boxClient, request) match {
         case Some(context) => ShowFolder("0").execute(context)
-        case None => Future(BoxAuthenticator(BoxClient.config).getOauth2Code)
+        case None => Future(boxClient.boxAuthenticator.getOauth2Code)
       }
     }
   }
@@ -43,10 +43,9 @@ object Application extends Controller {
 
   private def execAsync(request:Request[AnyContent], func:BoxContext=>Future[Result]) = {
     AsyncResult{
-      BoxContext.fromRequest(request) match {
-        case Some(context) =>
-          exceptionHandler(context, func)
-        case None => Future(BoxAuthenticator(BoxClient.config).getOauth2Code(request))
+      BoxContext.fromRequest(boxClient, request) match {
+        case Some(context) => exceptionHandler(context, func)
+        case None => Future(boxClient.boxAuthenticator.getOauth2Code(request))
       }
     }
   }

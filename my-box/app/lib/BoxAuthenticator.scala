@@ -77,7 +77,3 @@ class BoxAuthenticator(config:BoxAppConfig) {
     "client_secret" -> Seq(config.clientSecret)
   )
 }
-
-object BoxAuthenticator {
-  def apply(config:BoxAppConfig) = new BoxAuthenticator(config)
-}
