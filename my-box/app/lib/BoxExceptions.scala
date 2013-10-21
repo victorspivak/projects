@@ -16,3 +16,4 @@ object BoxRefreshTokenException {
           new BoxRefreshTokenException(response.status, response.statusText, response.getAHCResponse.getUri.toString)
 }
 
+class BoxFolderNotFoundException(folder:String, detail:String = "") extends Exception(s"Folder $folder is not found. $detail")

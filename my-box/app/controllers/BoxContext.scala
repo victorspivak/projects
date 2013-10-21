@@ -2,13 +2,20 @@ package controllers
 
 import play.api.mvc._
 import scala.util.{Success, Failure}
-import lib.{BoxAuthenticator, BoxToken, BoxClient, BoxAppConfig}
+import lib.{BoxToken, BoxClient,BoxFolderNotFoundException}
 import scala.concurrent.Future
+import scala.collection.immutable.Stack
 import scala.concurrent.ExecutionContext.Implicits.global
-import play.api.mvc.Session
 
-case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], currentFolderId:String) {
-  def setCurrentFolder(currentFolderId:String) = BoxContext(boxClient, tokenFuture, currentFolderId)
+case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], currentPath:Stack[String]) {
+  def pushFolder(folderId:String) = BoxContext(boxClient, tokenFuture, currentPath.push(folderId))
+  def popFolder = {
+    if (currentPath.size < 2)
+      throw new BoxFolderNotFoundException("..", "The current folder is root")
+    BoxContext(boxClient, tokenFuture, currentPath.pop)
+  }
+  def setRootFolder() = BoxContext(boxClient, tokenFuture, Stack("0"))
+  def getCurrentFolder = currentPath.top
 
   def toSessionData = tokenFuture.map (buildSessionData)
   def toSessionDataOpt = tokenFuture.value.flatMap {
@@ -19,7 +26,7 @@ case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], current
   private def buildSessionData(token: BoxToken): List[(String, String)] = {
     List(BoxContext.ACCESS_TOKEN -> token.accessToken,
       BoxContext.REFRESH_TOKEN -> token.refreshToken,
-      BoxContext.CURRENT_FOLDER -> currentFolderId
+      BoxContext.CURRENT_PATH -> currentPath.mkString(BoxContext.PATH_DELIMITER)
     )
   }
 }
@@ -27,7 +34,8 @@ case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], current
 object BoxContext {
   val ACCESS_TOKEN:   String = "accessToken"
   val REFRESH_TOKEN:  String = "refreshToken"
-  val CURRENT_FOLDER: String = "currentFolder"
+  val CURRENT_PATH:   String = "currentPath"
+  val PATH_DELIMITER: String = ","
 
   def fromRequest(boxClient:BoxClient, request:Request[AnyContent]) = {
     val session = request.session
@@ -43,13 +51,13 @@ object BoxContext {
     }
 
     tokenAsFuture.map{token =>
-      BoxContext(boxClient, token, session.get(CURRENT_FOLDER).getOrElse("0"))
+      BoxContext(boxClient, token, Stack(((session.get(CURRENT_PATH).getOrElse("0")).split(PATH_DELIMITER)): _*))
     }
   }
 
   def refreshToken(context:BoxContext) = {
     val newToken = context.boxClient.boxAuthenticator.refresh(context.tokenFuture.value.get.get)
-    BoxContext(context.boxClient, newToken, context.currentFolderId)
+    BoxContext(context.boxClient, newToken, context.currentPath)
   }
 
   private def retrieveTokenUsingCode(boxClient:BoxClient, request:Request[AnyContent]) =

@@ -29,7 +29,7 @@ class BoxClient(config:BoxAppConfig){
   }
 
   def folderIdByName(boxContext:BoxContext, name:String) = {
-    getFolderItems(boxContext, boxContext.currentFolderId).map{folderItems=>
+    getFolderItems(boxContext, boxContext.getCurrentFolder).map{folderItems=>
       folderItems.items.find{item=>
         item.name == name && item.itemType == BoxItemType.Folder
       }.get

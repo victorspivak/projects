@@ -2,6 +2,7 @@
 - Implement cd command
 - Add find folder by name command
 - Parse authentiction error json to identify the reason
+- use status line for common errors like missing folder, etc.
 
 
 
