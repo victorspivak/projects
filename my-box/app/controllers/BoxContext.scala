@@ -7,14 +7,17 @@ import scala.concurrent.Future
 import scala.collection.immutable.Stack
 import scala.concurrent.ExecutionContext.Implicits.global
 
-case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], currentPath:Stack[String]) {
+case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], currentPath:Stack[String], statusMessage:String = "") {
   def pushFolder(folderId:String) = BoxContext(boxClient, tokenFuture, currentPath.push(folderId))
   def popFolder = {
     if (currentPath.size < 2)
       throw new BoxFolderNotFoundException("..", "The current folder is root")
     BoxContext(boxClient, tokenFuture, currentPath.pop)
   }
+
   def setRootFolder() = BoxContext(boxClient, tokenFuture, Stack("0"))
+
+  def setStatus(message:String) = BoxContext(boxClient, tokenFuture, currentPath, message)
   def getCurrentFolder = currentPath.top
 
   def toSessionData = tokenFuture.map (buildSessionData)

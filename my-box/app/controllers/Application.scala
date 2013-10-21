@@ -63,7 +63,9 @@ object Application extends Controller {
     func(context).recoverWith{
       case e:ConnectException =>
         Future(Ok(views.html.message("Could not connect to the server", e.getMessage)))
-      case e:BoxFolderNotFoundException => Future(Ok(views.html.message(e.getMessage)))
+      case e:BoxFolderNotFoundException =>
+         ShowCurrentFolder().execute(context.setStatus(e.getMessage))
+        //Future(Ok(views.html.message(e.getMessage)))
       case BoxHttpErrorException(401, _, _) =>func(BoxContext.refreshToken(context)).recover{
           case e => Ok(views.html.message(e.getMessage)).withNewSession
         }

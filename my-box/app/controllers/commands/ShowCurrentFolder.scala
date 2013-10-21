@@ -9,7 +9,7 @@ class ShowCurrentFolder extends BoxCommand {
     val folderId = context.getCurrentFolder
     context.toSessionData.flatMap{sessionData =>
       FolderService().fetchFolderData(context, folderId) map {folderData =>
-        Ok(views.html.folder(folderData)).withSession(sessionData: _*)
+        Ok(views.html.folder(context, folderData)).withSession(sessionData: _*)
       }
     }
   }
