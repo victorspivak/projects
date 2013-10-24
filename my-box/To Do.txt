@@ -1,8 +1,6 @@
-- Add to session stack of directories to support cd ..
-- Implement cd command
-- Add find folder by name command
 - Parse authentiction error json to identify the reason
-- use status line for common errors like missing folder, etc.
+- Figure out how to use script files instead of embedding it in the html
+- move status to input command template
 
 
 

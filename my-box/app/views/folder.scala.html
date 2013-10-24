@@ -1,17 +1,6 @@
 @(context:BoxContext, folderData:model.FolderData)
 
-@main("Box Folders") {
-    <br/>
-    <table class="status">
-        <tr class="status">
-            <td class="status">Logged User: @folderData.currentUser.name</td>
-            <td class="status">@{"/" + context.currentPath.reverse.tail.mkString("/")}</td>
-            @if(!context.statusMessage.isEmpty){
-                <td class="status_error">@context.statusMessage</td>
-            }
-        </tr>
-    </table>
-
+@main(context, "Box Folders") {
     <h1 class="folderName">@folderData.folder.name  ---  @folderData.folder.count items</h1>
     <br/>
     <div class="itemsview">@folderMembers(folderData.folderItems)</div>

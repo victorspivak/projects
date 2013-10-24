@@ -1,4 +1,4 @@
-@(title: String)(content: Html)
+@(context:BoxContext, title: String)(content: Html)
 
 <!DOCTYPE html>
 
@@ -11,17 +11,18 @@
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
 
         <script type="text/javascript">
-            function setInputCommandFocus()
-            {
-                document.getElementById("inputCommand").focus()
-            }
+            $(document).ready(function(){
+                $("#inputCommand" ).focus();
+            });
         </script>
 
     </head>
-    <body onload="setInputCommandFocus()">
+
+    <body>
         <div>
-            @inputCommand()
+            @inputCommand(context)
         </div>
         @content
     </body>
+
 </html>

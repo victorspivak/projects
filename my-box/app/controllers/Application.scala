@@ -19,12 +19,12 @@ object Application extends Controller {
   val boxClient = BoxClient(BoxAppConfig("https://vspivak.inside-box.net/api", "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU"))
 
   def test = Action {implicit request =>
-    //Ok(views.html.message("Message:", "" + routes.Application.authtoken.absoluteURL(true)))
-    execAsync(request, {context:BoxContext =>
-      FolderService().cd(context, "BOX-73892").flatMap{newContext=>
-        ShowCurrentFolder().execute(newContext)
-      }
-    })
+    Ok(views.html.message("Message:", "" + routes.Application.authtoken.absoluteURL(true)))
+//    execAsync(request, {context:BoxContext =>
+//      FolderService().cd(context, "BOX-73892").flatMap{newContext=>
+//        ShowCurrentFolder().execute(newContext)
+//      }
+//    })
   }
 
   def authtoken = Action {implicit request =>
