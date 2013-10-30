@@ -45,6 +45,7 @@ object FutureAndTry {
     def main(args: Array[String]) {
         test1()
         test2()
+        test21()
         test3()
         test4()
     }
@@ -63,9 +64,7 @@ object FutureAndTry {
                     println(e.getMessage)
             }
 
-            println("test1 before Await...")
-            Await result(futures, 10.seconds)
-            println("test1 after Await...")
+            println(Await result(futures, 10.seconds))
         } catch {
             case e:Exception => println("==================> " + e)
         }
@@ -84,7 +83,29 @@ object FutureAndTry {
             values=>println(values)
         }
 
-        Await result(futures, 10.seconds)
+        println(Await result(futures, 10.seconds))
+    }
+
+    def test21 (){
+        println("================================ test21 =======================================")
+        val errorHandler: PartialFunction[scala.Throwable, Int] = {
+            case e:Exception => 99999
+        }
+
+        val futures = Future.sequence(List(
+            makeFuture(2, '2').recover(errorHandler),
+            makeFuture(1, '1').recover(errorHandler),
+            makeFuture(3, '3').recover(errorHandler)))
+        futures.map{
+            values=>println(values)
+        }
+
+        println(Await result(futures, 10.seconds))
+    }
+
+
+    def makeFuture(value: Int, symbol: Char): Future[Int] = {
+        Future(waiting(value, symbol))
     }
 
     def test3 (){
@@ -105,7 +126,7 @@ object FutureAndTry {
                 println(e.getMessage)
         }
 
-        Await result(futures, 10.seconds)
+        println(Await result(futures, 10.seconds))
     }
 
     def test4 (){
@@ -120,6 +141,6 @@ object FutureAndTry {
                     println(e.getMessage)
             }
         }
-        Await result(futures, 10.seconds)
+        println(Await result(futures, 10.seconds))
     }
 }
