@@ -1,12 +1,13 @@
 package lib
 
+import play.api.mvc._
 import scala.concurrent.Future
 import play.api.libs.ws.WS
 import play.api.mvc.Results.Redirect
 import scala.concurrent.ExecutionContext.Implicits.global
 
 class BoxAuthenticator(config:BoxAppConfig) {
-  def getOauth2Code = Redirect(authorizeUrl, postAuthDataForCode)
+  def getOauth2Code(implicit request:Request[AnyContent]) = Redirect(authorizeUrl, postAuthDataForCode)
 
   def authenticate(code:String): Future[BoxToken] = {
     println(s"Authenticating $code started...")
@@ -14,11 +15,23 @@ class BoxAuthenticator(config:BoxAppConfig) {
       case response if response.status == 200 =>
         println(s"Authenticating $code is successful.")
         val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
-        println(token)
         Future.successful(token)
       case response =>
         println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
         Future.failed(BoxHttpErrorException(response))
+    }
+  }
+
+  def refresh(token:BoxToken): Future[BoxToken] = {
+    println(s"Refresh token started...")
+    WS.url(tokenUrl).post(postAuthDataForRefresh(token.refreshToken)) flatMap {
+      case response if response.status == 200 =>
+        println(s"Refresh token is successful.")
+        val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
+        Future.successful(token)
+      case response =>
+        println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
+        Future.failed(BoxRefreshTokenException(response))
     }
   }
 
@@ -29,7 +42,6 @@ class BoxAuthenticator(config:BoxAppConfig) {
         println(s"Authenticating $login is successful.")
         Future.successful(BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String]))
       case response =>
-        println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
         Future.failed(BoxHttpErrorException(response))
     }
   }
@@ -37,9 +49,9 @@ class BoxAuthenticator(config:BoxAppConfig) {
   private def tokenUrl: String = config.url + "/oauth2/token"
   private def authorizeUrl: String = config.url + "/oauth2/authorize"
 
-  private def postAuthDataForCode = Map(
+  private def postAuthDataForCode(implicit request:Request[AnyContent]) = Map(
     "response_type" -> Seq("code"),
-    "redirect_uri" -> Seq("https://VSPIVAK-W530:8300/authtoken"),
+    "redirect_uri" -> Seq(controllers.routes.Application.authtoken.absoluteURL(true)),
     "client_id" -> Seq(config.clientId)
   )
 
@@ -64,8 +76,4 @@ class BoxAuthenticator(config:BoxAppConfig) {
     "client_id" -> Seq(config.clientId),
     "client_secret" -> Seq(config.clientSecret)
   )
-}
-
-object BoxAuthenticator {
-  def apply(config:BoxAppConfig) = new BoxAuthenticator(config)
 }

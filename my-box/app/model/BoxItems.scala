@@ -4,6 +4,7 @@ import play.api.libs.json.JsValue
 import model.BoxItem.BoxItemType
 
 trait BoxItem extends BoxEntity {
+  def id:String
   def name:String
   def itemType:BoxItemType.BoxItemType
 }
