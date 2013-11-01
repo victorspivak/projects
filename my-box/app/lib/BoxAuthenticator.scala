@@ -51,7 +51,7 @@ class BoxAuthenticator(config:BoxAppConfig) {
 
   private def postAuthDataForCode(implicit request:Request[AnyContent]) = Map(
     "response_type" -> Seq("code"),
-    "redirect_uri" -> Seq(controllers.routes.Application.authtoken.absoluteURL(true)),
+    "redirect_uri" -> Seq(config.redirectUrl.getOrElse("controllers.routes.Application.authtoken().absoluteURL(secure = true)")),
     "client_id" -> Seq(config.clientId)
   )
 

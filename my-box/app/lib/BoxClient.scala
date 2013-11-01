@@ -9,7 +9,9 @@ import controllers.BoxContext
 import model.BoxItem.BoxItemType
 import scala.concurrent.ExecutionContext.Implicits.global
 
-case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
+case class BoxAppConfig(url:String, clientId:String, clientSecret:String, _redirect:String = null){
+  def redirectUrl = Option(_redirect)
+}
 
 case class BoxToken(accessToken:String, refreshToken:String)
 
