@@ -1,10 +1,6 @@
 - Parse authentiction error json to identify the reason
 - Figure out how to use script files instead of embedding it in the html
-- move status to input command template
-- figure out logging
 - try cache
-- specify size for items
-- move app config to conf file
 
 
 

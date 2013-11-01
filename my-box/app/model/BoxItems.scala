@@ -6,6 +6,7 @@ import model.BoxItem.BoxItemType
 trait BoxItem extends BoxEntity {
   def id:String
   def name:String
+  def size:Long
   def itemType:BoxItemType.BoxItemType
 }
 
@@ -16,14 +17,14 @@ object BoxItem {
   }
 }
 
-case class BoxFolder(folderId: String, name: String, count:Int) extends BoxItem {
+case class BoxFolder(folderId: String, name: String, count:Int, size:Long) extends BoxItem {
   def id = folderId
-  def itemType = BoxItemType.Folder
+  val itemType = BoxItemType.Folder
 }
 
 case class BoxFolderResource(id: String) extends BoxResource[BoxFolder] {
   val path = s"/folders/$id"
-  def getParams = List("fields" -> "id,name,item_collection", "limit" -> "0")
+  def getParams = List("fields" -> "id,name,item_collection,size", "limit" -> "0")
 }
 
 class Json2BoxFolder extends json2Entity[BoxFolder] {
@@ -31,7 +32,7 @@ class Json2BoxFolder extends json2Entity[BoxFolder] {
     val count:Int = (json \ "item_collection").asOpt[JsValue].flatMap{jvalue:JsValue =>
       (jvalue \ "total_count").asOpt[Int]}.getOrElse(0)
 
-    BoxFolder((json \ "id").as[String], (json \ "name").as[String], count)
+    BoxFolder((json \ "id").as[String], (json \ "name").as[String], count, (json \ "size").asOpt[Long].getOrElse(0))
   }
 }
 
@@ -57,7 +58,7 @@ case class BoxFolderItems(folderId: String, count:Int, items:List[BoxItem]) exte
 
 case class BoxFolderItemsResource(id: String) extends BoxResource[BoxFolderItems] {
   val path = s"/folders/$id/items"
-  def getParams = List("fields" -> "id,name,type")
+  def getParams = List("fields" -> "id,name,type,size", "limit" -> "1000")
 }
 
 class Json2BoxFolderItems(folderId:String) extends json2Entity[BoxFolderItems] {

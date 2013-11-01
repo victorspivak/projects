@@ -16,12 +16,12 @@
         <td>Folder</td>
         <td>@item.name</td>
         <td align="right">@item.id</td>
-        <td align="right">0</td>
+        <td align="right">@{item.size / 1024} kB</td>
     } else {
         <td>File</td>
         <td>@item.name</td>
         <td align="right">@item.id</td>
-        <td align="right">@item.asInstanceOf[model.BoxFile].size</td>
+        <td align="right">@{item.size / 1024} kB</td>
     }
     </tr>
 }

@@ -12,13 +12,11 @@ class FolderService {
   def fetchFolderData(context:BoxContext, folderId:String) = {
     val rootItemsFuture = context.boxClient.getFolderItems(context, folderId)
     val rootFuture = context.boxClient.getFolder(context, folderId)
-    val userFuture = context.boxClient.getUser(context, "me")
 
     for {
       root <- rootFuture
       rootItems <- rootItemsFuture
-      user <- userFuture
-    } yield FolderData(user, root, rootItems)
+    } yield FolderData(root, rootItems)
   }
 
   def cd(context:BoxContext, path:String) = makeContextForPath(Future(context), path)

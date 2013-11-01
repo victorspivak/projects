@@ -8,14 +8,14 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.commands.ShowCurrentFolder
 import lib._
 import java.net.ConnectException
-import play.api.mvc.AsyncResult
 import lib.BoxAppConfig
 import scala.Some
+import play.api.{Logger, Play}
 
 object Application extends Controller {
   val inputCommandForm = Form[String]("command" -> text)
-//  val boxClient = BoxClient(BoxAppConfig("https://vspivak.inside-box.net/api", "i8ei0dxlkwu8d3n9036trtt436u9kbsc", "vBre9hlrrbmtxaCp5hPt7Ub3KN6m5eFU"))
-  val boxClient = BoxClient(BoxAppConfig("https://www.box.com/api", "7j2k31matzekl35p5mit1x6mz8si9wbp", "6qkDs9bpt2EXJlMYHa2FxgSisOFgJxhW", "https://victorspivak.homeip.net:9091/authtoken"))
+
+  val boxClient = BoxClient(buildAppConfig)
 
   def test = Action {implicit request =>
     Ok(views.html.message("Message:", "" + routes.Application.authtoken().absoluteURL(secure = true)))
@@ -54,12 +54,27 @@ object Application extends Controller {
         Future(Ok(views.html.message("Could not connect to the server", e.getMessage)))
       case e:BoxFolderNotFoundException =>
          ShowCurrentFolder().execute(context.setStatus(e.getMessage))
-        //Future(Ok(views.html.message(e.getMessage)))
       case BoxHttpErrorException(401, _, _) =>func(BoxContext.refreshToken(context)).recover{
           case e => Ok(views.html.message(e.getMessage)).withNewSession
         }
       case e:Exception =>
+        BoxClient.logger.error("Error", e)
         Future(Ok(views.html.message("There is an error", e.getMessage)))
     }
+  }
+
+  private def buildAppConfig = {
+    val appConfig = for {
+      apiUrl <- Play.current.configuration.getString("box.api.url")
+      clientId <- Play.current.configuration.getString("box.client.id")
+      clientSecret <- Play.current.configuration.getString("box.client.secret")
+    } yield BoxAppConfig(apiUrl, clientId, clientSecret, Play.current.configuration.getString("box.redirect.url"))
+
+    if (appConfig.isEmpty){
+      Logger.error("Box Application is not configured")
+      throw new Exception("Box Application is not configured")
+    }
+
+    appConfig.get
   }
 }
