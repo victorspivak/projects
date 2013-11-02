@@ -5,7 +5,7 @@ import controllers.commands.{CdCommand, ShowCurrentFolder}
 
 object CommandParser {
   def parse(command:String)(implicit request:Request[AnyContent]) = {
-    println(s"Parsing $command")
+    BoxClient.logger.info(s"Parsing $command")
 		val CommandTemplate = """\s*([!a-zA-Z0-9]*)\b*(.*)""".r
 
     command match {

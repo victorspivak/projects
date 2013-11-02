@@ -17,7 +17,7 @@
 <br/>
 <table class="status">
     <tr class="status">
-        <td class="status">Logged User: @context.userName</td>
+        <td class="status">Logged User: @context.userName.getOrElse("Unknown User")</td>
         <td class="status">@{"/" + context.currentPath.reverse.tail.mkString("/")}</td>
         @if(!context.statusMessage.isEmpty){
             <td class="status_error">@context.statusMessage</td>

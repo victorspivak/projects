@@ -3,11 +3,12 @@ package controllers
 import play.api.mvc._
 import scala.util.{Success, Failure}
 import lib.{BoxToken, BoxClient,BoxFolderNotFoundException}
-import scala.concurrent.Future
+import scala.concurrent.{Await, Future}
 import scala.collection.immutable.Stack
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration._
 
-case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], userName:String, currentPath:Stack[String], statusMessage:String = "") {
+case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], userName:Option[String], currentPath:Stack[String], statusMessage:String = "") {
   def pushFolder(folderId:String) = BoxContext(boxClient, tokenFuture, userName, currentPath.push(folderId))
   def popFolder = {
     if (currentPath.size < 2)
@@ -27,11 +28,12 @@ case class BoxContext(boxClient:BoxClient, tokenFuture:Future[BoxToken], userNam
   }
 
   private def buildSessionData(token: BoxToken): List[(String, String)] = {
-    List(BoxContext.ACCESS_TOKEN -> token.accessToken,
+    val data = List(BoxContext.ACCESS_TOKEN -> token.accessToken,
       BoxContext.REFRESH_TOKEN -> token.refreshToken,
-      BoxContext.USER_NAME -> userName,
       BoxContext.CURRENT_PATH -> currentPath.mkString(BoxContext.PATH_DELIMITER)
     )
+
+    userName.map(name => BoxContext.USER_NAME ->name :: data).getOrElse(data)
   }
 }
 
@@ -55,8 +57,22 @@ object BoxContext {
       case None =>  retrieveTokenUsingCode(boxClient, request)
     }
 
+    val pathStack = Stack(session.get(CURRENT_PATH).getOrElse("0").split(PATH_DELIMITER): _*)
+
     tokenAsFuture.map{token =>
-      BoxContext(boxClient, token, (session.get(USER_NAME).getOrElse("Unknown User")), Stack(((session.get(CURRENT_PATH).getOrElse("0")).split(PATH_DELIMITER)): _*))
+      val userName = session.get(USER_NAME) match {
+        case Some(name) => Some(name)
+        case None =>
+          val tempContext = BoxContext(boxClient, token, None, pathStack)
+          val user = boxClient.getUser(tempContext, "me")
+          Await.ready(user, 5 seconds)
+          user.value.flatMap {
+            case Success(user_) => Option(user_.name)
+            case Failure(_) => None
+          }
+      }
+
+      BoxContext(boxClient, token, userName, pathStack)
     }
   }
 

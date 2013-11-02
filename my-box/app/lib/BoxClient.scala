@@ -8,8 +8,10 @@ import play.api.libs.json.JsValue
 import controllers.BoxContext
 import model.BoxItem.BoxItemType
 import scala.concurrent.ExecutionContext.Implicits.global
+import play.Logger
+import org.slf4j.LoggerFactory
 
-case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
+case class BoxAppConfig(url:String, clientId:String, clientSecret:String, redirectUrl:Option[String] = None)
 
 case class BoxToken(accessToken:String, refreshToken:String)
 
@@ -39,13 +41,13 @@ class BoxClient(config:BoxAppConfig){
   private def get[T <: BoxEntity](boxContext:BoxContext, resource: BoxResource[T]): Future[JsValue] = {
     val fullUrl = apiUrl + resource.path
     boxContext.tokenFuture flatMap {token =>
-      System.out.println(s"Sending request to $fullUrl")
+      BoxClient.logger.info(s"Sending request to $fullUrl")
       val getFuture = WS.url(fullUrl).withHeaders(getAuthHeader(token)).withQueryString(resource.getParams: _*).get()
       getFuture flatMap {
         response => {
           response.status match {
             case 200 =>
-              System.out.println(s"Request $fullUrl is completed")
+              BoxClient.logger.info(s"Request $fullUrl is completed")
               Future.successful(response.json)
             case _ => Future.failed(BoxHttpErrorException(response))
           }
@@ -60,4 +62,5 @@ class BoxClient(config:BoxAppConfig){
 
 object BoxClient {
   def apply(config:BoxAppConfig) = new BoxClient(config) : BoxClient
+  val logger = LoggerFactory.getLogger("BoxClient")
 }

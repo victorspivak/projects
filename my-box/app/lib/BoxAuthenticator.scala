@@ -10,36 +10,36 @@ class BoxAuthenticator(config:BoxAppConfig) {
   def getOauth2Code(implicit request:Request[AnyContent]) = Redirect(authorizeUrl, postAuthDataForCode)
 
   def authenticate(code:String): Future[BoxToken] = {
-    println(s"Authenticating $code started...")
+    BoxClient.logger.info(s"Authenticating $code started...")
     WS.url(tokenUrl).post(postAuthDataForOauthTokens(code)) flatMap {
       case response if response.status == 200 =>
-        println(s"Authenticating $code is successful.")
+        BoxClient.logger.info(s"Authenticating $code is successful.")
         val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
         Future.successful(token)
       case response =>
-        println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
+        BoxClient.logger.error(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
         Future.failed(BoxHttpErrorException(response))
     }
   }
 
   def refresh(token:BoxToken): Future[BoxToken] = {
-    println(s"Refresh token started...")
+    BoxClient.logger.info(s"Refresh token started...")
     WS.url(tokenUrl).post(postAuthDataForRefresh(token.refreshToken)) flatMap {
       case response if response.status == 200 =>
-        println(s"Refresh token is successful.")
+        BoxClient.logger.info(s"Refresh token is successful.")
         val token: BoxToken = BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String])
         Future.successful(token)
       case response =>
-        println(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
+        BoxClient.logger.error(">>>>>>>>>>>>>>>>>>>>>>>> " + response.json)
         Future.failed(BoxRefreshTokenException(response))
     }
   }
 
   def authenticate(login:String, password:String): Future[BoxToken] = {
-    println(s"Authenticating $login started...")
+    BoxClient.logger.info(s"Authenticating $login started...")
     WS.url(tokenUrl).post(postAuthDataForPassword(login, password)) flatMap {
       case response if response.status == 200 =>
-        println(s"Authenticating $login is successful.")
+        BoxClient.logger.info(s"Authenticating $login is successful.")
         Future.successful(BoxToken((response.json \ "access_token").as[String], (response.json \ "refresh_token").as[String]))
       case response =>
         Future.failed(BoxHttpErrorException(response))
@@ -51,7 +51,7 @@ class BoxAuthenticator(config:BoxAppConfig) {
 
   private def postAuthDataForCode(implicit request:Request[AnyContent]) = Map(
     "response_type" -> Seq("code"),
-    "redirect_uri" -> Seq(controllers.routes.Application.authtoken.absoluteURL(true)),
+    "redirect_uri" -> Seq(config.redirectUrl.getOrElse("controllers.routes.Application.authtoken().absoluteURL(secure = true)")),
     "client_id" -> Seq(config.clientId)
   )
 
