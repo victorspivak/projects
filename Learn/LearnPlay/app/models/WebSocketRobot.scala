@@ -24,10 +24,10 @@ object WebSocketRobot {
   val loggerIteratee = Iteratee.foreach[JsValue](event => println(s"Trace: ${event.toString()}"))
 
   def start():scala.concurrent.Future[(Iteratee[JsValue,_],Enumerator[JsValue])] = {
-    (default ? "connect").map {
+    (default ? Connect()).map {
       case enumerator:Enumerator[JsValue] =>
         val iteratee = Iteratee.foreach[JsValue] { event =>
-          default ! (event \ "text").as[String]
+          default ! Command((event \ "command").as[String])
         }
         enumerator |>> loggerIteratee
 
@@ -40,8 +40,8 @@ class WebSocketRobot extends Actor {
   val (myEnumerator, myChannel) = Concurrent.broadcast[JsValue]
 
   def receive = {
-    case "connect" => sender ! myEnumerator
-    case input:String =>
+    case Connect() => sender ! myEnumerator
+    case Command(input) =>
       val msg = JsObject(
         Seq(
           "text" -> JsString(input.reverse)
@@ -51,3 +51,5 @@ class WebSocketRobot extends Actor {
   }
 }
 
+case class Connect()
+case class Command(command:String)

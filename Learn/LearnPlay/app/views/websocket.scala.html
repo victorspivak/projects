@@ -14,7 +14,7 @@
 
             var sendMessage = function() {
                 mySocket.send(JSON.stringify(
-                        {text: $("#talk").val()}
+                        {command: $("#talk").val()}
                 ))
                 $("#talk").val('')
             }
