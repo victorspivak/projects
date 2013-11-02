@@ -12,17 +12,10 @@
     } else {
         <tr class="alt1">
     }
-    @if(item.itemType == model.BoxItem.BoxItemType.Folder){
-        <td>Folder</td>
+        <td>@item.itemType</td>
         <td>@item.name</td>
         <td align="right">@item.id</td>
         <td align="right">@{item.size / 1024} kB</td>
-    } else {
-        <td>File</td>
-        <td>@item.name</td>
-        <td align="right">@item.id</td>
-        <td align="right">@{item.size / 1024} kB</td>
-    }
     </tr>
 }
 

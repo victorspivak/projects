@@ -13,18 +13,18 @@ trait BoxItem extends BoxEntity {
 object BoxItem {
   object BoxItemType extends Enumeration{
     type BoxItemType = Value
-    val Folder, File = Value
+    val Folder, File, WebLink = Value
   }
 }
 
 case class BoxFolder(folderId: String, name: String, count:Int, size:Long) extends BoxItem {
-  def id = folderId
+  val id = folderId
   val itemType = BoxItemType.Folder
 }
 
 case class BoxFolderResource(id: String) extends BoxResource[BoxFolder] {
   val path = s"/folders/$id"
-  def getParams = List("fields" -> "id,name,item_collection,size", "limit" -> "0")
+  val getParams = List("fields" -> "id,name,item_collection,size", "limit" -> "0")
 }
 
 class Json2BoxFolder extends json2Entity[BoxFolder] {
@@ -37,13 +37,13 @@ class Json2BoxFolder extends json2Entity[BoxFolder] {
 }
 
 case class BoxFile(fileId: String, name: String, size:Long) extends BoxItem {
-  def id = fileId
-  def itemType = BoxItemType.File
+  val id = fileId
+  val itemType = BoxItemType.File
 }
 
 case class BoxFileResource(id: String) extends BoxResource[BoxFile] {
   val path = s"/files/$id"
-  def getParams = List("fields" -> "id,name,size")
+  val getParams = List("fields" -> "id,name,size")
 }
 
 class Json2BoxFile extends json2Entity[BoxFile] {
@@ -52,23 +52,42 @@ class Json2BoxFile extends json2Entity[BoxFile] {
   }
 }
 
+case class BoxWebLink(webLinkId: String, name: String) extends BoxItem {
+  val id = webLinkId
+  val size = 0L
+  val itemType = BoxItemType.WebLink
+}
+
+case class BoxWebLinkResource(id: String) extends BoxResource[BoxWebLink] {
+  val path = s"/files/$id"
+  val getParams = List("fields" -> "id,name,size")
+}
+
+class Json2BoxWebLink extends json2Entity[BoxWebLink] {
+  def toEntity(json: JsValue): BoxWebLink = {
+    BoxWebLink((json \ "id").as[String], (json \ "name").as[String])
+  }
+}
+
 case class BoxFolderItems(folderId: String, count:Int, items:List[BoxItem]) extends BoxEntity {
-  def id = folderId
+  val id = folderId
 }
 
 case class BoxFolderItemsResource(id: String) extends BoxResource[BoxFolderItems] {
   val path = s"/folders/$id/items"
-  def getParams = List("fields" -> "id,name,type,size", "limit" -> "1000")
+  val getParams = List("fields" -> "id,name,type,size", "limit" -> "1000")
 }
 
 class Json2BoxFolderItems(folderId:String) extends json2Entity[BoxFolderItems] {
   val fileConvertor = new Json2BoxFile
   val folderConvertor = new Json2BoxFolder
+  val webLinkConvertor = new Json2BoxWebLink
 
   def toItem(json: JsValue): BoxItem = {
     (json \ "type").as[String] match {
       case "file" => fileConvertor.toEntity(json)
       case "folder" => folderConvertor.toEntity(json)
+      case "web_link" => webLinkConvertor.toEntity(json)
     }
   }
 

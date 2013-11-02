@@ -68,7 +68,7 @@ object Application extends Controller {
       apiUrl <- Play.current.configuration.getString("box.api.url")
       clientId <- Play.current.configuration.getString("box.client.id")
       clientSecret <- Play.current.configuration.getString("box.client.secret")
-    } yield BoxAppConfig(apiUrl, clientId, clientSecret, Play.current.configuration.getString("box.redirect.url"))
+    } yield BoxAppConfig(apiUrl, clientId, clientSecret)
 
     if (appConfig.isEmpty){
       Logger.error("Box Application is not configured")

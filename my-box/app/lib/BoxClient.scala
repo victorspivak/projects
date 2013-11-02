@@ -11,7 +11,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import play.Logger
 import org.slf4j.LoggerFactory
 
-case class BoxAppConfig(url:String, clientId:String, clientSecret:String, redirectUrl:Option[String] = None)
+case class BoxAppConfig(url:String, clientId:String, clientSecret:String)
 
 case class BoxToken(accessToken:String, refreshToken:String)
 
