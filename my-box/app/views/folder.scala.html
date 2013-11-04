@@ -1,4 +1,4 @@
-@(context:BoxContext, folderData:model.FolderData)
+@(context:BoxContext, folderData:model.FolderData)(implicit r: RequestHeader)
 
 @main(context, "Box Folders") {
     <h1 class="folderName">@folderData.folder.name  ---  @folderData.folder.count items</h1>

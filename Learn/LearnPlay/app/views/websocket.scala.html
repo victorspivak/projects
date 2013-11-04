@@ -42,7 +42,7 @@
                 }
             }
 
-            $("#talk").keypress(handleReturnKey)
+            $("#talk").keydown(handleReturnKey)
 
             mySocket.onmessage = receiveEvent
         })

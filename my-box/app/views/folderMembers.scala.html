@@ -3,8 +3,8 @@
 <table border="1" class="folderMembers">
     <th>Item Type</th>
     <th>Item Name</th>
-    <th>ID</th>
-    <th>Size</th>
+    <th class="right">ID</th>
+    <th class="right">Size</th>
 
 @for((item, index) <- rootFolderItems.items.zipWithIndex) {
     @if((index%2)==0){
@@ -14,8 +14,8 @@
     }
         <td>@item.itemType</td>
         <td>@item.name</td>
-        <td align="right">@item.id</td>
-        <td align="right">@{item.size / 1024} kB</td>
+        <td class="right">@item.id</td>
+        <td class="right">@{item.size / 1024} kB</td>
     </tr>
 }
 

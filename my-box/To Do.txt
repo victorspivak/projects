@@ -1,6 +1,9 @@
 - Parse authentiction error json to identify the reason
 - Figure out how to use script files instead of embedding it in the html
 - try cache
+- remove blocking for getting user name
+- validate that there is no actor leak
+
 
 
 

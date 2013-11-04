@@ -29,6 +29,11 @@
         <appender-ref ref="FILE" />
     </logger>
 
+    <logger name="AutoCompleteService" level="DEBUG" additivity="false">
+        <appender-ref ref="mySTDOUT" />
+        <appender-ref ref="FILE" />
+    </logger>
+
     <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILE" />

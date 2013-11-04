@@ -8,32 +8,40 @@ import scala.concurrent.ExecutionContext.Implicits.global
 /*
 * User: victor    Date: 10/26/13   Time: 12:52 AM
 */
-object SimpleAkkaActor {
+object MultipleActors {
     implicit val timeout = Timeout(1 second)
 
+    val system = ActorSystem("HelloSystem")
+
     def main(args: Array[String]) {
-        val system = ActorSystem("HelloSystem")
-        val actor = system.actorOf(Props[MyActor], name = "myactor")
 
-        actor ! "Hi"
-        //actor ! "quit"
-        //actor ! PoisonPill
-        actor ! "Oops"
-        (actor ? "wait").onSuccess{
-            case msg => println(s"Got $msg")
-        }
+        val a1 = runActor("a1")
+        val a2 = runActor("a2")
+        val a3 = runActor("a3")
 
-        system.stop(actor)
+        println(a1.isTerminated)
+        Thread.sleep(2000)
+        println(a1.isTerminated)
+
+        finish()
+    }
+
+
+    def runActor(name:String) = {
+        val actor = system.actorOf(Props[MyActor], name)
+        actor ! "wait"
+        actor ! PoisonPill
+        actor
+    }
+
+    def finish (){
         system.shutdown()
         system.awaitTermination()
     }
 
     class MyActor extends Actor{
         def receive = {
-            case "quit" => context.stop(self)
-            case "Hi" => println("Hello")
             case "wait" => Thread.sleep(1000)
-                sender ! "done"
             case msg:String => println(msg)
         }
     }

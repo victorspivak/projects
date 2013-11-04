@@ -11,6 +11,7 @@ import java.net.ConnectException
 import lib.BoxAppConfig
 import scala.Some
 import play.api.{Logger, Play}
+import play.api.libs.json.JsValue
 
 object Application extends Controller {
   val inputCommandForm = Form[String]("command" -> text)
@@ -39,6 +40,13 @@ object Application extends Controller {
       val command = CommandParser.parse(commandString)
       command.execute(context)
     })
+  }
+
+  def startAutoCompleter = WebSocket.async[JsValue] { request  =>
+    BoxContext.fromRequest(boxClient, request) match {
+      case Some(context) =>     AutoCompleteService.start(context)
+      case None => throw new Exception("Could not get context")
+    }
   }
 
   private def execute(request:Request[AnyContent], func:BoxContext=>Future[SimpleResult]) = {

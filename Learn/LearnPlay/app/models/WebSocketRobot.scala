@@ -4,7 +4,6 @@ import akka.actor._
 import scala.concurrent.duration._
 import scala.language.postfixOps
 
-import play.api._
 import play.api.libs.json._
 import play.api.libs.iteratee._
 import play.api.libs.concurrent._

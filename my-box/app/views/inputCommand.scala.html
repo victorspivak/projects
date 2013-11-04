@@ -1,8 +1,9 @@
-@(context:BoxContext)
+@(context:BoxContext)(implicit r: RequestHeader)
 @import helper._
 
 @form(routes.Application.processCommand) {
-    <input type="text" name="command" placeholder="Enter Command" id="inputCommand">
+<label for="inputCommand">Enter command:</label>
+<input type="text" name="command" placeholder="Enter Command" id="inputCommand">
 
     <button type="submit" id="commandButton" class="submit">Enter</button>
 }
@@ -13,14 +14,71 @@
         $("#inputCommand" ).focus();
     });
 </script>
+<script type="text/javascript">
+    function showMyError(msg) {
+        var status = $("#error-status");
+        status.text(msg);
+        status.show();
+    }
+</script>
+
+<script type="text/javascript">
+    $(function() {
+
+        var WS = WebSocket;
+        var mySocket = new WS("@routes.Application.startAutoCompleter.webSocketURL(true)");
+        var inpCommand = $("#inputCommand");
+
+        var sendMessage = function(msg) {
+            mySocket.send(JSON.stringify(
+                    {command: msg}
+            ));
+        };
+
+        var closeActor = function() {
+            sendMessage("close_ac_actor");
+        };
+
+        var receiveEvent = function(event) {
+            var data = JSON.parse(event.data);
+
+            // Handle errors
+            if(data.error) {
+                mySocket.close();
+                showMyError(data.error);
+                return
+            } else {
+                $("#inputCommand").show()
+            }
+
+            inpCommand.val(data.text)
+        };
+
+        var handleAutoCompletionKey = function(e) {
+            if(e.charCode == 9 || e.keyCode == 9) {
+                e.preventDefault();
+                sendMessage(inpCommand.val())
+            }
+        };
+
+        inpCommand.keydown(handleAutoCompletionKey);
+
+        mySocket.onmessage = receiveEvent
+
+        $(window).bind('beforeunload', closeActor);
+
+    })
+</script>
 
 <br/>
 <table class="status">
     <tr class="status">
         <td class="status">Logged User: @context.userName.getOrElse("Unknown User")</td>
         <td class="status">@{"/" + context.currentPath.reverse.tail.mkString("/")}</td>
+        <td id="error-status" class="status_error" hidden></td>
+
         @if(!context.statusMessage.isEmpty){
-            <td class="status_error">@context.statusMessage</td>
+            <script>showMyError("@context.statusMessage")</script>
         }
     </tr>
 </table>

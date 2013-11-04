@@ -3,16 +3,20 @@ package controllers.commands
 import lib.{FolderService, BoxClient}
 import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.BoxContext
+import play.api.mvc.RequestHeader
+import scala.concurrent.Future
 
 class ShowCurrentFolder extends BoxCommand {
   def execute(context:BoxContext) = {
     val folderId = context.getCurrentFolder
     context.toSessionData.flatMap{sessionData =>
       FolderService().fetchFolderData(context, folderId) map {folderData =>
-        Ok(views.html.folder(context, folderData)).withSession(sessionData: _*)
+        Ok(views.html.folder(context, folderData)(context.request)).withSession(sessionData: _*)
       }
     }
   }
+
+  def autoComplete(context:BoxContext): Future[Option[String]] = Future.successful(None)
 }
 
 object ShowCurrentFolder {
@@ -24,5 +28,9 @@ class CdCommand(val path:String) extends BoxCommand {
     FolderService().cd(context, path).flatMap{newContext=>
       ShowCurrentFolder().execute(newContext)
     }
+  }
+
+  def autoComplete(context:BoxContext): Future[Option[String]] = {
+    Future.successful(None)
   }
 }
