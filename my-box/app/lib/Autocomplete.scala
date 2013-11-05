@@ -16,6 +16,7 @@ import play.api.libs.concurrent.Execution.Implicits._
 import org.slf4j.LoggerFactory
 import controllers.BoxContext
 import scala.concurrent.Future
+import model.BoxItem._
 
 object AutoCompleteService {
   implicit val timeout = Timeout(1 second)
@@ -49,15 +50,35 @@ class AutoCompleter(boxContext:BoxContext) extends Actor {
   def receive = {
     case Connect() => sender ! myEnumerator
     case Command(input) =>
-      Future{
-        val msg = JsObject(
-          Seq(
-            "text" -> JsString("cd Concur")
-          )
-        )
+      //todo svl 04 Nov 13 (8:15 PM) vspivak: Fix the following hacky code
+      if (input.startsWith("cd")) {
+        val params = input.substring(2).trim
 
-        myChannel.push(msg)
+        boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
+          case items => val candidates = items.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(params))
+            if (candidates.size == 1){
+
+              Future{
+                val msg = JsObject(
+                  Seq(
+                    "text" -> JsString("cd " + candidates.head.name)
+                  )
+                )
+
+                myChannel.push(msg)
+            }
+          }
+        }
       }
+
+//      Future{
+//        val msg = JsObject(
+//          Seq(
+//            "text" -> JsString("cd Concur")
+//          )
+//        )
+//
+//        myChannel.push(msg)
   }
 }
 
