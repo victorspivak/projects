@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory
 import controllers.BoxContext
 import scala.concurrent.Future
 import model.BoxItem._
+import model.BoxFolderItems
 
 object AutoCompleteService {
   implicit val timeout = Timeout(1 second)
@@ -47,39 +48,66 @@ object AutoCompleteService {
 class AutoCompleter(boxContext:BoxContext) extends Actor {
   val (myEnumerator, myChannel) = Concurrent.broadcast[JsValue]
 
-  def receive = {
+  def receive = getBehavior(None)
+  def getBehavior(folderItems:Option[BoxFolderItems]): Receive = {
     case Connect() => sender ! myEnumerator
     case Command(input) =>
       //todo svl 04 Nov 13 (8:15 PM) vspivak: Fix the following hacky code
       if (input.startsWith("cd")) {
         val params = input.substring(2).trim
 
-        boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
-          case items => val candidates = items.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(params))
-            if (candidates.size == 1){
-
-              Future{
-                val msg = JsObject(
-                  Seq(
-                    "text" -> JsString("cd " + candidates.head.name)
-                  )
-                )
-
-                myChannel.push(msg)
+        folderItems match {
+          case Some(boxFolderItems) => sendSuggestion(boxFolderItems, params)
+          case None =>
+            boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
+              case boxFolderItems =>
+                sendSuggestion(boxFolderItems, params)
+                context become(getBehavior(Some(boxFolderItems)), true)
             }
-          }
         }
       }
-
-//      Future{
-//        val msg = JsObject(
-//          Seq(
-//            "text" -> JsString("cd Concur")
-//          )
-//        )
-//
-//        myChannel.push(msg)
   }
+
+  def sendSuggestion(boxFolderItems:BoxFolderItems, input:String) = {
+    val candidates = boxFolderItems.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(input))
+    if (candidates.size > 0){
+
+      Future{
+        val msg = JsObject(
+          Seq(
+            "text" -> JsString("cd " + StringUtils.diff(candidates.map(_.name)))
+          )
+        )
+
+        myChannel.push(msg)
+      }
+    }
+  }
+
+//  def receive = {
+//    case Connect() => sender ! myEnumerator
+//    case Command(input) =>
+//      //todo svl 04 Nov 13 (8:15 PM) vspivak: Fix the following hacky code
+//      if (input.startsWith("cd")) {
+//        val params = input.substring(2).trim
+//
+//        boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
+//          case items => val candidates = items.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(params))
+//            if (candidates.size > 0){
+//
+//              Future{
+//                val msg = JsObject(
+//                  Seq(
+//                    "text" -> JsString("cd " + StringUtils.diff(candidates.map(_.name)))
+//                  )
+//                )
+//
+//                myChannel.push(msg)
+//            }
+//          }
+//        }
+//      }
+//  }
 }
 
 case class Connect()
