@@ -36,9 +36,13 @@ object Application extends Controller {
 
   def processCommand() = Action.async {implicit request =>
     execute(request, {context=>
-      val commandString = inputCommandForm.bindFromRequest().data("command")
-      val command = CommandParser.parse(commandString)
-      command.execute(context)
+
+      Future{
+        val commandString = inputCommandForm.bindFromRequest().data("command")
+        CommandParser.parse(commandString)
+      }.flatMap{command=>
+        command.execute(context)
+      }
     })
   }
 
@@ -62,12 +66,16 @@ object Application extends Controller {
         Future(Ok(views.html.message("Could not connect to the server", e.getMessage)))
       case e:BoxFolderNotFoundException =>
          ShowCurrentFolder().execute(context.setStatus(e.getMessage))
-      case BoxHttpErrorException(401, _, _) =>func(BoxContext.refreshToken(context)).recover{
+      case e:UnknownCommandException =>
+         ShowCurrentFolder().execute(context.setStatus(e.getMessage))
+      case BoxHttpErrorException(401, _, _) => func(BoxContext.refreshToken(context)).recover{
           case e => Ok(views.html.message(e.getMessage)).withNewSession
         }
       case e:Exception =>
         BoxClient.logger.error("Error", e)
         Future(Ok(views.html.message("There is an error", e.getMessage)))
+      case _ =>
+        Future(Ok(views.html.message("There is an error", "")))
     }
   }
 

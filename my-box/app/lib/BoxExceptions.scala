@@ -17,3 +17,5 @@ object BoxRefreshTokenException {
 }
 
 class BoxFolderNotFoundException(folder:String, detail:String = "") extends Exception(s"Folder $folder is not found. $detail")
+
+class UnknownCommandException(val command:String) extends Exception(s"Could not recognize $command command")

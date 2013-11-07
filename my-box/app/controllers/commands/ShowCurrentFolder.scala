@@ -5,6 +5,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.BoxContext
 import play.api.mvc.RequestHeader
 import scala.concurrent.Future
+import play.api.mvc.Results._
 
 class ShowCurrentFolder extends BoxCommand {
   def execute(context:BoxContext) = {
