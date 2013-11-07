@@ -1,14 +1,19 @@
 package lib
 
-import play.api.mvc.{Request, AnyContent}
-import controllers.commands.{CdCommand, ShowCurrentFolder}
+import play.api.mvc.RequestHeader
+import controllers.commands.{BoxCommand, CdCommand, ShowCurrentFolder}
+import play.api.libs.concurrent.Execution.Implicits._
+import scala.concurrent.Future
 
 object CommandParser {
-  def parse(command:String)(implicit request:Request[AnyContent]) = {
+  def parseAsFuture(command:String)(implicit request:RequestHeader) = Future(parse(command))
+
+  def parse(command:String)(implicit request:RequestHeader):BoxCommand = {
     BoxClient.logger.info(s"Parsing $command")
 		val CommandTemplate = """\s*([!a-zA-Z0-9]*)\b*(.*)""".r
     command match {
-			case CommandTemplate("cd", params) => new CdCommand(params)
+			case CommandTemplate("cd", params) => new CdCommand(params.trim)
+			case CommandTemplate("ls", "") => new ShowCurrentFolder
       case _ =>  throw new UnknownCommandException(command)
 //      case CommandTemplate("exit", params) => new ExitCommand
 // 			case CommandTemplate("ls", params) => new LsCommand(params.trim)

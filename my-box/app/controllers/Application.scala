@@ -36,11 +36,8 @@ object Application extends Controller {
 
   def processCommand() = Action.async {implicit request =>
     execute(request, {context=>
-
-      Future{
-        val commandString = inputCommandForm.bindFromRequest().data("command")
-        CommandParser.parse(commandString)
-      }.flatMap{command=>
+      val commandString = inputCommandForm.bindFromRequest().data("command")
+      CommandParser.parseAsFuture(commandString).flatMap{command=>
         command.execute(context)
       }
     })
@@ -48,7 +45,7 @@ object Application extends Controller {
 
   def startAutoCompleter = WebSocket.async[JsValue] { request  =>
     BoxContext.fromRequest(boxClient, request) match {
-      case Some(context) =>     AutoCompleteService.start(context)
+      case Some(context) =>     AutoCompleteAgent.start(context)
       case None => throw new Exception("Could not get context")
     }
   }

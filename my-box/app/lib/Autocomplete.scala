@@ -15,18 +15,23 @@ import play.api.Play.current
 import play.api.libs.concurrent.Execution.Implicits._
 import org.slf4j.LoggerFactory
 import controllers.BoxContext
+import controllers.commands.{BoxCommand, AutoCompleter}
 import scala.concurrent.Future
-import model.BoxItem._
 import model.BoxFolderItems
+import scala.Some
+import play.api.libs.json.JsString
+import play.api.libs.json.JsObject
+import model.BoxItem.BoxItemType.BoxItemType
+import model.BoxItem.BoxItemType
 
-object AutoCompleteService {
+object AutoCompleteAgent {
   implicit val timeout = Timeout(1 second)
   val logger = LoggerFactory.getLogger("AutoCompleteService")
 
   val loggerIteratee = Iteratee.foreach[JsValue](event => logger.debug(s"${event.toString()}"))
 
   def start(boxContext:BoxContext) = {
-    val props = Props(classOf[AutoCompleter], boxContext)
+    val props = Props(classOf[AutoCompleteAgent], boxContext)
     val autoCompleter = Akka.system.actorOf(props)
     (autoCompleter ? Connect()).map {
       case enumerator:Enumerator[JsValue @unchecked] =>
@@ -45,71 +50,52 @@ object AutoCompleteService {
   }
 }
 
-class AutoCompleter(boxContext:BoxContext) extends Actor {
+class AutoCompleteAgent(boxContext:BoxContext) extends Actor {
   val (myEnumerator, myChannel) = Concurrent.broadcast[JsValue]
 
   def receive = getBehavior(None)
-  def getBehavior(folderItems:Option[BoxFolderItems]): Receive = {
+  def getBehavior(autoCompleter:Option[AutoCompleter]): Receive = {
     case Connect() => sender ! myEnumerator
     case Command(input) =>
-      //todo svl 04 Nov 13 (8:15 PM) vspivak: Fix the following hacky code
-      if (input.startsWith("cd")) {
-        val params = input.substring(2).trim
-
-        folderItems match {
-          case Some(boxFolderItems) => sendSuggestion(boxFolderItems, params)
+      CommandParser.parseAsFuture(input)(boxContext.request).map{command=>
+        autoCompleter match {
+          case Some(completer) => sendSuggestion(command, completer)
           case None =>
             boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
               case boxFolderItems =>
-                sendSuggestion(boxFolderItems, params)
-                context become(getBehavior(Some(boxFolderItems)), true)
+                val completer = new AutoCompleterImp(boxFolderItems)
+                sendSuggestion(command, completer)
+                context become(getBehavior(Some(completer)), true)
             }
         }
       }
   }
 
-  def sendSuggestion(boxFolderItems:BoxFolderItems, input:String) = {
-    val candidates = boxFolderItems.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(input))
-    if (candidates.size > 0){
-
-      Future{
-        val msg = JsObject(
-          Seq(
-            "text" -> JsString("cd " + StringUtils.diff(candidates.map(_.name)))
-          )
-        )
-
-        myChannel.push(msg)
-      }
-    }
+  private def sendSuggestion(command:BoxCommand, completer:AutoCompleter) {
+    command.autoComplete(completer).map(_.map(suggestion=>sendSuggestion(suggestion)))
   }
 
-//  def receive = {
-//    case Connect() => sender ! myEnumerator
-//    case Command(input) =>
-//      //todo svl 04 Nov 13 (8:15 PM) vspivak: Fix the following hacky code
-//      if (input.startsWith("cd")) {
-//        val params = input.substring(2).trim
-//
-//        boxContext.boxClient.getFolderItems(boxContext, boxContext.getCurrentFolder).onSuccess{
-//          case items => val candidates = items.items.filter(_.itemType == BoxItemType.Folder).filter(_.name.startsWith(params))
-//            if (candidates.size > 0){
-//
-//              Future{
-//                val msg = JsObject(
-//                  Seq(
-//                    "text" -> JsString("cd " + StringUtils.diff(candidates.map(_.name)))
-//                  )
-//                )
-//
-//                myChannel.push(msg)
-//            }
-//          }
-//        }
-//      }
-//  }
+  def sendSuggestion(suggestion:String) {
+    val msg = JsObject(
+      Seq("text" -> JsString(suggestion))
+    )
+
+    myChannel.push(msg)
+  }
 }
 
 case class Connect()
 case class Command(command:String)
 
+class AutoCompleterImp(folderItems:BoxFolderItems) extends AutoCompleter{
+  def completePath(path: String) = filter(path, BoxItemType.Folder)
+  def completeFilename(filename: String) = filter(filename, BoxItemType.Folder)
+
+  def filter(name: String, itemType:BoxItemType) = {
+    val candidates = folderItems.items.filter(_.itemType == itemType).filter(_.name.startsWith(name))
+    if (candidates.size > 0)
+      Future.successful(Option(StringUtils.diff(candidates.map(_.name))))
+    else
+      Future.successful(None)
+  }
+}

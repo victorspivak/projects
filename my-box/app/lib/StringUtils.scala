@@ -5,19 +5,24 @@ package lib
  */
 object StringUtils {
   def diff(l:Seq[String]) = {
-    l.reduceLeft{(found,str) =>
-      val candidate = findDiff(found, str, "")
-      if (candidate.length < found.length)
-        candidate
-      else
-        found
+    if (!l.isEmpty){
+      val pos = findDiffPos(l, 0)
+      l.head.substring(0, pos)
     }
+    else
+      ""
   }
 
-  def findDiff(s1:String, s2:String, found:String):String = {
-    if (s1.length() == 0 || s2.length() == 0 || (s1.charAt(0) != s2.charAt(0)))
-      found
-    else
-      findDiff(s1.substring(1), s2.substring(1), found + s1.charAt(0))
+  private def findDiffPos(l:Seq[String], pos:Int):Int = {
+    val first = l.head
+    if (first.length == pos)
+      pos
+    else {
+      val ch = first.charAt(pos)
+      if (l.forall{str=>str.length > pos && str.charAt(pos) == ch})
+        findDiffPos(l, pos + 1)
+      else
+        pos
+    }
   }
 }

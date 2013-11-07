@@ -17,7 +17,7 @@ class ShowCurrentFolder extends BoxCommand {
     }
   }
 
-  def autoComplete(context:BoxContext): Future[Option[String]] = Future.successful(None)
+  def autoComplete(autoCompleter:AutoCompleter): Future[Option[String]] = Future.successful(None)
 }
 
 object ShowCurrentFolder {
@@ -31,7 +31,7 @@ class CdCommand(val path:String) extends BoxCommand {
     }
   }
 
-  def autoComplete(context:BoxContext): Future[Option[String]] = {
-    Future.successful(None)
+  def autoComplete(autoCompleter:AutoCompleter): Future[Option[String]] = {
+    autoCompleter.completePath(path).map(_.map("cd " + _))
   }
 }
