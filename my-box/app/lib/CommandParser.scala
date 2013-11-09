@@ -16,7 +16,7 @@ object CommandParser {
 			case CommandTemplate("mkdir", name) => new MkDirCommand(name.trim)
 			case CommandTemplate("rmdir", name) => new RmDirCommand(name.trim)
 			case CommandTemplate("ls", "") | CommandTemplate("ll", "") => new ShowCurrentFolder
-      case _ =>  throw new UnknownCommandException(command)
+      case _ =>  new UnknownCommand(command)
 // 			case CommandTemplate("putfile", params) => new PutFileCommand(params.trim)
 // 			case CommandTemplate("getfile", params) => new GetFileCommand(params.trim)
 // 			case CommandTemplate("view", params) => new ViewFileCommand(params.trim)

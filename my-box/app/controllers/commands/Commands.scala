@@ -1,9 +1,9 @@
 package controllers.commands
 
-import lib.{BoxHttpErrorException, FolderService, BoxClient}
+import lib._
 import scala.concurrent.ExecutionContext.Implicits.global
 import controllers.BoxContext
-import play.api.mvc.RequestHeader
+import play.api.mvc.{SimpleResult, RequestHeader}
 import scala.concurrent.Future
 import play.api.mvc.Results._
 
@@ -68,3 +68,19 @@ class RmDirCommand(val name:String) extends BoxCommand {
   }
 }
 
+class UnknownCommand(val text:String) extends BoxCommand {
+    def execute(context:BoxContext): Future[SimpleResult] = {
+      throw new UnknownCommandException(text)
+  }
+
+  def autoComplete(autoCompleter:AutoCompleter): Future[Option[String]] = {
+    Future.successful(StringUtils.diff(UnknownCommand.supportedCommands.filter(_.startsWith(text))) match {
+      case "" => None
+      case suggestion => Some(suggestion)
+    })
+  }
+}
+
+object UnknownCommand{
+  val supportedCommands = List("mkdir", "rmdir", "cd", "ll", "ls")
+}
