@@ -2,7 +2,7 @@
 - Figure out how to use script files instead of embedding it in the html
 - try cache
 - remove blocking for getting user name
-- validate that there is no actor leak
+- add support for etag
 
 
 

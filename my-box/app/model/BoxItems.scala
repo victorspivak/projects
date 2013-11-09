@@ -4,7 +4,7 @@ import play.api.libs.json.JsValue
 import model.BoxItem.BoxItemType
 
 trait BoxItem extends BoxEntity {
-  def id:String
+  def parentId:String
   def name:String
   def size:Long
   def itemType:BoxItemType.BoxItemType
@@ -17,55 +17,64 @@ object BoxItem {
   }
 }
 
-case class BoxFolder(folderId: String, name: String, count:Int, size:Long) extends BoxItem {
+case class BoxFolder(folderId: String, name: String, count:Int, size:Long, parentId:String) extends BoxItem {
   val id = folderId
   val itemType = BoxItemType.Folder
 }
 
 case class BoxFolderResource(id: String) extends BoxResource[BoxFolder] {
-  val path = s"/folders/$id"
-  val getParams = List("fields" -> "id,name,item_collection,size", "limit" -> "0")
+  val collectionPath:String = "/folders"
+  val path = s"$collectionPath/$id"
+  val getParams = List("fields" -> "id,name,item_collection,size,parent", "limit" -> "0")
 }
 
 class Json2BoxFolder extends json2Entity[BoxFolder] {
   def toEntity(json: JsValue): BoxFolder = {
-    val count:Int = (json \ "item_collection").asOpt[JsValue].flatMap{jvalue:JsValue =>
+    val count = (json \ "item_collection").asOpt[JsValue].flatMap{jvalue:JsValue =>
       (jvalue \ "total_count").asOpt[Int]}.getOrElse(0)
+    val parentId = (json \ "parent").asOpt[JsValue].flatMap{jvalue:JsValue =>
+      (jvalue \ "id").asOpt[String]}.getOrElse("")
 
-    BoxFolder((json \ "id").as[String], (json \ "name").as[String], count, (json \ "size").asOpt[Long].getOrElse(0))
+    BoxFolder((json \ "id").as[String], (json \ "name").as[String], count, (json \ "size").asOpt[Long].getOrElse(0), parentId)
   }
 }
 
-case class BoxFile(fileId: String, name: String, size:Long) extends BoxItem {
+case class BoxFile(fileId: String, name: String, size:Long, parentId:String) extends BoxItem {
   val id = fileId
   val itemType = BoxItemType.File
 }
 
 case class BoxFileResource(id: String) extends BoxResource[BoxFile] {
-  val path = s"/files/$id"
-  val getParams = List("fields" -> "id,name,size")
+  val collectionPath:String = "/files"
+  val path = s"$collectionPath/$id"
+  val getParams = List("fields" -> "id,name,size,parent")
 }
 
 class Json2BoxFile extends json2Entity[BoxFile] {
   def toEntity(json: JsValue): BoxFile = {
-    BoxFile((json \ "id").as[String], (json \ "name").as[String], (json \ "size").asOpt[Long].getOrElse(0))
+    val parentId = (json \ "parent").asOpt[JsValue].flatMap{jvalue:JsValue =>
+      (jvalue \ "id").asOpt[String]}.getOrElse("")
+    BoxFile((json \ "id").as[String], (json \ "name").as[String], (json \ "size").asOpt[Long].getOrElse(0),parentId)
   }
 }
 
-case class BoxWebLink(webLinkId: String, name: String) extends BoxItem {
+case class BoxWebLink(webLinkId: String, name: String, parentId:String) extends BoxItem {
   val id = webLinkId
   val size = 0L
   val itemType = BoxItemType.WebLink
 }
 
 case class BoxWebLinkResource(id: String) extends BoxResource[BoxWebLink] {
-  val path = s"/files/$id"
-  val getParams = List("fields" -> "id,name,size")
+  val collectionPath:String = "/files"
+  val path = s"$collectionPath/$id"
+  val getParams = List("fields" -> "id,name,size,parent")
 }
 
 class Json2BoxWebLink extends json2Entity[BoxWebLink] {
   def toEntity(json: JsValue): BoxWebLink = {
-    BoxWebLink((json \ "id").as[String], (json \ "name").as[String])
+    val parentId = (json \ "parent").asOpt[JsValue].flatMap{jvalue:JsValue =>
+      (jvalue \ "id").asOpt[String]}.getOrElse("")
+    BoxWebLink((json \ "id").as[String], (json \ "name").as[String], parentId)
   }
 }
 
@@ -74,7 +83,8 @@ case class BoxFolderItems(folderId: String, count:Int, items:List[BoxItem]) exte
 }
 
 case class BoxFolderItemsResource(id: String) extends BoxResource[BoxFolderItems] {
-  val path = s"/folders/$id/items"
+  val collectionPath:String = "/folders"
+  val path = s"$collectionPath/$id/items"
   val getParams = List("fields" -> "id,name,type,size", "limit" -> "1000")
 }
 

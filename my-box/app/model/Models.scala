@@ -8,9 +8,11 @@ trait BoxEntity {
 
 trait BoxResource[T <: BoxEntity] {
   def path:String
+  def collectionPath:String
   def getParams:List[(String,String)]
 }
 
 trait json2Entity[T <: BoxEntity] {
   def toEntity(json: JsValue): T
 }
+

@@ -19,6 +19,20 @@ class FolderService {
     } yield FolderData(root, rootItems)
   }
 
+  def folderIdByName(context:BoxContext, name:String) = {
+    val boxClient = context.boxClient
+    boxClient.getFolderItems(context, context.getCurrentFolder).flatMap{folderItems=>
+      val foundFolder = folderItems.items.find{item=>
+        item.name == name && item.itemType == BoxItemType.Folder
+      }
+
+      foundFolder match {
+        case Some(item) => Future.successful(item)
+        case None => Future.failed(new BoxFolderNotFoundException(name))
+      }
+    }
+  }
+
   def cd(context:BoxContext, path:String) = makeContextForPath(Future(context), path)
 
   private def makeContextForPath(contextFuture:Future[BoxContext], path:String):Future[BoxContext] = {
@@ -38,24 +52,10 @@ class FolderService {
     }
   }
 
-  def makeContextForFolder(contextFuture: Future[BoxContext], folder: String): Future[BoxContext] = {
+  private def makeContextForFolder(contextFuture: Future[BoxContext], folder: String): Future[BoxContext] = {
       contextFuture.flatMap {context =>
       folderIdByName(context, folder).map {item =>
         context.pushFolder(item.id)
-      }
-    }
-  }
-
-  private def folderIdByName(context:BoxContext, name:String) = {
-    val boxClient = context.boxClient
-    boxClient.getFolderItems(context, context.getCurrentFolder).flatMap{folderItems=>
-      val foundFolder = folderItems.items.find{item=>
-        item.name == name && item.itemType == BoxItemType.Folder
-      }
-
-      foundFolder match {
-        case Some(item) => Future.successful(item)
-        case None => Future.failed(new BoxFolderNotFoundException(name))
       }
     }
   }
