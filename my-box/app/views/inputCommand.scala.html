@@ -61,7 +61,15 @@
             }
         };
 
+        var handleKey = function(e) {
+            //8 is backspace and 46 is delete
+            if(e.charCode != 8 && e.keyCode != 8 && e.charCode != 46 && e.keyCode != 46) {
+                sendMessage(inpCommand.val())
+            }
+        };
+
         inpCommand.keydown(handleAutoCompletionKey);
+        inpCommand.keyup(handleKey);
 
         mySocket.onmessage = receiveEvent
 
