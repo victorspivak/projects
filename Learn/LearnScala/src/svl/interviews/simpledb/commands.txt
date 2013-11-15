@@ -1,0 +1,7 @@
+set 10
+begin
+set 20
+count 20
+rollback
+count 20
+count 10
