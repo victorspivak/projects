@@ -2,8 +2,7 @@ package svl.interviews.simpledb
 
 object DbDriver {
     def main(args: Array[String]) {
-        val db = new MemoryDatabase[String, String]
-//        val CommandTemplate = """\s*([!a-zA-Z0-9]*)\b*([!a-zA-Z0-9]*)\b*([!a-zA-Z0-9]*)*.""".r
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
         val CommandTemplate = """\s*([a-zA-Z0-9]*)\s*([a-zA-Z0-9]*)\s*([a-zA-Z0-9]*).*""".r
 
         var cont = true
