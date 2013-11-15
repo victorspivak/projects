@@ -7,7 +7,7 @@ import org.junit.Test
 class TestDatabase {
     @Test
     def testBasicOperations() {
-        val db = new MemoryDatabase[String, String]
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
 
         db.set("k1", "v1")
         val v1 = db.get("k1")
@@ -32,12 +32,36 @@ class TestDatabase {
             case Some(v) => assertEquals("v11", v)
             case None => assertFalse(true)
         }
+    }
 
+    @Test
+    def testDelete() {
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
+
+        db.set("k1", "v1")
+        val v1 = db.get("k1")
+
+        v1 match {
+            case Some(v) => assertEquals("v1", v)
+            case None => assertFalse(true)
+        }
+
+        val oldValue = db.delete("k1")
+
+        oldValue match {
+            case Some(v) => assertEquals("v1", v)
+            case None => assertFalse(true)
+        }
+
+        db.get("k1") match {
+            case Some(v) => assertFalse(true)
+            case None => assertFalse(false)
+        }
     }
 
     @Test
     def testCount() {
-        val db = new MemoryDatabase[String, String]
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
 
         db.set("k1", "v1")
         db.set("k2", "v1")
@@ -55,7 +79,7 @@ class TestDatabase {
 
     @Test
     def testSimpleTransaction() {
-        val db = new MemoryDatabase[String, String]
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
 
         db.beginTrans()
         db.set("k1", "v1")
@@ -78,7 +102,7 @@ class TestDatabase {
 
     @Test
     def testRollback() {
-        val db = new MemoryDatabase[String, String]
+        val db = new MemoryDatabase[String, String] with DatabaseTransaction[String, String]
 
         db.set("k1", "v1")
         db.set("k2", "v1")
