@@ -13,3 +13,4 @@ trait Transaction{
     def rollback()
 }
 
+class NoTransactionException extends Exception

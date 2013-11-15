@@ -17,15 +17,7 @@ class MemoryDatabase[K,V] extends Database[K,V]{
         oldValue
     }
 
-    def get(key: K) = {
-        keyValueIndex.get(key).map{v=>
-            println(v)
-            v
-        }.orElse{
-            println("NULL")
-            None
-        }
-    }
+    def get(key: K) = keyValueIndex.get(key)
 
     def delete(key: K) = {
         val oldValue = keyValueIndex.get(key)
@@ -38,11 +30,7 @@ class MemoryDatabase[K,V] extends Database[K,V]{
         oldValue
     }
 
-    def count(value: V) = {
-        val num = valueKeyIndex.get(value).map(_.size).getOrElse(0)
-        println(num)
-        num
-    }
+    def count(value: V) = valueKeyIndex.get(value).map(_.size).getOrElse(0)
 
     private def removeFromValueIndex(key:K, oldValue:Option[V]) {
         oldValue.map{value=>

@@ -41,19 +41,25 @@ trait DatabaseTransaction[K,V] extends Database[K,V] with Transaction{
     }
 
     def commit() = {
-        currentTransaction = None
-        transactions.clear()
+        currentTransaction match {
+            case Some(_) =>
+                currentTransaction = None
+                transactions.clear()
+
+            case None => throw new NoTransactionException
+        }
     }
 
     def rollback() = {
         currentTransaction match {
             case Some(transaction) =>
                 undo(transaction.ops)
-                if (!transactions.isEmpty){
+                if (!transactions.isEmpty)
                     currentTransaction = Some(transactions.pop())
-                }
+                else
+                    currentTransaction = None
 
-            case None => println("No Transaction")
+            case None => throw new NoTransactionException
         }
     }
 
