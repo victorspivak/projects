@@ -29,6 +29,18 @@ object ByNameParameters {
         } catch {
             case e:ArithmeticException => Console println "Expected exception even when asserts are disabled"
         }
+
+        def test(p: => String) {
+            println(p)
+            println(p)
+        }
+
+        def myString = {
+            println("I am in the func")
+            "str"
+        }
+
+        test(myString)
     }
 }
 

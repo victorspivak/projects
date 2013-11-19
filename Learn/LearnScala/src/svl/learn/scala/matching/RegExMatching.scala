@@ -21,6 +21,12 @@ object RegExMatching {
             }
             case _ => println("Oops")
         }
+
+
+        val CommandTemplate = """\s*([a-zA-Z0-9]*)\s*([a-zA-Z0-9]*)\s*([a-zA-Z0-9]*).*""".r
+        "set aaa bbb" match {
+            case CommandTemplate(s1, s2, s3) => println(s"s1=>$s1 s2>=$s2 s3=>$s3")
+        }
     }
 }
 
