@@ -3,6 +3,7 @@ package svl.interviews.simpledb
 import org.junit.Assert._
 import org.junit.Test
 
+
 @Test
 class TestDatabase {
     @Test
