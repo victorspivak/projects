@@ -5,6 +5,8 @@ import akka.pattern.ask
 import akka.util.Timeout
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
+import akka.event.LoggingReceive
+
 /*
 * User: victor    Date: 10/26/13   Time: 12:52 AM
 */
@@ -12,6 +14,11 @@ object SimpleAkkaActor {
     implicit val timeout = Timeout(1 second)
 
     def main(args: Array[String]) {
+        //To enable LoggingReceive you need to start process with -Dakka.loglevel=DEBUG -Dakka.actor.debug.receive=on or
+        //set the following properties in the code
+        System.setProperty("akka.loglevel", "DEBUG")
+        System.setProperty("akka.actor.debug.receive", "on")
+
         val system = ActorSystem("HelloSystem")
         val actor = system.actorOf(Props[MyActor], name = "myactor")
 
@@ -29,7 +36,7 @@ object SimpleAkkaActor {
     }
 
     class MyActor extends Actor{
-        def receive = {
+        def receive = LoggingReceive{
             case "quit" => context.stop(self)
             case "Hi" => println("Hello")
             case "wait" => Thread.sleep(1000)

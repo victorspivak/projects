@@ -22,6 +22,17 @@ object Matching {
 		matchClass(1)
 		matchClass("1")
 		matchClass(1.0)
+
+        case object CaseObj
+
+        check(CaseObj)
+        check("1")
+        def check(toCheck:AnyRef) {
+            toCheck match {
+                case CaseObj => println("Got it")
+                case _ => println("Oops")
+            }
+        }
     }
 }
 
