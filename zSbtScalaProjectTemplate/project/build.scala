@@ -51,7 +51,7 @@ object MyScalaLibBuild extends Build {
         publishArtifact in Test := false,
 
         fork in run := true,
-        javaOptions ++= Seq("-deprecation", "-feature", "-unchecked"),
+        scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked"),
         initialCommands := """
                              |import svl.???._
                              |""".stripMargin
