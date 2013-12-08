@@ -1,18 +1,25 @@
 package svl.learn.scala.akka
 
-import akka.actor.{ActorSystem, Actor, Props}
+import akka.actor.{ActorRef, ActorSystem, Actor, Props}
+import scala.actors.{PoisonPill}
 
 class HelloWorld extends Actor {
-
+    var greeter:ActorRef = null
     override def preStart(): Unit = {
-        // create the greeter actor
-        val greeter = context.actorOf(Props[Greeter], "greeter")
-        // tell it to perform the greeting
+        greeter = context.actorOf(Props[Greeter], "greeter")
         greeter ! Greeter.Greet
     }
 
+    override def postStop() = {
+        println(s"greeter is ${greeter.isTerminated}")
+        context.stop(greeter)
+        println(s"greeter is ${greeter.isTerminated}")
+    }
+
     def receive = {
-        case Greeter.Done => context.stop(self)
+        case Greeter.Done =>
+            println("*> Done")
+            println(s"greeter is ${greeter.isTerminated}")
     }
 }
 
@@ -30,10 +37,18 @@ class Greeter extends Actor {
 }
 
 object Driver {
-
     def main(args: Array[String]) {
         val system = ActorSystem("Main")
         val ac = system.actorOf(Props[HelloWorld])
-    }
 
+        Thread.sleep(1000)
+        println(s"ac is ${ac.isTerminated}")
+
+        system.stop(ac)
+        Thread.sleep(1000)
+        println(s"ac is ${ac.isTerminated}")
+
+        system.shutdown()
+        system.awaitTermination()
+    }
 }
