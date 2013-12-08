@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/LearnScala.iml" filepath="$PROJECT_DIR$/LearnScala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/learnScala.iml" filepath="$PROJECT_DIR$/.idea_modules/learnScala.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea_modules/learnScala-build.iml" filepath="$PROJECT_DIR$/.idea_modules/learnScala-build.iml" />
     </modules>
   </component>
 </project>

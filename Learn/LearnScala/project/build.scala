@@ -7,12 +7,13 @@ object MyScalaLibBuild extends Build {
 
   val MyOrganization = "svl"
   val MyArtifact = "MyScalaLib"
-  val MyPackage = "svl.???"
+  val MyPackage = "svl.scala.learn"
   val MyProjectVersion = "1.0.0"
 
-  val ScalaVersion = "2.10.3"
+  val ScalaVersion = "2.10.2"
   val ScalaVersionDep = "2.10"
   val AkkaVersion = "2.2.3"
+
   val ScalatraVersion = "2.2.1"
   val Slf4jVersion = "1.7.5"
   val JUnitVersion = "4.7"
@@ -23,6 +24,7 @@ object MyScalaLibBuild extends Build {
     "com.typesafe.akka" %%  "akka-actor" % AkkaVersion,
     "org.scala-lang" % "scala-reflect" % ScalaVersion,
     "com.novocode" % "junit-interface" % "0.10" % "test",
+    "org.scala-lang" % "scala-swing" % ScalaVersion,
 
     "org.slf4j" % "slf4j-simple" % Slf4jVersion,
     "commons-logging" % "commons-logging" % "1.1.1",
@@ -32,7 +34,7 @@ object MyScalaLibBuild extends Build {
   )
 
   val root = Project(
-    id = "???",
+    id = "learnScala",
     base = file("."),
     settings =
       Defaults.defaultSettings ++
@@ -53,7 +55,7 @@ object MyScalaLibBuild extends Build {
         fork in run := true,
         javaOptions ++= Seq("-deprecation", "-feature", "-unchecked"),
         initialCommands := """
-                             |import svl.???._
+                             |import svl.scala.learn._
                              |""".stripMargin
       ) ++
       addArtifact(Artifact(MyArtifact, "one-jar"), oneJar)

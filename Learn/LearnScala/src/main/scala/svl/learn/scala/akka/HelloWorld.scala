@@ -1,7 +1,6 @@
 package svl.learn.scala.akka
 
 import akka.actor.{ActorRef, ActorSystem, Actor, Props}
-import scala.actors.{PoisonPill}
 
 class HelloWorld extends Actor {
     var greeter:ActorRef = null
