@@ -22,8 +22,8 @@ object AkkaActorsBecome {
         actor ! "talk"
         actor ! "talk"
 
+      //It is sync message
         (actor ? "count").map(println)
-
 
         system.stop(actor)
         system.shutdown()
