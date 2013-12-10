@@ -1,4 +1,4 @@
-/*
+package svl.checked_exceptions;/*
  * Copyright � 1994-2009. Victor Spivak.  All Rights Reserved.
  */
 

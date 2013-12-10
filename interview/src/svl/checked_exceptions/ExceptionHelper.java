@@ -1,3 +1,5 @@
+package svl.checked_exceptions;
+
 public class ExceptionHelper {
     public static void doThrow(Exception e) {
         ExceptionHelper.<RuntimeException> doThrow0(e);
