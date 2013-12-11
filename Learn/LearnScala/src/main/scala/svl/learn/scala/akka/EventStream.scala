@@ -15,27 +15,20 @@ object EventStream {
 
    def main(args: Array[String]) {
      val system = ActorSystem("HelloSystem")
-     val actor = system.actorOf(Props[MainActor], name = "mainActor")
+     val actor = system.actorOf(Props[MyActor], name = "myActor")
+     val listener1 = system.actorOf(Props(classOf[MyListener], 1), name = "myListener1")
+     val listener2 = system.actorOf(Props(classOf[MyListener], 2), name = "myListener2")
 
+     implicit val receiver = system.actorOf(Props[MyReceiver], name = "myReceiver")
 
-     system.eventStream.subscribe()
+     system.eventStream.subscribe(listener1, classOf[Any])
+     system.eventStream.subscribe(listener2, classOf[Any])
 
-     val worker1 = Await.result(actor ? "worker1", 1 second).asInstanceOf[ActorRef]
-     val worker2 = Await.result(actor ? "worker2", 1 second).asInstanceOf[ActorRef]
-
-     (worker1 ? "greet").map(println)
-     worker1 ! "fail1"
-     (worker1 ? "greet").map(println)
-
-     (worker2 ? "greet").map(println)
-     worker2 ! "fail2"
-     (worker2 ? "greet").map(println)
-
-     (worker1 ? "greet").map(println)
-     worker1 ! "exit"
-     (worker1 ? "greet").map(println)
-
-     worker2 ! "exit"
+     actor ! "greet"
+     actor ! "greet"
+     actor ! "greet"
+     actor ! "greet"
+     actor ! "greet"
 
      Thread.sleep(3000)
 
@@ -43,31 +36,24 @@ object EventStream {
      system.awaitTermination()
    }
 
-   class MainActor extends Actor{
-     val worker1 = context.actorOf(Props[MyActor], "worker1")
-     val worker2 = context.actorOf(Props[MyActor], "worker2")
-
-     def receive = {
-       case "worker1" => sender ! worker1
-       case "worker2" => sender ! worker2
-     }
-   }
-
    class MyActor extends Actor{
      def receive = {
-       case "greet" => sender ! "Hello from: " + self
+       case "greet" =>
+         context.system.eventStream.publish("Hello from: " + self)
+         sender ! "Hello from: " + self
        case "exit" => context.stop(self)
-       case "fail1" => throw new RuntimeException("kuku")
-       case "fail2" => throw new IOException("kuku")
      }
    }
 
-   class MyListener extends Actor{
+   class MyReceiver extends Actor{
      def receive = {
-       case "greet" => sender ! "Hello from: " + self
-       case "exit" => context.stop(self)
-       case "fail1" => throw new RuntimeException("kuku")
-       case "fail2" => throw new IOException("kuku")
+       case msg:String => println(">>>>>>>>>>>>>>>>>>> " + msg)
+     }
+   }
+
+   class MyListener(val id:Int) extends Actor{
+     def receive = {
+       case event => println(s"*********************> $id => $event")
      }
    }
  }
