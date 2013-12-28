@@ -7,9 +7,6 @@ import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import akka.event.LoggingReceive
 
-/*
-* User: victor    Date: 10/26/13   Time: 12:52 AM
-*/
 object SimpleAkkaActor {
     implicit val timeout = Timeout(1 second)
 
@@ -22,6 +19,7 @@ object SimpleAkkaActor {
         val system = ActorSystem("HelloSystem")
         val actor = system.actorOf(Props[MyActor], name = "myactor")
 
+      println(s"Actor path: ${actor.path}")
         actor ! "Hi"
         //actor ! "quit"
         //actor ! PoisonPill
