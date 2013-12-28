@@ -22,6 +22,7 @@ object MyScalaLibBuild extends Build {
 
   lazy val deps = Seq(
     "com.typesafe.akka" %%  "akka-actor" % AkkaVersion,
+    "com.typesafe.akka" %% "akka-remote" % AkkaVersion,
     "org.scala-lang" % "scala-reflect" % ScalaVersion,
     "com.novocode" % "junit-interface" % "0.10" % "test",
     "org.scala-lang" % "scala-swing" % ScalaVersion,

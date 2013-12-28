@@ -63,5 +63,12 @@ object SupervisorStrategy {
       case "fail1" => throw new RuntimeException("kuku")
       case "fail2" => throw new IOException("kuku")
     }
+
+    override def preRestart(reason: Throwable, message: Option[Any]) {
+      //message foreach { self forward _ }
+      message map { msg =>
+        println("failed: " + msg) }
+    }
+
   }
 }
