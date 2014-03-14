@@ -13,7 +13,7 @@ class Foo
 
 $m = function ()
 {
-	$this->
+	//$this->
 };
 
 $foo = new Foo(10);
