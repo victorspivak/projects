@@ -10,6 +10,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="PHP">
+        <CLASSES>
+          <root url="file://D:/Tools/php/composer-packages/vendor/lisachenko/go-aop-php" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/doctrine/common" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/composer" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/jakubledl/dissect" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/andrewsville/php-token-reflection" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://D:/Tools/php/composer-packages/vendor/lisachenko/go-aop-php" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/doctrine/common" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/composer" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/jakubledl/dissect" />
+          <root url="file://D:/Tools/php/composer-packages/vendor/andrewsville/php-token-reflection" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
 
