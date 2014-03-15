@@ -6,9 +6,10 @@
  * Time: 3:01 AM
  */
 
-class SubClassWithFinalMethodImpl extends ClassWithFinalMethodImpl {
-    public final function foo()
+class SubClassWithFinalMethod extends ClassWithFinalMethod {
+    public function foo()
     {
         echo "Sub Class\n";
+		parent::foo();
     }
 } 
