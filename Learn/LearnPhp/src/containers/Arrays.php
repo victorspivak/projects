@@ -27,7 +27,6 @@ print_r($m1);
 
 $ar3 = array_fill(5, 10, 9999);
 print_r($ar3);
-printf("%d\n", $ar3[1]);
 
 if (!isset($ar3[1]))
     printf("It is not set\n");
@@ -57,6 +56,16 @@ foreach($ar as $v)
     print "(" . $v . ")\n";
 
 foreach($array1 as $v)
+    print "(" . $v . ")\n";
+
+print "\n";
+
+foreach($array1 as $v)
+    print "(" . $v . ")\n";
+
+print "\n";
+
+foreach($array1 as $k=>$v)
     print "(" . $v . ")\n";
 ?>
 
