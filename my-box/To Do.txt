@@ -11,5 +11,11 @@
 
 To use https:
     set JAVA_OPTS=-Dhttps.port=9443
-    play run
+    play
+    run
+    run -Dhttps.port=9443
+    https://localhost:9443
 
+    play "start -Dhttps.port=9443"
+    play debug "run -Dhttps.port=9443"
+    run -Dhttps.port=9443
