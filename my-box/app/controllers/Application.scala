@@ -5,7 +5,7 @@ import play.api.data.Forms._
 import play.api.data.Form
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
-import controllers.commands.ShowCurrentFolder
+import controllers.commands.{BoxCommand, ShowCurrentFolder}
 import lib._
 import java.net.ConnectException
 import lib.BoxAppConfig
