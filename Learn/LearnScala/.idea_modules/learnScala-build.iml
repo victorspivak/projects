@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
+  <component name="DBNavigator.Module.ConnectionManager">
+    <connections />
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../project/target/idea-classes" />
     <output-test url="file://$MODULE_DIR$/../project/target/idea-test-classes" />
@@ -26,6 +29,7 @@
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/relation-0.13.2.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/scala-reflect-2.10.3.jar!/" />
           <root url="jar://$USER_HOME$/.ivy2/cache/scala_2.10/sbt_0.13/com.github.retronym/sbt-onejar/jars/sbt-onejar-0.8.jar!/" />
+<<<<<<< HEAD
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/sbt-0.13.2.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/test-interface-1.0.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/io-0.13.2.jar!/" />
@@ -69,6 +73,48 @@
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/compiler-ivy-integration-0.13.2.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/xsbti/interface-0.13.2.jar!/" />
           <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.3/org.scala-sbt/sbt/0.13.2/main-0.13.2.jar!/" />
+=======
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/control-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/collections-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/compiler-integration-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/test-interface-1.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/classpath-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/main-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/lib/scala-reflect.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/completion-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/sbinary_2.10-0.4.2.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/apply-macro-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/scala-reflect-2.10.2.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/lib/jansi.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/lib/scala-compiler.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/persist-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/jsch-0.1.46.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/tasks-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/scala_2.10/sbt_0.13/com.eed3si9n/sbt-buildinfo/jars/sbt-buildinfo-0.3.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/tracking-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/actions-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/process-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/run-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/lib/scala-library.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/command-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/relation-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/logging-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/compile-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/sbt-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/cache-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/jline-2.11.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/ivy-2.3.0-rc1.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/compiler-ivy-integration-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/ivy-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/main-settings-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/lib/jline.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/task-system-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/incremental-compiler-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/xsbti/interface-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/io-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.sbt/boot/scala-2.10.2/org.scala-sbt/sbt/0.13.0/test-agent-0.13.0.jar!/" />
+          <root url="jar://$USER_HOME$/.ivy2/cache/scala_2.10/sbt_0.13/com.github.mpeltonen/sbt-idea/jars/sbt-idea-1.6.0.jar!/" />
+>>>>>>> e6e1937f9757a06e4ece150ad998f12cae18ca4e
         </CLASSES>
         <JAVADOC />
         <SOURCES />

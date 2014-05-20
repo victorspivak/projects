@@ -5,7 +5,7 @@
   </component>
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -120,6 +120,7 @@
         </lookup-objects>
         <force-database-load value="false" />
         <prompt-connection-selection value="true" />
+        <prompt-schema-selection value="true" />
       </lookup-filters>
     </navigation-settings>
     <dataset-editor-settings>
@@ -148,6 +149,7 @@
       </filters>
       <qualified-text-editor text-length-threshold="300">
         <content-types>
+<<<<<<< HEAD
           <content-type enabled="true" name="Text" />
           <content-type enabled="true" name="Properties" />
           <content-type enabled="true" name="XML" />
@@ -171,6 +173,25 @@
           <content-type enabled="true" name="YAML" />
           <content-type enabled="true" name="Flex" />
           <content-type enabled="true" name="Manifest" />
+=======
+          <content-type name="Text" enabled="true" />
+          <content-type name="Properties" enabled="true" />
+          <content-type name="XML" enabled="true" />
+          <content-type name="DTD" enabled="true" />
+          <content-type name="HTML" enabled="true" />
+          <content-type name="XHTML" enabled="true" />
+          <content-type name="CSS" enabled="true" />
+          <content-type name="Java" enabled="true" />
+          <content-type name="SQL" enabled="true" />
+          <content-type name="PL/SQL" enabled="true" />
+          <content-type name="JavaScript" enabled="true" />
+          <content-type name="PHP" enabled="true" />
+          <content-type name="FTL" enabled="true" />
+          <content-type name="VTL" enabled="true" />
+          <content-type name="Flex" enabled="true" />
+          <content-type name="Bash" enabled="true" />
+          <content-type name="Manifest" enabled="true" />
+>>>>>>> e6e1937f9757a06e4ece150ad998f12cae18ca4e
         </content-types>
       </qualified-text-editor>
       <record-navigation>
@@ -353,7 +374,7 @@
       </general>
     </ddl-file-settings>
   </component>
-  <component name="IdProvider" IDEtalkID="5DD5660070B485D2D4EB1CC09D4BDCDE" />
+  <component IDEtalkID="5DD5660070B485D2D4EB1CC09D4BDCDE" name="IdProvider" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/target/idea_output" />
   </component>

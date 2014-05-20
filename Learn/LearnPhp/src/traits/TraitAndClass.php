@@ -4,27 +4,41 @@ trait DecoratorTrait
 {
     public function foobar()
     {
-        printf("Foo is called.\n");
-        parent::foobar();
+		printf("DecoratorTrait: Foo is called.\n");
     }
 }
 
 class Foo
 {
-    public function foobar()
-    {
-        printf("It is me.\n");
-    }
+//    public function foobar()
+//    {
+//		printf("Foo: Foo is called.\n");
+//    }
 }
 
-class TraitAndClass extends Foo
+class DecoratedClass extends Foo
 {
-    use DecoratorTrait;
+	use DecoratorTrait;
+//	public function foobar()
+//	{
+//		printf("DecoratedClass: Foo is called.\n");
+//		parent::foobar();
+//	}
+}
+
+class TraitAndClass extends DecoratedClass
+{
+	public function foobar()
+	{
+		printf("TraitAndClass: Foo is called.\n");
+		parent::foobar();
+	}
 }
 
 $o = new TraitAndClass();
 $o->foobar();
 
+echo "------------------------------------------------\n";
 if ($o instanceof Foo)
     printf("It is Foo.\n");
 
