@@ -1,19 +1,33 @@
 package svl.learn.scala.classes
 
+import scala.language.implicitConversions
+
 object ValueClasses {
-  class PersonName(val imp:String) extends AnyVal
-  class PersonSSN(val imp:String) extends AnyVal
+  case class PersonName(imp:String) extends AnyVal
+  case class PersonSSN(imp:String) extends AnyVal
+  case class Year(imp:Int) extends AnyVal
   case class Person(name:PersonName, ssn:PersonSSN)
 
+  implicit def Year2Int(year:Year) = year.imp
+  implicit def Ssn2String(ssn:PersonSSN) = ssn.imp
+
   def main(args: Array[String]) {
-    val vic = Person(new PersonName("Victor"), new PersonSSN("111-11-1111"))
+    val victor = Person(PersonName("Victor"), PersonSSN("111-11-1111"))
+    val yegor = Person(PersonName("Yegor"), PersonSSN("222-22-2222"))
 
-    println(vic.ssn)
+    println(victor.ssn)
 
-    //val strings = List[String](vic.ssn)
-    //ssns.foreach{ssn => println(ssn)}
+    val ssn = victor.ssn
 
-    //val ssns = List[PersonSSN](vic.ssn)
-    //ssns.foreach{ssn => println(ssn)}
+    println(ssn.getClass)
+
+    val year = Year(2014)
+    val y:Int = year
+
+    val strings = List[String](victor.ssn, yegor.ssn)
+    strings.foreach(println)
+
+    val ssns = List[PersonSSN](victor.ssn, yegor.ssn)
+    ssns.foreach(println)
   }
 }
