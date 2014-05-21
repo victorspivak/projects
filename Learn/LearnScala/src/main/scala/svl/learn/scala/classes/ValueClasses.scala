@@ -3,6 +3,9 @@ package svl.learn.scala.classes
 import scala.language.implicitConversions
 
 object ValueClasses {
+  trait User
+  trait UserId extends User
+  trait UserRecord extends User
   case class PersonName(imp:String) extends AnyVal
   case class PersonSSN(imp:String) extends AnyVal
   case class Year(imp:Int) extends AnyVal
