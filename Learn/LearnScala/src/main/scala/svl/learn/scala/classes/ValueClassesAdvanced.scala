@@ -5,7 +5,7 @@ import scala.language.implicitConversions
 object ValueClassesAdvanced {
 
   case class TypeId(id:String) extends AnyVal
-  case class EntityType(name:TypeId)
+  case class EntityType(id:TypeId, name:String)
 
   trait Record
 
@@ -18,29 +18,39 @@ object ValueClassesAdvanced {
   case class UserId(id:String) extends AnyVal
   case class PictureId(id:String) extends AnyVal
   class PictureRecord extends Record
-  class Picture[T <: PictureRecord](val entityId:PictureId, val record:Option[T]) extends Entity[PictureId, T]{
-    override def entityType = EntityType(TypeId("Picture"))
+  class Picture(val entityId:PictureId, val record:Option[PictureRecord]) extends Entity[PictureId, PictureRecord]{
+    override def entityType = EntityType(TypeId("#picture"), "Picture")
   }
 
-  class UserRecord(val name:String) extends Record
+  class UserRecord(val name:String, val picture:Picture) extends Record
+  class CustomUserRecord(name:String, val email:String, picture:Picture) extends UserRecord(name, picture)
 
-  class CustomUserRecord(name:String, val email:String) extends UserRecord(name)
-
-  class User[T <: UserRecord](val id:UserId, val record:Option[T])
+  class User[T <: UserRecord](val entityId:UserId, val record:Option[T]) extends Entity[UserId, UserRecord]{
+    override def entityType: EntityType = EntityType(TypeId("#userId"), "User")
+  }
 
   object User{
     def apply(id:UserId) = new User(id, None)
     def apply[T <: UserRecord](id:UserId, record:T) = new User(id, Some(record))
   }
 
+  implicit def TypeId2String(typeId:TypeId) = typeId.id
+  implicit def PictureId2String(pictureId:PictureId) = pictureId.id
+  implicit def UserId2String(userId:UserId) = userId.id
+  
   def main(args: Array[String]) {
     val user = User(UserId("12345"))
     println(user.record)
-    val user1 = User(UserId("12345"), new UserRecord("User Name"))
+    val user1 = User(UserId("12345"), new UserRecord("User Name",
+      new Picture(PictureId("Pic#1"), Some(new PictureRecord()))))
+
     user1.record.map(r => println(r.name))
-    val user2 = User(UserId("12345"), new CustomUserRecord("Custom User Name", "email@box.com"))
+    val user2 = User(UserId("12345"), new CustomUserRecord("Custom User Name", "email@box.com",
+      new Picture(PictureId("Pic#2"), Some(new PictureRecord()))))
+
     user2.record.map(r => println(r.name))
     user2.record.map(r => println(r.email))
+    println(user2.entityType.name)
   }
 }
 

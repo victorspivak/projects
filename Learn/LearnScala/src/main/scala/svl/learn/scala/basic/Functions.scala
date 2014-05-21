@@ -37,7 +37,7 @@ object Functions {
         h dump1 "Result"
 
         h mult 2 dump1 "Res:"
-        h reset
+        h.reset
 
         h sum 10 mult 2 dump1 "Res:"
     }

@@ -9,6 +9,7 @@ import java.io.IOException
 import akka.actor.SupervisorStrategy.{Escalate, Stop, Restart}
 import akka.actor.OneForOneStrategy
 import scala.concurrent.Await
+import scala.language.postfixOps
 
 object SupervisorStrategy1 {
    implicit val timeout = Timeout(1 second)

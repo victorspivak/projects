@@ -5,9 +5,8 @@ import akka.pattern.ask
 import akka.util.Timeout
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
-/*
-* User: victor    Date: 10/26/13   Time: 12:52 AM
-*/
+import scala.language.postfixOps
+
 object MultipleActors {
     implicit val timeout = Timeout(1 second)
 

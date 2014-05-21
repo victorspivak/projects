@@ -1,3 +1,5 @@
+import scala.language.implicitConversions
+
 object Rational {
     def main(args:Array[String]) {
         class Rational(n: Int, d: Int) {

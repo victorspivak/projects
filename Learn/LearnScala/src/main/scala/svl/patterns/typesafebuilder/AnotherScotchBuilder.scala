@@ -1,6 +1,7 @@
 package svl.patterns.typesafebuilder
 
-import scala.annotation.implicitNotFound
+import scala.language.implicitConversions
+import scala.language.reflectiveCalls
 
 object BuilderPattern {
     sealed abstract class Preparation
@@ -42,7 +43,7 @@ object BuilderPattern {
 
     implicit def enableBuild(builder:ScotchBuilder[TRUE, TRUE, TRUE]) = new {
         def build() =
-            new OrderOfScotch(builder.theBrand.get, builder.theMode.get, builder.theDoubleStatus.get, builder.theGlass);
+            new OrderOfScotch(builder.theBrand.get, builder.theMode.get, builder.theDoubleStatus.get, builder.theGlass)
     }
 
     def builder = new ScotchBuilder[FALSE, FALSE, FALSE](None, None, None, None)
@@ -131,9 +132,9 @@ import BuilderPattern._
 
 
 object AnotherScotchBuilder extends App{
-    builder.withBrand("Mine").isDouble(true).withGlass(Tall).withMode(OnTheRocks).build()
+    builder.withBrand("Mine").isDouble(b = true).withGlass(Tall).withMode(OnTheRocks).build()
 
-	builder.withMode(OnTheRocks).isDouble(true).withBrand("aaa")
+	builder.withMode(OnTheRocks).isDouble(b = true).withBrand("aaa")
 }
 
 

@@ -1,4 +1,5 @@
 import Stream._
+import scala.language.postfixOps
 
 object Streams {
     def main(args:Array[String]) {

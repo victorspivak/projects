@@ -1,3 +1,5 @@
+import scala.language.postfixOps
+
 object BasicClasses extends App {
     val hello : Any = "Hello"
     Console println  hello.hashCode

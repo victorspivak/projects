@@ -1,3 +1,5 @@
+import scala.language.implicitConversions
+
 object Enum {
     def main(args:Array[String]) {
         println ("Enums:")

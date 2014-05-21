@@ -6,42 +6,44 @@ import akka.util.Timeout
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext.Implicits.global
 import akka.event.LoggingReceive
+import scala.language.postfixOps
 
 object SimpleAkkaActor {
-    implicit val timeout = Timeout(1 second)
+  implicit val timeout = Timeout(1 second)
 
-    def main(args: Array[String]) {
-        //To enable LoggingReceive you need to start process with -Dakka.loglevel=DEBUG -Dakka.actor.debug.receive=on or
-        //set the following properties in the code
-        System.setProperty("akka.loglevel", "DEBUG")
-        System.setProperty("akka.actor.debug.receive", "on")
+  def main(args: Array[String]) {
+    //To enable LoggingReceive you need to start process with -Dakka.loglevel=DEBUG -Dakka.actor.debug.receive=on or
+    //set the following properties in the code
+    System.setProperty("akka.loglevel", "DEBUG")
+    System.setProperty("akka.actor.debug.receive", "on")
 
-        val system = ActorSystem("HelloSystem")
-        val actor = system.actorOf(Props[MyActor], name = "myactor")
+    val system = ActorSystem("HelloSystem")
+    val actor = system.actorOf(Props[MyActor], name = "myactor")
 
-      println(s"Actor path: ${actor.path}")
-        actor ! "Hi"
-        //actor ! "quit"
-        //actor ! PoisonPill
-        actor ! "Oops"
-        (actor ? "wait").onSuccess{
-            case msg => println(s"Got $msg")
-        }
-
-        system.stop(actor)
-        system.shutdown()
-        system.awaitTermination()
+    println(s"Actor path: ${actor.path}")
+    actor ! "Hi"
+    //actor ! "quit"
+    //actor ! PoisonPill
+    actor ! "Oops"
+    (actor ? "wait").onSuccess {
+      case msg => println(s"Got $msg")
     }
 
-    class MyActor extends Actor{
-        def receive = LoggingReceive{
-            case "quit" => context.stop(self)
-            case "Hi" => println("Hello")
-            case "wait" => Thread.sleep(1000)
-                sender ! "done"
-            case msg:String => println(msg)
-        }
+    system.stop(actor)
+    system.shutdown()
+    system.awaitTermination()
+  }
+
+  class MyActor extends Actor {
+    def receive = LoggingReceive {
+      case "quit" => context.stop(self)
+      case "Hi" => println("Hello")
+      case "wait" => Thread.sleep(1000)
+        sender ! "done"
+      case msg: String => println(msg)
     }
+  }
+
 }
 
 

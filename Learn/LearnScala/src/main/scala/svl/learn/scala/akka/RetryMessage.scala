@@ -9,67 +9,70 @@ import java.io.IOException
 import akka.actor.SupervisorStrategy.{Escalate, Stop, Restart}
 import akka.actor.OneForOneStrategy
 import scala.concurrent.Await
+import scala.language.postfixOps
 
 object RetryMessage {
-   implicit val timeout = Timeout(1 second)
+  implicit val timeout = Timeout(1 second)
 
-   def main(args: Array[String]) {
-     val system = ActorSystem("HelloSystem")
-     val actor = system.actorOf(Props[MainActor], name = "mainActor")
+  def main(args: Array[String]) {
+    val system = ActorSystem("HelloSystem")
+    val actor = system.actorOf(Props[MainActor], name = "mainActor")
 
-     val worker = Await.result(actor ? "worker1", 1 second).asInstanceOf[ActorRef]
+    val worker = Await.result(actor ? "worker1", 1 second).asInstanceOf[ActorRef]
 
-     (worker ? "greet").map(println)
-     (worker ? "fail1").map(println)
-     (worker ? "fail1").map(println)
-     (worker ? "fail1").map(println)
-     (worker ? "fail1").map(println)
+    (worker ? "greet").map(println)
+    (worker ? "fail1").map(println)
+    (worker ? "fail1").map(println)
+    (worker ? "fail1").map(println)
+    (worker ? "fail1").map(println)
 
-     Thread.sleep(3000)
+    Thread.sleep(3000)
 
-     system.shutdown()
-     system.awaitTermination()
-   }
+    system.shutdown()
+    system.awaitTermination()
+  }
 
-   class MainActor extends Actor{
-     override def supervisorStrategy = OneForOneStrategy(){
-       case _:IOException => Escalate
-       case _:ActorKilledException => Stop
-       case _:RuntimeException =>
-         println("Restarting... " + sender)
-         Restart
-     }
+  class MainActor extends Actor {
+    override def supervisorStrategy = OneForOneStrategy() {
+      case _: IOException => Escalate
+      case _: ActorKilledException => Stop
+      case _: RuntimeException =>
+        println("Restarting... " + sender)
+        Restart
+    }
 
-     val worker1 = context.actorOf(Props[MyActor], "worker1")
-     val worker2 = context.actorOf(Props[MyActor], "worker2")
+    val worker1 = context.actorOf(Props[MyActor], "worker1")
+    val worker2 = context.actorOf(Props[MyActor], "worker2")
 
-     def receive = {
-       case "worker1" => sender ! worker1
-       case "worker2" => sender ! worker2
-     }
-   }
+    def receive = {
+      case "worker1" => sender ! worker1
+      case "worker2" => sender ! worker2
+    }
+  }
 
-   class MyActor extends Actor{
-     var attempt = 0
-     def receive = {
-       case "greet" => sender ! "Hello from: " + self
-       case "exit" => context.stop(self)
-       case "fail1" =>
-         attempt += 1
-         if ((attempt % 2) == 0)
-           throw new RuntimeException("kuku")
-         else
-           sender ! "I am fine"
-       case "fail2" => throw new IOException("kuku")
-     }
+  class MyActor extends Actor {
+    var attempt = 0
 
-     override def preRestart(reason: Throwable, message: Option[Any]) {
-       //message foreach { self forward _ }
-       message map { msg =>
-         println("retry failed: " + msg)
-         self forward(msg)
-       }
-     }
+    def receive = {
+      case "greet" => sender ! "Hello from: " + self
+      case "exit" => context.stop(self)
+      case "fail1" =>
+        attempt += 1
+        if ((attempt % 2) == 0)
+          throw new RuntimeException("kuku")
+        else
+          sender ! "I am fine"
+      case "fail2" => throw new IOException("kuku")
+    }
 
-   }
- }
+    override def preRestart(reason: Throwable, message: Option[Any]) {
+      //message foreach { self forward _ }
+      message map { msg =>
+        println("retry failed: " + msg)
+        self forward msg
+      }
+    }
+
+  }
+
+}

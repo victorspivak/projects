@@ -1,3 +1,6 @@
+import scala.language.implicitConversions
+import scala.language.reflectiveCalls
+
 object AbstractTypes {
     def main(args:Array[String]) {
         trait Money  {
@@ -34,7 +37,7 @@ object AbstractTypes {
         //usage samples:
         assert(2.dollar + 3.euro >= 1.dollar + 1.dollar + 1.euro)
 
-        println((2.dollar > 1.5.euro))
+        println(2.dollar > 1.5.euro)
     }
 }
 
