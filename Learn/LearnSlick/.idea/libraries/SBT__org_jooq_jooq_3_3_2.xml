@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: org.jooq:jooq:3.3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.jooq/jooq/jars/jooq-3.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.jooq/jooq/docs/jooq-3.3.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/org.jooq/jooq/srcs/jooq-3.3.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
