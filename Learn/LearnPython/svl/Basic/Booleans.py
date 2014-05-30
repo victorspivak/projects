@@ -1,0 +1,5 @@
+print(type(True))
+print('True == 1' if True == 1 else 'True  != 1')
+print('True is 1' if True is 1 else 'True is not 1')
+print('True + 4 :', True + 4)
+print('True - 4 :', True - 4)
