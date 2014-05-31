@@ -1,6 +1,9 @@
 firstName = 'Victor'
 lastName = 'Spivak'
+
 print('Hello %s %s' % (firstName, lastName))
+print('Hello %(firstName)s %(lastName)s' % vars())
+
 print('Hello {} {}'.format (firstName, lastName))
 print('Hello {0} {1}'.format (firstName, lastName))
 print('Hello {1} {0}'.format (firstName, lastName))
