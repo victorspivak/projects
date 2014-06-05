@@ -42,8 +42,8 @@ trait FileSystemSchema {
         def findByEmail(email:String)(implicit session: Session) = boxUsers.filter(_.email === email).firstOption
     }
 
-//    object FileType extends SlickEnumAsString() {
-    object FileType extends SlickEnumAsInt() {
+    object FileType extends SlickEnumAsString() {
+//    object FileType extends SlickEnumAsInt() {
         type FileType = Value
         val Php = Value("Php")
         val Java = Value("Java")

@@ -14,7 +14,7 @@ object HelloSlick {
     }
 
     def generate() = scala.slick.model.codegen.SourceCodeGenerator.main(
-        Array(Settings.slickDriver, Settings.driver, Settings.dbUrl,
+        Array(Settings.slickDriverName, Settings.driver, Settings.dbUrl,
             Settings.outputGenDir, Settings.genSchemaPackage,
             Settings.user, Settings.password)
     )
