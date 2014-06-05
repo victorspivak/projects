@@ -27,6 +27,7 @@ trait FileSystemSchema {
         def company = column[String]("Company", O.Nullable)
 
         def * = (userId, name, email, company.?) <> (BoxUser.tupled, BoxUser.unapply)
+        def ? = (userId.?, name.?, email.?, company.?)
 
         def nameIndex = index("ind_BoxUser_Name", name, unique = false)
         def emailIndex = index("ind_BoxUser_Email", email)
@@ -70,6 +71,12 @@ trait FileSystemSchema {
             insert(BoxFile(FileId(0), name, fileType, ownerId))
         def insert(entity:BoxFile)(implicit session: Session) : FileId =
             (boxFiles returning boxFiles.map(u => u.fileId)) += entity
+        def update(entity:BoxFile)(implicit session: Session) = {
+            val q = for { f <- boxFiles if f.fileId === entity.fileId } yield f
+            q.update(entity)
+        }
+
+        def findById(id:FileId)(implicit session: Session) = boxFiles.filter(_.fileId === id).firstOption
     }
 
     def create(force:Boolean = false)(implicit session: Session) = {

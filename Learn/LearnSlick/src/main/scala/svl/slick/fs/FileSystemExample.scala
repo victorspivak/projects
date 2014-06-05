@@ -15,6 +15,8 @@ object FileSystemExample {
         val file4Id = BoxFiles.insert("file4.java", FileType.Java, johnId)
         val file5Id = BoxFiles.insert("file5.php", FileType.Php, vicId)
 
+        BoxFiles.insert("fake file1.php", FileType.Php, UserId(-1))
+
         SlickUtils.dumpQuery(boxUsers)
         SlickUtils.dumpQuery(boxFiles)
     }
@@ -35,6 +37,9 @@ object FileSystemExample {
     def run() = {
         db withSession { implicit session: Session =>
             create(force = true)
+
+            val filesCount = boxFiles.length.run
+            println(s"Files count $filesCount")
 
             val vic = boxUsers.filter(_.name === "Vic").firstOption
             println(vic)
@@ -70,6 +75,20 @@ object FileSystemExample {
             println("========================================")
             val user1 = BoxUsers.findByEmail("Vic@box.com")
             user1.map(u => println(BoxUsers.findById(u.userId)))
+
+            println("========================================")
+            val outerJoin1 = for{
+                (f, u) <- boxFiles leftJoin boxUsers on (_.ownerId === _.userId)
+            } yield (f, u.name.?)
+            outerJoin1.foreach(println)
+
+            println("========================================")
+            val file1 = BoxFiles.findById(FileId(1))
+            println(file1)
+            file1.map{f =>
+                val updated = f.copy(name = "file1 updated.txt")
+                BoxFiles.update(updated)
+            }
         }
     }
 }
