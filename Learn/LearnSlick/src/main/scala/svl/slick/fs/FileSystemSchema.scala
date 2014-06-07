@@ -19,7 +19,10 @@ trait FileSystemSchema {
     lazy val ddl = boxUsers.ddl ++ boxFiles.ddl
 
     implicit val UserIdType = MappedColumnType.base[UserId, Int](_.id, new UserId(_))
+
     case class BoxUser(userId: UserId, name: String, email: String, company:Option[String] = None)
+    case class BoxUserNameInfo(userId: UserId, name: String)
+
     class BoxUsers(tag: Tag) extends Table[BoxUser](tag, "BoxUser") {
         def userId = column[UserId]("UserId", O.PrimaryKey, O.AutoInc)
         def name = column[String]("UserName")
@@ -27,6 +30,8 @@ trait FileSystemSchema {
         def company = column[String]("Company", O.Nullable)
 
         def * = (userId, name, email, company.?) <> (BoxUser.tupled, BoxUser.unapply)
+        def nameInfo = (userId, name) <> (BoxUserNameInfo.tupled, BoxUserNameInfo.unapply)
+
         def ? = (userId.?, name.?, email.?, company.?)
 
         def nameIndex = index("ind_BoxUser_Name", name, unique = false)

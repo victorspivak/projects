@@ -54,7 +54,7 @@ object FileSystemExample {
             val join1 = for{
                 f <- boxFiles
                 u <- boxUsers if u.userId === f.ownerId
-            } yield (f.name, u.name)
+            } yield (f.name, u.nameInfo)
             join1.foreach(println)
 
             println("========================================")
