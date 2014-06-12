@@ -5,9 +5,10 @@ match = re.match('(.*)@(.*)', email)
 if(match):
     print("Domain:", match.group(2))
 
-filename = 'Oi.Mamochki.09.avi'
-pattern =  '.*?(\d\d?[.]).*'
+filename = 'Oi.Mamochki.09_10.avi'
+pattern =  '.*?(\d\d?)_(\d\d?).*'
 match = re.match(pattern, filename)
 if(match):
-    print("Domain:", match.group(1))
+    groups = [int(group) for group in match.groups()]
+    print("Filename: {0} {1}".format(*groups))
 

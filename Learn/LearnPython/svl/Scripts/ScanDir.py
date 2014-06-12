@@ -12,26 +12,37 @@ parser.add_argument('dir', default= '.', help = 'Directory to scan')
 
 args = parser.parse_args()
 
-path = args.dir
-pattern = args.pattern.lstrip('\'')
-name = args.name
-run = args.run
+pathArg = args.dir
+patternArg = args.pattern.lstrip('\'')
+nameArg = args.name
+runArg = args.run
 
-print(pattern)
-print(path)
+def scanDir(path, pattern, name, run):
+    files = os.listdir(path)
 
-#path = '/home/victor'
+    for file in files:
+        filename=os.path.join(path, file)
+        if os.path.isfile(filename):
+            match = re.match(pattern, file)
+            if match:
+                groups = [int(group) for group in match.groups()]
+                newFilename = os.path.join(path, name.format(*groups))
 
-files = os.listdir(path)
+                print(newFilename, ' --> ', filename)
+                if run:
+                    os.rename(filename, newFilename)
+            else:
+                print('*' * 10, ' ', filename, ' ', '*' * 10)
 
-for file in files:
-    filename=os.path.join(path, file)
-    if os.path.isfile(filename):
-        match = re.match(pattern, file)
-        if match:
-            newFilename = os.path.join(path, name.format(int(match.group(1))))
-            print(newFilename, ' --> ', filename)
-            if run:
-                os.rename(filename, newFilename)
-        else:
-            print('*' * 10, ' ', filename, ' ', '*' * 10)
+scanDir(pathArg, patternArg, nameArg, runArg)
+
+if not runArg:
+    answers = {
+        'y': True,
+        'yes': True,
+    }
+    print('Would you like to rename files? y/N: ', end = '')
+    answer = input('Would you like to rename files? y/N: ')
+    run = answers.get(answer.lower(), False)
+
+    if run: scanDir(pathArg, patternArg, nameArg, run)
