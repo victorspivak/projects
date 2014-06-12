@@ -31,13 +31,13 @@ object For {
         Console println ()
 
         //Nested loop
-        for {   i <- 1 to 10;
+        for {   i <- 1 to 10
                 j <- 1 to 10
                 if (i * j < 25)}
             Console print (" " + i + "/" + j)
         Console println ()
 
-        def numbers = for { i <- 1 to 10;
+        def numbers = for { i <- 1 to 10
                             j <- 1 to 10
                             if (i * j < 25)}
         yield i * j

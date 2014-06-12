@@ -11,5 +11,19 @@ object CaseClasses {
 
     println(person5years)
     println(person10years)
+
+    //case class from tuple
+    val p1 = Person.tupled("Vic", "Smith", 22)
+    println(p1)
+
+    //tuple from a case class
+    val t1 = Person.unapply(p1).get
+    println(t1)
+
+    println("===============================================================")
+    println("Arity: " + p1.productArity)
+    for (i <- 0 until p1.productArity)
+      println(s"$i -> ${p1.productElement(i)}")
+
   }
 }
