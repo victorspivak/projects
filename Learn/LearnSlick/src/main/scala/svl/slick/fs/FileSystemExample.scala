@@ -86,8 +86,17 @@ object FileSystemExample {
             val file1 = BoxFiles.findById(FileId(1))
             println(file1)
             file1.map{f =>
-                val updated = f.copy(name = "file1 updated.txt")
-                BoxFiles.update(updated)
+//                val updated = f.copy(name = "file1 updated.txt")
+//                BoxFiles.update(updated)
+//                BoxFiles.update(updated)
+//                val file2 = BoxFiles.findById(updated.fileId)
+//                file2.map(f=>BoxFiles.update(f.copy(fileType = FileType.Java)))
+              val updated = BoxFileEdit(f.vStamp, name = Some("file1 updated.txt"))
+              BoxFiles.update(f.fileId, updated)
+              BoxFiles.update(f.fileId, updated)
+              val file2 = BoxFiles.findById(f.fileId)
+              file2.map(f=>BoxFiles.update(f.copy(fileType = FileType.Java)))
+
             }
         }
     }
