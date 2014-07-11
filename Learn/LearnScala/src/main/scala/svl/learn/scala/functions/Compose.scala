@@ -5,7 +5,7 @@ object Compose extends App{
     def func2(str:String):String = "func2>>>" + str + "<<<func2"
     def func3(str:String):String = "func3>>>" + str + "<<<func3"
 
-    val f = func1 _ compose func2 _ compose func3
+    val f = func1 _ compose func2 compose func3
     println(f("*****"))
 
     def conv(v:String):Int = Integer.parseInt(v)
@@ -18,11 +18,11 @@ object Compose extends App{
     def double(i:Int):Int = 2 * i
     def intToString(i:Int):String = "" + i
 
-    val pipeline = intToString _ compose double _ compose dump _ compose conv
+    val pipeline = intToString _ compose double compose dump compose conv
     println(pipeline("100"))
     println(pipeline("400"))
 
-   val pipeline1 = conv _ andThen dump _ andThen double _ andThen intToString
+   val pipeline1 = conv _ andThen dump andThen double andThen intToString
     println(pipeline1("1600"))
     println(pipeline1("6400"))
 }
