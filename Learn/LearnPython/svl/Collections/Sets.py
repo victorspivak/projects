@@ -1,14 +1,14 @@
-str = 'hello world'
+sample = 'hello world'
 
-chars = set(str)
+chars = set(sample)
 
-sorted = list(chars)
-sorted.sort()
-for c in sorted:
+sorted_str = list(chars)
+sorted_str.sort()
+for c in sorted_str:
     print(c)
 
-l1 = [1,3,5,7,9]
-l2 = [9,3,5,7,1]
+l1 = [1, 3, 5, 7, 9]
+l2 = [9, 3, 5, 7, 1]
 
 print('Match' if l1 == l2 else 'Failed')
 print('Match' if set(l1) == set(l2) else 'Failed')
@@ -26,4 +26,3 @@ print('Managers but not engineers:', managers - engineers)
 print('Are all managers engineers:', engineers > managers)
 print('Are both engineers:', {'bob', 'sue'} < engineers)
 print('IN one but not in both sets:', engineers ^ managers)
-

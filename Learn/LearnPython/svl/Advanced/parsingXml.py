@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-x="""<foo>
+x = """<foo>
    <bar>
       <type foobar="f1.1"/>
       <type foobar="f1.2"/>
@@ -19,10 +19,12 @@ x="""<foo>
    </bar1>
 </foo>"""
 
-def dump(itemList):
-    for e in itemList :
-        print (e.attrib['foobar'])
+
+def dump(items):
+    for e in items:
+        print(e.attrib['foobar'])
     print('*' * 100)
+
 
 tree = ET.fromstring(x)
 itemList = tree.findall('.//type')
