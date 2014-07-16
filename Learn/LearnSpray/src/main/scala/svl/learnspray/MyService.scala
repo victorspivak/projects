@@ -1,39 +1,59 @@
 package svl.learnspray
 
-//import svl.spray.entities.Person
+//import svl.learnspray.entities.Person
+//
+//import akka.actor.Actor
+//import spray.routing._
+//
+//import spray.json.DefaultJsonProtocol
+//import spray.httpx.unmarshalling._
+//import spray.httpx.marshalling._
+//import spray.http._
+//import HttpCharsets._
+//import MediaTypes._
+//import spray.json._
+//
+////case class Person(name: String, firstName: String, age: Int)
+//
+//object MyJsonProtocol extends DefaultJsonProtocol {
+//  implicit val PersonFormat = jsonFormat3(Person)
+//}
+//
+//import MyJsonProtocol._
+
+
+
+
 
 import akka.actor.Actor
 import spray.routing._
 
-import spray.json.DefaultJsonProtocol
-import spray.httpx.unmarshalling._
-import spray.httpx.marshalling._
-import spray.http._
-import HttpCharsets._
-import MediaTypes._
+import svl.learnspray.entities.Person
+
+import spray.http.MediaTypes._
 import spray.json._
 
-case class Person(name: String, firstName: String, age: Int)
+import spray.json.DefaultJsonProtocol
 
 object MyJsonProtocol extends DefaultJsonProtocol {
   implicit val PersonFormat = jsonFormat3(Person)
 }
 
 import MyJsonProtocol._
+
 import spray.httpx.SprayJsonSupport._
 import spray.util._
 
-// we don't implement our route structure directly in the service actor because
-// we want to be able to test it independently, without having to spin up an actor
+
+//val p = Person("Vic", "Spivak", 33)
+//val personString = p.toJson.toString()
+//val personJson = personString.parseJson
+//val p2 = personJson.convertTo[Person]
+
+
+
 class MyServiceActor extends Actor with MyService {
-
-  // the HttpService trait defines only one abstract member, which
-  // connects the services environment to the enclosing actor or test
   def actorRefFactory = context
-
-  // this actor only runs our route, but you could add
-  // other things here, like request stream processing
-  // or timeout handling
   def receive = runRoute(myRoute)
 }
 
@@ -60,16 +80,38 @@ trait MyService extends HttpService {
         }
       }
     } ~
-      path("test") {
+      path("person") {
         get {
           respondWithMediaType(`application/json`) {
             complete {
               implicit def executionContext = actorRefFactory.dispatcher
-              val person = Person("Victor", "Spivak", 100)
-              //person.toJson
-              List(1, 2, 3).toJson
+              val person = Person("Victor", "Spivak", 20)
+              //also we could return: person
+              person.toJson.toString()
             }
           }
         }
+      } ~
+//      path("test") {
+//        post {
+//          respondWithMediaType(`application/json`) {
+//            complete {
+//              implicit def executionContext = actorRefFactory.dispatcher
+//              val person = Person("Victor", "Spivak", 20)
+//              //also we could return: person
+//              person.toJson.toString()
+//            }
+//          }
+//        }
+//      }
+      path("person") {
+        post {
+          entity(as[Person]) { person =>
+            println(person)
+            val result = "OK"
+            complete(result)
+          }
+        }
       }
+
 }
