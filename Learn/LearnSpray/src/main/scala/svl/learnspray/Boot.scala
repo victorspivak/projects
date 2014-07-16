@@ -1,4 +1,4 @@
-package com.example
+package svl.learnspray
 
 import akka.actor.{ActorSystem, Props}
 import akka.io.IO
