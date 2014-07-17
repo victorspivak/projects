@@ -1,22 +1,12 @@
-import svl.learnspray.entities.Person
-
-import spray.http.MediaTypes
+import svl.learnspray.entities._
 import spray.json._
-
-import spray.json.DefaultJsonProtocol
-val p = Person("Vic", "Spivak", 33)
-object MyJsonProtocol extends DefaultJsonProtocol {
-  implicit val PersonFormat = jsonFormat3(Person)
-}
-
 import MyJsonProtocol._
 
-val personString = p.toJson.toString()
-val personJson = personString.parseJson
-val p2 = personJson.convertTo[Person]
 
-
-
+val user1 = User("Vic", "Spivak", company = Some("Box"))
+val user1String = user1.toJson.toString()
+val user1Json = user1String.parseJson
+val user2 = user1Json.convertTo[User]
 
 
 
