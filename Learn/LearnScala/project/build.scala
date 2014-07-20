@@ -27,6 +27,8 @@ object MyScalaLibBuild extends Build {
     "com.novocode" % "junit-interface" % "0.10" % "test",
     "org.scala-lang" % "scala-swing" % ScalaVersion,
 
+    "org.json4s" %% "json4s-native" % "3.2.8",
+
     "org.slf4j" % "slf4j-simple" % Slf4jVersion,
     "commons-logging" % "commons-logging" % "1.1.1",
     "org.specs2" % ("specs2_" + ScalaVersionDep) % Specs2Version % "test",
