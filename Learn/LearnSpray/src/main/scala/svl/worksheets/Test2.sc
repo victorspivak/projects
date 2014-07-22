@@ -1,12 +1,27 @@
-import svl.learnspray.entities._
-import spray.json._
-import MyJsonProtocol._
+import scala.concurrent.Future
+import scala.concurrent.duration._
+import akka.actor.ActorSystem
+import akka.util.Timeout
+import akka.pattern.ask
+import akka.io.IO
+import spray.can.Http
+import spray.http._
+import HttpMethods._
+
+implicit val system: ActorSystem = ActorSystem()
+implicit val timeout: Timeout = Timeout(15.seconds)
+import system.dispatcher // implicit execution context
+
+val response: Future[HttpResponse] =
+  (IO(Http) ? HttpRequest(GET, Uri("http://localhost:8080/user"))).mapTo[HttpResponse]
+
+// or, with making use of spray-httpx
+import spray.httpx.RequestBuilding._
+
+val response2: Future[HttpResponse] =
+  (IO(Http) ? Get("http://spray.io")).mapTo[HttpResponse]
 
 
-val user1 = User("Vic", "Spivak", company = Some("Box"))
-val user1String = user1.toJson.toString()
-val user1Json = user1String.parseJson
-val user2 = user1Json.convertTo[User]
 
 
 

@@ -29,6 +29,8 @@ object MyScalaLibBuild extends Build {
 
     "org.json4s" %% "json4s-native" % "3.2.8",
 
+    "io.spray"   %% "spray-json"   % "1.2.6",
+
     "org.slf4j" % "slf4j-simple" % Slf4jVersion,
     "commons-logging" % "commons-logging" % "1.1.1",
     "org.specs2" % ("specs2_" + ScalaVersionDep) % Specs2Version % "test",

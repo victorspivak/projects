@@ -16,6 +16,5 @@ object Json4sExamples {
     val personJson = parse(personJsonString)
     val person = personJson.extract[Person]
     println(person)
-
   }
 }
