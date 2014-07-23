@@ -79,7 +79,5 @@ object ParseScalaCodeParser extends App {
           case ("type", alias, newType) => println(s"\t$alias")
         }
       }
-
-
   }
 }
