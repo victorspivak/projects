@@ -10,7 +10,7 @@ object SprayCaseClassExample extends App {
   case class NamedList[A](name: String, items: List[A])
 
   object MyJsonProtocol extends DefaultJsonProtocol {
-    implicit val ColorJsonFormat = format4(Color)
+    implicit val ColorJsonFormat = jsonFormat4(Color)
     implicit def namedListFormat[A :JsonFormat] = jsonFormat2(NamedList.apply[A])
   }
 
