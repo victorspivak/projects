@@ -61,22 +61,25 @@ object ParseScalaCodeParser extends App {
       |def doIt(a:Int, b:Int):Int = a+b
       |}
       |class Bar extends Foo{
+      |  val counter:Int = a+b
       |  type MyString = String
+      |  def doIt1(a:Int, b:Int):Int = a+b
       |}
       |""".stripMargin
 
   import ScalaCodeParser._
-  val rez = ScalaCodeParser(source)
-  println(rez)
+  val tree = ScalaCodeParser(source)
+  println(tree)
   println()
   println("Classes:")
-  rez.foreach{
+  tree.foreach{
     case ("class" ~ className ~ clParams) ~ clExt ~ clBodyOpt => println(s"class $className")
       clBodyOpt map{member=>
 
         member.foreach{
-          case ("def", name, params, retType, expr) => println(s"\t$name")
-          case ("type", alias, newType) => println(s"\t$alias")
+          case ("def", name, params, retType, expr) => println(s"\tMethod: $name")
+          case ("type", alias, newType) => println(s"\tType alias: $alias")
+          case _ @leftover => println(leftover)
         }
       }
   }

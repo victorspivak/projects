@@ -89,8 +89,10 @@ import scala.collection.mutable
       |c = z;
     """.stripMargin
 
-  def dump(res:Try[Vars]) {
-    res match {
+  def dump(input:String, initials:Vars = mutable.Map[String, Double]()) {
+    println(input)
+    println("Initials: " + initials)
+    Calculator(input, initials) match {
       case util.Success(v) => println(v)
       case util.Failure(e) => println(e.getMessage)
     }
@@ -98,7 +100,7 @@ import scala.collection.mutable
     println()
   }
 
-  dump (Calculator("a=b; c=d;e=f;"))
-  dump(Calculator(input))
-  dump(Calculator(input, mutable.Map("z" -> 999)))
+  dump ("a=b; c=d;e=f;")
+  dump(input)
+  dump(input, mutable.Map("z" -> 999))
 }
