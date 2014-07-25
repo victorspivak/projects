@@ -22,21 +22,21 @@ object TestClient extends App{
   val claimType = MdTypes.getType(claimTypeName).getOrElse(null)
 
   val createTiming = PerformanceUtil.timer({
-//    for (i <- 1 to 100) {
-//      val dbObj = makeDbObj(i)
-//      val createdObj = s.create(dbObj)
-////      val fetchedObject = s.fetch(createdObj.id, claimType)
-////      dump(fetchedObject)
-//    }
+    for (i <- 1 to 100) {
+      val dbObj = makeDbObj(i)
+      val createdObj = s.create(dbObj)
+//      val fetchedObject = s.fetch(createdObj.id, claimType)
+//      dump(fetchedObject)
+    }
   })
 
   val (createdObjects, createWithBatchingTiming) = PerformanceUtil.timerWithResult({
-//    val createdObjects = for {i <- 1 to 100
-//      dbObj = makeDbObj(i)
-//    } yield dbObj
-//
-//
-//    s.create(createdObjects.toList, claimType)
+    val createdObjects = for {i <- 1 to 100
+      dbObj = makeDbObj(i)
+    } yield dbObj
+
+
+    s.create(createdObjects.toList, claimType)
   })
 
 //  createdObjects.foreach(MdObjectHelper.dump(_))

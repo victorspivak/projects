@@ -43,6 +43,7 @@ object MdPocBuild extends Build {
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),
       ("org.apache.hbase"         %  "hbase"                % "0.94.7")
+//      ("org.apache.hbase"         %  "hbase-client"                % "0.98.3-hadoop1")
         .exclude("org.slf4j", "slf4j-log4j12")
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),
