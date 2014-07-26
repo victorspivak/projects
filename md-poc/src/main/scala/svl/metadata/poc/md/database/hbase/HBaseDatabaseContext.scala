@@ -31,7 +31,7 @@ trait HBaseDatabaseContext{
 
 trait HBaseEnv{
   def conf:Configuration
-  def pool:HTablePool
+  def connection:HConnection
   def administration:Administration
 
   trait Administration{
@@ -42,7 +42,7 @@ trait HBaseEnv{
 trait DefaultHBaseEnv{
   def hbaseEnv = new HBaseEnv{
     val conf = HBaseConfiguration.create()
-    val pool = new HTablePool()
+    val connection = HConnectionManager.createConnection(conf)
 
     def administration = new Administration{
       def adminSession = new HBaseAdmin(conf)
@@ -86,19 +86,14 @@ class HBaseHelper(val context:HBaseDatabaseContext){
 
   def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     def getTableWithCreate(name:String, fieldFamily:Option[String]):HTableInterface = {
-      try{
-        val table = tableCache.get(name)
-
-        context.hbaseEnv.pool.getTable(name)
-      } catch {
-        case exception:Exception => translateException(exception) match {
-          case e:org.apache.hadoop.hbase.TableNotFoundException =>  fieldFamily.map(fldFamily => {
-            createTable(name, fldFamily)
-            getTable(name, None)
-          }).getOrElse(null)
-          case e:Exception => throw e
-        }
+      if (!context.hbaseEnv.administration.adminSession.tableExists(name)) {
+        fieldFamily.map(fldFamily => {
+          createTable(name, fldFamily)
+          getTable(name, None)
+        }).orNull
       }
+      else
+        context.hbaseEnv.connection.getTable(name)
     }
 
     val tableOpt = tableCache.get(name)

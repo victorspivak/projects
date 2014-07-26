@@ -4,36 +4,43 @@
 
 package svl.hbase;
 
-import java.io.IOException;
-
 import org.apache.hadoop.conf.Configuration;
-
 import org.apache.hadoop.hbase.HBaseConfiguration;
-
 import org.apache.hadoop.hbase.HColumnDescriptor;
-
 import org.apache.hadoop.hbase.HTableDescriptor;
-
 import org.apache.hadoop.hbase.client.HBaseAdmin;
 
+import java.io.IOException;
+
+@SuppressWarnings({"UseOfSystemOutOrSystemErr", "UtilityClass", "Annotation", "BusyWait"})
 public class HelloHbase {
-    public static void main(String[] args) throws IOException
-    {
+    private HelloHbase() {
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
         HBaseConfiguration hc = new HBaseConfiguration(new Configuration());
 
-        HTableDescriptor ht = new HTableDescriptor("User");
+        String tableName = "User";
+        HTableDescriptor ht = new HTableDescriptor(tableName);
 
-        ht.addFamily( new HColumnDescriptor("Id"));
+        ht.addFamily(new HColumnDescriptor("Id"));
 
-        ht.addFamily( new HColumnDescriptor("Name"));
+        ht.addFamily(new HColumnDescriptor("Name"));
 
-        System.out.println( "connecting" );
+        System.out.println("connecting");
 
-        HBaseAdmin hba = new HBaseAdmin( hc );
+        HBaseAdmin hba = new HBaseAdmin(hc);
 
-        System.out.println( "Creating Table" );
 
-        hba.createTable( ht );
+        for (int i = 0; i <100; i++) {
+            if (!hba.tableExists(tableName)){
+                System.out.println("Creating Table");
+                hba.createTable(ht);
+            }
+            else
+                System.out.println("The table exists");
+            Thread.sleep(1000);
+        }
 
         System.out.println("Done......");
     }

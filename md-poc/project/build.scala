@@ -38,12 +38,16 @@ object MdPocBuild extends Build {
       "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile,container",
       "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile,container;provided;test" artifacts Artifact("javax.servlet", "jar", "jar"),
 
+//        "org.apache.hbase"         %  "hbase-common"                % "0.98.3-hadoop1",
+//        "org.apache.hbase"         %  "hbase-protocol"              % "0.98.3-hadoop1",
+//        "org.apache.hbase"         %  "hbase-client"                % "0.98.3-hadoop1",
+//        "org.apache.hadoop"        %  "hadoop-core"                 % "1.2.1",
+
       ("org.apache.hadoop"        %  "hadoop-core"          % "1.1.2")
         .exclude("org.slf4j", "slf4j-log4j12")
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),
-      ("org.apache.hbase"         %  "hbase"                % "0.94.7")
-//      ("org.apache.hbase"         %  "hbase-client"                % "0.98.3-hadoop1")
+      ("org.apache.hbase"         %  "hbase"                % "0.94.21")
         .exclude("org.slf4j", "slf4j-log4j12")
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),
@@ -108,5 +112,5 @@ object MdPocBuild extends Build {
                              |""".stripMargin
       ) ++
       addArtifact(Artifact(MyArtifact, "one-jar"), oneJar)
-  )
+  ).settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 }
