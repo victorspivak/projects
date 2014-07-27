@@ -20,9 +20,12 @@ import MdAttrDataTypes._
 case class MdAttrIndexPolicy(filterable:Boolean, searchable:Boolean)
 case class MdAttrStorePolicy(compressing:Boolean, encrypting:Boolean)
 
+case class MdAttributeRef[T](id:String, name:String, attrType:MdAttrDataType[T])
+
 case class MdAttribute[T](id:String, name:String, attrType:MdAttrDataType[T], size:Int,
                        indexPolicy:MdAttrIndexPolicy, storePolicy:MdAttrStorePolicy) {
   def attrValueToString(value:Any) = value.asInstanceOf[T].toString
+  def toRef = MdAttributeRef(id, name, attrType)
 }
 
 class MdAttributeBuilder[T] (name:String, attrType:MdAttrDataType[T], size:Int = -1) {

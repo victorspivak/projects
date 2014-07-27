@@ -3,9 +3,11 @@ package svl.metadata.poc.md.database
 import svl.metadata.poc.md.mdd._
 import svl.metadata.poc.md.mdd.MdAttribute
 import scala.language.existentials
+import scala.reflect.Manifest
 
 case class DbObject(id: String, mdType: MdType, values: Map[String, Any]) {
   def getValue[T](attr: MdAttribute[T]): Option[T] = values.get(attr.name).map(_.asInstanceOf[T])
+  def getValue[T](attr: MdAttributeRef[T]): Option[T] = values.get(attr.name).map(_.asInstanceOf[T])
   def getValue[T](attr: Option[MdAttribute[T]]) = attr.flatMap((a: MdAttribute[T]) => values.get(a.name).map(_.asInstanceOf[T]))
   def getValue[T](name: String)(clazz: Class[T]) = values.get(name).map(_.asInstanceOf[T])
 
@@ -28,9 +30,11 @@ class DbObjectBuilder(id: String, mdType: MdType, overwriteValues: Boolean = fal
     this
   }
 
-  def addAttribute[T](entry: (MdAttribute[T], T)): DbObjectBuilder = add(entry._1.name -> entry._2)
-  def addAttribute[T](entry: (String, T))(clazz:Class[T]): DbObjectBuilder = {val (name, value) = entry
-    addAttribute(mdType.getAttributeByNameType(name)(clazz) -> value)
+  private def addAttributeImpl[T](entry: (MdAttribute[T], T)): DbObjectBuilder = add(entry._1.name -> entry._2)
+  def addAttribute[T](entry: (MdAttributeRef[T], T)): DbObjectBuilder = add(entry._1.name -> entry._2)
+  def addAttribute[T](entry: (String, T))(implicit m:Manifest[T]): DbObjectBuilder = {
+    val (name, value) = entry
+    addAttributeImpl(mdType.getAttributeByNameManifest(name) -> value)
   }
 
   def build = new DbObject(id, mdType, values.toMap)

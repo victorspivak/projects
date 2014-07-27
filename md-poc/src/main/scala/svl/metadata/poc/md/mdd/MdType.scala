@@ -1,6 +1,7 @@
 package svl.metadata.poc.md.mdd
 
 import scala.language.existentials
+import scala.reflect.Manifest
 
 case class MdTypePolicy(optimisticLocking:Boolean, searchable:Boolean)
 
@@ -25,6 +26,9 @@ case class MdType(id:String, name:String, attributes:List[MdAttribute[_]], idGen
     case _ => throw MddExceptions.unknownAttribute(name, attrName)
   }
   def getAttributeByNameType[T](attrName:String)(clazz:Class[T]):MdAttribute[T] = getAttributeByName(attrName).asInstanceOf[MdAttribute[T]]
+
+  def getAttributeByNameManifest[T](attrName:String)(implicit m:Manifest[T]):MdAttribute[T] =
+    getAttributeByName(attrName).asInstanceOf[MdAttribute[T]]
 
   def containsAttribute(attrName:String) = attributesByName.contains(attrName)
   def idColumn = idGeneration.idColumn

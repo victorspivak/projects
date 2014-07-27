@@ -82,28 +82,26 @@ trait DefaultHBaseDatabaseContext{
 class HBaseHelper(val context:HBaseDatabaseContext){
   import scala.language.implicitConversions
   implicit def string2Bytes(value:String) = Bytes.toBytes(value)
-  def tableCache = new mutable.HashMap[String, HTableInterface]
+  val tableCache = new mutable.HashMap[String, HTableInterface]
 
   def getTable(name:String, fieldFamily:Option[String]):HTableInterface = {
     def getTableWithCreate(name:String, fieldFamily:Option[String]):HTableInterface = {
       if (!context.hbaseEnv.administration.adminSession.tableExists(name)) {
-        fieldFamily.map(fldFamily => {
+        fieldFamily.map { fldFamily =>
           createTable(name, fldFamily)
           getTable(name, None)
-        }).orNull
+        }.orNull
       }
       else
         context.hbaseEnv.connection.getTable(name)
     }
 
-    val tableOpt = tableCache.get(name)
-    if (tableOpt.isEmpty) {
+    tableCache.getOrElse(name, {
       val table = getTableWithCreate(name, fieldFamily)
+      println(s"Put in type cache $name")
       tableCache.put(name, table)
       table
-    }
-    else
-      tableOpt.get
+    })
   }
 
 

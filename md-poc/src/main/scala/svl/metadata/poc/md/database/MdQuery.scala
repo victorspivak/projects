@@ -1,6 +1,6 @@
 package svl.metadata.poc.md.database
 
-import svl.metadata.poc.md.mdd.{MdAttribute, MdType}
+import svl.metadata.poc.md.mdd.{MdAttributeRef, MdAttribute, MdType}
 import scala.language.existentials
 
 object MdQueryOperators{
@@ -24,12 +24,15 @@ object MdQueryBooleanOperators{
 }
 import MdQueryBooleanOperators._
 
+case class MdQueryConstrainRef[T](booleanOperator:MdQueryBooleanOperator, attrRef:MdAttributeRef[T], operator:MdQueryOperator, value:T){
+  def toConstrain(mdType:MdType) = MdQueryConstrain(booleanOperator, mdType.getAttributeByName(attrRef.name).asInstanceOf[MdAttribute[T]], operator, value)
+}
+
+object MdQueryConstrainRef{
+  def apply[T](attrRef:MdAttributeRef[T], operator:MdQueryOperator, value:T) = new MdQueryConstrainRef(Empty, attrRef, operator, value)
+}
 
 case class MdQueryConstrain[T](booleanOperator:MdQueryBooleanOperator, attribute:MdAttribute[T], operator:MdQueryOperator, value:T)
-
-object MdQueryConstrain{
-  def apply[T](attribute:MdAttribute[T], operator:MdQueryOperator, value:T) = new MdQueryConstrain(Empty, attribute, operator, value)
-}
 
 object MdSortingPolicy{
   case class MdSoringOrder(ordinal:Int){}
@@ -42,7 +45,6 @@ import MdSortingPolicy._
 case class MdSorting(attribute:MdAttribute[_], direction:MdSoringOrder)
 case class MdQueryOptions(starting:Int, maxCount:Int)
 
-
 case class MdQuery (ftQuery:String, mdType:MdType, constrains:List[MdQueryConstrain[_]], sorting:Option[MdSorting], options:MdQueryOptions){
 }
 
@@ -52,13 +54,13 @@ class MdQueryBuilder(ftQuery:String, mdType:MdType) {
   var starting = 0
   var count = 10
 
-  def filter(constrain:MdQueryConstrain[_]) = {
-    constrains += constrain
+  def filter(constrain:MdQueryConstrainRef[_]) = {
+    constrains += constrain.toConstrain(mdType)
     this
   }
 
-  def sortBy(attribute:MdAttribute[_], direction:MdSoringOrder = Descending) = {
-    sorting = Some(MdSorting(attribute, direction))
+  def sortBy(attrRef:MdAttributeRef[_], direction:MdSoringOrder = Descending) = {
+    sorting = Some(MdSorting(mdType.getAttributeByName(attrRef.name), direction))
     this
   }
 
