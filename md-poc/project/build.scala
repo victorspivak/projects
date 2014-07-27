@@ -51,7 +51,7 @@ object MdPocBuild extends Build {
         .exclude("org.slf4j", "slf4j-log4j12")
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),
-      ("org.apache.solr" % "solr-solrj" % "4.3.0")
+      ("org.apache.solr" % "solr-solrj" % "4.7.2")
         .exclude("org.slf4j", "slf4j-log4j12")
         .exclude("org.slf4j", "slf4j-simple")
         .exclude("org.slf4j", "slf4j-api"),

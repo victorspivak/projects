@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rm -fr hbase/
+rm -fr zookeeper/
+rm -fr solr/metadata/data
+

@@ -17,7 +17,7 @@ trait HBaseDatabaseContext{
   def hbaseEnv:HBaseEnv
   def solrEnv:SolrEnv
 
-  def hbaseHelper = new HBaseHelper(this)
+  val hbaseHelper = new HBaseHelper(this)
 
   trait HBaseSessionFactory{
     def newSession:DbSession
