@@ -116,7 +116,7 @@ class SolrHelper(val solrEnv: SolrEnv) {
 
   def solrDocumentToDbObject(document: SolrDocument, mdType: MdType) = {
     val builder = mdType.attributes.foldLeft(DbObjectBuilder(document.getFieldValue("id").asInstanceOf[String], mdType)) { (builder, attribute) =>
-      builder.addAttribute(attribute.toRef.asInstanceOf[MdAttributeRef[Any]] -> document.getFieldValue(solrFieldName(attribute)).asInstanceOf[Any])
+      builder.addAttribute(attribute.asInstanceOf[MdAttribute[Any]] -> document.getFieldValue(solrFieldName(attribute)).asInstanceOf[Any])
     }
 
     builder.build

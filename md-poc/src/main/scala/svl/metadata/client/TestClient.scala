@@ -20,9 +20,9 @@ object TestClient extends App{
   val claimTypeName = "Claim"
   val claimType = MdTypes.getType(claimTypeName).orNull
 
-  val amountAttr = claimType.getAttributeByNameType("Amount")(classOf[Double]).toRef
-  val itemAttr = claimType.getAttributeByNameType("Item")(classOf[String]).toRef
-  val insuranceAttr = claimType.getAttributeByNameType("Insurance")(classOf[String]).toRef
+  val amountAttr = claimType.getAttributeByNameType("Amount")(classOf[Double])
+  val itemAttr = claimType.getAttributeByNameType("Item")(classOf[String])
+  val insuranceAttr = claimType.getAttributeByNameType("Insurance")(classOf[String])
 
   val createTiming = PerformanceUtil.timer({
 //    for (i <- 1 to 100) {
@@ -53,8 +53,8 @@ object TestClient extends App{
   def dump(dbObject:Option[DbObject]) = dbObject.map{MdObjectHelper.dump}.orElse{println("There is no object");null}
 
   val query = MdQueryBuilder("", claimType)
-    .filter(MdQueryConstrainRef(amountAttr, Greater, 9100.0))
-    .filter(MdQueryConstrainRef(And, itemAttr, Equal, "Car"))
+    .filter(MdQueryConstrain(amountAttr, Greater, 9100.0))
+    .filter(MdQueryConstrain(And, itemAttr, Equal, "Car"))
     .sortBy(amountAttr, Descending)
     .startWith(0)
     .maxCount(5)
