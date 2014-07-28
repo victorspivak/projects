@@ -2,8 +2,6 @@ package svl.learn.scala.reflections
 
 import scala.reflect.Manifest
 
-//implicit m:Manifest[T]
-
 object ClassManifest extends App{
   def analyze[T](list:List[T])(implicit m:Manifest[T]) = {
     m.toString() match {
