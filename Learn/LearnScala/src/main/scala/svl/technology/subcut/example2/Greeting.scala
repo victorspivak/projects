@@ -30,7 +30,11 @@ class GreetingXmlFormatter extends GreetingFormatter{
 //  }
 //}
 
-class GreetingService (greeting:String, formatter:GreetingFormatter) extends Greeting {
+class GreetingService (greetingPar:Option[String] = injected, formatterPar:Option[GreetingFormatter] = injected)
+                          (implicit val bindingModule:BindingModule) extends Greeting with Injectable{
+  val greeting = injectIfMissing[String] (greetingPar, GreetingId)
+  val formatter = injectIfMissing[GreetingFormatter](formatterPar)
+
   override def greet(name: String) {
     val formatted = formatter.format(greeting + " " + name)
     println(formatted)
