@@ -1,7 +1,6 @@
-package svl.technology.subcut
+package svl.technology.subcut.example1
 
 import com.escalatesoft.subcut.inject.{BindingId, NewBindingModule}
-import svl.learn.scala.akka.Greeter
 
 object BindingKeys {
   object GreetingId extends BindingId
@@ -10,7 +9,7 @@ object BindingKeys {
 
 object MyBinding extends NewBindingModule(module => {
   import module._
-  import BindingKeys._
+  import svl.technology.subcut.example1.BindingKeys._
 
   bind[Int] idBy MaxTryCountId toSingle  100
   bind[String] idBy GreetingId toModuleSingle(_ => "Hello")

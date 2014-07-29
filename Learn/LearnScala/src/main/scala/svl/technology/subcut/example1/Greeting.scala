@@ -1,7 +1,7 @@
-package svl.technology.subcut
+package svl.technology.subcut.example1
 
-import com.escalatesoft.subcut.inject.{Injectable, BindingModule}
-import svl.technology.subcut.BindingKeys._
+import com.escalatesoft.subcut.inject.{BindingModule, Injectable}
+import svl.technology.subcut.example1.BindingKeys.GreetingId
 
 trait Greeting {
   def greet(name:String)
