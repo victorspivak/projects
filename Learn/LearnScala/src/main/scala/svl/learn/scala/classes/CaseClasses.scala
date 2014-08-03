@@ -25,5 +25,19 @@ object CaseClasses {
     for (i <- 0 until p1.productArity)
       println(s"$i -> ${p1.productElement(i)}")
 
+    println("===============================================================")
+    case class User(private var _login:String, var password:String){
+      def login = _login
+
+      def login_=(value:String){
+        println(s"Reset login from $login to $value")
+        _login = value
+      }
+    }
+
+    val user1 = User("v", "p")
+    println(user1)
+    user1.login = "Victor"
+    println(user1)
   }
 }
