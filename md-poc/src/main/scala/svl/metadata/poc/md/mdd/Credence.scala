@@ -60,25 +60,25 @@ object Credence extends App {
                                id:Attribute[ObjId, GenericObjectType],
                                optimisticLocking:Option[Attribute[OptimisticLocking, GenericObjectType]] = None) extends ObjectType
 
-  trait DbObject{
-    def id:Option[ObjId] = getValue(objectType.id)
-    def objectType:ObjectType
-    def values:Map[Attribute[Any, ObjectType], Any]
+  trait DbObject[T<:ObjectType]{
+    def objectType:T
+    def id:Option[ObjId] = getValue(objectType.id.asInstanceOf[Attribute[ObjId, T]])
+    def values:Map[Attribute[Any, T], Any]
 
-    def getValue[T](attr:Attribute[T, ObjectType]):Option[T] = values.get(attr).map(_.asInstanceOf[T])
-    def getValue[T](attr:Option[Attribute[T, ObjectType]]):Option[T] = attr.flatMap((a:Attribute[T, ObjectType]) => getValue(a))
+    def getValue[D](attr:Attribute[D, T]):Option[D] = values.get(attr).map(_.asInstanceOf[D])
+    def getValue[D](attr:Option[Attribute[D, T]]):Option[D] = attr.flatMap((a:Attribute[D, T]) => getValue(a))
 
-    def getAllValues:List[(Attribute[Any, ObjectType], Any)] = values.foldLeft(List[(Attribute[Any, ObjectType], Any)]()){(list, entry) =>
+    def getAllValues:List[(Attribute[Any, T], Any)] = values.foldLeft(List[(Attribute[Any, T], Any)]()){(list, entry) =>
       entry._1 -> entry._2 ::list}
-    def setId(id:ObjId):DbObject
+    def setId(id:ObjId):DbObject[T]
   }
 
-  case class GenericDbObject(objectType:ObjectType, values:Map[Attribute[Any, ObjectType], Any]) extends DbObject {
-    override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id -> id) )
+  case class GenericDbObject[T<:ObjectType](objectType:T, values:Map[Attribute[Any, T], Any]) extends DbObject[T] {
+    override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
   }
 
   class DbObjectBuilder[T<:ObjectType](objectType:T, overwriteValues:Boolean = false) {
-    var values = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+    var values:scala.collection.mutable.HashMap[Attribute[_, T], Any] = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
 
     def add(entry:(String, Any)):DbObjectBuilder[T] = {
       val (name, value) = entry
@@ -98,13 +98,13 @@ object Credence extends App {
       addAttributeImpl(objectType.getAttributeByNameManifest(name) -> value)
     }
 
-    def build = new GenericDbObject(objectType, values.toMap)
+    def build = new GenericDbObject(objectType, values.toMap.asInstanceOf[Map[Attribute[Any, T], Any]])
   }
 
   object DbObjectBuilder {
     def apply(objectType:ObjectType) = new DbObjectBuilder[objectType.type](objectType)
 
-    def apply(dbObject:DbObject) = dbObject.values.foldLeft(new DbObjectBuilder(dbObject.objectType, true)) {
+    def apply[T<:ObjectType](dbObject:DbObject[T]) = dbObject.values.foldLeft(new DbObjectBuilder(dbObject.objectType, true)) {
       (builder, entry) => builder.addAttributeImpl(entry)
     }
   }
@@ -129,13 +129,14 @@ object Credence extends App {
     val fileId = Attribute(this, "FileId", ObjIdType, 32)
     val fileName = Attribute(this, "FileName", StringType, 32)
     val fileSize = Attribute(this, "FileSize", IntegerType, 4)
-    val attributes = List(fileId, fileName, fileSize)
+    val fileOwner = Attribute(this, "FileOwner", ObjIdType, 32)
+    val attributes = List(fileId, fileName, fileSize, fileOwner)
 
     val id = fileId
     val optimisticLocking = None
   }
 
-  case class UserRecord(values:Map[Attribute[Any, ObjectType], Any]) extends DbObject{
+  case class UserRecord(values:Map[Attribute[Any, UserType.type], Any]) extends DbObject[UserType.type]{
     val objectType = UserType
     def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
 
@@ -148,7 +149,7 @@ object Credence extends App {
     println(s"${attr.name}  --> ${attr.attrType.dataTypeName}  --> ${attr.objectType}")
   }
 
-  def dumpObject(obj:DbObject) {
+  def dumpObject[T<:ObjectType](obj:DbObject[T]) {
     println("==================================================")
     println(s"Object ${obj.id}")
     obj.getAllValues.foreach { entry =>
@@ -157,10 +158,15 @@ object Credence extends App {
     }
   }
 
+  import UserType._
+  import FileType._
+
   println(Try(UserType.getAttributeByName("WrongName")))
   dumpAttr(UserType.getAttributeByName("UserName"))
   dumpAttr(UserType.userAge)
-  val user1 = UserRecord(Map(UserType.userName -> "Vic", UserType.userAge -> 33))
+
+  val user1 = UserRecord(Map(userName -> "Vic", userAge -> 33))
+
   dumpObject(user1)
   val user11 = user1.setId(ObjId("User1"))
   dumpObject(user11)
@@ -168,10 +174,39 @@ object Credence extends App {
   println(UserType.userEmail.objectType)
   println(FileType.fileName.objectType)
 
-  val user2 = DbObjectBuilder(UserType).addAttribute(UserType.userName, "Victor").
-    addAttribute(UserType.userEmail, "vic@box.com").
-//    addAttribute(FileType.fileName, "My Favorite File").
+  val user2 = DbObjectBuilder(UserType).addAttribute(userName -> "Victor").
+    addAttribute(userEmail -> "vic@box.com").
+//    addAttribute(fileName -> "My Favorite File").
     build
-
   dumpObject(user2)
+
+  val file1 = DbObjectBuilder(FileType).addAttribute(fileName -> "My Favorite Type").
+//    addAttribute(userEmail -> "vic@box.com").
+    build
+  dumpObject(file1)
+
+  println("==================================================")
+  val userName1 = user1.getValue(userName)
+  val userAge1 = user1.getValue(userAge)
+
+  //println(user1.getValue(fileName))
+
+  println(s"$userName1  --> $userAge1")
+
+  def foo(user:DbObject[UserType.type]) {
+    for {
+      name <- user.getValue(userName)
+      age <- user.getValue(userAge)
+    } yield println(s"$name -> $age")
+  }
+
+  println("==================================================")
+  foo(user1)
+  foo(user2)
+
+  println("==================================================")
+  dumpObject(user1)
+  val user111 = DbObjectBuilder(user1).addAttribute(userName -> "John").build
+  dumpObject(user111)
+  println(user1.email)
 }
