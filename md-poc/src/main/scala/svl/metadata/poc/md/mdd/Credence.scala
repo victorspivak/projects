@@ -73,10 +73,6 @@ object Credence extends App {
     def setId(id:ObjId):DbObject[T]
   }
 
-  case class GenericDbObject[T<:ObjectType](objectType:T, values:Map[Attribute[Any, T], Any]) extends DbObject[T] {
-    override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
-  }
-
   trait DbObjectBuilder[T<:ObjectType] {
     def objectType:T
     def overwriteValues:Boolean
@@ -98,10 +94,14 @@ object Credence extends App {
   }
 
   class GenericDbObjectBuilder[T<:ObjectType](val objectType:T, val overwriteValues:Boolean = false) extends DbObjectBuilder[T]{
-    def build:DbObject[T] = new GenericDbObject(objectType, newValues)
+    def build:DbObject[T] = new GenericDbObjectBuilder.GenericDbObject(objectType, newValues)
   }
 
   object GenericDbObjectBuilder {
+    case class GenericDbObject[T<:ObjectType] private[GenericDbObjectBuilder] (objectType:T, values:Map[Attribute[Any, T], Any]) extends DbObject[T] {
+      override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
+    }
+
     def apply(objectType:ObjectType) = new GenericDbObjectBuilder[objectType.type](objectType)
 
     def apply[T<:ObjectType](dbObject:DbObject[T]) = {
@@ -137,15 +137,6 @@ object Credence extends App {
     val optimisticLocking = None
   }
 
-  case class UserRecord(values:Map[Attribute[Any, UserType.type], Any]) extends DbObject[UserType.type]{
-    val objectType = UserType
-    def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
-
-    def name = getValue(UserType.userName)
-    def email = getValue(UserType.userEmail)
-    def age = getValue(UserType.userAge)
-  }
-
   class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]{
     def objectType = UserType
 
@@ -153,12 +144,21 @@ object Credence extends App {
     def email(value:String) = add(UserType.userEmail -> value)
     def age(value:Int) = add(UserType.userAge -> value)
 
-    def build:UserRecord = new UserRecord(newValues)
+    def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
 
     override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
   }
 
   object UserRecordBuilder {
+    case class UserRecord private[UserRecordBuilder](values:Map[Attribute[Any, UserType.type], Any]) extends DbObject[UserType.type]{
+      val objectType = UserType
+      def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
+
+      def name = getValue(UserType.userName)
+      def email = getValue(UserType.userEmail)
+      def age = getValue(UserType.userAge)
+    }
+
     def apply() = new UserRecordBuilder()
 
     def apply(userRecord:UserRecord) = {
@@ -188,7 +188,7 @@ object Credence extends App {
   dumpAttr(UserType.getAttributeByName("UserName"))
   dumpAttr(UserType.userAge)
 
-  val user1 = UserRecord(Map(userName -> "Vic", userAge -> 33))
+  val user1 = UserRecordBuilder().name("Vic").age(33).build
 
   dumpObject(user1)
   val user11 = user1.setId(ObjId("User1"))
@@ -201,12 +201,12 @@ object Credence extends App {
     add(userName -> "Victor").
     add(userEmail -> "vic@box.com").
     add(userAge -> 11).
-//    addAttribute(fileName -> "My Favorite File").
+//    add(fileName -> "My Favorite File").
     build
   dumpObject(user2)
 
   val file1 = GenericDbObjectBuilder(FileType).add(fileName -> "My Favorite Type").
-//    addAttribute(userEmail -> "vic@box.com").
+//    add(userEmail -> "vic@box.com").
     build
   dumpObject(file1)
 
@@ -231,8 +231,11 @@ object Credence extends App {
 
   println("==================================================")
   dumpObject(user1)
-  val builder = UserRecordBuilder(user1).name("John")
-  val user111 = builder.age(22).build
+  val user111 = UserRecordBuilder(user1).name("John").
+    age(22).
+    add(userAge -> 11).
+//    add(fileName -> "My Favorite File").
+    build
   dumpObject(user111)
   println(user111.email)
 }
