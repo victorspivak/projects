@@ -77,11 +77,16 @@ object Credence extends App {
     override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
   }
 
-  class DbObjectBuilder[T<:ObjectType](objectType:T, overwriteValues:Boolean = false) {
-    var values:scala.collection.mutable.HashMap[Attribute[_, T], Any] = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+  trait DbObjectBuilder[T<:ObjectType] {
+    def objectType:T
+    def overwriteValues:Boolean
 
-    def add[D](entry:(Attribute[D, T], D)):DbObjectBuilder[T] = {
-      val (attribute, value) = entry
+    var values:scala.collection.mutable.HashMap[Attribute[_, T], Any] = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+    def newValues = values.toMap
+
+    def add[D](entry:(Attribute[D, T], D))(implicit m:Manifest[D]):DbObjectBuilder[T] = add(entry._1, entry._2)
+    def add[D](attribute:Attribute[D, T], value:D)(implicit m:Manifest[D]):DbObjectBuilder[T] = {
+      println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + m)
       if (!objectType.containsAttribute(attribute.name))
         throw new RuntimeException(s"Unknown ${attribute.name} attribute in the ${objectType.name} type")
       if (!overwriteValues && values.contains(attribute))
@@ -90,17 +95,19 @@ object Credence extends App {
       this
     }
 
-    def build = {
-      val newValues = values.toMap
-      new GenericDbObject(objectType, newValues)
-    }
+    def build:DbObject[T]
   }
 
-  object DbObjectBuilder {
-    def apply(objectType:ObjectType) = new DbObjectBuilder[objectType.type](objectType)
+  class GenericDbObjectBuilder[T<:ObjectType](val objectType:T, val overwriteValues:Boolean = false) extends DbObjectBuilder[T]{
+    def build:DbObject[T] = new GenericDbObject(objectType, newValues)
+  }
 
-    def apply[T<:ObjectType](dbObject:DbObject[T]) = dbObject.values.foldLeft(new DbObjectBuilder(dbObject.objectType, true)) {
-      (builder, entry) => builder.add(entry)
+  object GenericDbObjectBuilder {
+    def apply(objectType:ObjectType) = new GenericDbObjectBuilder[objectType.type](objectType)
+
+    def apply[T<:ObjectType](dbObject:DbObject[T]) = {
+      val builder:DbObjectBuilder[T] = new GenericDbObjectBuilder(dbObject.objectType, true)
+      dbObject.values.foldLeft(builder)(_.add(_))
     }
   }
 
@@ -140,6 +147,27 @@ object Credence extends App {
     def age = getValue(UserType.userAge)
   }
 
+  class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]{
+    def objectType = UserType
+
+    def name(value:String) = add(UserType.userName -> value)
+    def email(value:String) = add(UserType.userEmail -> value)
+    def age(value:Int) = add(UserType.userAge -> value)
+
+    def build:UserRecord = new UserRecord(newValues)
+
+    override def add[D](entry:(Attribute[D, UserType.type], D))(implicit m:Manifest[D]):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
+  }
+
+  object UserRecordBuilder {
+    def apply() = new UserRecordBuilder()
+
+    def apply(userRecord:UserRecord) = {
+      val builder:UserRecordBuilder = new UserRecordBuilder(true)
+      userRecord.values.foldLeft(builder)(_.add(_))
+    }
+  }
+
   def dumpAttr(attr:Attribute[_, _]) {
     println(s"${attr.name}  --> ${attr.attrType.dataTypeName}  --> ${attr.objectType}")
   }
@@ -169,13 +197,15 @@ object Credence extends App {
   println(UserType.userEmail.objectType)
   println(FileType.fileName.objectType)
 
-  val user2 = DbObjectBuilder(UserType).add(userName -> "Victor").
+  val user2 = GenericDbObjectBuilder(UserType).
+    add(userName -> "Victor").
     add(userEmail -> "vic@box.com").
+    add(userAge -> "wrong").
 //    addAttribute(fileName -> "My Favorite File").
     build
   dumpObject(user2)
 
-  val file1 = DbObjectBuilder(FileType).add(fileName -> "My Favorite Type").
+  val file1 = GenericDbObjectBuilder(FileType).add(fileName -> "My Favorite Type").
 //    addAttribute(userEmail -> "vic@box.com").
     build
   dumpObject(file1)
@@ -201,7 +231,7 @@ object Credence extends App {
 
   println("==================================================")
   dumpObject(user1)
-  val user111 = DbObjectBuilder(user1).add(userName -> "John").build
+  val user111 = UserRecordBuilder(user1).name("John").age(22).build
   dumpObject(user111)
-  println(user1.email)
+  println(user111.email)
 }
