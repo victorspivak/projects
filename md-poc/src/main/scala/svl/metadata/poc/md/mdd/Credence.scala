@@ -81,12 +81,11 @@ object Credence extends App {
     def objectType:T
     def overwriteValues:Boolean
 
-    var values:scala.collection.mutable.HashMap[Attribute[_, T], Any] = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+    var values = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
     def newValues = values.toMap
 
-    def add[D](entry:(Attribute[D, T], D))(implicit m:Manifest[D]):DbObjectBuilder[T] = add(entry._1, entry._2)
-    def add[D](attribute:Attribute[D, T], value:D)(implicit m:Manifest[D]):DbObjectBuilder[T] = {
-      println(">>>>>>>>>>>>>>>>>>>>>>>>>>" + m)
+    def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):DbObjectBuilder[T] = add(entry._1, entry._2)
+    def add[D1, D2](attribute:Attribute[D1, T], value:D2)(implicit same:D1=:=D2) = {
       if (!objectType.containsAttribute(attribute.name))
         throw new RuntimeException(s"Unknown ${attribute.name} attribute in the ${objectType.name} type")
       if (!overwriteValues && values.contains(attribute))
@@ -156,7 +155,7 @@ object Credence extends App {
 
     def build:UserRecord = new UserRecord(newValues)
 
-    override def add[D](entry:(Attribute[D, UserType.type], D))(implicit m:Manifest[D]):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
+    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
   }
 
   object UserRecordBuilder {
@@ -164,7 +163,8 @@ object Credence extends App {
 
     def apply(userRecord:UserRecord) = {
       val builder:UserRecordBuilder = new UserRecordBuilder(true)
-      userRecord.values.foldLeft(builder)(_.add(_))
+      userRecord.values.foldLeft(builder)((builder, entry) => builder.add(entry))
+      builder
     }
   }
 
@@ -200,7 +200,7 @@ object Credence extends App {
   val user2 = GenericDbObjectBuilder(UserType).
     add(userName -> "Victor").
     add(userEmail -> "vic@box.com").
-    add(userAge -> "wrong").
+    add(userAge -> 11).
 //    addAttribute(fileName -> "My Favorite File").
     build
   dumpObject(user2)
@@ -231,7 +231,8 @@ object Credence extends App {
 
   println("==================================================")
   dumpObject(user1)
-  val user111 = UserRecordBuilder(user1).name("John").age(22).build
+  val builder = UserRecordBuilder(user1).name("John")
+  val user111 = builder.age(22).build
   dumpObject(user111)
   println(user111.email)
 }
