@@ -80,32 +80,27 @@ object Credence extends App {
   class DbObjectBuilder[T<:ObjectType](objectType:T, overwriteValues:Boolean = false) {
     var values:scala.collection.mutable.HashMap[Attribute[_, T], Any] = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
 
-    def add(entry:(String, Any)):DbObjectBuilder[T] = {
-      val (name, value) = entry
-      if (!objectType.containsAttribute(name))
-        throw new RuntimeException(s"Unknown $name attribute in the ${objectType.name} type")
-      val attribute = objectType.getAttributeByName(name).asInstanceOf[Attribute[Any,T]]
+    def add[D](entry:(Attribute[D, T], D)):DbObjectBuilder[T] = {
+      val (attribute, value) = entry
+      if (!objectType.containsAttribute(attribute.name))
+        throw new RuntimeException(s"Unknown ${attribute.name} attribute in the ${objectType.name} type")
       if (!overwriteValues && values.contains(attribute))
-        throw new RuntimeException(s"Duplicate $name attribute")
+        throw new RuntimeException(s"Duplicate ${attribute.name} attribute")
       values += attribute -> value
       this
     }
 
-    private def addAttributeImpl[D](entry:(Attribute[D, T], D)) = add(entry._1.name -> entry._2)
-    def addAttribute[D](entry:(Attribute[D, T], D)) = add(entry._1.name -> entry._2)
-    def addAttribute[D](entry:(String, D))(implicit m:Manifest[D]) = {
-      val (name, value) = entry
-      addAttributeImpl(objectType.getAttributeByNameManifest(name) -> value)
+    def build = {
+      val newValues = values.toMap
+      new GenericDbObject(objectType, newValues)
     }
-
-    def build = new GenericDbObject(objectType, values.toMap.asInstanceOf[Map[Attribute[Any, T], Any]])
   }
 
   object DbObjectBuilder {
     def apply(objectType:ObjectType) = new DbObjectBuilder[objectType.type](objectType)
 
     def apply[T<:ObjectType](dbObject:DbObject[T]) = dbObject.values.foldLeft(new DbObjectBuilder(dbObject.objectType, true)) {
-      (builder, entry) => builder.addAttributeImpl(entry)
+      (builder, entry) => builder.add(entry)
     }
   }
 
@@ -174,13 +169,13 @@ object Credence extends App {
   println(UserType.userEmail.objectType)
   println(FileType.fileName.objectType)
 
-  val user2 = DbObjectBuilder(UserType).addAttribute(userName -> "Victor").
-    addAttribute(userEmail -> "vic@box.com").
+  val user2 = DbObjectBuilder(UserType).add(userName -> "Victor").
+    add(userEmail -> "vic@box.com").
 //    addAttribute(fileName -> "My Favorite File").
     build
   dumpObject(user2)
 
-  val file1 = DbObjectBuilder(FileType).addAttribute(fileName -> "My Favorite Type").
+  val file1 = DbObjectBuilder(FileType).add(fileName -> "My Favorite Type").
 //    addAttribute(userEmail -> "vic@box.com").
     build
   dumpObject(file1)
@@ -206,7 +201,7 @@ object Credence extends App {
 
   println("==================================================")
   dumpObject(user1)
-  val user111 = DbObjectBuilder(user1).addAttribute(userName -> "John").build
+  val user111 = DbObjectBuilder(user1).add(userName -> "John").build
   dumpObject(user111)
   println(user1.email)
 }
