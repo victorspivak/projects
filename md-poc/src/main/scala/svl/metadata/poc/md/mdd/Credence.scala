@@ -45,7 +45,7 @@ object Credence extends App {
 
     def getAttributeByName(attrName:String):Attribute[Any, ObjectType] = getAttributeByNameOpt(attrName) match {
       case Some(attr) => attr
-      case _ => throw MddExceptions.unknownAttribute(name, attrName)
+      case _ => throw new RuntimeException(s"Unknown $attrName attribute in the $name type")
     }
 
     def getAttributeByNameType[T](attrName:String)(clazz:Class[T]):Attribute[T, ObjectType] = getAttributeByName(attrName).asInstanceOf[Attribute[T, ObjectType]]
