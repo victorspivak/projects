@@ -2,6 +2,7 @@ package svl.metadata.poc.md.mdd
 
 import java.util.Date
 
+import scala.collection.immutable.HashMap
 import scala.reflect.Manifest
 
 object Ravioli extends App{
@@ -61,9 +62,8 @@ object Ravioli extends App{
                                id:Attribute[ObjId, GenericObjectType],
                                optimisticLocking:Option[Attribute[OptimisticLocking, GenericObjectType]] = None) extends ObjectType
 
-  trait DbObject[T<:ObjectType]{
+  trait AttributesBag[T<:ObjectType]{
     def objectType:T
-    def id:Option[ObjId] = getValue(objectType.id.asInstanceOf[Attribute[ObjId, T]])
     def values:Map[Attribute[Any, T], Any]
 
     def getValue[D](attr:Attribute[D, T]):Option[D] = values.get(attr).map(_.asInstanceOf[D])
@@ -71,14 +71,21 @@ object Ravioli extends App{
 
     def getAllValues:List[(Attribute[Any, T], Any)] = values.foldLeft(List[(Attribute[Any, T], Any)]()){(list, entry) =>
       entry._1 -> entry._2 ::list}
+  }
+
+  trait DbObject[T<:ObjectType] extends AttributesBag[T]{
+    def objectType:T
+    def id:Option[ObjId] = getValue(objectType.id.asInstanceOf[Attribute[ObjId, T]])
+    def values:Map[Attribute[Any, T], Any]
+
     def setId(id:ObjId):DbObject[T]
   }
 
-  trait DbObjectBuilder[T<:ObjectType] {
+  trait DbObjectBuilder[T<:ObjectType]  extends AttributesBag[T] {
     def objectType:T
     def overwriteValues:Boolean
 
-    var values = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+    var values = HashMap[Attribute[Any, T], Any]()
     def newValues = values.toMap
 
     def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):DbObjectBuilder[T] = add(entry._1, entry._2)
@@ -141,7 +148,7 @@ object Ravioli extends App{
   }
 
   trait UserId {self:DbObject[UserType.type] =>
-    def id = getValue(UserType.userId)
+    def userId = getValue(UserType.userId)
   }
 
   trait UserName {self:DbObject[UserType.type] =>
@@ -160,61 +167,89 @@ object Ravioli extends App{
     def ssn = getValue(UserType.userSsn)
   }
 
-//  class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]{
-//    def objectType = UserType
-//
-//    def name(value:String) = add(UserType.userName -> value)
-//    def email(value:String) = add(UserType.userEmail -> value)
-//    def age(value:Int) = add(UserType.userAge -> value)
-//
-//    def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
-//
-//    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
-//  }
-//
-//  object UserRecordBuilder {
-//    case class UserRecord private[UserRecordBuilder](values:Map[Attribute[Any, UserType.type], Any]) extends DbObject[UserType.type]{
-//      val objectType = UserType
-//      def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
-//
-//      def name = getValue(UserType.userName)
-//      def email = getValue(UserType.userEmail)
-//      def age = getValue(UserType.userAge)
-//    }
-//
-//    def apply() = new UserRecordBuilder()
-//
-//    def apply(userRecord:UserRecord) = {
-//      val builder:UserRecordBuilder = new UserRecordBuilder(true)
-//      userRecord.values.foldLeft(builder)((builder, entry) => builder.add(entry))
-//      builder
-//    }
-//  }
-//
-//  def dumpAttr(attr:Attribute[_, _]) {
-//    println(s"${attr.name}  --> ${attr.attrType.dataTypeName}  --> ${attr.objectType}")
-//  }
-//
-//  def dumpObject[T<:ObjectType](obj:DbObject[T]) {
-//    println("==================================================")
-//    println(s"Object ${obj.id}")
-//    obj.getAllValues.foreach { entry =>
-//      val (attr, value) = entry
-//      println(s"${attr.name}  --> $value")
-//    }
-//  }
+  trait UserIdBuilder {self:DbObjectBuilder[UserType.type] =>
+    def userId = getValue(UserType.userId)
+    def userId_=(value:ObjId) = add(UserType.userId, value)
+  }
+
+  trait UserNameBuilder {self:DbObjectBuilder[UserType.type] =>
+    def name = getValue(UserType.userName)
+    def name(value:String) = add(UserType.userName -> value)
+    def name_=(value:String) = add(UserType.userName -> value)
+  }
+
+  trait UserEmailBuilder {self:DbObjectBuilder[UserType.type] =>
+    def email = getValue(UserType.userEmail)
+    def email(value:String) = add(UserType.userEmail -> value)
+    def email_=(value:String) = add(UserType.userEmail -> value)
+  }
+
+  trait UserPhoneBuilder {self:DbObjectBuilder[UserType.type] =>
+    def phone = getValue(UserType.userPhone)
+    def phone_=(value:String) = add(UserType.userPhone -> value)
+  }
+
+  trait UserSsnBuilder {self:DbObjectBuilder[UserType.type] =>
+    def ssn = getValue(UserType.userSsn)
+    def ssn_=(value:SSN) = add(UserType.userSsn -> value)
+  }
+
+  class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]
+    with UserIdBuilder with UserNameBuilder with UserEmailBuilder with UserPhoneBuilder with UserSsnBuilder {
+    def objectType = UserType
+
+    def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
+
+    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
+  }
+
+  object UserRecordBuilder {
+    case class UserRecord private[UserRecordBuilder](values:Map[Attribute[Any, UserType.type], Any])
+      extends DbObject[UserType.type]
+      with UserId with UserName with UserEmail with UserPhone with UserSsn {
+      val objectType = UserType
+      def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
+    }
+
+    def apply() = new UserRecordBuilder()
+
+    def apply(userRecord:UserRecord) = {
+      val builder:UserRecordBuilder = new UserRecordBuilder(true)
+      userRecord.values.foldLeft(builder)((builder, entry) => builder.add(entry))
+      builder
+    }
+  }
+
+  def dumpAttr(attr:Attribute[_, _]) {
+    println(s"${attr.name}  --> ${attr.attrType.dataTypeName}  --> ${attr.objectType}")
+  }
+
+  def dumpObject[T<:ObjectType](obj:DbObject[T]) {
+    println("==================================================")
+    println(s"Object ${obj.id}")
+    obj.getAllValues.foreach { entry =>
+      val (attr, value) = entry
+      println(s"${attr.name}  --> $value")
+    }
+  }
 
   import UserType._
-  import FileType._
+  //import FileType._
 
-  type UserWithNameAndSsn = GenericDbObject[UserType.type] with UserName with UserSsn
+  type UserWithNameAndSsn = DbObject[UserType.type] with UserName with UserSsn
 
   val user1 = new GenericDbObject(UserType, Map[Attribute[Any, UserType.type], Any](userName -> "Victor", userSsn -> "111-11-1111")) with UserName with UserSsn
   val user2 = new GenericDbObject(UserType, Map[Attribute[Any, UserType.type], Any](userName -> "Vic", userSsn -> "222-22-2222")) with UserName with UserSsn
 
   def dump(user:UserWithNameAndSsn) = println(s"${user.name} ---> ${user.ssn}")
-  def dumpUserName(user:GenericDbObject[UserType.type] with UserName) = println(s"${user.name}")
+  def dumpUserName(user:DbObject[UserType.type] with UserName) = println(s"${user.name}")
 
   dump(user1)
   dumpUserName(user2)
+
+  val user3Builder = UserRecordBuilder().name("John")
+//    email("john@box.com").
+  val user3 = user3Builder.build
+//  dump(user3)
+  dumpObject(user3)
 }
