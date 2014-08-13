@@ -126,9 +126,8 @@ object Ravioli extends App{
     val userName = Attribute(this, "UserName", StringType, 32)
     val userEmail = Attribute(this, "UserEmail", StringType, 64)
     val userPhone = Attribute(this, "UserPhone", StringType, 16)
-    val userAge = Attribute(this, "UserAge", IntegerType, 4)
     val userSsn = Attribute(this, "UserSSN", SsnType, 9)
-    val attributes = List(userId, userName, userEmail, userAge, userSsn, userPhone)
+    val attributes = List(userId, userName, userEmail, userSsn, userPhone)
 
     val id = userId
     val optimisticLocking = None
@@ -199,8 +198,6 @@ object Ravioli extends App{
     def objectType = UserType
 
     def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
-
-//    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
   }
 
   object UserRecordBuilder {
@@ -242,7 +239,7 @@ object Ravioli extends App{
   val user2 = new GenericDbObject(UserType, Map[Attribute[Any, UserType.type], Any](userName -> "Vic", userSsn -> "222-22-2222")) with UserName with UserSsn
 
   def dump(user:UserWithNameAndSsn) = println(s"${user.name} ---> ${user.ssn}")
-  def dumpUserName(user:DbObject[UserType.type] with UserName) = println(s"${user.name}")
+  def dumpUserName(user:UserName) = println(s"${user.name}")
 
   dump(user1)
   dumpUserName(user2)

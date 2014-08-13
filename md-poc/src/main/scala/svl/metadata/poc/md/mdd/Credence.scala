@@ -80,8 +80,8 @@ object Credence extends App {
     var values = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
     def newValues = values.toMap
 
-    def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):DbObjectBuilder[T] = add(entry._1, entry._2)
-    def add[D1, D2](attribute:Attribute[D1, T], value:D2)(implicit same:D1=:=D2) = {
+    def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):this.type = add(entry._1, entry._2)
+    def add[D1, D2](attribute:Attribute[D1, T], value:D2)(implicit same:D1=:=D2):this.type = {
       if (!objectType.containsAttribute(attribute.name))
         throw new RuntimeException(s"Unknown ${attribute.name} attribute in the ${objectType.name} type")
       if (!overwriteValues && values.contains(attribute))
@@ -145,8 +145,6 @@ object Credence extends App {
     def age(value:Int) = add(UserType.userAge -> value)
 
     def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
-
-    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
   }
 
   object UserRecordBuilder {
