@@ -88,8 +88,8 @@ object Ravioli extends App{
     var values = HashMap[Attribute[Any, T], Any]()
     def newValues = values.toMap
 
-    def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):DbObjectBuilder[T] = add(entry._1, entry._2)
-    def add[D1, D2](attribute:Attribute[D1, T], value:D2)(implicit same:D1=:=D2) = {
+    def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):this.type = add(entry._1, entry._2)
+    def add[D1, D2](attribute:Attribute[D1, T], value:D2)(implicit same:D1=:=D2):this.type = {
       if (!objectType.containsAttribute(attribute.name))
         throw new RuntimeException(s"Unknown ${attribute.name} attribute in the ${objectType.name} type")
       if (!overwriteValues && values.contains(attribute))
@@ -173,14 +173,14 @@ object Ravioli extends App{
   }
 
   trait UserNameBuilder {self:DbObjectBuilder[UserType.type] =>
-    def name = getValue(UserType.userName)
-    def name(value:String) = add(UserType.userName -> value)
+//    def name = getValue(UserType.userName)
+    def name(value:String):this.type with UserName = add(UserType.userName -> value).asInstanceOf[this.type with UserName]
     def name_=(value:String) = add(UserType.userName -> value)
   }
 
   trait UserEmailBuilder {self:DbObjectBuilder[UserType.type] =>
-    def email = getValue(UserType.userEmail)
-    def email(value:String) = add(UserType.userEmail -> value)
+//    def email = getValue(UserType.userEmail)
+    def email(value:String):this.type with UserEmail = add(UserType.userEmail -> value).asInstanceOf[this.type with UserEmail]
     def email_=(value:String) = add(UserType.userEmail -> value)
   }
 
@@ -200,7 +200,7 @@ object Ravioli extends App{
 
     def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
 
-    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
+//    override def add[D1, D2](entry:(Attribute[D1, UserType.type], D2))(implicit same:D1=:=D2):UserRecordBuilder = super.add(entry).asInstanceOf[UserRecordBuilder]
   }
 
   object UserRecordBuilder {
@@ -247,9 +247,12 @@ object Ravioli extends App{
   dump(user1)
   dumpUserName(user2)
 
-  val user3Builder = UserRecordBuilder().name("John")
-//    email("john@box.com").
-  val user3 = user3Builder.build
+  val user3 = UserRecordBuilder().name("John").email("john@box.com").build
 //  dump(user3)
   dumpObject(user3)
+
+  val user4Builder = UserRecordBuilder().name("Yegor").email("1@2")
+  user4Builder.ssn = SSN("xxxxxxxx")
+  val user4 = user4Builder.build
+  dumpObject(user4)
 }
