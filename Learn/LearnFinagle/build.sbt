@@ -8,6 +8,10 @@ scalaVersion  := "2.10.3"
 
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
+fork := true
+
+connectInput := true
+
 com.twitter.scrooge.ScroogeSBT.newSettings
 
 scroogeThriftOutputFolder in Compile <<= (sourceManaged in Compile) { _ / "thrift" }
