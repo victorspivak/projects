@@ -116,7 +116,7 @@ object GreetingHttpServer extends App {
     }
   }
 
-  def scheduleTask(task: FutureTask[HttpResponse]): FutureTask[HttpResponse] = {
+  def scheduleTask(task: FutureTask[HttpResponse]): Future[HttpResponse] = {
     pool.submit(task)
     task
   }
