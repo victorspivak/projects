@@ -6,8 +6,11 @@ module Examples.SimpleFunctions where
 		-- using guard
 -}
 
+<<<<<<< HEAD
 import Debug.Trace
 
+=======
+>>>>>>> 5fa8cc91ff20d5a886e215dc93fc8bc35687afe8
 indicate1 :: String -> String
 indicate1 address = 
     if address == "127.0.0.1" then "localhost" else address
