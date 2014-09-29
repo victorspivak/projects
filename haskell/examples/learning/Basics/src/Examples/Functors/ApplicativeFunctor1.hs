@@ -48,7 +48,7 @@ run = do
     print $ (+) <$> Distance 19.78 <*> Distance 1.6
     print $ (-) <$> Distance 19.78 <*> Distance 1.6
     print $ (*) <$> Distance 20.0 <*> Distance 2.0
-
+                 .WithTabUtils
     print $ totalSum <$> Distance 19.78 <*> Distance 1.6 <*> Distance 289.0
 
     -- if pure is defined then we could use the following form:
