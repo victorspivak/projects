@@ -1,14 +1,15 @@
-package svl.metadata.poc.md.mdd
+package svl.metadata.experiment
 
 import java.util.Date
 
+import scala.collection.immutable.HashMap
 import scala.reflect.Manifest
-import scala.util.Try
 
-object Credence extends App {
+object Ravioli extends App{
   object AttrDataTypes{
     case class ObjId(imp:String) extends AnyVal
     case class OptimisticLocking(imp:Long) extends AnyVal
+    case class SSN(imp:String) extends AnyVal
 
     sealed case class AttrDataType[+T:Manifest](){
       def dataTypeName = implicitly[Manifest[T]].toString()
@@ -23,9 +24,10 @@ object Credence extends App {
 
     val ObjIdType = AttrDataType[ObjId]()
     val OptimisticLockingType = AttrDataType[OptimisticLocking]()
+    val SsnType = AttrDataType[SSN]()
   }
 
-  import AttrDataTypes._
+  import svl.metadata.experiment.Ravioli.AttrDataTypes._
 
   case class Attribute[+D, +T<:ObjectType](objectType:T, name:String, attrType:AttrDataType[D], size:Int) {
     def attrValueToString(value:Any) = value.asInstanceOf[D].toString
@@ -60,9 +62,8 @@ object Credence extends App {
                                id:Attribute[ObjId, GenericObjectType],
                                optimisticLocking:Option[Attribute[OptimisticLocking, GenericObjectType]] = None) extends ObjectType
 
-  trait DbObject[T<:ObjectType]{
+  trait AttributesBag[T<:ObjectType]{
     def objectType:T
-    def id:Option[ObjId] = getValue(objectType.id.asInstanceOf[Attribute[ObjId, T]])
     def values:Map[Attribute[Any, T], Any]
 
     def getValue[D](attr:Attribute[D, T]):Option[D] = values.get(attr).map(_.asInstanceOf[D])
@@ -70,14 +71,21 @@ object Credence extends App {
 
     def getAllValues:List[(Attribute[Any, T], Any)] = values.foldLeft(List[(Attribute[Any, T], Any)]()){(list, entry) =>
       entry._1 -> entry._2 ::list}
+  }
+
+  trait DbObject[T<:ObjectType] extends AttributesBag[T]{
+    def objectType:T
+    def id:Option[ObjId] = getValue(objectType.id.asInstanceOf[Attribute[ObjId, T]])
+    def values:Map[Attribute[Any, T], Any]
+
     def setId(id:ObjId):DbObject[T]
   }
 
-  trait DbObjectBuilder[T<:ObjectType] {
+  trait DbObjectBuilder[T<:ObjectType]  extends AttributesBag[T] {
     def objectType:T
     def overwriteValues:Boolean
 
-    var values = scala.collection.mutable.HashMap[Attribute[Any, T], Any]()
+    var values = HashMap[Attribute[Any, T], Any]()
     def newValues = values.toMap
 
     def add[D1, D2](entry:(Attribute[D1, T], D2))(implicit same:D1=:=D2):this.type = add(entry._1, entry._2)
@@ -93,15 +101,15 @@ object Credence extends App {
     def build:DbObject[T]
   }
 
+  case class GenericDbObject[T<:ObjectType] (objectType:T, values:Map[Attribute[Any, T], Any]) extends DbObject[T] {
+    override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
+  }
+
   class GenericDbObjectBuilder[T<:ObjectType](val objectType:T, val overwriteValues:Boolean = false) extends DbObjectBuilder[T]{
-    def build:DbObject[T] = new GenericDbObjectBuilder.GenericDbObject(objectType, newValues)
+    def build:DbObject[T] = new GenericDbObject(objectType, newValues)
   }
 
   object GenericDbObjectBuilder {
-    case class GenericDbObject[T<:ObjectType] private[GenericDbObjectBuilder] (objectType:T, values:Map[Attribute[Any, T], Any]) extends DbObject[T] {
-      override def setId(id:ObjId) = GenericDbObject(objectType, values + (objectType.id.asInstanceOf[Attribute[ObjId, T]] -> id) )
-    }
-
     def apply(objectType:ObjectType) = new GenericDbObjectBuilder[objectType.type](objectType)
 
     def apply[T<:ObjectType](dbObject:DbObject[T]) = {
@@ -110,15 +118,16 @@ object Credence extends App {
     }
   }
 
-//----------------------------------------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------------------------------------
   object UserType extends ObjectType{
     def typeId = "UserTypeId-1"
     def name = "User"
     val userId = Attribute(this, "UserId", ObjIdType, 32)
     val userName = Attribute(this, "UserName", StringType, 32)
     val userEmail = Attribute(this, "UserEmail", StringType, 64)
-    val userAge = Attribute(this, "UserAge", IntegerType, 4)
-    val attributes = List(userId, userName, userEmail, userAge)
+    val userPhone = Attribute(this, "UserPhone", StringType, 16)
+    val userSsn = Attribute(this, "UserSSN", SsnType, 9)
+    val attributes = List(userId, userName, userEmail, userSsn, userPhone)
 
     val id = userId
     val optimisticLocking = None
@@ -137,24 +146,66 @@ object Credence extends App {
     val optimisticLocking = None
   }
 
-  class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]{
-    def objectType = UserType
+  trait UserId {self:DbObject[UserType.type] =>
+    def userId = getValue(UserType.userId)
+  }
 
-    def name(value:String) = add(UserType.userName -> value)
-    def email(value:String) = add(UserType.userEmail -> value)
-    def age(value:Int) = add(UserType.userAge -> value)
+  trait UserName {self:DbObject[UserType.type] =>
+    def name = getValue(UserType.userName)
+  }
+
+  trait UserEmail {self:DbObject[UserType.type] =>
+    def email = getValue(UserType.userEmail)
+  }
+
+  trait UserPhone {self:DbObject[UserType.type] =>
+    def phone = getValue(UserType.userPhone)
+  }
+
+  trait UserSsn {self:DbObject[UserType.type] =>
+    def ssn = getValue(UserType.userSsn)
+  }
+
+  trait UserIdBuilder {self:DbObjectBuilder[UserType.type] =>
+    def userId = getValue(UserType.userId)
+    def userId_=(value:ObjId) = add(UserType.userId, value)
+  }
+
+  trait UserNameBuilder {self:DbObjectBuilder[UserType.type] =>
+//    def name = getValue(UserType.userName)
+    def name(value:String):this.type with UserName = add(UserType.userName -> value).asInstanceOf[this.type with UserName]
+    def name_=(value:String) = add(UserType.userName -> value)
+  }
+
+  trait UserEmailBuilder {self:DbObjectBuilder[UserType.type] =>
+//    def email = getValue(UserType.userEmail)
+    def email(value:String):this.type with UserEmail = add(UserType.userEmail -> value).asInstanceOf[this.type with UserEmail]
+    def email_=(value:String) = add(UserType.userEmail -> value)
+  }
+
+  trait UserPhoneBuilder {self:DbObjectBuilder[UserType.type] =>
+    def phone = getValue(UserType.userPhone)
+    def phone_=(value:String) = add(UserType.userPhone -> value)
+  }
+
+  trait UserSsnBuilder {self:DbObjectBuilder[UserType.type] =>
+    def ssn = getValue(UserType.userSsn)
+    def ssn_=(value:SSN) = add(UserType.userSsn -> value)
+  }
+
+  class UserRecordBuilder(val overwriteValues:Boolean = false) extends DbObjectBuilder[UserType.type]
+    with UserIdBuilder with UserNameBuilder with UserEmailBuilder with UserPhoneBuilder with UserSsnBuilder {
+    def objectType = UserType
 
     def build:UserRecordBuilder.UserRecord = UserRecordBuilder.UserRecord(newValues)
   }
 
   object UserRecordBuilder {
-    case class UserRecord private[UserRecordBuilder](values:Map[Attribute[Any, UserType.type], Any]) extends DbObject[UserType.type]{
+    case class UserRecord private[UserRecordBuilder](values:Map[Attribute[Any, UserType.type], Any])
+      extends DbObject[UserType.type]
+      with UserId with UserName with UserEmail with UserPhone with UserSsn {
       val objectType = UserType
       def setId(id:ObjId):UserRecord = UserRecord(values + (UserType.userId -> id))
-
-      def name = getValue(UserType.userName)
-      def email = getValue(UserType.userEmail)
-      def age = getValue(UserType.userAge)
     }
 
     def apply() = new UserRecordBuilder()
@@ -179,54 +230,26 @@ object Credence extends App {
     }
   }
 
-  import UserType._
-  import FileType._
+  import svl.metadata.experiment.Ravioli.UserType._
+  //import FileType._
 
-  println(Try(UserType.getAttributeByName("WrongName")))
-  dumpAttr(UserType.getAttributeByName("UserName"))
+  type UserWithNameAndSsn = DbObject[UserType.type] with UserName with UserSsn
 
-  val user1 = UserRecordBuilder().name("Vic").age(33).build
+  val user1 = new GenericDbObject(UserType, Map[Attribute[Any, UserType.type], Any](userName -> "Victor", userSsn -> "111-11-1111")) with UserName with UserSsn
+  val user2 = new GenericDbObject(UserType, Map[Attribute[Any, UserType.type], Any](userName -> "Vic", userSsn -> "222-22-2222")) with UserName with UserSsn
 
-  dumpObject(user1)
-  val user11 = user1.setId(ObjId("User1"))
-  dumpObject(user11)
+  def dump(user:UserWithNameAndSsn) = println(s"${user.name} ---> ${user.ssn}")
+  def dumpUserName(user:UserName) = println(s"${user.name}")
 
-  val user2 = GenericDbObjectBuilder(UserType).
-    add(userName -> "Victor").
-    add(userEmail -> "vic@box.com").
-    add(userAge -> 11).
-//    add(fileName -> "My Favorite File").
-    build
-  dumpObject(user2)
+  dump(user1)
+  dumpUserName(user2)
 
-  val file1 = GenericDbObjectBuilder(FileType).add(fileName -> "My Favorite Type").
-//    add(userEmail -> "vic@box.com").
-    build
-  dumpObject(file1)
+  val user3 = UserRecordBuilder().name("John").email("john@box.com").build
+//  dump(user3)
+  dumpObject(user3)
 
-  println("==================================================")
-  val userName1 = user1.getValue(userName)
-  val userAge1 = user1.getValue(userAge)
-  println(s"$userName1  --> $userAge1")
-
-  //println(user1.getValue(fileName))
-
-  def foo(user:DbObject[UserType.type]) {
-    for {
-      name <- user.getValue(userName)
-      age <- user.getValue(userAge)
-    } yield println(s"$name -> $age")
-  }
-
-  println("==================================================")
-  foo(user1)
-  foo(user2)
-
-  println("==================================================")
-  val userUpdated1 = UserRecordBuilder(user1).name("John").
-    age(22).
-    add(userAge -> 11).
-    build
-  dumpObject(userUpdated1)
-  println(userUpdated1.email)
+  val user4Builder = UserRecordBuilder().name("Yegor").email("1@2")
+  user4Builder.ssn = SSN("xxxxxxxx")
+  val user4 = user4Builder.build
+  dumpObject(user4)
 }

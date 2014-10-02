@@ -34,11 +34,11 @@ object TestClient extends App{
   })
 
   val (createdObjects, createWithBatchingTiming) = PerformanceUtil.timerWithResult({
-//    val createdObjects = for {i <- 1 to 100
-//      dbObj = makeDbObj(i)
-//    } yield dbObj
-//
-//    s.create(createdObjects.toList, claimType)
+    val createdObjects = for {i <- 1 to 100
+      dbObj = makeDbObj(i)
+    } yield dbObj
+
+    s.create(createdObjects.toList, claimType)
   })
 
 //  createdObjects.foreach(MdObjectHelper.dump(_))

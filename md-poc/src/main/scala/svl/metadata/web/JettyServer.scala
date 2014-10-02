@@ -7,20 +7,25 @@ import org.scalatra.servlet.ScalatraListener
 
 object JettyServer {
   def main(args: Array[String]) {
-    val port = if(System.getenv("PORT") != null) System.getenv("PORT").toInt else 8180
+    try {
+      val port = if (System.getenv("PORT") != null) System.getenv("PORT").toInt else 8180
 
-    val server = new Server(port)
-    val context = new WebAppContext()
-    context setContextPath "/"
-    context.setInitParameter(ScalatraListener.LifeCycleKey, "svl.metadata.web.ScalatraBootstrap")
-    context.setResourceBase("src/main/webapp")
-    context.addEventListener(new ScalatraListener)
-    context.addServlet(classOf[DefaultServlet], "/")
-    //context.addServlet(classOf[com.example.app.MyScalatraServlet], "/*")
+      val server = new Server(port)
+      val context = new WebAppContext()
+      context setContextPath "/"
+      context.setInitParameter(ScalatraListener.LifeCycleKey, "svl.metadata.web.ScalatraBootstrap")
+      context.setResourceBase("src/main/webapp")
+      context.addEventListener(new ScalatraListener)
+      context.addServlet(classOf[DefaultServlet], "/")
 
-    server.setHandler(context)
+      server.setHandler(context)
 
-    server.start()
-    server.join()
+      server.start()
+      server.join()
+    }
+    catch {
+      case e:Exception => println(e)
+        System.exit(-1)
+    }
   }
 }

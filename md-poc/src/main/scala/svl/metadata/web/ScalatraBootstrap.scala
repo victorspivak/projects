@@ -7,5 +7,6 @@ class ScalatraBootstrap extends LifeCycle {
   override def init(context: ServletContext) {
     context.mount(new ObjectsRestServlet, "/objects/*")
     context.mount(new TypesRestServlet, "/types/*")
+    context.mount(new MaintenanceRestServlet, "/master/*")
   }
 }

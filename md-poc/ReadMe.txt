@@ -10,6 +10,8 @@ To run Solr:
     http://localhost:8983/solr
     query: Amount_d:[100 TO 1000]
 
-curl http://localhost:8180/types/Claim | python -mjson.tool
+~runMain svl.metadata.web.JettyServer
 
-curl http://localhost:8180/objects/Claim/ClaimID-00000174 | python -mjson.tool
+curl -s http://localhost:8180/types/Claim | python -mjson.tool
+curl -s http://localhost:8180/objects/Claim/ClaimID-00000174 | python -mjson.tool
+curl -s http://localhost:8180/master/stop
