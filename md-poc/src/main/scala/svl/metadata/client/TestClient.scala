@@ -15,7 +15,7 @@ object TestClient extends App{
                               with DefaultHBaseDatabaseContext
                               with DefaultSolrEnv
 
-  val s = db.connect
+  val session = db.connect
 
   val claimTypeName = "Claim"
   val claimType = MdTypes.getType(claimTypeName).orNull
@@ -34,11 +34,11 @@ object TestClient extends App{
   })
 
   val (createdObjects, createWithBatchingTiming) = PerformanceUtil.timerWithResult({
-    val createdObjects = for {i <- 1 to 100
-      dbObj = makeDbObj(i)
-    } yield dbObj
-
-    s.create(createdObjects.toList, claimType)
+//    val createdObjects = for {i <- 1 to 100
+//      dbObj = makeDbObj(i)
+//    } yield dbObj
+//
+//    s.create(createdObjects.toList, claimType)
   })
 
 //  createdObjects.foreach(MdObjectHelper.dump(_))
@@ -60,7 +60,7 @@ object TestClient extends App{
     .maxCount(5)
     .build
 
-  val (result, queryTiming) = PerformanceUtil.timerWithResult(s.query(query))
+  val (result, queryTiming) = PerformanceUtil.timerWithResult(session.query(query))
 
   result.foreach(MdObjectHelper.dump)
 
@@ -69,28 +69,30 @@ object TestClient extends App{
   println ("Query                 Timing: " + queryTiming + "  Size: " + result.size)
 
 
-  val id = "ClaimID-00000174"
+  val id = "ClaimID-00000001"
 
-  val obj1 = s.fetch(id, claimType)
+  val obj1 = session.fetch(id, claimType)
   dump(obj1)
-  val obj2 = changeObject(s.fetch(obj1.get))
+  val obj2 = changeObject(session.fetch(obj1.get))
   dump(obj2)
-  val obj3 = changeObject(s.fetch(obj2.get))
+  val obj3 = changeObject(session.fetch(obj2.get))
   dump(obj3)
-  val obj4 = changeObject(s.fetch(obj3.get))
+  val obj4 = changeObject(session.fetch(obj3.get))
   dump(obj4)
 
 
   def changeObject(dbObj:Option[DbObject]) = {
     dbObj.map {obj =>
         val amount = obj.mdType.getAttributeByNameType("Amount")(classOf[Double])
-        val updated = DbObjectBuilder(obj).addAttribute(amountAttr, obj.getValue(amount).getOrElse(0.0) + 1000.0).build
-        s.update(updated)
+
+      val value = obj.getValue(amount).getOrElse(0.0)
+      val updated = DbObjectBuilder(obj).addAttribute(amountAttr, value + 1000.0).build
+        session.update(updated)
         updated
     }
   }
 
-  s.disconnect()
+  session.disconnect()
 }
 
 

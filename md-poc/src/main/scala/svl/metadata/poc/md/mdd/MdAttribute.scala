@@ -2,17 +2,24 @@ package svl.metadata.poc.md.mdd
 
 import java.util.Date
 
+import scala.reflect.ClassTag
+
 object MdAttrDataTypes{
-  sealed case class MdAttrDataType[T](dataType:Class[T]){
-    val dataTypeName = dataType.getSimpleName
+
+  case class OptimisticLocking(imp:Long) extends AnyVal
+
+  sealed case class MdAttrDataType[T](implicit dataType:ClassTag[T]){
+    val dataTypeName = dataType.toString()
     def asInstanceOf(value:Any) = value.asInstanceOf[T]
   }
 
-  val StringType = MdAttrDataType(classOf[String])
-  val IntegerType = MdAttrDataType(classOf[Int])
-  val DoubleType = MdAttrDataType(classOf[Double])
-  val DateType = MdAttrDataType(classOf[Date])
-  val LongType = MdAttrDataType(classOf[Long])
+  val StringType = MdAttrDataType[String]()
+  val IntegerType = MdAttrDataType[Int]()
+  val DoubleType = MdAttrDataType[Double]()
+  val DateType = MdAttrDataType[Date]()
+  val LongType = MdAttrDataType[Long]()
+
+  val OptimisticLockingType = MdAttrDataType[OptimisticLocking]()
 }
 
 import MdAttrDataTypes._

@@ -6,7 +6,10 @@ import scala.language.existentials
 import scala.reflect.Manifest
 
 case class DbObject(id: String, mdType: MdType, values: Map[String, Any]) {
-  def getValue[T](attr: MdAttribute[T]): Option[T] = values.get(attr.name).map(_.asInstanceOf[T])
+  def getValue[T](attr: MdAttribute[T]): Option[T] = {
+    val option: Option[Any] = values.get(attr.name)
+    option.map(_.asInstanceOf[T])
+  }
   def getValue[T](attr: Option[MdAttribute[T]]) = attr.flatMap((a: MdAttribute[T]) => values.get(a.name).map(_.asInstanceOf[T]))
   def getValue[T](name: String)(clazz: Class[T]) = values.get(name).map(_.asInstanceOf[T])
 
