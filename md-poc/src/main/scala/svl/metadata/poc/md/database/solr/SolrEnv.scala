@@ -43,11 +43,11 @@ class SolrHelper(val solrEnv: SolrEnv) {
     solrEnv.solr.add(document, 100)
   }
 
-  def indexDocument(dbObjs: List[DbObject], mdType: MdType) {
+  def indexDocument(dbObjs: List[DbObject], mdType: GenericMdType) {
     solrEnv.solr.add(dbObjs.map(makeSolrDocument(_, mdType)), 100)
   }
 
-  private def makeSolrDocument(dbObj: DbObject, mdType: MdType): SolrInputDocument = {
+  private def makeSolrDocument(dbObj: DbObject, mdType: GenericMdType): SolrInputDocument = {
     val document = new SolrInputDocument
     document.addField("id", dbObj.id)
     document.addField(TypeField, dbObj.mdType.name)
@@ -114,7 +114,7 @@ class SolrHelper(val solrEnv: SolrEnv) {
     result.toString()
   }
 
-  def solrDocumentToDbObject(document: SolrDocument, mdType: MdType) = {
+  def solrDocumentToDbObject(document: SolrDocument, mdType: GenericMdType) = {
     val builder = mdType.attributes.foldLeft(DbObjectBuilder(document.getFieldValue("id").asInstanceOf[String], mdType)) { (builder, attribute) =>
       builder.addAttribute(attribute.asInstanceOf[MdAttribute[Any]] -> document.getFieldValue(solrFieldName(attribute)).asInstanceOf[Any])
     }

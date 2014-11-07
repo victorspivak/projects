@@ -48,14 +48,14 @@ class MdTypeSpec extends Specification { def is =
   def makeSimpleTypeBuilder = MdTypeBuilder(typeName).add(attr1).id(attr2).add(attr3)
   def makeSimpleType = makeSimpleTypeBuilder.build
 
-  def typeIdFact(t:MdType, expected:String) = t.id mustEqual expected
-  def typeNameFact(t:MdType, expected:String) = t.name mustEqual expected
-  def typeAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.getAttributeByNameOpt(attrName) === Option(expected)
-  def typeOptimisticLockingFact(t:MdType, expected:Boolean) = t.optimisticLockingAttribute.isDefined === expected
-  def idGenerationPolicyFact(t:MdType, expected:MdIdGenerationPolicy) = t.idGenerationPolicy.policy === expected
-  def idTemplateFact(t:MdType, expected:String) = t.idGenerationPolicy.idTemplate === expected
+  def typeIdFact(t:GenericMdType, expected:String) = t.id mustEqual expected
+  def typeNameFact(t:GenericMdType, expected:String) = t.name mustEqual expected
+  def typeAttrFact(t:GenericMdType, attrName:String, expected:MdAttribute[_]) = t.getAttributeByNameOpt(attrName) === Option(expected)
+  def typeOptimisticLockingFact(t:GenericMdType, expected:Boolean) = t.optimisticLockingAttribute.isDefined === expected
+  def idGenerationPolicyFact(t:GenericMdType, expected:MdIdGenerationPolicy) = t.idGenerationPolicy.policy === expected
+  def idTemplateFact(t:GenericMdType, expected:String) = t.idGenerationPolicy.idTemplate === expected
 
-  def typeIdAttrFact(t:MdType, attrName:String, expected:MdAttribute[_]) = t.idGenerationPolicy.idColumn == expected
+  def typeIdAttrFact(t:GenericMdType, attrName:String, expected:MdAttribute[_]) = t.idGenerationPolicy.idColumn == expected
   def dupAttrFact(tb:MdTypeBuilder, attr1:MdAttribute[_]) = tb.add(attr1) must throwAn[MddInvalidTypeBuildingException]
   def typeWitoutIdFact = MdTypeBuilder(typeName).add(attr1).build must throwAn[MddInvalidTypeBuildingException]
   def addingAttrBuilderFact(tb:MdTypeBuilder) = {

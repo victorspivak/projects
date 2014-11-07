@@ -13,12 +13,18 @@ object MdIdGenerationPolicies{
   val SuppliedIdPolicy = MdIdGenerationPolicy(3)
 }
 import MdIdGenerationPolicies._
+import MdAttrDataTypes._
 
-sealed case class IdGeneration(idColumn:MdAttribute[_], policy:MdIdGenerationPolicy, idTemplate:String)
+sealed case class IdGeneration(idColumn:MdAttribute[_, _], policy:MdIdGenerationPolicy, idTemplate:String)
 
-case class MdType(id:String, name:String, attributes:List[MdAttribute[_]], idGeneration:IdGeneration){
-  val attributesByName:Map[String, MdAttribute[_]] =
-    attributes.foldLeft(Map[String, MdAttribute[_]]()) ((m:Map[String, MdAttribute[_]], a:MdAttribute[_]) => m + (a.name -> a))
+trait MdType{
+  def id:DmTypeId
+  def name:String
+  def attributes:List[MdAttribute[Any, MdType]]
+  def idGeneration:IdGeneration
+
+  val attributesByName:Map[String, MdAttribute[_,_]] =
+    attributes.foldLeft(Map[String, MdAttribute[_, _]]()) ((m:Map[String, MdAttribute[_, _]], a:MdAttribute[_, _]) => m + (a.name -> a))
 
   def getAttributeByNameOpt(attrName:String) = attributesByName.get(attrName)
   def getAttributeByName(attrName:String):MdAttribute[_] = getAttributeByNameOpt(attrName) match {
@@ -33,10 +39,31 @@ case class MdType(id:String, name:String, attributes:List[MdAttribute[_]], idGen
   def containsAttribute(attrName:String) = attributesByName.contains(attrName)
   def idColumn = idGeneration.idColumn
   def idGenerationPolicy = idGeneration
-  def optimisticLockingAttribute:Option[MdAttribute[Long]] = getAttributeByNameOpt(MdType.OptimisticLockingColumnName).asInstanceOf[Option[MdAttribute[Long]]]
+  def optimisticLockingAttribute:Option[MdAttribute[Long]] = getAttributeByNameOpt(GenericMdType.OptimisticLockingColumnName).asInstanceOf[Option[MdAttribute[Long]]]
 }
 
-object MdType {
+case class GenericMdType(id:String, name:String, attributes:List[MdAttribute[_]], idGeneration:IdGeneration) extends MdType
+//{
+//  val attributesByName:Map[String, MdAttribute[_]] =
+//    attributes.foldLeft(Map[String, MdAttribute[_]]()) ((m:Map[String, MdAttribute[_]], a:MdAttribute[_]) => m + (a.name -> a))
+//
+//  def getAttributeByNameOpt(attrName:String) = attributesByName.get(attrName)
+//  def getAttributeByName(attrName:String):MdAttribute[_] = getAttributeByNameOpt(attrName) match {
+//    case Some(attr) => attr
+//    case _ => throw MddExceptions.unknownAttribute(name, attrName)
+//  }
+//  def getAttributeByNameType[T](attrName:String)(clazz:Class[T]):MdAttribute[T] = getAttributeByName(attrName).asInstanceOf[MdAttribute[T]]
+//
+//  def getAttributeByNameManifest[T](attrName:String)(implicit m:Manifest[T]):MdAttribute[T] =
+//    getAttributeByName(attrName).asInstanceOf[MdAttribute[T]]
+//
+//  def containsAttribute(attrName:String) = attributesByName.contains(attrName)
+//  def idColumn = idGeneration.idColumn
+//  def idGenerationPolicy = idGeneration
+//  def optimisticLockingAttribute:Option[MdAttribute[Long]] = getAttributeByNameOpt(GenericMdType.OptimisticLockingColumnName).asInstanceOf[Option[MdAttribute[Long]]]
+//}
+
+object GenericMdType {
   val OptimisticLockingColumnName = "OptLockingAttr"
 }
 
@@ -51,7 +78,7 @@ class MdTypeBuilder (val name:String) {
   def add (attribute:MdAttribute[_]):MdTypeBuilder = {
     if (attributesIndex.contains(attribute.name))
       throw MddExceptions.duplicateAttribute(name, attribute.name)
-    if (attribute.name == MdType.OptimisticLockingColumnName)
+    if (attribute.name == GenericMdType.OptimisticLockingColumnName)
       throw MddExceptions.invalidAttributeName(name, attribute.name)
     attributes += attribute
     attributesIndex += attribute.name -> attribute
@@ -80,7 +107,7 @@ class MdTypeBuilder (val name:String) {
   def build = {
     def addOptimisticAttrIfNeeded(): List[MdAttribute[_]] = {
       if (optimisticLocking)
-        LongAttributeBuilder(MdType.OptimisticLockingColumnName).build :: attributes.toList
+        LongAttributeBuilder(GenericMdType.OptimisticLockingColumnName).build :: attributes.toList
       else
         attributes.toList
     }
@@ -88,7 +115,7 @@ class MdTypeBuilder (val name:String) {
     if (idColumn == null)
       throw MddExceptions.missingIdColumn(name)
 
-    new MdType("", name, addOptimisticAttrIfNeeded(), IdGeneration(idColumn, idGenerationPolicy, idTemplate))
+    new GenericMdType("", name, addOptimisticAttrIfNeeded(), IdGeneration(idColumn, idGenerationPolicy, idTemplate))
   }
 }
 

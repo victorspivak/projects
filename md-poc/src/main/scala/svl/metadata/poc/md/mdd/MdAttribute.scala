@@ -6,6 +6,8 @@ import scala.reflect.ClassTag
 
 object MdAttrDataTypes{
 
+  case class DmTypeId(imp:String) extends AnyVal
+  case class DmObjId(imp:String) extends AnyVal
   case class OptimisticLocking(imp:Long) extends AnyVal
 
   sealed case class MdAttrDataType[T](implicit dataType:ClassTag[T]){
@@ -27,9 +29,10 @@ import MdAttrDataTypes._
 case class MdAttrIndexPolicy(filterable:Boolean, searchable:Boolean)
 case class MdAttrStorePolicy(compressing:Boolean, encrypting:Boolean)
 
-case class MdAttribute[T](id:String, name:String, attrType:MdAttrDataType[T], size:Int,
+case class MdAttribute[+D, +T](objectType:T, id:String,
+                       name:String, attrType:MdAttrDataType[D], size:Int,
                        indexPolicy:MdAttrIndexPolicy, storePolicy:MdAttrStorePolicy) {
-  def attrValueToString(value:Any) = value.asInstanceOf[T].toString
+  def attrValueToString(value:Any) = value.asInstanceOf[D].toString
 }
 
 class MdAttributeBuilder[T] (name:String, attrType:MdAttrDataType[T], size:Int = -1) {

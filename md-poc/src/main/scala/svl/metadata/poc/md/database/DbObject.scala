@@ -5,7 +5,7 @@ import svl.metadata.poc.md.mdd.MdAttribute
 import scala.language.existentials
 import scala.reflect.Manifest
 
-case class DbObject(id: String, mdType: MdType, values: Map[String, Any]) {
+case class DbObject(id: String, mdType: GenericMdType, values: Map[String, Any]) {
   def getValue[T](attr: MdAttribute[T]): Option[T] = {
     val option: Option[Any] = values.get(attr.name)
     option.map(_.asInstanceOf[T])
@@ -19,7 +19,7 @@ case class DbObject(id: String, mdType: MdType, values: Map[String, Any]) {
   def optimisticLocking: Option[Long] = getValue(mdType.optimisticLockingAttribute)
 }
 
-class DbObjectBuilder(id: String, mdType: MdType, overwriteValues: Boolean = false) {
+class DbObjectBuilder(id: String, mdType: GenericMdType, overwriteValues: Boolean = false) {
   var values = scala.collection.mutable.HashMap[String, Any]()
 
   def add(entry: (String, Any)): DbObjectBuilder = {
@@ -43,9 +43,9 @@ class DbObjectBuilder(id: String, mdType: MdType, overwriteValues: Boolean = fal
 }
 
 object DbObjectBuilder {
-  def apply(id: String, mdType: MdType) = new DbObjectBuilder(id, mdType)
+  def apply(id: String, mdType: GenericMdType) = new DbObjectBuilder(id, mdType)
 
-  def apply(mdType: MdType) = new DbObjectBuilder("", mdType)
+  def apply(mdType: GenericMdType) = new DbObjectBuilder("", mdType)
 
   def apply(dbObject: DbObject) = dbObject.values.foldLeft(new DbObjectBuilder(dbObject.id, dbObject.mdType, true)) {
     (builder, entry) => builder.add(entry)

@@ -4,7 +4,7 @@ import svl.metadata.poc.md.mdd._
 
 
 object MdTypes {
-  val types:Map[String, MdType] = MdTypesLoader.loadTypes.map{t => t.name.toLowerCase -> t}.toMap
+  val types:Map[String, GenericMdType] = MdTypesLoader.loadTypes.map{t => t.name.toLowerCase -> t}.toMap
 
   def getType(name:String) = types.get(name.toLowerCase)
 }

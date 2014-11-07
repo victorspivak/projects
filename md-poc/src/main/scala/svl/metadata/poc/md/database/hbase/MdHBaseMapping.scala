@@ -10,7 +10,7 @@ import svl.metadata.poc.md.database.DbObject
 
 object HBaseRichObjects{
   import scala.language.implicitConversions
-  implicit def mdType2HBaseRichType(mdType:MdType)(implicit context:HBaseDatabaseContext) =
+  implicit def mdType2HBaseRichType(mdType:GenericMdType)(implicit context:HBaseDatabaseContext) =
                                                                         new HBaseRichType(mdType)(context)
   implicit def mdObject2HBaseRichDbObject(dbObject:DbObject)(implicit context:HBaseDatabaseContext) =
                                                                         new HBaseRichDbObject(dbObject)(context)
@@ -20,7 +20,7 @@ object HBaseRichObjects{
 
 import HBaseRichObjects._
 
-class HBaseRichType(val mdType:MdType)(val context:HBaseDatabaseContext){
+class HBaseRichType(val mdType:GenericMdType)(val context:HBaseDatabaseContext){
   val helper = context.hbaseHelper
 
   def tableName = mdType.name
@@ -35,7 +35,7 @@ class HBaseRichAttribute[T](val attribute:MdAttribute[T])(val context:HBaseDatab
   val helper = context.hbaseHelper
 
   def fieldName = attribute.name
-  def getValue(result:Result, mdType:MdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
+  def getValue(result:Result, mdType:GenericMdType) = helper.getValue(attribute.attrType, result, mdType.fieldFamily, fieldName)
 }
 
 class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext){
@@ -64,8 +64,8 @@ class HBaseRichDbObject(val dbObject:DbObject)(val context:HBaseDatabaseContext)
 
     dbObject.values.foldLeft(helper.makePut(dbObject.id)){(put, entry) => val (attrName, value) = entry
       mdType.getAttributeByName(attrName) match {
-        case MdAttribute(_, MdType.OptimisticLockingColumnName, LongType, _, _, _) =>
-          helper.addToPut(put, mdType.fieldFamily, MdType.OptimisticLockingColumnName, LongType, value.asInstanceOf[Long] + 1)
+        case MdAttribute(_, GenericMdType.OptimisticLockingColumnName, LongType, _, _, _) =>
+          helper.addToPut(put, mdType.fieldFamily, GenericMdType.OptimisticLockingColumnName, LongType, value.asInstanceOf[Long] + 1)
         case MdAttribute(_, name, attrType, _, _, _) =>
           helper.addToPut(put, mdType.fieldFamily, name, attrType, attrType.asInstanceOf(value))
         case attr =>

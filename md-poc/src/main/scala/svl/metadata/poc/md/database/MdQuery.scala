@@ -1,6 +1,6 @@
 package svl.metadata.poc.md.database
 
-import svl.metadata.poc.md.mdd.{MdAttribute, MdType}
+import svl.metadata.poc.md.mdd.{MdAttribute, GenericMdType}
 import scala.language.existentials
 
 object MdQueryOperators{
@@ -42,10 +42,10 @@ import MdSortingPolicy._
 case class MdSorting(attribute:MdAttribute[_], direction:MdSoringOrder)
 case class MdQueryOptions(starting:Int, maxCount:Int)
 
-case class MdQuery (ftQuery:String, mdType:MdType, constrains:List[MdQueryConstrain[_]], sorting:Option[MdSorting], options:MdQueryOptions){
+case class MdQuery (ftQuery:String, mdType:GenericMdType, constrains:List[MdQueryConstrain[_]], sorting:Option[MdSorting], options:MdQueryOptions){
 }
 
-class MdQueryBuilder(ftQuery:String, mdType:MdType) {
+class MdQueryBuilder(ftQuery:String, mdType:GenericMdType) {
   var constrains = scala.collection.mutable.ArrayBuffer[MdQueryConstrain[_]]()
   var sorting:Option[MdSorting] = None
   var starting = 0
@@ -75,6 +75,6 @@ class MdQueryBuilder(ftQuery:String, mdType:MdType) {
 }
 
 object MdQueryBuilder{
-  def apply(query:String = "", mdType:MdType) = new MdQueryBuilder(query, mdType)
+  def apply(query:String = "", mdType:GenericMdType) = new MdQueryBuilder(query, mdType)
 }
 

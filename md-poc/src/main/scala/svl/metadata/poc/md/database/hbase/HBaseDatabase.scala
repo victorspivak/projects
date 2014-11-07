@@ -1,6 +1,6 @@
 package svl.metadata.poc.md.database.hbase
 
-import svl.metadata.poc.md.mdd.{MddExceptions, MdAttrDataTypes, MdType}
+import svl.metadata.poc.md.mdd.{MddExceptions, MdAttrDataTypes, GenericMdType}
 import svl.metadata.poc.md.database.{MdQuery, DbObject, DbSession, Database}
 import HBaseRichObjects._
 import svl.metadata.poc.md.database.solr.SolrEnv
@@ -36,7 +36,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
 
     dbObj.optimisticLocking match {
       case Some(optLock) =>
-        if (!table.checkAndPut(dbObj.id, mdType.fieldFamily, MdType.OptimisticLockingColumnName, hbaseHelper.toBytes(LongType, optLock), put))
+        if (!table.checkAndPut(dbObj.id, mdType.fieldFamily, GenericMdType.OptimisticLockingColumnName, hbaseHelper.toBytes(LongType, optLock), put))
           throw MddExceptions.concurrentObjectUpdate(dbObj)
       case None => table.put(put)
     }
@@ -47,7 +47,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
   def delete(id: String) {println("DELETE " + id)}
 
   def fetch(dbObj:DbObject):Option[DbObject] = fetch(dbObj.id, dbObj.mdType)
-  def fetch(id: String, mdType:MdType) = {
+  def fetch(id: String, mdType:GenericMdType) = {
     val table =  mdType.table
     val get = mdType.makeGet(id)
     val result = table.get(get)
@@ -55,7 +55,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
     getResultToDbObject(result, id, mdType)
   }
 
-  def getResultToDbObject(result: Result, id: String, mdType: MdType): Option[DbObject] = {
+  def getResultToDbObject(result: Result, id: String, mdType: GenericMdType): Option[DbObject] = {
     val values = for {
       attribute <- mdType.attributes
       value <- attribute.getValue(result, mdType)
@@ -71,7 +71,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
 
   def disconnect() {}
 
-  def create(dbObjects: List[DbObject], mdType:MdType) = {
+  def create(dbObjects: List[DbObject], mdType:GenericMdType) = {
     import scala.collection.JavaConversions._
     val table =  mdType.table
     val objWithIds = dbObjects.map(_.assignId)
@@ -86,7 +86,7 @@ class HBaseSession(val context:HBaseDatabaseContext) extends DbSession{
     objWithIds
   }
 
-  def fetch(ids: List[String], mdType:MdType) = {
+  def fetch(ids: List[String], mdType:GenericMdType) = {
     import scala.collection.JavaConversions._
     val table =  mdType.table
     val gets = ids.foldLeft(List[Get]()){(gets, id) =>
