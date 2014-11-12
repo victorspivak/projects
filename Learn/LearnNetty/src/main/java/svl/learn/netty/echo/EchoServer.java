@@ -12,10 +12,12 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.ResourceLeakDetector;
 
 import java.net.InetSocketAddress;
 
 public class EchoServer {
+    private static final int BACKLOG_SIZE = 128;
     private final int port;
     public EchoServer(int port) {
         this.port = port;
@@ -28,23 +30,27 @@ public class EchoServer {
         new EchoServer(port).start();
     }
     public void start() throws Exception {
-        EventLoopGroup group = new NioEventLoopGroup();
+        System.out.println("Start Server");
+        ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED);
+
+        final EventLoopGroup group = new NioEventLoopGroup();
         try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(group)
+            ServerBootstrap bootstrap = new ServerBootstrap();
+            bootstrap.group(group)
                 .channel(NioServerSocketChannel.class)
                 .localAddress(new InetSocketAddress(port))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    public void initChannel(SocketChannel ch)
-                            throws Exception {
-                    ch.pipeline().addLast(new EchoServerHandler());
+                    public void initChannel(SocketChannel channel) throws Exception {
+                        channel.pipeline().addLast(new EchoServerHandler(group));
+                        channel.pipeline().addLast(new LoggingChannelInboundHandler());
                     }
                 })
-                .option(ChannelOption.SO_BACKLOG, 128)
+                .option(ChannelOption.SO_BACKLOG, BACKLOG_SIZE)
                 .childOption(ChannelOption.SO_KEEPALIVE, true);
-            ChannelFuture f = b.bind().sync();
-            f.channel().closeFuture().sync();
+
+            ChannelFuture channelFuture = bootstrap.bind();
+            channelFuture.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
         }

@@ -1,7 +1,3 @@
-/*
- * Copyright © 1994-2009. Victor Spivak.  All Rights Reserved.
- */
-
 package svl.learn.netty.echo;
 
 import io.netty.buffer.ByteBuf;
@@ -11,13 +7,15 @@ import io.netty.util.CharsetUtil;
 
 @ChannelHandler.Sharable
 public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
-    public EchoClientHandler() {
-        System.out.println("Constructing EchoClientHandler");
+    private final String message;
+
+    public EchoClientHandler(String message) {
+        this.message = message;
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        ctx.write(Unpooled.copiedBuffer("Netty rocks!", CharsetUtil.UTF_8));
+        ctx.write(Unpooled.copiedBuffer(message, CharsetUtil.UTF_8));
         ctx.flush();
     }
 

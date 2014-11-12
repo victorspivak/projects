@@ -17,10 +17,12 @@ import java.net.InetSocketAddress;
 public class EchoClient {
     private final String host;
     private final int port;
+    private final String message;
 
-    public EchoClient(String host, int port) {
+    public EchoClient(String host, int port, String message) {
         this.host = host;
         this.port = port;
+        this.message = message;
     }
 
     public void start() throws Exception {
@@ -37,7 +39,7 @@ public class EchoClient {
                         public void initChannel(SocketChannel ch)
                                 throws Exception {
                             ch.pipeline().addLast(
-                                    new EchoClientHandler());
+                                    new EchoClientHandler(message));
                         }
                     });
 
@@ -50,15 +52,16 @@ public class EchoClient {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
+        if (args.length != 3) {
             System.err.println(
                     "Usage: " + EchoClient.class.getSimpleName() +
-                            " <host> <port>");
+                            " <host> <port> <message>");
             return;
         }
 
         final String host = args[0];
         final int port = Integer.parseInt(args[1]);
-        new EchoClient(host, port).start();
+        final String message = args[2];
+        new EchoClient(host, port, message).start();
     }
 }
