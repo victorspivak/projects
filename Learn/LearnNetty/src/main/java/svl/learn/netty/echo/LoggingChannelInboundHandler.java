@@ -1,10 +1,12 @@
 package svl.learn.netty.echo;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
+@ChannelHandler.Sharable
 public class LoggingChannelInboundHandler  extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -34,6 +36,5 @@ public class LoggingChannelInboundHandler  extends ChannelInboundHandlerAdapter 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         cause.printStackTrace();
-        ctx.fireExceptionCaught(cause);
     }
 }

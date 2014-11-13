@@ -9,9 +9,9 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.util.CharsetUtil;
 
-@ChannelHandler.Sharable
 public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     private final EventLoopGroup group;
+    private StringBuilder stringBuilder = new StringBuilder();
 
     public EchoServerHandler(EventLoopGroup group) {
         this.group = group;
@@ -20,20 +20,21 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         ByteBuf buf = (ByteBuf) msg;
-        String message = buf.toString(CharsetUtil.UTF_8);
-        if (message.equals("Exit")) {
-            ctx.close();
-            group.shutdownGracefully();
-        } else {
-            ctx.write(buf);
-            buf.retain();
-            ctx.fireChannelRead(buf);
-        }
+        stringBuilder.append(buf.toString(CharsetUtil.UTF_8));
+        ctx.fireChannelRead(buf);
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) {
-        ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
-        ctx.fireChannelReadComplete();
+        String message = stringBuilder.toString();
+        if (message.equals("Exit")) {
+            ctx.close();
+            group.shutdownGracefully();
+        } else {
+            ctx.write(Unpooled.copiedBuffer(message, CharsetUtil.UTF_8));
+
+            ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+            ctx.fireChannelReadComplete();
+        }
     }
 }

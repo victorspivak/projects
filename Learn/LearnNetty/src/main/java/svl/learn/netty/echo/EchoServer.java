@@ -30,8 +30,8 @@ public class EchoServer {
         new EchoServer(port).start();
     }
     public void start() throws Exception {
-        System.out.println("Start Server");
-        ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.ADVANCED);
+        System.out.println("Start Server...");
+        ResourceLeakDetector.setLevel(ResourceLeakDetector.Level.PARANOID);
 
         final EventLoopGroup group = new NioEventLoopGroup();
         try {
@@ -42,6 +42,8 @@ public class EchoServer {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel channel) throws Exception {
+                        channel.pipeline().addLast(new LoggingChannelInboundHandler());
+                        channel.pipeline().addLast(new MessageSplitterInboundHandler());
                         channel.pipeline().addLast(new EchoServerHandler(group));
                         channel.pipeline().addLast(new LoggingChannelInboundHandler());
                     }
@@ -53,6 +55,7 @@ public class EchoServer {
             channelFuture.channel().closeFuture().sync();
         } finally {
             group.shutdownGracefully().sync();
+            System.out.println("Server finished");
         }
     }
 }
