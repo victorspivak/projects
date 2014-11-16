@@ -91,7 +91,26 @@ case class Note(headers:Headers, values:Array[String]) {
     override def toString = values.mkString(" | ") + "\n"
 }
 
-case class DataStats(name:String,  var successCount:Int, var failCount:Int) {
+case class NoteAttribute(name:String, headerIndex:Int, ranges:List[Int]){
+    def valueSlot(value:String) = {
+        if (ranges.isEmpty)
+            value
+        else {
+            val cleanValue = if (value.endsWith("%")) value.substring(0, value.length - 1) else value
+            if (!cleanValue.isEmpty){
+                val number = cleanValue.toDouble
+                ranges.find(number <= _).getOrElse(9999999).toString
+            } else
+                ""
+        }
+    }
+}
+
+object NoteAttribute{
+    def apply(headers:Headers, name:String, ranges:List[Int] = List()) = new NoteAttribute(name, headers.getIndex(name), ranges)
+}
+
+case class DataStats(value:String, var successCount:Int, var failCount:Int) {
     def updateStats(note:Note) = {
         if (note.isFailed)
             failCount += 1
@@ -103,13 +122,10 @@ case class DataStats(name:String,  var successCount:Int, var failCount:Int) {
     def totalCount = successCount + failCount
     def probability = 100.0 * failCount / totalCount
 
-    override def toString = "%20s ==> %6d / %6d = %6.2f".format(name, failCount, totalCount, probability)
+    override def toString = "%20s ==> %6d / %6d = %6.2f".format(value.toString, failCount, totalCount, probability)
 }
 
 object DataStats {
-//    def apply(name:String,  successCount:Int, failCount:Int) = new DataStats(name, successCount, failCount)
-    def apply(name:String):DataStats = DataStats(name, 0,0)
-    def apply(name:String, note:Note):DataStats = {
-        DataStats(name, 0,0).updateStats(note)
-    }
+    def apply(value:String):DataStats = DataStats(value, 0,0)
+    def apply(value:String, note:Note):DataStats = DataStats(value, 0,0).updateStats(note)
 }
