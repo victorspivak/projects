@@ -10,21 +10,25 @@ object Analyser {
 
         val parser = CsvParser(filename, latestDate)
         val headers = parser.header
-        val validData = parser.validData
+        val sourceData = parser.validData
+
+//        val termId = headers.getIndex("term")
+//        val dataToAnalyze = sourceData.filter{note => note.get(termId).equals("36 months")}
+        val dataToAnalyze = sourceData
 
         println("********** Parameters *******************")
         headers.dump()
         println()
 
-        val statusStats = validData.foldLeft(new mutable.HashMap[Statuses.Value, Int])((map, entry) => {
+        val statusStats = dataToAnalyze.foldLeft(new mutable.HashMap[Statuses.Value, Int])((map, entry) => {
             map.get(entry.status()) match {
                 case Some(count) => map.put(entry.status(), count + 1)
                 case None => map.put(entry.status(), 1)
             }
             map
         })
-        val totalNotesCount = validData.size
-        val failedNotesCount = validData.count(_.status == Statuses.Failed)
+        val totalNotesCount = dataToAnalyze.size
+        val failedNotesCount = dataToAnalyze.count(_.status == Statuses.Failed)
         val totalStats = DataStats("Total Stats", totalNotesCount - failedNotesCount, failedNotesCount)
 
         println("********** Statuses *******************")
@@ -37,7 +41,7 @@ object Analyser {
             ,NoteAttribute(headers, "loan_amnt", List(10000, 15000, 20000, 25000, 30000, 35000, 40000))
             ,NoteAttribute(headers, "revol_util", List(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200))
             ,NoteAttribute(headers, "int_rate", List(8, 9, 10, 12, 14, 16, 18, 20, 25, 30, 100))
-            ,NoteAttribute(headers, "annual_inc", List(25000, 50000, 60000, 70000, 80000, 90000, 10000, 150000, 200000))
+            ,NoteAttribute(headers, "annual_inc", List(25000, 50000, 60000, 70000, 80000, 90000, 100000, 150000, 200000))
             ,NoteAttribute(headers, "grade")
 //            ,NoteAttribute(headers, "sub_grade")
             ,NoteAttribute(headers, "home_ownership")
@@ -48,7 +52,6 @@ object Analyser {
             ,NoteAttribute(headers, "fico_range_high")
         )
 
-
         attributesToProcess.foreach(attribute => {
             val paramStats = normalizeData(attribute)
             println("********** %s ********** %s **********".format (headers.label(attribute.headerIndex), totalStats))
@@ -57,7 +60,7 @@ object Analyser {
         })
 
         def normalizeData (noteAttribute:NoteAttribute) =
-            validData.foldLeft(new mutable.HashMap[String, DataStats])((map, note) => {
+            dataToAnalyze.foldLeft(new mutable.HashMap[String, DataStats])((map, note) => {
                 val value = note.get(noteAttribute.headerIndex)
                 val slot = noteAttribute.valueSlot(value)
                 map.get(slot) match {
