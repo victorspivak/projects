@@ -19,7 +19,7 @@ class CsvParser (filename:String, latestDate:Date) {
     private def stringToNote(str:String) = Note(header, str.split(",").map(_.trim).map(removeEnclosedQuotes))
 
     private def removeEnclosedQuotes (line:String): String = {
-        if (line(0) == line.last && line(0) == '\"')
+        if (!line.isEmpty && line(0) == line.last && line(0) == '\"')
             line.substring(1, line.length - 1)
         else
             line

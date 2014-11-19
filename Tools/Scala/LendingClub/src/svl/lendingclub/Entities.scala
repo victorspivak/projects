@@ -12,6 +12,8 @@ object Statuses extends Enumeration {
         , "Late (31-120 days)" -> Failed
         , "Late (16-30 days)" -> Late30
         , "In Review" -> Skip
+        , "In Funding" -> Skip
+        , "Issuing" -> Skip
         , "Performing Payment Plan" -> Current
         , "Issued" -> Current
         , "Does not meet the current credit policy  Status: Fully Paid" -> Paid
@@ -75,10 +77,38 @@ case class Headers(headers:Array[String]) {
     def dump() = headers.zipWithIndex.foreach{case (value, index) => println("%2d => %s".format(index, value))}
     def label(index:Int) = headers(index)
 
+    normalizeHeaderNames()
+    def normalizeHeaderNames(): Unit = {
+        update("Status", "loan_status")
+        update("Note Issue Date", "issue_d")
+        update("Term", "term")
+        update("PrincipalRemaining", "loan_amnt")
+        update("InterestRate", "int_rate")
+        update("Grade", "grade")
+
+        def update(oldName:String, newName:String): Unit = {
+            val index = headers.indexOf(oldName)
+            if (index >= 0)
+                headers(index) = newName
+        }
+    }
+
     override def toString = headers.mkString("|") + "\n"
 }
 
 case class Note(headers:Headers, values:Array[String]) {
+    object DataParser{
+        val monthYearFormat = new SimpleDateFormat("MMM-yyyy")
+        val monthDayYearFormat = new SimpleDateFormat("mm/dd/yyyy")
+
+        def parse(str:String) = {
+            if (str.indexOf('/') >= 0)
+                monthDayYearFormat.parse(str)
+            else
+                monthYearFormat.parse(str)
+        }
+    }
+
     def isValid = headers.size == values.length
     def status() = Statuses.toStatus(values(headers.statusIndex))
     def needProcessing(latestDate:Date) = {
@@ -86,7 +116,7 @@ case class Note(headers:Headers, values:Array[String]) {
     }
     def isFailed = isValid && status == Statuses.Failed
     def get(index:Int) = values(index).trim
-    def getIssueDate = new SimpleDateFormat("MMM-yyyy").parse(get(headers.issueDateIndex))
+    def getIssueDate = DataParser.parse(get(headers.issueDateIndex))
 
     override def toString = values.mkString(" | ") + "\n"
 }
