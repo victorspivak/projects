@@ -4,51 +4,63 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.function.Function;
 
-public abstract class Try<A> {
-    public static boolean isSuccess(Try tryy) {
-        return tryy instanceof Success;
-    }
-
-    public static <A> Try<A> tryOf(Callable<A> function) {
+public abstract class Try<V> {
+    public static <V> Try<V> tryOf(Callable<V> function) {
         try {
-            A result = function.call();
-            return new Success<A>(result);
+            V result = function.call();
+            return success(result);
         } catch (Exception e) {
-            return new Failure<>(e);
+            return failure(e);
         }
     }
 
-    public static <A, B> Function<A, Try<B>> tryOf(ThrowableFunction<A, B> function) {
-        return a -> {
-            try {
-                B result = function.apply(a);
-                return new Success<B>(result);
-            } catch (Exception e) {
-                return new Failure<>(e);
-            }
-        };
+    public static <I, O> Function<I, Try<O>> tryOf(ThrowableFunction<I, O> function) {
+        return a -> tryOf(() -> function.apply(a));
+    }
+
+    public static <V> Try<V> success(V value) {
+        return new Success<>(value);
+    }
+
+    public static <V> Try<V> failure(Exception e) {
+        return new Failure<>(e);
     }
 
     public abstract boolean isSuccess();
+
+    abstract public<U> Try<U> map(Function<? super V, ? extends U> mapper);
+    abstract public<U> Try<U> flatMap(Function<? super V, Try<U>> mapper);
 
     public boolean isError() {
         return !isSuccess();
     }
 
-    public abstract A getResult();
+    public abstract V getResult();
 
     public abstract Exception getError();
 
-    public interface ThrowableFunction<A, B> {
-        B apply(A a) throws Exception;
+    public interface ThrowableFunction<I, O> {
+        O apply(I a) throws Exception;
     }
 
-    static public class Success<A> extends Try<A> {
+    static public class Success<V> extends Try<V> {
 
-        private final A result;
+        private final V result;
 
-        public Success(A result) {
+        public Success(V result) {
             this.result = result;
+        }
+
+        @Override
+        public<U> Try<U> map(Function<? super V, ? extends U> mapper) {
+            Objects.requireNonNull(mapper);
+            return tryOf(() -> mapper.apply(getResult()));
+        }
+
+        @Override
+        public<U> Try<U> flatMap(Function<? super V, Try<U>> mapper) {
+            Objects.requireNonNull(mapper);
+            return mapper.apply(getResult());
         }
 
         @Override
@@ -57,7 +69,7 @@ public abstract class Try<A> {
         }
 
         @Override
-        public A getResult() {
+        public V getResult() {
             return result;
         }
 
@@ -85,7 +97,7 @@ public abstract class Try<A> {
         }
     }
 
-    static public class Failure<A> extends Try<A> {
+    static public class Failure<V> extends Try<V> {
 
         private final Exception exception;
 
@@ -94,12 +106,23 @@ public abstract class Try<A> {
         }
 
         @Override
+        public<U> Try<U> map(Function<? super V, ? extends U> mapper) {
+            return failure(getError());
+        }
+
+        @Override
+        public<U> Try<U> flatMap(Function<? super V, Try<U>> mapper) {
+            Objects.requireNonNull(mapper);
+            return failure(getError());
+        }
+
+        @Override
         public boolean isSuccess() {
             return false;
         }
 
         @Override
-        public A getResult() {
+        public V getResult() {
             throw new UnsupportedOperationException();
         }
 
@@ -110,7 +133,7 @@ public abstract class Try<A> {
 
         @Override
         public String toString() {
-            return "Failure{" + exception.getMessage() + '}';
+            return "Failure{" + exception.getClass().getName() + " : " + exception.getMessage() + '}';
         }
     }
 }
