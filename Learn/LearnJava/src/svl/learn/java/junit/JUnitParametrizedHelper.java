@@ -5,7 +5,6 @@ import junit.framework.TestSuite;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
