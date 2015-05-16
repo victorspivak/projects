@@ -11,6 +11,6 @@ fun testExtFunc() {
 
     val l = arrayList(1, 2, 3)
     println(l)
-    l.swap(0, 2)
+//    l.swap(0, 2)
     println(l)
 }
