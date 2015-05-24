@@ -1,12 +1,12 @@
-package svl.learn.kotlin.basic
+package svl.learn.kotlin.classes
 
 fun testProperties () {
-    val person1 = Person("Vic", "Spivak")
+    val person1 = PersonClass("Vic", "Spivak")
     println(person1.FirstName + " " + person1.LastName)
     person1.FirstName = "Lucy"
     println(person1.FirstName + " " + person1.LastName)
 }
-class Person (firstName : String, lastName : String) {
+class PersonClass (firstName : String, lastName : String) {
     public var FirstName : String = firstName
         get() {
             println ("Getter was invoked")

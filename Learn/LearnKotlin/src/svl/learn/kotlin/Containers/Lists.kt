@@ -1,6 +1,6 @@
-package svl.learn.kotlin.Containers
+package svl.learn.kotlin.containers
 
-fun lists() {
+fun testLists() {
     val l = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9)
     l.filter { it % 3 == 0 } . sortDescending() . forEach { print ("$it ") }
     println()
