@@ -35,9 +35,13 @@ public abstract class Try<V> {
         return !isSuccess();
     }
 
-    public abstract V getResult();
+    abstract public V getResult();
 
-    public abstract Exception getError();
+    abstract public Exception getError();
+
+    abstract public void propagateException();
+
+    abstract public <E extends Exception> Try<V> propagateException(Class<E> e) throws E;
 
     public interface ThrowableFunction<I, O> {
         O apply(I a) throws Exception;
@@ -79,11 +83,17 @@ public abstract class Try<V> {
         }
 
         @Override
+        public void propagateException() {
+        }
+
+        @Override
+        public <E extends Exception> Try<V> propagateException(Class<E> e) throws E {
+            return this;
+        }
+
+        @Override
         public boolean equals(Object that) {
-            if(!(that instanceof Success)) {
-                return false;
-            }
-            return Objects.equals(result, ((Success) that).getResult());
+            return that instanceof Success && Objects.equals(result, ((Success) that).getResult());
         }
 
         @Override
@@ -132,8 +142,43 @@ public abstract class Try<V> {
         }
 
         @Override
+        public void propagateException() {
+            ExceptionHelper.doThrow(exception);
+        }
+
+        @Override
+        public <E extends Exception> Try<V> propagateException(Class<E> e) throws E {
+            if (exception instanceof RuntimeException || e.isInstance(exception))
+                ExceptionHelper.doThrow(exception);
+            return this;
+        }
+
+        @Override
+        public int hashCode() {
+            return exception.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object that) {
+            return that instanceof Failure &&
+                    exception.getClass().equals(((Failure) that).getError().getClass()) &&
+                    Objects.equals(exception.getMessage(), ((Failure) that).getError().getMessage());
+        }
+
+        @Override
         public String toString() {
             return "Failure{" + exception.getClass().getName() + " : " + exception.getMessage() + '}';
+        }
+    }
+
+    static private class ExceptionHelper {
+        public static void doThrow(Exception e) {
+            ExceptionHelper.<RuntimeException> throwException(e);
+        }
+
+        @SuppressWarnings("unchecked")
+        static <E extends Exception> void throwException(Exception e) throws E {
+            throw (E) e;
         }
     }
 }

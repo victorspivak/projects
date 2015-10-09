@@ -30,6 +30,17 @@
       <group-entries value="false" />
       <execution-inputs />
     </execution-history>
+    <argument-values-cache />
+  </component>
+  <component name="DBNavigator.Project.ObjectDependencyManager">
+    <last-used-dependency-type value="INCOMING" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections />
@@ -110,15 +121,18 @@
       </lookup-filters>
     </navigation-settings>
     <dataset-grid-settings>
+      <general>
+        <enable-zooming value="true" />
+      </general>
+      <sorting>
+        <nulls-first value="true" />
+        <max-sorting-columns value="4" />
+      </sorting>
       <tracking-columns>
         <columnNames value="" />
         <visible value="true" />
         <editable value="false" />
       </tracking-columns>
-      <sorting>
-        <nulls-first value="true" />
-        <max-sorting-columns value="4" />
-      </sorting>
     </dataset-grid-settings>
     <dataset-editor-settings>
       <text-editor-popup>
@@ -139,6 +153,7 @@
         <convert-empty-strings-to-null value="true" />
         <select-content-on-cell-edit value="true" />
         <large-value-preview-active value="true" />
+        <load-view-data-active value="false" />
       </general>
       <filters>
         <prompt-filter-dialog value="true" />
@@ -160,15 +175,9 @@
           <content-type name="JavaScript" enabled="true" />
           <content-type name="JSP" enabled="true" />
           <content-type name="JSPx" enabled="true" />
-          <content-type name="Groovy" enabled="true" />
           <content-type name="FTL" enabled="true" />
-          <content-type name="TML" enabled="true" />
-          <content-type name="GSP" enabled="true" />
-          <content-type name="ASP" enabled="true" />
           <content-type name="VTL" enabled="true" />
           <content-type name="YAML" enabled="true" />
-          <content-type name="Flex" enabled="true" />
-          <content-type name="Bash" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>
       </qualified-text-editor>
@@ -181,6 +190,10 @@
         <show-object-navigation-gutter value="false" />
         <show-spec-declaration-navigation-gutter value="true" />
       </general>
+      <confirmations>
+        <save-changes value="false" />
+        <revert-changes value="true" />
+      </confirmations>
     </code-editor-settings>
     <code-completion-settings>
       <filters>
@@ -342,17 +355,18 @@
       <statement-execution>
         <fetch-block-size value="100" />
         <execution-timeout value="20" />
-        <focus-result value="false" />
-      </statement-execution>
-      <statement-execution>
-        <execution-timeout value="20" />
         <debug-execution-timeout value="600" />
+        <prompt-execution value="false" />
       </statement-execution>
-      <compiler>
-        <compile-type value="KEEP" />
-        <compile-dependencies value="ASK" />
-        <always-show-controls value="false" />
-      </compiler>
+      <script-execution>
+        <command-line-interfaces />
+        <execution-timeout value="300" />
+      </script-execution>
+      <method-execution>
+        <execution-timeout value="30" />
+        <debug-execution-timeout value="600" />
+        <parameter-history-size value="10" />
+      </method-execution>
     </execution-engine-settings>
     <operation-settings>
       <transactions>
@@ -371,6 +385,15 @@
         <kill-session value="ASK" />
         <reload-on-filter-change value="false" />
       </session-browser>
+      <compiler>
+        <compile-type value="KEEP" />
+        <compile-dependencies value="ASK" />
+        <always-show-controls value="false" />
+      </compiler>
+      <debugger>
+        <debugger-type value="JDWP" />
+        <use-generic-runners value="true" />
+      </debugger>
     </operation-settings>
     <ddl-file-settings>
       <extensions>
