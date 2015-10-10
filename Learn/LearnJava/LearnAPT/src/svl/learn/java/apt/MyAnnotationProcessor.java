@@ -22,20 +22,21 @@ public class MyAnnotationProcessor  extends AbstractProcessor {
             try {
                 generate(element1);
             } catch (IOException e) {
-                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, e.getMessage());
+                showError(e.getMessage());
             }
         });
 
         return true;
     }
 
-    private void generate(TypeElement element) throws IOException {
-        PackageElement packageElement = elementUtils().getPackageOf(element);
+    private void generate(TypeElement entityType) throws IOException {
+        PackageElement packageElement = elementUtils().getPackageOf(entityType);
         Filer filer = processingEnv.getFiler();
-        String builderName = element.getAnnotation(NeedBuilderClass.class).name();
+        String builderName = entityType.getAnnotation(NeedBuilderClass.class).name();
+        String entityName = entityType.getSimpleName().toString();
 
         JavaFileObject sourceFile = filer.createSourceFile(getQualifiedName(packageElement, builderName));
-        List<Element> fields = getFields(element);
+        List<Element> fields = getFields(entityType);
 
         showInfo("Generating: " + sourceFile.getName());
 
@@ -58,12 +59,18 @@ public class MyAnnotationProcessor  extends AbstractProcessor {
                 printer.printf("\t}\n");
             });
 
-            StringBuilder buffer = new StringBuilder();
-            fields.forEach(el -> {
+            List<List<? extends VariableElement>> constructors = getConstructors(entityType);
+            if (constructors.isEmpty() || constructors.size() > 1) {
+                showError(String.format("Entity %s class does not have constructor or has more than one constructor", entityName));
+                return;
+            }
+
+            List<? extends VariableElement> constructor = constructors.get(0);
+            StringBuilder buffer = new StringBuilder(128);
+            constructor.forEach(el -> {
                 buffer.append(el.getSimpleName()).append(", ");
             });
 
-            String entityName = element.getSimpleName().toString();
             printer.printf("\n");
             printer.printf("\tpublic %s build(){\n", entityName);
             printer.printf("\t\treturn new %s(%s);\n", entityName, buffer.toString().substring(0, buffer.length() - 2));
@@ -72,6 +79,13 @@ public class MyAnnotationProcessor  extends AbstractProcessor {
 
             printer.printf("}\n");
         }
+    }
+
+    private List<List<? extends VariableElement>> getConstructors(TypeElement entityType) {
+        return elementUtils().getAllMembers(entityType).stream().
+                filter(el -> el.getKind() == ElementKind.CONSTRUCTOR).
+                map(element -> ((ExecutableElement) element).getParameters()).
+                collect(Collectors.toList());
     }
 
     private List<Element> getFields(TypeElement element) {
@@ -95,5 +109,9 @@ public class MyAnnotationProcessor  extends AbstractProcessor {
 
     private void showInfo(String msg) {
         processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, msg);
+    }
+
+    private void showError(String msg) {
+        processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, msg);
     }
 }

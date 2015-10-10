@@ -21,6 +21,6 @@ public class PersonBuilder{
 	}
 
 	public Person build(){
-		return new Person(firstname, lastname, age);
+		return new Person(age, firstname, lastname);
 	}
 }
