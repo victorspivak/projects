@@ -42,6 +42,14 @@ public abstract class Try<V> {
     abstract public void propagateException();
 
     abstract public <E extends Exception> Try<V> propagateException(Class<E> e) throws E;
+    abstract public <E1 extends Exception, E2 extends Exception> Try<V>
+                propagateException(Class<E1> e1, Class<E2> e2) throws E1, E2;
+    abstract public <E1 extends Exception, E2 extends Exception, E3 extends Exception> Try<V>
+                propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3) throws E1, E2, E3;
+    abstract public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception> Try<V>
+                propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4) throws E1, E2, E3, E4;
+    abstract public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception, E5 extends Exception> Try<V>
+                propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4, Class<E2> e5) throws E1, E2, E3, E4, E5;
 
     public interface ThrowableFunction<I, O> {
         O apply(I a) throws Exception;
@@ -88,6 +96,26 @@ public abstract class Try<V> {
 
         @Override
         public <E extends Exception> Try<V> propagateException(Class<E> e) throws E {
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2) throws E1, E2 {
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3) throws E1, E2, E3 {
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4) throws E1, E2, E3, E4 {
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception, E5 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4, Class<E2> e5) throws E1, E2, E3, E4, E5 {
             return this;
         }
 
@@ -150,6 +178,38 @@ public abstract class Try<V> {
         public <E extends Exception> Try<V> propagateException(Class<E> e) throws E {
             if (exception instanceof RuntimeException || e.isInstance(exception))
                 ExceptionHelper.doThrow(exception);
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2) throws E1, E2 {
+            propagateException(e1);
+            propagateException(e2);
+
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3) throws E1, E2, E3 {
+            propagateException(e1);
+            propagateException(e2, e3);
+
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4) throws E1, E2, E3, E4 {
+            propagateException(e1);
+            propagateException(e2, e3, e4);
+
+            return this;
+        }
+
+        @Override
+        public <E1 extends Exception, E2 extends Exception, E3 extends Exception, E4 extends Exception, E5 extends Exception> Try<V> propagateException(Class<E1> e1, Class<E2> e2, Class<E2> e3, Class<E2> e4, Class<E2> e5) throws E1, E2, E3, E4, E5 {
+            propagateException(e1);
+            propagateException(e2, e3, e4, e5);
+
             return this;
         }
 

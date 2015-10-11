@@ -69,6 +69,22 @@ public class TryTest {
         } catch (InterruptedException e) {
             fail("Unexpected exception");
         }
+
+        try {
+            failure.propagateException(IOException.class).propagateException(InterruptedException.class);
+            fail("Expected exception");
+        } catch (IOException ignore) {
+        } catch (InterruptedException e) {
+            fail("Unexpected exception");
+        }
+
+        try {
+            failure.propagateException(IOException.class, InterruptedException.class);
+            fail("Expected exception");
+        } catch (IOException ignore) {
+        } catch (InterruptedException e) {
+            fail("Unexpected exception");
+        }
     }
 
     @Test public void testGenericPropagate() {
