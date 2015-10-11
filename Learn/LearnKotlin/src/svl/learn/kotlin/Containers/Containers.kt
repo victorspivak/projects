@@ -1,7 +1,8 @@
-package svl.learn.kotlin.Containers
+package svl.learn.kotlin.containers
 
 fun main(args : Array<String>) {
-    lists()
-    sequences()
+    testLists()
+    testSequences()
+    testArrays()
 }
 
