@@ -1,10 +1,18 @@
 package svl.interview;
 
-public class Puzzle {
-    public static void main(String[] args) {
-      String str = "hi";
+import java.util.ArrayList;
+import java.util.List;
 
+public class Puzzle {
+    final static String str = "hi";
+    public static void main(String[] args) {
+      //String str = "hi";
+
+        List<String> list = new ArrayList<String>();
+        list.add("hi");
+        list.add("Hi");
         System.out.println("str = " + str);
+        System.out.println(list);
     }
 
 

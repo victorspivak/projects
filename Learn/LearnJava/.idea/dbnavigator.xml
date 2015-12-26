@@ -16,6 +16,7 @@
       <scope value="GLOBAL" />
       <destination value="FILE" />
       <format value="EXCEL" />
+      <charset value="UTF-8" />
     </export-instructions>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
@@ -24,6 +25,9 @@
     <show-object-properties value="true" />
     <loaded-nodes />
   </component>
+  <component name="DBNavigator.Project.EditorStateManager">
+    <last-used-providers />
+  </component>
   <component name="DBNavigator.Project.MethodExecutionManager">
     <method-browser />
     <execution-history>
@@ -31,6 +35,16 @@
       <execution-inputs />
     </execution-history>
     <argument-values-cache />
+  </component>
+  <component name="DBNavigator.Project.ObjectDependencyManager">
+    <last-used-dependency-type value="INCOMING" />
+  </component>
+  <component name="DBNavigator.Project.ObjectQuickFilterManager">
+    <last-used-operator value="EQUAL" />
+    <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections />
@@ -75,6 +89,11 @@
         <object-type name="PROCEDURE" sorting-type="NAME" />
         <object-type name="ARGUMENT" sorting-type="POSITION" />
       </sorting>
+      <default-editors>
+        <object-type name="VIEW" editor-type="SELECTION" />
+        <object-type name="PACKAGE" editor-type="SELECTION" />
+        <object-type name="TYPE" editor-type="SELECTION" />
+      </default-editors>
     </browser-settings>
     <navigation-settings>
       <lookup-filters>
@@ -164,15 +183,9 @@
           <content-type name="JavaScript" enabled="true" />
           <content-type name="JSP" enabled="true" />
           <content-type name="JSPx" enabled="true" />
-          <content-type name="Groovy" enabled="true" />
           <content-type name="FTL" enabled="true" />
-          <content-type name="TML" enabled="true" />
-          <content-type name="GSP" enabled="true" />
-          <content-type name="ASP" enabled="true" />
           <content-type name="VTL" enabled="true" />
           <content-type name="YAML" enabled="true" />
-          <content-type name="Flex" enabled="true" />
-          <content-type name="Bash" enabled="true" />
           <content-type name="Manifest" enabled="true" />
         </content-types>
       </qualified-text-editor>
@@ -185,6 +198,10 @@
         <show-object-navigation-gutter value="false" />
         <show-spec-declaration-navigation-gutter value="true" />
       </general>
+      <confirmations>
+        <save-changes value="false" />
+        <revert-changes value="true" />
+      </confirmations>
     </code-editor-settings>
     <code-completion-settings>
       <filters>
@@ -346,18 +363,19 @@
       <statement-execution>
         <fetch-block-size value="100" />
         <execution-timeout value="20" />
+        <debug-execution-timeout value="600" />
         <focus-result value="false" />
+        <prompt-execution value="false" />
       </statement-execution>
-      <statement-execution>
-        <execution-timeout value="20" />
+      <script-execution>
+        <command-line-interfaces />
+        <execution-timeout value="300" />
+      </script-execution>
+      <method-execution>
+        <execution-timeout value="30" />
         <debug-execution-timeout value="600" />
         <parameter-history-size value="10" />
-      </statement-execution>
-      <compiler>
-        <compile-type value="KEEP" />
-        <compile-dependencies value="ASK" />
-        <always-show-controls value="false" />
-      </compiler>
+      </method-execution>
     </execution-engine-settings>
     <operation-settings>
       <transactions>
@@ -376,6 +394,15 @@
         <kill-session value="ASK" />
         <reload-on-filter-change value="false" />
       </session-browser>
+      <compiler>
+        <compile-type value="KEEP" />
+        <compile-dependencies value="ASK" />
+        <always-show-controls value="false" />
+      </compiler>
+      <debugger>
+        <debugger-type value="JDWP" />
+        <use-generic-runners value="true" />
+      </debugger>
     </operation-settings>
     <ddl-file-settings>
       <extensions>
@@ -407,10 +434,10 @@
       </regional-settings>
       <environment>
         <environment-types>
-          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" />
-          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" />
-          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" />
-          <environment-type id="other" name="Other" description="" color="-1576/-10724543" />
+          <environment-type id="development" name="Development" description="Development environment" color="-2430209/-12296320" readonly-code="false" readonly-data="false" />
+          <environment-type id="integration" name="Integration" description="Integration environment" color="-2621494/-12163514" readonly-code="false" readonly-data="false" />
+          <environment-type id="production" name="Production" description="Productive environment" color="-11574/-10271420" readonly-code="false" readonly-data="false" />
+          <environment-type id="other" name="Other" description="" color="-1576/-10724543" readonly-code="false" readonly-data="false" />
         </environment-types>
         <visibility-settings>
           <connection-tabs value="true" />
