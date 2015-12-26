@@ -23,8 +23,10 @@ public class TestOptional {
         else
             System.out.println("Did not found");
 
-        System.out.println(find("lemon", fruits).map(f -> f.getName()).orElse("Oops"));
-        System.out.println(find("grape", fruits).map(f -> f.getName()).orElse("Oops"));
+        System.out.println(find("lemon", fruits).map(Fruit::getName).orElse("Oops"));
+        System.out.println(find("grape", fruits).map(Fruit::getName).orElse("Oops"));
+        System.out.println(find("lemon", fruits).map(Fruit::getName).orElse(null));
+        System.out.println(find("lemon", fruits).isPresent());
 
     }
 
