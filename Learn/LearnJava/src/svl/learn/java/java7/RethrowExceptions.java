@@ -9,10 +9,11 @@ public class RethrowExceptions {
         }
     }
 
-    static class FirstException extends Exception { }
-    static class SecondException extends Exception { }
+    private static class FirstException extends Exception { }
+    private static class SecondException extends Exception { }
 
     public static void rethrowException(String exceptionName) throws FirstException, SecondException {
+        //noinspection OverlyBroadCatchBlock
         try {
             if (exceptionName.equals("First")) {
                 throw new FirstException();

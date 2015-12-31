@@ -1,6 +1,6 @@
 package svl.learn.java.java7.files;
 
-import svl.learn.java.java7.trymonad.Try;
+import svl.learn.java.java8.trymonad.Try;
 
 import java.nio.file.FileStore;
 import java.nio.file.FileSystems;

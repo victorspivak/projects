@@ -4,7 +4,7 @@
 
 package svl.learn.java.streams;
 
-import svl.learn.java.java7.trymonad.Try;
+import svl.learn.java.java8.trymonad.Try;
 
 import java.util.concurrent.*;
 import java.util.stream.IntStream;

@@ -1,4 +1,4 @@
-package svl.learn.java.java7.trymonad;
+package svl.learn.java.java8.trymonad;
 
 import java.util.List;
 import java.util.Objects;

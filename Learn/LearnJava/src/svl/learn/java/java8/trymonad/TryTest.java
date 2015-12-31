@@ -1,7 +1,7 @@
-package svl.learn.java.java7.trymonad;
+package svl.learn.java.java8.trymonad;
 
 import org.junit.Test;
-import svl.learn.java.java7.trymonad.Try.Failure;
+import svl.learn.java.java8.trymonad.Try.Failure;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
