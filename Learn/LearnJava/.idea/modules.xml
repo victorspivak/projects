@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/AptClient/AptClient.iml" filepath="$PROJECT_DIR$/AptClient/AptClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LearnAPT/LearnAPT.iml" filepath="$PROJECT_DIR$/LearnAPT/LearnAPT.iml" />
       <module fileurl="file://$PROJECT_DIR$/LearnJava.iml" filepath="$PROJECT_DIR$/LearnJava.iml" />
     </modules>
   </component>
 </project>
-

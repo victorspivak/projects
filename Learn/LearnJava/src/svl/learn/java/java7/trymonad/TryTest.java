@@ -1,13 +1,14 @@
 package svl.learn.java.java7.trymonad;
 
 import org.junit.Test;
-import svl.learn.java.java7.trymonad.Failure;
+import svl.learn.java.java7.trymonad.Try.Failure;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.SocketException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -42,7 +43,7 @@ public class TryTest {
     }
 
     @Test public void processError() {
-        Set<Integer> isHandlerCalled = Sets.newHashSet();
+        Set<Integer> isHandlerCalled = new HashSet<>();
         int test1 = 1;
         int test2 = 2;
 
@@ -74,7 +75,7 @@ public class TryTest {
             failure.propagateException(IOException.class);
             fail("Expected exception");
         } catch (RuntimeException ignored) {
-        } catch (IOException e) {
+        } catch (IOException ignore) {
             fail("Unexpected exception");
         }
     }
@@ -88,6 +89,7 @@ public class TryTest {
         } catch (IOException ignore) {
         }
 
+        //noinspection OverlyBroadCatchBlock
         try {
             failure.propagateException(Exception.class);
             fail("Expected exception");
@@ -96,7 +98,7 @@ public class TryTest {
 
         try {
             failure.propagateException(InterruptedException.class);
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
 
@@ -104,7 +106,7 @@ public class TryTest {
             failure.propagateException(IOException.class).propagateException(InterruptedException.class);
             fail("Expected exception");
         } catch (IOException ignore) {
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
 
@@ -112,7 +114,7 @@ public class TryTest {
             failure.propagateException(IOException.class, InterruptedException.class);
             fail("Expected exception");
         } catch (IOException ignore) {
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
 
@@ -120,7 +122,7 @@ public class TryTest {
             failure.propagateException(SocketException.class, IOException.class, InterruptedException.class);
             fail("Expected exception");
         } catch (IOException ignore) {
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
 
@@ -128,7 +130,7 @@ public class TryTest {
             failure.propagateException(FileNotFoundException.class, SocketException.class, IOException.class, InterruptedException.class);
             fail("Expected exception");
         } catch (IOException ignore) {
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
 
@@ -136,7 +138,7 @@ public class TryTest {
             failure.propagateException(SQLException.class, FileNotFoundException.class, SocketException.class, IOException.class, InterruptedException.class);
             fail("Expected exception");
         } catch (IOException | SQLException ignore) {
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ignore) {
             fail("Unexpected exception");
         }
     }
@@ -158,7 +160,7 @@ public class TryTest {
     }
 
     private void assertLoginInfo(Try<String> expected, Try<String> login, Try<String> domain, Try<String> password) {
-        Try<String> r = login.flatMap(l -> domain.flatMap(d -> password.map(p -> String.format("%s/%s/%s", d, l, p))));
+        Try<String> r = login.flatMap(_name -> domain.flatMap(_domain -> password.map(_password -> String.format("%s/%s/%s", _domain, _name, _password))));
         assertEquals(expected, r);
     }
 }
