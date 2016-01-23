@@ -14,6 +14,7 @@ print('=' * 80)
 s = 'Hello World'
 print(s[:4])
 print(s[6:])
+print(s[:-1])
 print('Slice from 2 to 6 chars: ', s[2:6])
 print('Slice from 2 to 6 chars with step 1: ', s[2:6:1])
 print('Slice from 2 to 6 chars with step 2: ', s[2:6:2])
