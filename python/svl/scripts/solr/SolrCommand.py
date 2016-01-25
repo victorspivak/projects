@@ -22,7 +22,8 @@ class SolrCommands:
     def query_solr(self, query):
         headers = {'Content-type': 'application/x-www-form-urlencoded'}
         self.connection.request('POST', self.path + 'query', query, headers)
-        result = json.loads(self.connection.getresponse().read().decode())['response']
+        decoded = json.loads(self.connection.getresponse().read().decode())
+        result = decoded['response']
         if self.dump_results:
             print('Query Result: %s ' % result['numFound'])
             for doc in result['docs']:

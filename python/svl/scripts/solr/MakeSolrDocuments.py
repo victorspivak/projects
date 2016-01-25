@@ -5,6 +5,7 @@ from svl.commons.RandomText import *
 from svl.commons.Performance import *
 from svl.scripts.solr.SolrCommand import *
 from collections import Counter
+from os.path import expanduser
 import random
 import pickle
 
@@ -95,7 +96,8 @@ def load_library():
 rebuild_library = False
 
 solr = SolrCommands('localhost:8983', 'Core1')
-filename = '/home/victor/tmp/library.dmp'
+
+filename = '%s/tmp/library.dmp' % expanduser("~")
 
 if rebuild_library:
     library = Library(10000)
