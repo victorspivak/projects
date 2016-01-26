@@ -27,6 +27,13 @@ class Library:
             self.books.extend(self.make_book_vd(init_words, self.make_group_user_list(init_vd, min_count, max_count)))
         self.used_words = get_used_words()
 
+    def convert_to_combined_mode(self):
+        combined = []
+        for book, vd in zip(*[iter(self.books)] * 2):
+            combined.append(BookVdCombined(book, vd))
+
+        self.books = combined
+
     @staticmethod
     def make_book_vd(init_words, vd):
         book_id = random_id('001x0', 15)
@@ -95,28 +102,68 @@ def load_library():
 
 rebuild_library = False
 
-solr = SolrCommands('localhost:8983', 'Core1')
+search_host = 'localhost:1234'
+solr_core1 = SolrCommands(search_host, 'Core1', False, False)
+solr_core2 = SolrCommands(search_host, 'Core2', False, False)
 
 filename = '%s/tmp/library.dmp' % expanduser("~")
 
 if rebuild_library:
     library = Library(10000)
     populate_library()
-    solr.cleanup_core()
-    timing("Indexing %f", lambda: solr.index_solr(library.get_books()))
+    solr_core1.cleanup_core()
+    timing("Indexing %f", lambda: solr_core1.index_solr(library.get_books()))
+    library.convert_to_combined_mode()
+    solr_core2.cleanup_core()
+    timing("Combined Indexing %f", lambda: solr_core2.index_solr(library.get_books()))
 else:
     library = load_library()
 
 used_words = library.get_used_words()
-most_used_words = list(key for key, value in used_words.most_common(20))
+most_used_words = list(key for key, value in used_words.most_common(100))
 top_used_users_groups = list(key for key, value in library.get_used_users_groups().most_common(20000))
 
-for i in range(10):
-    user_vd = library.make_used_group_user_list(True, 10, 3000)
 
-    tokens = '*FindMeToken* %s' % random.choice(most_used_words)
-    join = '{!join from=id to=vdid}vd:(%s)' % ' '.join(user_vd)
+# print(used_words.most_common(100))
+# print(library.groups[0])
+
+
+def query_all_modes(tokens, user_vd, dump_query=False):
+    join = '{!join from=id to=vdid}'
+    sharing_constrain = 'vd:(%s)' % ' '.join(user_vd)
     fields = 'id, title'
-    timing('Quering %f for VD: ' + str(len(user_vd)), lambda: solr.query_solr('q=%s&fq=%s&fl=%s' % (tokens, join, fields)))
+
+    query1 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain, fields)
+    query2 = 'q=%s&fq=%s%s&fl=%s' % (tokens, '', sharing_constrain, fields)
+
+    if dump_query:
+        print('Jquery: ' + query1)
+        print('Cquery: ' + query2)
+
+    timing('Jquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+           lambda: solr_core1.query_solr(query1, dump_query),
+           lambda m, t, r: m % (t, r['numFound']))
+    timing('Cquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+           lambda: solr_core2.query_solr(query2, dump_query),
+           lambda m, t, r: m % (t, r['numFound']))
+
+
+search_term = random.choice(most_used_words)
+print('Search term: %s %d' % (search_term, used_words[search_term]))
+
+query_all_modes('*%s*' % search_term,
+                library.make_used_group_user_list(True, 10, 30), True)
+
+query_all_modes('*FindMeToken* *%s*' % search_term,
+                library.make_used_group_user_list(True, 10, 30), True)
+
+print('=' * 100)
+
+for i in range(5):
+    vd = library.make_used_group_user_list(True, 10, 3000)
+    search_tokens = '*%s %s %s %s %s*' % (random.choice(most_used_words), random.choice(most_used_words),
+                                          random.choice(most_used_words), random.choice(most_used_words),
+                                          random.choice(most_used_words))
+    query_all_modes(search_tokens, vd)
 
 library.dump_stats()

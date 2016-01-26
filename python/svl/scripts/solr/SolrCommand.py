@@ -19,15 +19,17 @@ class SolrCommands:
         if self.dump_responses:
             print(response)
 
-    def query_solr(self, query):
+    def query_solr(self, query, dump_results = False):
         headers = {'Content-type': 'application/x-www-form-urlencoded'}
         self.connection.request('POST', self.path + 'query', query, headers)
-        decoded = json.loads(self.connection.getresponse().read().decode())
-        result = decoded['response']
-        if self.dump_results:
+        decoded = self.connection.getresponse().read().decode()
+        json_resp = json.loads(decoded)
+        result = json_resp['response']
+        if self.dump_results or dump_results:
             print('Query Result: %s ' % result['numFound'])
             for doc in result['docs']:
                 print('\t %s --> %s' % (doc['id'], doc['title']))
+        return result
 
     def cleanup_core(self):
         headers = {'Content-type': 'text/xml'}
