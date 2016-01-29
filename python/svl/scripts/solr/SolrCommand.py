@@ -19,7 +19,7 @@ class SolrCommands:
         if self.dump_responses:
             print(response)
 
-    def query_solr(self, query, dump_results = False):
+    def query_solr(self, query, dump_results=False):
         headers = {'Content-type': 'application/x-www-form-urlencoded'}
         self.connection.request('POST', self.path + 'query', query, headers)
         decoded = self.connection.getresponse().read().decode()

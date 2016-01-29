@@ -13,6 +13,10 @@ import pickle
 class Library:
     def __init__(self, max_users_groups_count):
         self.books = []
+        self.combined_books = []
+        self.books_integer = []
+        self.combined_books_integer = []
+        self.id_to_integer = dict()
         self.used_users_groups = Counter()
         self.max_users_groups_count = max_users_groups_count
         self.groups = list(set([random_id('00Gx0', 15) for group_index in range(max_users_groups_count)]))
@@ -20,6 +24,8 @@ class Library:
         self.used_words = get_used_words()
         self.max_vd_length = 0
         self.max_user_vd_length = 0
+        last_int = self.convert_id_to_integer(self.groups, self.id_to_integer, 0)
+        self.convert_id_to_integer(self.users, self.id_to_integer, last_int)
 
     def add_books(self, count, init_words, use_first_group_user, min_count, max_count):
         init_vd = [self.groups[0], self.users[0]] if use_first_group_user else []
@@ -27,12 +33,30 @@ class Library:
             self.books.extend(self.make_book_vd(init_words, self.make_group_user_list(init_vd, min_count, max_count)))
         self.used_words = get_used_words()
 
-    def convert_to_combined_mode(self):
-        combined = []
-        for book, vd in zip(*[iter(self.books)] * 2):
-            combined.append(BookVdCombined(book, vd))
+    def convert_other_modes(self):
+        self.combined_books = []
+        self.books_integer = []
+        self.combined_books_integer = []
 
-        self.books = combined
+        for book, desc in zip(*[iter(self.books)] * 2):
+            self.combined_books.append(BookVdCombined(book, desc))
+            vdi = self.convert_id_list_to_integer(desc.vd, self.id_to_integer)
+
+            vd_integer = VisibilityDescriptorInteger(desc.id, vdi)
+            self.books_integer.extend([book, vd_integer])
+            self.combined_books_integer.append(BookVdCombinedInteger(book, vd_integer))
+
+    @staticmethod
+    def convert_id_to_integer(ids, id_map, start):
+        for _id in ids:
+            start += 1
+            id_map[_id] = start
+
+        return start
+
+    @staticmethod
+    def convert_id_list_to_integer(ids, id_map):
+        return list([str(id_map[_id]) for _id in ids])
 
     @staticmethod
     def make_book_vd(init_words, vd):
@@ -75,6 +99,15 @@ class Library:
     def get_books(self):
         return self.books
 
+    def get_combined_books(self):
+        return self.combined_books
+
+    def get_books_integer(self):
+        return self.books_integer
+
+    def get_combined_books_integer(self):
+        return self.combined_books_integer
+
     def get_used_words(self):
         return self.used_words
 
@@ -84,8 +117,8 @@ class Library:
 
 
 def populate_library():
-    library.add_books(10000, '', True, 1, 10)
-    library.add_books(5000, '', True, 10, 25)
+    library.add_books(150000, '', True, 1, 10)
+    library.add_books(10000, '', True, 10, 25)
     library.add_books(1000, '', True, 25, 100)
     library.add_books(100, '', True, 100, 1000)
     library.add_books(50, '', True, 1000, 2500)
@@ -105,6 +138,8 @@ rebuild_library = False
 search_host = 'localhost:1234'
 solr_core1 = SolrCommands(search_host, 'Core1', False, False)
 solr_core2 = SolrCommands(search_host, 'Core2', False, False)
+solr_core3 = SolrCommands(search_host, 'Core3', False, False)
+solr_core4 = SolrCommands(search_host, 'Core4', False, False)
 
 filename = '%s/tmp/library.dmp' % expanduser("~")
 
@@ -113,9 +148,17 @@ if rebuild_library:
     populate_library()
     solr_core1.cleanup_core()
     timing("Indexing %f", lambda: solr_core1.index_solr(library.get_books()))
-    library.convert_to_combined_mode()
+
+    library.convert_other_modes()
     solr_core2.cleanup_core()
-    timing("Combined Indexing %f", lambda: solr_core2.index_solr(library.get_books()))
+    timing("Combined Indexing %f", lambda: solr_core2.index_solr(library.get_combined_books()))
+
+    solr_core3.cleanup_core()
+    timing("Combined Indexing %f", lambda: solr_core3.index_solr(library.get_books_integer()))
+
+    solr_core4.cleanup_core()
+    timing("Combined Indexing %f", lambda: solr_core4.index_solr(library.get_combined_books_integer()))
+
 else:
     library = load_library()
 
@@ -130,22 +173,35 @@ top_used_users_groups = list(key for key, value in library.get_used_users_groups
 
 def query_all_modes(tokens, user_vd, dump_query=False):
     join = '{!join from=id to=vdid}'
+    vd_integers = library.convert_id_list_to_integer(user_vd, library.id_to_integer)
     sharing_constrain = 'vd:(%s)' % ' '.join(user_vd)
+    sharing_constrain_integer = 'vdi:(%s)' % ' '.join(vd_integers)
     fields = 'id, title'
 
     query1 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain, fields)
     query2 = 'q=%s&fq=%s%s&fl=%s' % (tokens, '', sharing_constrain, fields)
+    query3 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain_integer, fields)
+    query4 = 'q=%s&fq=%s%s&fl=%s' % (tokens, '', sharing_constrain_integer, fields)
 
     if dump_query:
         print('Jquery: ' + query1)
         print('Cquery: ' + query2)
+        print('JIquery: ' + query3)
+        print('CIquery: ' + query4)
 
-    timing('Jquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+    timing('J query %f Result Count %d  VD length: ' + str(len(user_vd)),
            lambda: solr_core1.query_solr(query1, dump_query),
            lambda m, t, r: m % (t, r['numFound']))
-    timing('Cquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+    timing('C query %f Result Count %d  VD length: ' + str(len(user_vd)),
            lambda: solr_core2.query_solr(query2, dump_query),
            lambda m, t, r: m % (t, r['numFound']))
+    timing('JIquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+           lambda: solr_core3.query_solr(query3, dump_query),
+           lambda m, t, r: m % (t, r['numFound']))
+    timing('CIquery %f Result Count %d  VD length: ' + str(len(user_vd)),
+           lambda: solr_core4.query_solr(query4, dump_query),
+           lambda m, t, r: m % (t, r['numFound']))
+    print('-' * 100)
 
 
 search_term = random.choice(most_used_words)
@@ -159,7 +215,7 @@ query_all_modes('*FindMeToken* *%s*' % search_term,
 
 print('=' * 100)
 
-for i in range(5):
+for i in range(20):
     vd = library.make_used_group_user_list(True, 10, 3000)
     search_tokens = '*%s %s %s %s %s*' % (random.choice(most_used_words), random.choice(most_used_words),
                                           random.choice(most_used_words), random.choice(most_used_words),

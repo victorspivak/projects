@@ -21,7 +21,7 @@ class Book:
     def vdid(self):
         return self.vdid
 
-    def to_string(self):
+    def __str__(self):
         return 'Book: {} {} {}  vdid: {}'.format(self.id, self.title, self.author, self.vdid)
 
 
@@ -36,8 +36,23 @@ class VisibilityDescriptor:
     def vd(self):
         return self.vd
 
-    def to_string(self):
+    def __str__(self):
         return 'VD: {} Targets {}'.format(self.id, self.vd)
+
+
+class VisibilityDescriptorInteger:
+    def __init__(self, _id, vdi):
+        self.id = _id
+        self.vdi = vdi
+
+    def id(self):
+        return self.id
+
+    def vdi(self):
+        return self.vdi
+
+    def __str__(self):
+        return 'VD: {} Targets {}'.format(self.id, self.vdi)
 
 
 class BookVdCombined:
@@ -63,5 +78,32 @@ class BookVdCombined:
     def vd(self):
         return self.vd
 
-    def to_string(self):
+    def __str__(self):
         return 'Book: {} {} {}  vdid: {}'.format(self.id, self.title, self.author, self.vd)
+
+
+class BookVdCombinedInteger:
+    def __init__(self, book: Book, vd: VisibilityDescriptorInteger):
+        self.id = book.id
+        self.title = book.title
+        self.author = book.author
+        self.body = book.body
+        self.vdi = vd.vdi
+
+    def id(self):
+        return self.id
+
+    def title(self):
+        return self.title
+
+    def author(self):
+        return self.author
+
+    def body(self):
+        return self.body
+
+    def vdi(self):
+        return self.vdi
+
+    def __str__(self):
+        return 'Book: {} {} {}  vdid: {}'.format(self.id, self.title, self.author, self.vdi)
