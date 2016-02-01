@@ -3,25 +3,27 @@ import json
 
 
 class SolrCommands:
-    def __init__(self, host, core, dump_responses=False, dump_results=False):
+    def __init__(self, host, dump_responses=False, dump_results=False):
         self.host = host
-        self.core = core
-        self.path = '/solr/%s/' % self.core
         self.dump_responses = dump_responses
         self.dump_results = dump_results
         self.connection = http.client.HTTPConnection(host)
 
-    def index_solr(self, books):
+    @staticmethod
+    def make_path(core):
+        return '/solr/%s/' % core
+
+    def index_solr(self, core, books):
         library_json = json.dumps([ob.__dict__ for ob in books])
         headers = {'Content-type': 'application/json'}
-        self.connection.request('POST', self.path + 'update?commit=true', library_json, headers)
+        self.connection.request('POST', self.make_path(core) + 'update?commit=true', library_json, headers)
         response = self.connection.getresponse().read().decode()
         if self.dump_responses:
             print(response)
 
-    def query_solr(self, query, dump_results=False):
+    def query_solr(self, core, query, dump_results=False):
         headers = {'Content-type': 'application/x-www-form-urlencoded'}
-        self.connection.request('POST', self.path + 'query', query, headers)
+        self.connection.request('POST', self.make_path(core) + 'query', query, headers)
         decoded = self.connection.getresponse().read().decode()
         json_resp = json.loads(decoded)
         result = json_resp['response']
@@ -31,10 +33,10 @@ class SolrCommands:
                 print('\t %s --> %s' % (doc['id'], doc['title']))
         return result
 
-    def cleanup_core(self):
+    def cleanup_core(self, core):
         headers = {'Content-type': 'text/xml'}
         command = '<delete><query>*:*</query></delete>'
-        self.connection.request('POST', self.path + 'update?commit=true', command, headers)
+        self.connection.request('POST', self.make_path(core) + 'update?commit=true', command, headers)
         response = self.connection.getresponse().read().decode()
         if self.dump_responses:
             print(response)
