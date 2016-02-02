@@ -7,7 +7,8 @@ def timing(msg, f, formatter=lambda m, t, r: m % t):
     running_time = time.time() - start_time
     line = formatter(msg, running_time, res)
 
-    print(line)
+    if len(line) > 0:
+        print(line)
 
     return res, running_time
 

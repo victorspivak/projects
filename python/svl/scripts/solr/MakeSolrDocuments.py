@@ -153,7 +153,7 @@ def populate_library(lib):
         pickle.dump(lib, f)
 
 
-def random_queries(dump_query=False):
+def random_queries(dump_query=0):
     if random_query_count > 0:
         print('=' * 100)
 
@@ -172,22 +172,30 @@ def special_queries():
         print('Search term: %s %d' % (search_term, used_words[search_term]))
 
         query_all_modes('*%s*' % search_term,
-                        library.make_used_group_user_list(True, 10, 30), False, True)
+                        library.make_used_group_user_list(False, 10, 30), False, 2)
 
         query_all_modes('*FindMeToken* *%s*' % search_term,
-                        library.make_used_group_user_list(True, 10, 30), False, True)
+                        library.make_used_group_user_list(True, 10, 30), False, 2)
+
+
+def query_timing_formater(m, t, r):
+    return m % (t, r['numFound'])
+
+
+def query_timing_formater_nop(m, t, r):
+    return ''
 
 
 def query(query_id, core, q, user_vd, dump_query, log_stats):
     timing_result = timing(query_id + ' query %f Result Count %d  VD length: ' + str(len(user_vd)),
-                           lambda: solr_core.query_solr(core, q, dump_query),
-                           lambda m, t, r: m % (t, r['numFound']))
+                           lambda: solr_core.query_solr(core, q, True if dump_query > 1 else False),
+                           query_timing_formater if dump_query > 0 else query_timing_formater_nop)
 
     if log_stats:
         query_run_stats[query_id][len(user_vd)].append(timing_result[1])
 
 
-def query_all_modes(tokens, user_vd, log_stats, dump_query=False):
+def query_all_modes(tokens, user_vd, log_stats, dump_query=0):
     join = '{!join from=id to=vdid}'
     vd_integers = library.convert_id_list_to_integer(user_vd, library.id_to_integer)
     sharing_constrain = 'vd:(%s)' % ' '.join(user_vd)
@@ -199,11 +207,11 @@ def query_all_modes(tokens, user_vd, log_stats, dump_query=False):
     query3 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain_integer, fields)
     query4 = 'q=%s&fq=%s&fl=%s' % (tokens, sharing_constrain_integer, fields)
 
-    if dump_query:
-        print('Jquery: ' + query1)
-        print('Cquery: ' + query2)
-        print('JIquery: ' + query3)
-        print('CIquery: ' + query4)
+    if dump_query > 1:
+        print('J  query: ' + query1)
+        print('C  query: ' + query2)
+        print('JI query: ' + query3)
+        print('CI query: ' + query4)
 
     query('J ', core1, query1, user_vd, dump_query, log_stats)
     query('JF', core11, query1, user_vd, dump_query, log_stats)
@@ -211,10 +219,11 @@ def query_all_modes(tokens, user_vd, log_stats, dump_query=False):
     query('JI', core3, query3, user_vd, dump_query, log_stats)
     query('CI', core4, query4, user_vd, dump_query, log_stats)
 
-    print('-' * 100)
+    if dump_query > 0:
+        print('-' * 100)
 
 
-def query_misc_user_vd(dump_query=False):
+def query_misc_user_vd(dump_query=0):
     search_tokens = '*%s %s %s %s %s*' % (random.choice(most_used_words), random.choice(most_used_words),
                                           random.choice(most_used_words), random.choice(most_used_words),
                                           random.choice(most_used_words))
@@ -227,7 +236,26 @@ def query_misc_user_vd(dump_query=False):
                 query_all_modes(search_tokens, user_vd, True, dump_query)
 
 
-search_host = 'localhost:1234'
+def average_queries_stats():
+    if run_average_queries_stats:
+        average_stats = dict()
+        for query_mode in query_modes:
+            average_stats[query_mode] = dict()
+
+            for vd_size in user_vd_counts:
+                raw_stats = query_run_stats[query_mode][vd_size]
+                average_stats[query_mode][vd_size] = sum(raw_stats) / len(raw_stats)
+                print("%s \t %5d \t %s" % (query_mode, vd_size, '\t '.join(['%6.3f' % e for e in raw_stats])))
+
+        print('=' * 100)
+        print('%3s\t   %s' % ('   ', '\t '.join(['%6d' % k for k in user_vd_counts])))
+        for query_mode in query_modes:
+            raw_stats = average_stats[query_mode]
+            formatted = '\t '.join(['%6.3f' % raw_stats[k] for k in user_vd_counts])
+            print('%3s\t  %s' % (query_mode, formatted))
+
+
+search_host = 'localhost:4444'
 filename = '%s/tmp/library.dmp' % expanduser("~")
 solr_core = SolrCommands(search_host, False, False)
 
@@ -237,13 +265,16 @@ core3 = 'Core3'
 core4 = 'Core4'
 core11 = 'Core11'
 cores = [core1, core2, core3, core4, core11]
+query_modes = ['J ', 'JF', 'C ', 'JI', 'CI']
 user_vd_counts = [10, 100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000]
+# user_vd_counts = [10, 100, 250, 500]
 
 rebuild_library = False
 
 run_special_queries = False
+run_average_queries_stats = True
 random_query_count = 0
-query_misc_user_vd_count = 10
+query_misc_user_vd_count = 2
 
 query_run_stats = defaultdict(lambda: defaultdict(list))
 library = get_library()
@@ -254,16 +285,10 @@ top_used_users_groups = list(key for key, value in library.get_used_users_groups
 
 special_queries()
 random_queries()
-query_misc_user_vd()
+query_misc_user_vd(1)
 
-all_query_ids = list(query_run_stats.keys())
-all_query_ids.sort()
-for key1 in all_query_ids:
-    query_user_id_stats = list(query_run_stats[key1].keys())
-    query_user_id_stats.sort()
 
-    for key2 in query_user_id_stats:
-        stats = ['%6.3f' % e for e in query_run_stats[key1][key2]]
-        print("%s %5d -> %s" % (key1, key2, str(stats)))
+average_queries_stats()
 
+print('=' * 100)
 library.dump_stats()
