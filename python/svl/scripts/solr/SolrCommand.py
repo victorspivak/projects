@@ -14,9 +14,14 @@ class SolrCommands:
         return '/solr/%s/' % core
 
     def index_solr(self, core, books):
-        library_json = json.dumps([ob.__dict__ for ob in books])
+        chunk_size = 10000
+        for chunk in [(books[i:i+chunk_size]) for i in range(0, len(books), chunk_size)]:
+            self.index_chunk(core, chunk)
+
+    def index_chunk(self, core, chunk):
+        chunk_json = json.dumps([ob.__dict__ for ob in chunk])
         headers = {'Content-type': 'application/json'}
-        self.connection.request('POST', self.make_path(core) + 'update?commit=true', library_json, headers)
+        self.connection.request('POST', self.make_path(core) + 'update?commit=true', chunk_json, headers)
         response = self.connection.getresponse().read().decode()
         if self.dump_responses:
             print(response)
