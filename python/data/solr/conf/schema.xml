@@ -111,12 +111,16 @@
    -->   
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
 
-   <field name="title" type="string" indexed="true" stored="true" required="false" multiValued="false" />
-   <field name="author" type="string" indexed="true" stored="true" required="false" multiValued="false" />
-   <field name="body" type="string" indexed="true" stored="false" required="false" multiValued="false" />
+   <field name="title" type="text_general" indexed="true" stored="true" required="false" multiValued="false" />
+   <field name="author" type="text_general" indexed="true" stored="true" required="false" multiValued="false" />
+   <field name="body" type="text_general" indexed="true" stored="false" required="false" multiValued="false" />
    <field name="vd" type="string" indexed="true" stored="false" required="false" multiValued="true" />
-   <field name="vdi" type="int" indexed="true" stored="false" required="false" multiValued="true" />
    <field name="vdid" type="string" indexed="true" stored="false" required="false" multiValued="false" />
+   <field name="vdref" type="string" indexed="true" stored="false" required="false" multiValued="false" />
+
+   <field name="vdidi" type="int" indexed="true" stored="false" required="false" multiValued="false" />
+   <field name="vdrefi" type="int" indexed="true" stored="false" required="false" multiValued="false" />
+    <field name="vdsv" type="string" indexed="true" stored="false" required="false" multiValued="false" />
 
    <field name="text" type="string" indexed="true" stored="false" required="false" multiValued="true" />
 

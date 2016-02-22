@@ -1,6 +1,6 @@
 # !/usr/bin/python3
 
-from svl.scripts.solr.SolrDataClasses import *
+from svl.scripts.solr.SolrDataModel import *
 from svl.commons.RandomText import *
 from svl.commons.Performance import *
 from svl.scripts.solr.SolrCommand import *
@@ -14,11 +14,6 @@ import pickle
 # noinspection PyUnusedLocal
 class Library:
     def __init__(self, max_users_groups_count):
-        self.books = []
-        self.combined_books = []
-        self.books_integer = []
-        self.combined_books_integer = []
-        self.id_to_integer = dict()
         self.used_users_groups = Counter()
         self.max_users_groups_count = max_users_groups_count
         self.groups = list(set([random_id('00Gx0', 15) for group_index in range(max_users_groups_count)]))
@@ -26,8 +21,7 @@ class Library:
         self.used_words = get_used_words()
         self.max_vd_length = 0
         self.max_user_vd_length = 0
-        last_int = self.convert_id_to_integer(self.groups, self.id_to_integer, 0)
-        self.convert_id_to_integer(self.users, self.id_to_integer, last_int)
+        self.total_books_count = 0
 
     def add_books(self, count, init_words, use_first_group_user, min_vd_size, max_vd_size):
         init_vd = [self.groups[0], self.users[0]] if use_first_group_user else []
@@ -37,7 +31,7 @@ class Library:
             for index in range(chunk, min(count, chunk + chunk_size)):
                 self.add_book(init_words, init_vd, max_vd_size, min_vd_size)
 
-            print('Indexing chunk: %d documents' % len(self.combined_books))
+            print('Indexing chunk: %d documents' % data_models[0].books_count)
             self.indexing()
 
         self.used_words = get_used_words()
@@ -47,38 +41,14 @@ class Library:
         title = random_text(1, 5)
         author = random_text(1, 3)
         body = random_text(10, 100) + ' ' + init_words
-        vd_id = "vd-" + book_id
         vd = self.make_group_user_list(init_vd, min_vd_size, max_vd_size)
-        book = Book(book_id, title, author, body, vd_id)
-        desc = VisibilityDescriptor(vd_id, vd)
-        self.books.extend([book, desc])
-        self.combined_books.append(BookVdCombined(book, desc))
-        vdi = self.convert_id_list_to_integer(vd, self.id_to_integer)
-        vd_integer = VisibilityDescriptorInteger(vd_id, vdi)
-        self.books_integer.extend([book, vd_integer])
-        self.combined_books_integer.append(BookVdCombinedInteger(book, vd_integer))
+        for data_model in data_models:
+            data_model.add_book(book_id, title, author, body, vd)
 
     def indexing(self):
-        timing("J  Indexing %f", lambda: solr_core.index_solr(core1, self.books))
-        timing("C  Indexing %f", lambda: solr_core.index_solr(core2, self.combined_books))
-        timing("JI Indexing %f", lambda: solr_core.index_solr(core3, self.books_integer))
-        timing("CI Indexing %f", lambda: solr_core.index_solr(core4, self.combined_books_integer))
-        self.books = []
-        self.combined_books = []
-        self.books_integer = []
-        self.combined_books_integer = []
-
-    @staticmethod
-    def convert_id_to_integer(ids, id_map, start):
-        for _id in ids:
-            start += 1
-            id_map[_id] = start
-
-        return start
-
-    @staticmethod
-    def convert_id_list_to_integer(ids, id_map):
-        return list([str(id_map[_id]) for _id in ids])
+        self.total_books_count += data_models[0].books_count
+        for data_model in data_models:
+            data_model.indexing(solr_core)
 
     def make_group_user_list(self, init_vd, min_count, max_count):
         g_count = random.randint(min_count, max_count)
@@ -116,7 +86,7 @@ class Library:
 
     def dump_stats(self):
         print('Library: %d docs max VD length %d  max user VD length %d  used groups/users %d' %
-              (len(self.books), self.max_vd_length, self.max_user_vd_length, len(self.used_users_groups)))
+              (self.total_books_count, self.max_vd_length, self.max_user_vd_length, len(self.used_users_groups)))
 
 
 def get_library():
@@ -137,8 +107,8 @@ def load_library():
 
 
 def cleanup_all_indexes():
-    for core in cores:
-        solr_core.cleanup_core(core)
+    for data_model in data_models:
+        solr_core.cleanup_core(data_model.core)
 
 
 def populate_library(lib):
@@ -174,10 +144,10 @@ def special_queries():
         search_term = random_most_used_words(library.get_used_words(), 100, 1, 1)
         print('Search term: %s %d' % (search_term, used_words[search_term]))
 
-        query_all_models('*%s*' % search_term,
+        query_all_models('%s' % search_term,
                          library.make_used_group_user_list(False, 10, 30), False, 2)
 
-        query_all_models('*FindMeToken* *%s*' % search_term,
+        query_all_models('FindMeToken %s' % search_term,
                          library.make_used_group_user_list(True, 10, 30), False, 2)
 
 
@@ -199,27 +169,12 @@ def query(query_id, core, q, user_vd, dump_query, log_stats):
 
 
 def query_all_models(tokens, user_vd, log_stats, dump_query=0):
-    join = '{!join from=id to=vdid}'
-    vd_integers = library.convert_id_list_to_integer(user_vd, library.id_to_integer)
-    sharing_constrain = 'vd:(%s)' % ' '.join(user_vd)
-    sharing_constrain_integer = 'vdi:(%s)' % ' '.join(vd_integers)
-    fields = 'id, title'
-
-    query1 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain, fields)
-    query2 = 'q=%s&fq=%s&fl=%s' % (tokens, sharing_constrain, fields)
-    query3 = 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain_integer, fields)
-    query4 = 'q=%s&fq=%s&fl=%s' % (tokens, sharing_constrain_integer, fields)
-
     if dump_query > 1:
-        print('J  query: ' + query1)
-        print('C  query: ' + query2)
-        print('JI query: ' + query3)
-        print('CI query: ' + query4)
+        for data_model in data_models:
+            print('%s query: %s' % (data_model.model_id, data_model.query(tokens, user_vd)))
 
-    query('J ', core1, query1, user_vd, dump_query, log_stats)
-    query('C ', core2, query2, user_vd, dump_query, log_stats)
-    query('JI', core3, query3, user_vd, dump_query, log_stats)
-    query('CI', core4, query4, user_vd, dump_query, log_stats)
+    for data_model in data_models:
+        query(data_model.model_id, data_model.core, data_model.query(tokens, user_vd), user_vd, dump_query, log_stats)
 
     if dump_query > 0:
         print('-' * 100)
@@ -240,19 +195,19 @@ def average_queries_stats():
     if run_average_queries_stats:
         average_stats = dict()
         for data_model in data_models:
-            average_stats[data_model] = dict()
+            average_stats[data_model.model_id] = dict()
 
             for vd_size in user_vd_counts:
-                raw_stats = query_run_stats[data_model][vd_size]
-                average_stats[data_model][vd_size] = sum(raw_stats) / len(raw_stats)
-                print("%s \t %5d \t %s" % (data_model, vd_size, '\t '.join(['%6.3f' % e for e in raw_stats])))
+                raw_stats = query_run_stats[data_model.model_id][vd_size]
+                average_stats[data_model.model_id][vd_size] = sum(raw_stats) / len(raw_stats)
+                print("%s \t %5d \t %s" % (data_model.model_id, vd_size, '\t '.join(['%6.3f' % e for e in raw_stats])))
 
         print('=' * 100)
         print('%3s\t   %s' % ('   ', '\t '.join(['%6d' % k for k in user_vd_counts])))
         for data_model in data_models:
-            raw_stats = average_stats[data_model]
+            raw_stats = average_stats[data_model.model_id]
             formatted = '\t '.join(['%6.3f' % raw_stats[k] for k in user_vd_counts])
-            print('%3s\t  %s' % (data_model, formatted))
+            print('%3s\t  %s' % (data_model.model_id, formatted))
 
 
 def set_limits():
@@ -262,17 +217,17 @@ def set_limits():
         user_vd_counts = user_vd_counts[1:4]
         query_misc_user_vd_count = 2
 
+
 search_host = 'localhost:4444'
 filename = '%s/tmp/library.dmp' % expanduser("~")
 solr_core = SolrCommands(search_host, False, False)
 
-core1 = 'Core1'
-core2 = 'Core2'
-core3 = 'Core3'
-core4 = 'Core4'
-
-cores = [core1, core2, core3, core4]
-data_models = ['J ', 'C ', 'JI', 'CI']
+data_models = [
+    JoinModel('Core1')
+    , CombinedModel('Core2')
+    , JoinIntegerModel('Core3')
+    # , JoinIntegerSingleValueModel('Core4')
+]
 user_vd_counts = [10, 100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000]
 
 rebuild_library = False
@@ -292,8 +247,7 @@ top_used_users_groups = list(key for key, value in library.get_used_users_groups
 set_limits()
 special_queries()
 random_queries()
-query_misc_user_vd(0)
-
+query_misc_user_vd(1)
 
 average_queries_stats()
 

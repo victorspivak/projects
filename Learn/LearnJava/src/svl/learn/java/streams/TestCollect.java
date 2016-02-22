@@ -3,6 +3,8 @@ package svl.learn.java.streams;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.IntConsumer;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * TestCollect
@@ -23,6 +25,12 @@ public class TestCollect {
                 .collect(HashMap::new, (m, p) -> m.put(p.getName(), p), HashMap::putAll);
 
         System.out.println("map = " + map);
+
+        System.out.print(IntStream.rangeClosed(1, 10)
+            .map(i -> i * i)
+            .mapToObj(Integer::toString)
+            .collect(Collectors.joining(" "))
+        );
     }
 
     static class Averager implements IntConsumer
