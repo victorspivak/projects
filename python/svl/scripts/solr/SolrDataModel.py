@@ -37,10 +37,9 @@ class JoinModel(SolrDataModel):
         desc = VisibilityDescriptor(vd_id, vd)
         self.books.extend([book, desc])
 
-    def query(self, tokens, user_vd):
+    def query(self, tokens, user_vd, fields):
         join = '{!join from=id to=vdid}'
         sharing = 'vd:(%s)' % ' '.join(user_vd)
-        fields = 'id, title'
 
         return 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing, fields)
 
@@ -53,9 +52,8 @@ class CombinedModel(SolrDataModel):
         self.books_count += 1
         self.books.append(BookVdCombined(book_id, title, author, body, vd))
 
-    def query(self, tokens, user_vd):
+    def query(self, tokens, user_vd, fields):
         sharing = 'vd:(%s)' % ' '.join(user_vd)
-        fields = 'id, title'
 
         return 'q=%s&fq=%s&fl=%s' % (tokens, sharing, fields)
 
@@ -74,10 +72,9 @@ class JoinIntegerModel(SolrDataModel):
         vd_integer = VisibilityDescriptorInteger(vd_id, vd, JoinIntegerModel.vdref_factory)
         self.books.extend([book_integer, vd_integer])
 
-    def query(self, tokens, user_vd):
+    def query(self, tokens, user_vd, fields):
         join = '{!join from=vdidi to=vdrefi}'
         sharing_constrain = 'vd:(%s)' % ' '.join(user_vd)
-        fields = 'id, title'
 
         return 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing_constrain, fields)
 
@@ -100,9 +97,8 @@ class JoinIntegerSingleValueModel(SolrDataModel):
             self.books.append(VisibilityDescriptorIntegerSingleValue(JoinIntegerSingleValueModel.vdid_factory, item,
                                                                      JoinIntegerSingleValueModel.vdref_factory))
 
-    def query(self, tokens, user_vd):
+    def query(self, tokens, user_vd, fields):
         join = '{!join from=vdidi to=vdrefi}'
         sharing = 'vdsv:(%s)' % ' '.join(user_vd)
-        fields = 'id, title'
 
         return 'q=%s&fq=%s%s&fl=%s' % (tokens, join, sharing, fields)

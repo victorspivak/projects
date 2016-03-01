@@ -26,7 +26,7 @@ class Library:
     def add_books(self, count, init_words, use_first_group_user, min_vd_size, max_vd_size):
         init_vd = [self.groups[0], self.users[0]] if use_first_group_user else []
 
-        chunk_size = 100000
+        chunk_size = 10000
         for chunk in range(0, count, chunk_size):
             for index in range(chunk, min(count, chunk + chunk_size)):
                 self.add_book(init_words, init_vd, max_vd_size, min_vd_size)
@@ -113,12 +113,10 @@ def cleanup_all_indexes():
 
 def populate_library(lib):
     if full_run:
-        lib.add_books(500000, '', True, 1, 10)
-        lib.add_books(20000, '', True, 10, 25)
-        lib.add_books(2000, '', True, 25, 100)
-        lib.add_books(1000, '', True, 100, 1000)
-        lib.add_books(500, '', True, 1000, 2500)
-        lib.add_books(100, '', True, 2500, 5000)
+        populate_library_misc_model(lib, 'FindMeToken')
+        # populate_library_many_targets_model(lib, 'FindMeToken')
+        # populate_library_small_targets_model(lib, 'FindMeToken')
+
         lib.add_books(10, 'FindMeToken', True, 10, 25)
     else:
         lib.add_books(1000, '', True, 1, 10)
@@ -126,6 +124,23 @@ def populate_library(lib):
 
     with open(filename, 'wb') as f:
         pickle.dump(lib, f)
+
+
+def populate_library_misc_model(lib, init_words):
+    lib.add_books(500000, init_words, True, 1, 10)
+    lib.add_books(20000, init_words, True, 10, 25)
+    lib.add_books(2000, init_words, True, 25, 100)
+    lib.add_books(1000, init_words, True, 100, 1000)
+    lib.add_books(500, init_words, True, 1000, 2500)
+    lib.add_books(100, init_words, True, 2500, 5000)
+
+
+def populate_library_many_targets_model(lib, init_words):
+    lib.add_books(100000, init_words, True, 2500, 5000)
+
+
+def populate_library_small_targets_model(lib, init_words):
+    lib.add_books(1000000, init_words, True, 1, 10)
 
 
 def random_queries(dump_query=0):
@@ -171,20 +186,24 @@ def query(query_id, core, q, user_vd, dump_query, log_stats):
 def query_all_models(tokens, user_vd, log_stats, dump_query=0):
     if dump_query > 1:
         for data_model in data_models:
-            print('%s query: %s' % (data_model.model_id, data_model.query(tokens, user_vd)))
+            print('%s query: %s' % (data_model.model_id, data_model.query(tokens, user_vd, fields)))
 
     for data_model in data_models:
-        query(data_model.model_id, data_model.core, data_model.query(tokens, user_vd), user_vd, dump_query, log_stats)
+        solr_query = data_model.query(tokens, user_vd, fields)
+        query(data_model.model_id, data_model.core, solr_query, user_vd, dump_query, log_stats)
 
     if dump_query > 0:
         print('-' * 100)
 
 
 def query_misc_user_vd(dump_query=0):
-    search_tokens = random_most_used_words(library.get_used_words(), 100, 1, 5)
     if query_misc_user_vd_count > 0:
-        print('=' * 100)
         for i in range(query_misc_user_vd_count):
+            search_tokens = random_most_used_words(library.get_used_words(), 100, 1, 5)
+
+            query('NS', data_models[0].core, 'q=%s&fl=%s' % (search_tokens, fields), [], dump_query, False)
+            print('=' * 100)
+
             user_vd = []
             for vd_count in user_vd_counts:
                 user_vd = library.make_used_group_user_list(False, vd_count, vd_count, user_vd)
@@ -221,6 +240,7 @@ def set_limits():
 search_host = 'localhost:4444'
 filename = '%s/tmp/library.dmp' % expanduser("~")
 solr_core = SolrCommands(search_host, False, False)
+fields = 'id, title'
 
 data_models = [
     JoinModel('Core1')
@@ -230,7 +250,7 @@ data_models = [
 ]
 user_vd_counts = [10, 100, 250, 500, 750, 1000, 1500, 2000, 2500, 3000, 4000]
 
-rebuild_library = False
+rebuild_library = True
 full_run = True
 
 run_special_queries = False
