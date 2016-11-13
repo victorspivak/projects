@@ -37,7 +37,7 @@ fun testLoops() {
     @myloop for (i in 1..10) {
         for (j in 1..10) {
             if (i == 2 && j > 5)
-                break@myloop
+                break @myloop
             s += i
         }
     }

@@ -2,7 +2,7 @@ package svl.learn.kotlin.basic
 
 import kotlin.reflect.KClass
 
-class Foo(public val name:String, public val id:Int) {
+class Foo(val name:String, val id:Int) {
     fun foo() = name
 }
 
@@ -20,7 +20,7 @@ fun testReflections(){
     println("Reflections: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     val clazz = Foo::class
 
-    println("Properties: ${clazz.properties}")
+    println("Properties: ${clazz.members properties}")
     println("Extension Properties: ${clazz.extensionProperties}")
     Foo("Name", 111).objCouner
 

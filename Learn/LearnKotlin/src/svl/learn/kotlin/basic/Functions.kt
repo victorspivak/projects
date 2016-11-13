@@ -1,7 +1,7 @@
 package svl.learn.kotlin.basic
 
 fun testFunctions() {
-    fun join<T>(data:Collection<T>, prefix : String = "", delimiter :String = " ", suffix:String = "") : String {
+    fun<T> join(data:Collection<T>, prefix : String = "", delimiter :String = " ", suffix:String = "") : String {
         val builder = StringBuilder()
         builder.append(prefix)
         for (el in data)
