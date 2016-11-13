@@ -1,11 +1,13 @@
 package svl.learn.kotlin.classes
 
-fun testDelegates() {
-    trait Base {
-        fun print()
-        fun process()
-    }
+import kotlin.reflect.KProperty
 
+interface Base {
+    fun print()
+    fun process()
+}
+
+fun testDelegates() {
     class BaseImpl(var x: Int): Base {
         override fun process() {x *= 2}
         override fun print() { println(x) }
@@ -24,12 +26,12 @@ fun testDelegates() {
     d.print()
 
     class MyPropertyDelegate<T>(var value:T) {
-        fun get(thisRef: Any?, prop: PropertyMetadata): T {
+        operator fun getValue(thisRef: Any?, prop: KProperty<*>): T {
             println("$thisRef, thank you for delegating '${prop.name}' to me!")
             return value
         }
 
-        fun set(thisRef: Any?, prop: PropertyMetadata, v: T) {
+        operator fun setValue(thisRef: Any?, prop: KProperty<*>, v: T) {
             println("$v has been assigned to '${prop.name} in $thisRef.'")
             value = v
         }

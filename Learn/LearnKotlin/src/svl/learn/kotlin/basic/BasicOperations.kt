@@ -20,10 +20,12 @@ fun testWhen(p:Any?) {
 
 fun testLoops() {
     var s = 0
-    for (i in 1..10)
+    for (i in 1..10) {
+        print (" " + i)
         s += i
+    }
 
-    println("Sum is $s")
+    println("\nSum is $s should be the same with ${(1..10).sum()}")
 
     val l = listOf(1, 3, 5, 7, 9, 7, 5)
     for (e in l) print("$e ")
@@ -34,10 +36,10 @@ fun testLoops() {
     println()
 
     s = 0
-    @myloop for (i in 1..10) {
+    myloop@ for (i in 1..10) {
         for (j in 1..10) {
             if (i == 2 && j > 5)
-                break @myloop
+                break@myloop
             s += i
         }
     }

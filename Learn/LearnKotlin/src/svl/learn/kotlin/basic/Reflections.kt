@@ -1,6 +1,8 @@
 package svl.learn.kotlin.basic
 
 import kotlin.reflect.KClass
+import kotlin.reflect.memberExtensionProperties
+import kotlin.reflect.memberProperties
 
 class Foo(val name:String, val id:Int) {
     fun foo() = name
@@ -20,8 +22,8 @@ fun testReflections(){
     println("Reflections: >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     val clazz = Foo::class
 
-    println("Properties: ${clazz.members properties}")
-    println("Extension Properties: ${clazz.extensionProperties}")
+    println("Properties: ${clazz.memberProperties}")
+    println("Extension Properties: ${clazz.memberExtensionProperties}")
     Foo("Name", 111).objCouner
 
     fun isOdd(x: Int) = x % 2 != 0

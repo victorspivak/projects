@@ -3,12 +3,12 @@ package svl.learn.kotlin.classes
 data class Person(val firstName:String, val lastName:String, val age:Int)
 
 class Calculator {
-    public var value:Int = 0
-    fun set(v:Int) {
+    var value:Int = 0
+    infix fun set(v:Int) {
         value = v
     }
 
-    fun add(v:Int) {
+    infix fun add(v:Int) {
         value += v
     }
 

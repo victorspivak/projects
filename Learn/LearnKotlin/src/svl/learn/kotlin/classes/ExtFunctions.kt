@@ -22,6 +22,6 @@ fun testExtFunc() {
         return hashCode()
     }
 
-    var s:String? = null
+    val s:String? = null
     println("HashCode for null: ${s.hashCode()}")
 }

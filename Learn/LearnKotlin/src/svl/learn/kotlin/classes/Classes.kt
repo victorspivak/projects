@@ -4,7 +4,7 @@ fun main(args : Array<String>) {
     testSimpleClasses()
     testProperties()
     testExtFunc()
-    testTraits()
+    testInterfaces()
     testObjects()
     testDelegates()
     testNestedClasses()

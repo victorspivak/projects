@@ -21,7 +21,7 @@ class MyClass{
 }
 
 open class InstanceCounter(){
-    public var count:Int = 0
+    var count:Int = 0
 
     fun increment() = ++count
 }

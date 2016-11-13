@@ -1,7 +1,7 @@
 package svl.learn.kotlin.basic
 
 fun testStrings () {
-    val name = "Victor";
+    val name = "Victor"
 
     println ("Hello ${name}")
 }
