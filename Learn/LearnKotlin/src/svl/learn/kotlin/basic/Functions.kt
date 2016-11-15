@@ -14,4 +14,9 @@ fun testFunctions() {
     println(d.joinToString())
     println(join(d))
     println(join(d, delimiter = ""))
+
+    tailrec fun findFixPoint(x: Double = 1.0): Double
+            = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
+
+    print(findFixPoint())
 }

@@ -1,5 +1,6 @@
 package svl.learn.kotlin.classes
 
+import kotlin.properties.Delegates.observable
 import kotlin.reflect.KProperty
 
 interface Base {
@@ -48,4 +49,42 @@ fun testDelegates() {
     o.p2 = "20"
     println("===> ${o.p1} ===> ${o.p2} ===> ${o.p3}")
 
+    fun testStandardDelegates() {
+        class TestStandardDelegates {
+            val lazyValue: String by lazy {
+                println("computed!")
+                "Hello"
+            }
+
+            var name: String by observable("<no name>") {
+                prop, old, new ->
+                println("$old -> $new")
+            }
+        }
+
+        val obj1 = TestStandardDelegates()
+        println(obj1.lazyValue)
+        println(obj1.lazyValue)
+        val obj2 = TestStandardDelegates()
+        println(obj2.lazyValue)
+        println(obj2.lazyValue)
+        obj1.name = "name 1"
+        obj1.name = "name 2"
+        obj1.name = "name 3"
+
+        class User(val map: Map<String, Any?>) {
+            val name: String by map
+            val age: Int     by map
+        }
+
+        val user = User(mapOf(
+                "name" to "John Doe",
+                "age"  to 25
+        ))
+
+        println(user.name) // Prints "John Doe"
+        println(user.age)  // Prints 25
+    }
+
+    testStandardDelegates()
 }

@@ -8,5 +8,6 @@ fun main(args : Array<String>) {
     testLoops()
     testFunctions()
     testReflections()
+    testRegex()
 }
 

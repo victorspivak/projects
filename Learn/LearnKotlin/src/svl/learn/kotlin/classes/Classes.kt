@@ -9,4 +9,5 @@ fun main(args : Array<String>) {
     testDelegates()
     testNestedClasses()
     testEnums()
+    testGenerics()
 }

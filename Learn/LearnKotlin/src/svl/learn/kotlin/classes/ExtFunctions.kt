@@ -14,7 +14,6 @@ fun testExtFunc() {
     l.swap(0, 2)
     println(l)
 
-
     fun Any?.hashCode(): Int {
         if (this == null) return 0
         // after the null check, 'this' is autocast to a non-null type, so the toString() below
