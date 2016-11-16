@@ -1,31 +1,26 @@
 package svl.learn.kotlin.classes
 
-fun main(args: Array<String>) {
-    testGenerics()
-}
+data class MyPerson(var name:String, var age:Int)
 
 //reified could be used only with inline functions. It solves the type erasure problem
 inline fun <reified T> membersOf() = T::class.members
 
-inline fun <reified T> factory()  where T: Any = T::class.java.newInstance()
+inline fun <reified T> factory(vararg args:Any) :T where T: Any {
+    val types = args.map(::typeExtrator).toTypedArray()
+
+    return T::class.java.getConstructor(*types).newInstance(*args)
+}
+
+fun typeExtrator(v:Any):Class<out Any> {
+    val res = when (v) {
+        is Int -> Int::class.java
+        else -> v.javaClass
+    }
+    return res
+}
 
 fun testGenerics() {
-    data class Person(var name:String = "no name", var age:Int = 0)
-
-    println(membersOf<Person>().joinToString("\n"))
-
-    println("|" + factory<String>() + "|")
-    //println("|" + factory<Person>() + "|")
-
-//    val o = Person::class.java.getConstructor(String::class.java, Int::class.java).newInstance("aaa", 11)
-    val o = Person()
-    println("|" + o + "|")
-
-    fun foo(vararg args:Int) {
-        println(args.joinToString())
-    }
-
-    val numbers = intArrayOf(1, 2, 3)
-    foo(1,2,3)
-    foo(*numbers)
+    println(membersOf<MyPerson>().joinToString("\n\t"))
+    println(factory<String>("aaa"))
+    println(factory<MyPerson>("Victor Spivak", 18))
 }

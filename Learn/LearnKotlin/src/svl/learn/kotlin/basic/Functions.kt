@@ -19,4 +19,16 @@ fun testFunctions() {
             = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
 
     print(findFixPoint())
+
+    varargExample()
+}
+
+private fun varargExample() {
+    fun foo(vararg args: Int) {
+        println(args.joinToString())
+    }
+
+    val numbers = intArrayOf(1, 2, 3)
+    foo(1, 2, 3)
+    foo(*numbers)
 }
