@@ -237,7 +237,7 @@ def set_limits():
         query_misc_user_vd_count = 2
 
 
-search_host = 'localhost:4444'
+search_host = 'localhost:8983'
 filename = '%s/tmp/library.dmp' % expanduser("~")
 solr_core = SolrCommands(search_host, False, False)
 fields = 'id, title'
