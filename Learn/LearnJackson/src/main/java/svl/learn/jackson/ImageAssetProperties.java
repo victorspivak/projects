@@ -1,5 +1,8 @@
 package svl.learn.jackson;
 
+import java.util.Objects;
+import java.util.StringJoiner;
+
 public class ImageAssetProperties implements AssetProperties {
     private String source;
     private String proxy;
@@ -40,5 +43,34 @@ public class ImageAssetProperties implements AssetProperties {
     public ImageAssetProperties setWidth(Integer width) {
         this.width = width;
         return this;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ImageAssetProperties that = (ImageAssetProperties) o;
+
+        return Objects.equals(this.height, that.height) &&
+                Objects.equals(this.proxy, that.proxy) &&
+                Objects.equals(this.source, that.source) &&
+                Objects.equals(this.width, that.width);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(height, proxy, source, width);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", this.getClass().getSimpleName() + "[", "]")
+                .add("height = " + height)
+                .add("proxy = " + proxy)
+                .add("source = " + source)
+                .add("width = " + width)
+                .toString();
     }
 }

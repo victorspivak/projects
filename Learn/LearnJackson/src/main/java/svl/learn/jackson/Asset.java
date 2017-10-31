@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.Objects;
+import java.util.StringJoiner;
+
 public class Asset {
     private AssetType type;
 
@@ -39,5 +42,29 @@ public class Asset {
 
     public void setProperties(AssetProperties properties) {
         this.properties = properties;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Asset that = (Asset) o;
+
+        return Objects.equals(this.properties, that.properties) &&
+                Objects.equals(this.type, that.type);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(properties, type);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", this.getClass().getSimpleName() + "[", "]")
+                .add("properties = " + properties)
+                .add("type = " + type)
+                .toString();
     }
 }
