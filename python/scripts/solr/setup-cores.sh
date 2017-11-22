@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+SOLR_HOME=/home/victor/tools/solr/solr
 
 function setup_core () {
     d="$SOLR_HOME/server/solr/$Core"
