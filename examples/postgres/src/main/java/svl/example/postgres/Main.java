@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
         Main main = new Main(new DatabaseManager());
 
-        if (false)
-            main.populate(true, 1_000_000);
+        if (true)
+            main.populate(true, 1_000);
 
         main.query();
     }

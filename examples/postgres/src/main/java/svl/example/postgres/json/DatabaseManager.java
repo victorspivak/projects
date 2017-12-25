@@ -19,8 +19,11 @@ public class DatabaseManager {
              Statement st = con.createStatement()) {
 
             st.executeUpdate(String.format("DROP TABLE IF EXISTS %s;", TABLE_NAME));
-            
-            st.executeUpdate(String.format("CREATE TABLE %s (ID serial NOT NULL PRIMARY KEY, tenantId char(16) NOT NULL, %s jsonb NOT NULL);", TABLE_NAME, JASON_COLUMN_NAME));
+            st.executeUpdate(String.format("DROP SEQUENCE IF EXISTS %s_seq;", TABLE_NAME));
+
+            st.executeUpdate(String.format("CREATE SEQUENCE %s_seq;", TABLE_NAME));
+            //for seq number id use: ID serial NOT NULL PRIMARY KEY
+            st.executeUpdate(String.format("CREATE TABLE %s (invoice_id char(16) NOT NULL PRIMARY KEY DEFAULT 'INV' || to_char(nextval('%s_seq'), 'FM000000000000'), tenantId char(16) NOT NULL, %s jsonb NOT NULL);", TABLE_NAME, TABLE_NAME, JASON_COLUMN_NAME));
             st.executeUpdate(String.format("CREATE INDEX ind_%s_%s ON %s USING gin (%s);", TABLE_NAME, JASON_COLUMN_NAME, TABLE_NAME, JASON_COLUMN_NAME));
         }
     }
