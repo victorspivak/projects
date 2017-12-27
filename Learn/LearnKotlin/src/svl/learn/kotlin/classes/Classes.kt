@@ -10,4 +10,5 @@ fun main(args : Array<String>) {
     testNestedClasses()
     testEnums()
     testGenerics()
+    testClassInitializers()
 }
