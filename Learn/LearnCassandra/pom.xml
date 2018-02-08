@@ -13,6 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.version>1.2.21</kotlin.version>
+        <cassandra.version>3.4.0</cassandra.version>
         <junit.version>4.12</junit.version>
     </properties>
 
@@ -38,7 +39,12 @@
         <dependency>
             <groupId>com.datastax.cassandra</groupId>
             <artifactId>cassandra-driver-core</artifactId>
-            <version>3.4.0</version>
+            <version>${cassandra.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-mapping</artifactId>
+            <version>${cassandra.version}</version>
         </dependency>
 
         <dependency>
