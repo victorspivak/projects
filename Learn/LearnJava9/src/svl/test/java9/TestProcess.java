@@ -8,12 +8,10 @@ public class TestProcess {
     }
 
     public static void main(String[] args) {
-
         dumpProcessInfo(ProcessHandle.current());
     }
 
-    static private void dumpProcessInfo(ProcessHandle ph)
-    {
+    static private void dumpProcessInfo(ProcessHandle ph) {
         System.out.println("PROCESS INFORMATION");
         System.out.println("===================");
         System.out.printf("Process id: %d%n", ph.pid());

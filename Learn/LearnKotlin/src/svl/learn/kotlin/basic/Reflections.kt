@@ -1,8 +1,9 @@
 package svl.learn.kotlin.basic
 
 import kotlin.reflect.KClass
-import kotlin.reflect.memberExtensionProperties
-import kotlin.reflect.memberProperties
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.memberExtensionProperties
+import kotlin.reflect.full.memberProperties
 
 class Foo(val name:String, val id:Int) {
     fun foo() = name
