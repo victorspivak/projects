@@ -1,6 +1,7 @@
 package svl.learn.kotlin.basic
 
 import kotlin.reflect.KClass
+import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.full.memberExtensionProperties
 import kotlin.reflect.full.memberProperties
 
