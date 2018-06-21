@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d063684-1e71-4904-8f02-a2b0b510e79d" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/.name" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/compiler.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/encodings.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/inspectionProfiles/Project_Default.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/libraries/Maven__junit_junit_3_8_1.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/libraries/Maven__org_postgresql_postgresql_9_4_1212.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/misc.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/.idea/modules.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/pom.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/postgres-example.iml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/src/main/java/svl/example/postgres/Version.java" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../examples/postgres/src/test/java/svl/example/postgres/AppTest.java" />
       <change beforePath="$PROJECT_DIR$/../Learn/LearnJava9/.idea/misc.xml" afterPath="$PROJECT_DIR$/../Learn/LearnJava9/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="interview.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -778,6 +765,15 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -792,16 +788,6 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <pass-parent-envs>true</pass-parent-envs>
-      <envs />
     </configuration>
     <list size="2">
       <item index="0" class="java.lang.String" itemvalue="Application.RemoveDupChars" />
@@ -846,11 +832,12 @@
       <workItem from="1513990773422" duration="17000" />
       <workItem from="1513990835924" duration="22000" />
       <workItem from="1513990888470" duration="159000" />
+      <workItem from="1529526691613" duration="16000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5691000" />
+    <option name="totallyTimeSpent" value="5707000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -878,6 +865,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24503043" sideWeight="0.6927536" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
